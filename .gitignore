@@ -1,0 +1,33 @@
+.DS_Store
+
+/lokpal_online/application/cache/*
+!/lokpal_online/application/cache/index.html
+
+/lokpal_online/application/logs/*
+!/lokpal_online/application/logs/index.html
+
+!/lokpal_online/application/*/.htaccess
+
+/lokpal_online/composer.lock
+
+/lokpal_online/user_guide_src/build/*
+/lokpal_online/user_guide_src/cilexer/build/*
+/lokpal_online/user_guide_src/cilexer/dist/*
+/lokpal_online/user_guide_src/cilexer/pycilexer.egg-info/*
+/lokpal_online/vendor/
+
+# IDE Files
+#-------------------------
+/nbproject/
+.idea/*
+
+## Sublime Text cache files
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+*.sublime-workspace
+*.sublime-project
+/lokpal_online/tests/tests/
+/lokpal_online/tests/results/
+/lokpal_online/application/config/config.php
+/lokpal_online/application/config/database.php
