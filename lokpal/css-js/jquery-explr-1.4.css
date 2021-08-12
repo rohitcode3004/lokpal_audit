@@ -1,0 +1,188 @@
+.explr-tree * {
+	margin: 0;
+	padding: 0;
+}
+
+.explr-tree, 
+.explr-tree ol,
+.explr-tree ul {
+	display: block;
+	font-size: 12px;
+	letter-spacing: normal;
+	line-height: 20px;
+	list-style: none;
+	margin: 0;
+	padding-bottom: 0;
+	padding-left: 20px;
+	padding-top: 5px;
+	position: relative;
+}
+
+ul.explr-line-fix > li > a, li.icon-mail ul li a {
+	color: #c64a30;
+    font-size: 110%;
+}
+
+.explr-tree {
+	background: #fafafa;
+    border: 1px solid #999;
+    overflow: auto;
+    margin-top: 15px;
+    padding: 20px 40px;
+}
+
+.explr-tree li {
+	background: url("../images/icons/folder.png") 16px 2px no-repeat;
+	display: block;
+	position: relative;
+	white-space: nowrap;
+}
+
+.explr-tree li a {
+	color: #1b6b00;
+    display: block;
+    font-size: 140%;
+    margin-left: 30px;
+    padding: 0px 0 5px 8px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.explr-tree li a:hover {	
+	color: #1b6b00;
+	text-decoration: underline;
+	opacity: 1;
+}
+
+.explr-line {
+	border-left: 1px dotted #999;
+	border-bottom: 1px dotted #999;
+	height: 22px;
+	position: absolute;
+	margin-left: 0;
+	margin-top: -12px;
+	width: 12px;
+}
+
+.explr-tree ol>li:first-child>.explr-line,
+.explr-tree ul>li:first-child>.explr-line {
+	margin-top: -8px;
+	height: 18px;
+}
+
+.explr-line-fix {
+	border-left: 1px dotted #999;
+}
+
+.explr-plus {
+	background: url("../images/icons/plus.png") 0 0 no-repeat;
+	height: 16px;
+	margin-left: -8px;
+	margin-top: 2px;
+	position: absolute;
+	width: 40px;
+	z-index: 1;
+}
+
+.explr-minus { background-image: url("../images/icons/busy.png"); }
+
+
+/* Menu icons: */
+
+.explr-tree .icon-text > li, .explr-tree li.icon-text { background-image: url("../images/icons/attibutes.png"); }
+.explr-tree .icon-address > li, .explr-tree li.icon-address { background-image: url("../images/icons/address.png"); }
+.explr-tree .icon-archives > li, .explr-tree li.icon-archives { background-image: url("../images/icons/archives.png"); }
+.explr-tree .icon-badge > li, .explr-tree li.icon-badge { background-image: url("../images/icons/bestseller.png"); }
+.explr-tree .icon-bank > li, .explr-tree li.icon-bank { background-image: url("../images/icons/bank.png"); }
+.explr-tree .icon-basket > li, .explr-tree li.icon-basket { background-image: url("../images/icons/basket.png"); }
+.explr-tree .icon-board > li, .explr-tree li.icon-board { background-image: url("../images/icons/order.png"); }
+.explr-tree .icon-board2 > li, .explr-tree li.icon-board2 { background-image: url("../images/icons/order-1.png"); }
+.explr-tree .icon-book > li, .explr-tree li.icon-book { background-image: url("../images/icons/library.png"); }
+.explr-tree .icon-bookmark > li, .explr-tree li.icon-bookmark { background-image: url("../images/icons/bookmark.png"); }
+.explr-tree .icon-business > li, .explr-tree li.icon-business { background-image: url("../images/icons/business-contact.png"); }
+.explr-tree .icon-calendar > li, .explr-tree li.icon-calendar { background-image: url("../images/icons/calendar.png"); }
+.explr-tree .icon-card > li, .explr-tree li.icon-card { background-image: url("../images/icons/credit-card.png"); }
+.explr-tree .icon-card2 > li, .explr-tree li.icon-card2 { background-image: url("../images/icons/my-account.png"); }
+.explr-tree .icon-chain > li, .explr-tree li.icon-chain { background-image: url("../images/icons/link.png"); }
+.explr-tree .icon-chart > li, .explr-tree li.icon-chart { background-image: url("../images/icons/statistics.png"); }
+.explr-tree .icon-check > li, .explr-tree li.icon-check { background-image: url("../images/icons/check.png"); }
+.explr-tree .icon-clock > li, .explr-tree li.icon-clock { background-image: url("../images/icons/full-time.png"); }
+.explr-tree .icon-comment > li, .explr-tree li.icon-comment { background-image: url("../images/icons/comment.png"); }
+.explr-tree .icon-config > li, .explr-tree li.icon-config { background-image: url("../images/icons/config.png"); }
+.explr-tree .icon-customers > li, .explr-tree li.icon-customers { background-image: url("../images/icons/customers.png"); }
+.explr-tree .icon-cv > li, .explr-tree li.icon-cv { background-image: url("../images/icons/cv.png"); }
+.explr-tree .icon-db > li, .explr-tree li.icon-db { background-image: url("../images/icons/database.png"); }
+.explr-tree .icon-direction > li, .explr-tree li.icon-direction { background-image: url("../images/icons/milestone.png"); }
+.explr-tree .icon-flag > li, .explr-tree li.icon-flag { background-image: url("../images/icons/flag.png"); }
+.explr-tree .icon-folder > li, .explr-tree li.icon-folder { background-image: url("../images/icons/folder.png"); }
+.explr-tree .icon-folder2 > li, .explr-tree li.icon-folder2 { background-image: url("../images/icons/finished-work.png"); }
+.explr-tree .icon-folder3 > li, .explr-tree li.icon-folder3 { background-image: url("../images/icons/upcoming-work.png"); }
+.explr-tree .icon-hand > li, .explr-tree li.icon-hand { background-image: url("../images/icons/freelance.png"); }
+.explr-tree .icon-heart > li, .explr-tree li.icon-heart { background-image: url("../images/icons/heart.png"); }
+.explr-tree .icon-help > li, .explr-tree li.icon-help { background-image: url("../images/icons/consulting.png"); }
+.explr-tree .icon-home > li, .explr-tree li.icon-home { background-image: url("../images/icons/home.png"); }
+.explr-tree .icon-lamp > li, .explr-tree li.icon-lamp { background-image: url("../images/icons/lightbulb.png"); }
+.explr-tree .icon-left > li, .explr-tree li.icon-left { background-image: url("../images/icons/sign-out.png"); }
+.explr-tree .icon-left2 > li, .explr-tree li.icon-left2 { background-image: url("../images/icons/login.png"); }
+.explr-tree .icon-lock > li, .explr-tree li.icon-lock { background-image: url("../images/icons/lock.png"); }
+.explr-tree .icon-mail > li, .explr-tree li.icon-mail { background-image: url("../images/icons/contact.png"); }
+.explr-tree .icon-mail2 > li, .explr-tree li.icon-mail2 { background-image: url("../images/icons/email.png"); }
+.explr-tree .icon-palette > li, .explr-tree li.icon-palette { background-image: url("../images/icons/drawings.png"); }
+.explr-tree .icon-pencil > li, .explr-tree li.icon-pencil { background-image: url("../images/icons/edit.png"); }
+.explr-tree .icon-pencil2 > li, .explr-tree li.icon-pencil2 { background-image: url("../images/icons/pencil.png"); }
+.explr-tree .icon-phone > li, .explr-tree li.icon-phone { background-image: url("../images/icons/phone.png"); }
+.explr-tree .icon-photo > li, .explr-tree li.icon-photo { background-image: url("../images/icons/photography.png"); }
+.explr-tree .icon-print > li, .explr-tree li.icon-print { background-image: url("../images/icons/print.png"); }
+.explr-tree .icon-project > li, .explr-tree li.icon-project { background-image: url("../images/icons/project.png"); }
+.explr-tree .icon-refresh > li, .explr-tree li.icon-refresh { background-image: url("../images/icons/refresh.png"); }
+.explr-tree .icon-right > li, .explr-tree li.icon-right { background-image: url("../images/icons/sign-in.png"); }
+.explr-tree .icon-right2 > li, .explr-tree li.icon-right2 { background-image: url("../images/icons/logout.png"); }
+.explr-tree .icon-showreel > li, .explr-tree li.icon-showreel { background-image: url("../images/icons/showreel.png"); }
+.explr-tree .icon-star > li, .explr-tree li.icon-star { background-image: url("../images/icons/star.png"); }
+.explr-tree .icon-tag > li, .explr-tree li.icon-tag { background-image: url("../images/icons/tag.png"); }
+.explr-tree .icon-text2 > li, .explr-tree li.icon-text2 { background-image: url("../images/icons/issue.png"); }
+.explr-tree .icon-text3 > li, .explr-tree li.icon-text3 { background-image: url("../images/icons/future-projects.png"); }
+.explr-tree .icon-text4 > li, .explr-tree li.icon-text4 { background-image: url("../images/icons/old-versions.png"); }
+.explr-tree .icon-user > li, .explr-tree li.icon-user { background-image: url("../images/icons/user.png"); }
+.explr-tree .icon-world > li, .explr-tree li.icon-world { background-image: url("../images/icons/world.png"); }
+.explr-tree .icon-zoom > li, .explr-tree li.icon-zoom { background-image: url("../images/icons/zoom.png"); }
+
+
+/* IE Hack Fixes: */
+
+.explr-ie, 
+.explr-ie ol,
+.explr-ie ul {
+	margin-left: 4px;
+	padding-left: 16px;
+	position: static;
+}
+
+.explr-ie ol,
+.explr-ie ul {
+	overflow: hidden;
+}
+
+.explr-ie {
+	padding-top: 20px;
+}
+
+.explr-ie .explr-line, 
+.explr-ie .explr-plus {
+	top: 0;
+	left: 4px;
+}
+
+.explr-ie li {
+	height: auto !important;
+	height: 24px;
+	*padding-top: 12px;
+	_padding-top: 0;
+}
+
+.explr-ie li a {
+	*position: absolute;
+	_position: static;
+	*top: 0;
+	_top: auto;
+}

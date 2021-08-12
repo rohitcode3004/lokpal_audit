@@ -1,0 +1,122 @@
+.current-day {
+    border: 1px solid #d9544f;
+    background: #d9544f;
+    color: #fff !important;
+    height: 30px !important;
+    width: 30px !important;
+    border-radius: 50%;
+    padding: 3px !important;
+    position: relative !important;
+    left: 13px;
+    margin-right: 20px;
+}
+
+.tempust {
+    border: 10px solid #ccc;
+    margin-top: 12px;
+    font-size: 14px;
+    overflow: auto;
+    transform: translateZ(0deg);
+    background-color: #577e9a;
+    background: -webkit-gradient(linear, left top, left bottom, from(#577e9a), to(#57c8bf));
+    background: -webkit-linear-gradient(top, #577e9a, #57c8bf);
+    background: -moz-linear-gradient(top, #577e9a, #57c8bf);
+    background: -ms-linear-gradient(top, #577e9a, #57c8bf);
+    background: -o-linear-gradient(top, #577e9a, #57c8bf);
+}
+.tempust .day{
+    display: block;
+    width: 14.2857142857%;
+    padding: 4px;
+    box-sizing: border-box;
+    float: left;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-align: center;
+}
+
+.text-danger {
+    color: #a94442 !important;
+}
+
+.tempust .weekday {
+    display: block;
+    width: 14.2857142857%;
+    padding: 1rem;
+    box-sizing: border-box;
+    float: left;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+    color: #fff;
+    letter-spacing: 1.2px;
+    font-weight: normal;
+}
+
+.tempust .day {
+    position: relative;
+    cursor: pointer;
+    color: #000;
+}
+
+.tempust .day[data-event]::before {
+    display: block;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 1rem 1rem 0;
+    border-color: transparent #d9544f transparent transparent;
+    content: '';
+    margin: 4px 4px;
+}
+
+.tempust .inactive {
+    color: rgba(255,255,255, 0.2) !important;    
+    border: none !important;
+    background: transparent !important;
+}
+
+.tempust .month {
+    width: 70%;
+}
+
+.tempust .month,
+.tempust .year {
+    display: block;
+    padding: 4px;
+    box-sizing: border-box;
+    float: left;
+    font-size: 16px;
+    background-color: #fff;
+    border: 0;
+    outline: 0;
+    text-align: center;
+    border: 4px solid rgba(148, 148, 148, 0.8);
+}
+
+.tempust .year {
+    width: 30%;
+}
+
+.tempust .event {
+    display: none;
+    background-color: #037480;
+    color: #ffffff;
+    box-sizing: border-box;
+    padding: 0.5rem;
+    float: left;
+    width: 100%;
+}
