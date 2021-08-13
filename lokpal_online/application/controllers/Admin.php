@@ -15,6 +15,7 @@ class Admin extends CI_Controller {
 		$this->load->helper('common_helper'); 
 
 		$this->load->library('Menus_lib');
+		$this->load->helper('captcha');
 
 		$this->isUserLoggedIn = $this->session->userdata('isUserLoggedIn'); 
 	}
@@ -29,7 +30,7 @@ class Admin extends CI_Controller {
 	
 	public function authenticate(){				
 		$data = array(); 
-
+		$data['captcha'] =  $this->captcha();
         // Get messages from the session 
 		if($this->session->userdata('success_msg')){ 
 			$data['success_msg'] = $this->session->userdata('success_msg'); 
@@ -44,6 +45,7 @@ class Admin extends CI_Controller {
 		if($this->input->post('loginSubmit')){ 
 			$this->form_validation->set_rules('username', 'Username', 'required'); 
 			$this->form_validation->set_rules('password', 'password', 'required'); 
+			$this->form_validation->set_rules('captcha', 'captcha', 'required');
 
 			if($this->form_validation->run() == true){ 
 				$data['username'] = strip_tags($this->input->post('username'));
@@ -74,16 +76,52 @@ class Admin extends CI_Controller {
 					die('Unable to maintain your log.Go back and try again.');
 				}
 				}else{ 
-					$data['error_msg'] = 'Wrong email or password, please try again.'; 
+					$data['error_msg'] = '<div class="alert alert-info"><h4 class="m-0">Wrong email, password  or captcha, please try again.</h4></div>'; 
 				} 
 			}else{ 
-				$data['error_msg'] = 'Please fill all the mandatory fields.'; 
+				$data['error_msg'] = '<div class="alert alert-danger"><h4 class="m-0">Please fill all the mandatory fields.</h4>'; 
 			} 
 		} 
 
         // Load view 
 		$this->load->view('admin/user/login', $data); 			
 	}
+
+	public function captcha(){
+        // Captcha configuration
+        $config = array(
+            'img_path'      => 'captcha_images/',
+            'img_url'       => base_url().'captcha_images/',
+            // 'font_path'     => 'system/fonts/texb.ttf',
+            'font_path'     => realpath('system/fonts/texb.ttf'),
+            'img_width'     => '160',
+            'img_height'    => 50,
+            'word_length'   => 6,
+            'font_size'     => 18,
+            'pool' => '23456789ABCDEFGHJKLMNPQRSTUVWXYZ',
+            'colors'        => array(
+                'background' => array(16, 56, 135),
+                'border' => array(9, 48, 176),
+                'text' => array(255, 255, 255),
+                'grid' => array(81, 108, 164)
+                )
+        );
+        $captcha = create_captcha($config);
+        
+        // Unset previous captcha and set new captcha word
+        $this->session->unset_userdata('captchaCode');
+        $this->session->set_userdata('captchaCode',$captcha['word']);
+        
+        // Display captcha image
+
+        return $captcha;
+    }
+
+    public function refresh_captcha(){
+
+        $captcha = $this->captcha();
+        echo $captcha['image'];
+    }
 
 	public function save(){
 		$data = $userData = array(); 
