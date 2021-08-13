@@ -178,6 +178,7 @@ public function affidavitupload()
         if ( ! $this->upload->do_upload('affidavit_upload'))
         {
           $error = array('error' => $this->upload->display_errors()); 
+          redirect('document/testafidavit'); 
           
         }else
         { 
@@ -316,6 +317,7 @@ public function phisical_copy_upload()
         if ( ! $this->upload->do_upload('phisicalcopy_upload'))
         {
           $error = array('error' => $this->upload->display_errors()); 
+          redirect('document/phisical'); 
           
         }else
         { 

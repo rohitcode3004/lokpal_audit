@@ -463,6 +463,7 @@ if(!empty($_FILES['ob_identity_proof_upload']['name']))
   if ( ! $this->upload->do_upload('ob_identity_proof_upload'))
   {
     $error = array('error' => $this->upload->display_errors()); 
+    redirect('applet/officebeared');  
 
   }
   else
@@ -520,6 +521,7 @@ if(!empty($_FILES['ob_idres_proof_upload']['name']))
   if ( ! $this->upload->do_upload('ob_idres_proof_upload'))
   {
     $error = array('error' => $this->upload->display_errors()); 
+    redirect('applet/officebeared');
 
   }
   else
@@ -806,7 +808,8 @@ if(!empty($_FILES['ob_identity_proof_upload']['name']))
   $this->load->library('upload', $config);
   if ( ! $this->upload->do_upload('ob_identity_proof_upload'))
   {
-    $error = array('error' => $this->upload->display_errors());          
+    $error = array('error' => $this->upload->display_errors());
+    redirect('applet/officebeared');          
   }
   else
   { 
@@ -854,7 +857,8 @@ if(!empty($_FILES['ob_idres_proof_upload']['name']))
   $this->load->library('upload', $config);
   if ( ! $this->upload->do_upload('ob_idres_proof_upload'))
   {
-    $error = array('error' => $this->upload->display_errors());          
+    $error = array('error' => $this->upload->display_errors()); 
+    redirect('applet/officebeared');         
   }
   else
   { 
@@ -1144,6 +1148,8 @@ public function save(){
     {
       $error = array('error' => $this->upload->display_errors()); 
 
+    redirect('applet/appletfiling'); 
+
     }else
     { 
       $uploadedImage = $this->upload->data();      
@@ -1162,7 +1168,7 @@ public function save(){
   $filename = substr($filename, 0, strrpos($filename, '.'));
   $filename = str_replace(' ','',$filename);  
   $filename = str_replace('.','',$filename);  
-  if(!empty($_FILES['identity_proof_upload']['name']))
+  if(!empty($_FILES['aidres_proof_upload']['name']))
   {     
           // $config['encrypt_name'] = TRUE;  
     $config['upload_path']   = './cdn/residenceformb/'; 
@@ -1174,6 +1180,7 @@ public function save(){
     if ( ! $this->upload->do_upload('aidres_proof_upload'))
     {
      $error = array('error' => $this->upload->display_errors()); 
+      redirect('applet/appletfiling'); 
    }
    else
    { 
@@ -1203,7 +1210,7 @@ if(!empty($_FILES['auth_doc_upload']['name']))
   if ( ! $this->upload->do_upload('auth_doc_upload'))
   {
     $error = array('error' => $this->upload->display_errors()); 
-
+   redirect('applet/appletfiling'); 
   }else
   { 
     $uploadedImage = $this->upload->data();      
@@ -1525,6 +1532,7 @@ else
     if ( ! $this->upload->do_upload('identity_proof_upload'))
     {
       $error = array('error' => $this->upload->display_errors()); 
+        redirect('applet/appletfiling'); 
 
     }else
     { 
@@ -1537,35 +1545,39 @@ else
           //$part_c = $this->report_model->getPartc($ref_no);
     $identity_url_partb=$datapartb['identity_url_partb'] ?? '';
   } 
+
+
+
   $filename=$_FILES['aidres_proof_upload']['name'];
   $ext = substr($filename, -4, strrpos($filename, '.'));
   $filename = substr($filename, 0, strrpos($filename, '.'));
   $filename = str_replace(' ','',$filename);  
   $filename = str_replace('.','',$filename);  
-
   if(!empty($_FILES['aidres_proof_upload']['name']))
-  {        
-    $config['upload_path']   = './cdn/identityformb/'; 
+  {     
+          // $config['encrypt_name'] = TRUE;  
+    $config['upload_path']   = './cdn/residenceformb/'; 
     $config['allowed_types'] = 'gif|jpg|pdf';      
-          //$config['max_size']      = 15000;
+              //$config['max_size']      = 15000;
     $config['file_name'] = $new_name.$filename;
     $this->upload->initialize($config);
     $this->load->library('upload', $config);
     if ( ! $this->upload->do_upload('aidres_proof_upload'))
     {
-      $error = array('error' => $this->upload->display_errors()); 
+     $error = array('error' => $this->upload->display_errors()); 
+       redirect('applet/appletfiling'); 
 
-    }else
-    { 
-      $uploadedImage = $this->upload->data();      
-    } 
-    $residence_url_partb='cdn/identityformb/'.$new_name.$filename.$ext;
-  }      
-  else
-  {        
-          //$part_c = $this->report_model->getPartc($ref_no);
-    $residence_url_partb=$datapartb['residence_url_partb'] ?? '';
-  } 
+   }
+   else
+   { 
+     $uploadedImage = $this->upload->data();      
+   } 
+   $residence_url_partb='cdn/residenceformb/'.$new_name.$filename.$ext;
+ }      
+ else
+ {
+  $residence_url_partb='';
+} 
 
 
           //auth_doc_upload
@@ -1588,7 +1600,7 @@ else
     if ( ! $this->upload->do_upload('auth_doc_upload'))
     {
       $error = array('error' => $this->upload->display_errors()); 
-
+      redirect('applet/appletfiling'); 
     }else
     { 
       $uploadedImage = $this->upload->data();      

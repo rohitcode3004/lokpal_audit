@@ -323,6 +323,7 @@ class Filing extends CI_Controller {
 				if ( ! $this->upload->do_upload('identity_proof_upload'))
 				{
 					$error = array('error' => $this->upload->display_errors()); 
+					redirect('filing/filing'); 
 
 				}else
 				{ 
@@ -351,6 +352,7 @@ class Filing extends CI_Controller {
 				if ( ! $this->upload->do_upload('a_affidavit_upload'))
 				{
 					$error = array('error' => $this->upload->display_errors()); 
+					redirect('filing/filing'); 
 
 				}else
 				{ 
@@ -682,7 +684,8 @@ class Filing extends CI_Controller {
 					         $this->load->library('upload', $config);
 					         if ( ! $this->upload->do_upload('identity_proof_upload'))
 					         {
-					         	$error = array('error' => $this->upload->display_errors());          
+					         	$error = array('error' => $this->upload->display_errors());  
+					         	redirect('filing/filing');         
 					         }
 					         else
 					         { 
@@ -713,6 +716,7 @@ class Filing extends CI_Controller {
 					     	if ( ! $this->upload->do_upload('a_affidavit_upload'))
 					     	{
 					     		$error = array('error' => $this->upload->display_errors()); 
+					     		redirect('filing/filing'); 
 
 					     	}
 					     	else
