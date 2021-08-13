@@ -19,6 +19,7 @@ class User extends CI_Controller {
 		$this->load->helper("date_helper");
 		$this->isUserLoggedIn = $this->session->userdata('isUserLoggedIn'); 
 		$this->load->library('Menus_lib');
+		$this->load->helper('captcha');
 	}
 
 	function index()
@@ -30,6 +31,7 @@ class User extends CI_Controller {
 	public function login(){ 
 		//print_r($_POST);die;
 		$data = array(); 
+		$data['captcha'] =  $this->captcha();
 
         // Get messages from the session 
 		if($this->session->userdata('success_msg')){ 
@@ -45,7 +47,8 @@ class User extends CI_Controller {
 		if($this->input->post('userloginSubmit')){ 
 			$this->form_validation->set_rules('username', 'Username', 'required'); 
 			$this->form_validation->set_rules('password', 'password', 'required'); 
-
+			$this->form_validation->set_rules('captcha', 'captcha', 'required'); 
+			
 			if($this->form_validation->run() == true){ 
 				$data['username'] = $this->input->post('username');
 				$password_encrypted = $this->input->post('password');
@@ -74,10 +77,10 @@ class User extends CI_Controller {
 						redirect('/filing/filing/'.$ref_no); 
 					}
 				}else{ 
-					$data['error_msg'] = 'Wrong email or password, please try again.'; 
+					$data['error_msg'] = '<div class="alert alert-info"><h4 class="m-0">Wrong email, password  or captcha, please try again.</h4></div>'; 
 				} 
 			}else{ 
-				$data['error_msg'] = 'Please fill all the mandatory fields.'; 
+				$data['error_msg'] = '<div class="alert alert-danger"><h4 class="m-0">Please fill all the mandatory fields.</h4></div>	'; 
 			} 
 		} 
 
@@ -705,8 +708,8 @@ class User extends CI_Controller {
 
 public function user_register(){
 
-$data['salution'] = $this->common_model->getSalution();
-
+	$data['salution'] = $this->common_model->getSalution();
+	$data['captcha'] =  $this->captcha();
 	$this->load->view('front/user/user_registration.php',$data);
 	
 	/*
@@ -733,6 +736,7 @@ public function new_user_save(){
 		$data['salution'] = $this->common_model->getSalution();
 		$data = $userData = array(); 
 		$data=$partaData=array();
+		$data['captcha'] =  $this->captcha();
 
 		$ref_no=mt_rand();
 
@@ -749,6 +753,7 @@ public function new_user_save(){
 				
 				$this->form_validation->set_rules('password2', 'Confirm Password', 'required'); 
 				$this->form_validation->set_rules('password', 'password', 'trim|required'); 
+				$this->form_validation->set_rules('captcha_code', 'Captcha Code', 'required');
 				//print_r($this->input->post());die;
 				if($this->input->post('password')){
 					$this->form_validation->set_rules('password2', 'confirm password', 'trim|matches[password]'); 			
@@ -860,5 +865,41 @@ public function new_user_save(){
 		}*/
 		
 	}
+
+	public function captcha(){
+        // Captcha configuration
+        $config = array(
+            'img_path'      => 'captcha_images/',
+            'img_url'       => base_url().'captcha_images/',
+            // 'font_path'     => 'system/fonts/texb.ttf',
+            'font_path'     => realpath('system/fonts/texb.ttf'),
+            'img_width'     => '160',
+            'img_height'    => 50,
+            'word_length'   => 6,
+            'font_size'     => 18,
+            'pool' => '23456789ABCDEFGHJKLMNPQRSTUVWXYZ',
+            'colors'        => array(
+                'background' => array(16, 56, 135),
+                'border' => array(9, 48, 176),
+                'text' => array(255, 255, 255),
+                'grid' => array(81, 108, 164)
+                )
+        );
+        $captcha = create_captcha($config);
+        
+        // Unset previous captcha and set new captcha word
+        $this->session->unset_userdata('captchaCode');
+        $this->session->set_userdata('captchaCode',$captcha['word']);
+        
+        // Display captcha image
+
+        return $captcha;
+    }
+
+    public function refresh_captcha(){
+
+        $captcha = $this->captcha();
+        echo $captcha['image'];
+    }
 
 }

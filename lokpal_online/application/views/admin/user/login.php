@@ -14,9 +14,9 @@
             <div class="col-md-12">
             <?php  
                 if(!empty($success_msg)){ 
-                    echo '<div class="alert alert-success">'.$success_msg.'</div>'; 
+                    echo ''.$success_msg.''; 
                 }elseif(!empty($error_msg)){ 
-                    echo '<div class="alert alert-danger">'.$error_msg.'</div>'; 
+                    echo ''.$error_msg.''; 
                 } 
             ?>
             </div>
@@ -24,6 +24,16 @@
       <form class="form-horizontal" role="form" action="<?php echo base_url('admin/authenticate') ?>" method="post">
         <input class="input-form" placeholder="username" name="username" type="text" autofocus>
         <input class="input-form" placeholder="Password" name="password" type="password" value="" id="pwd">
+
+
+        <div class="captcha-box">
+          <div id="captImg" style="float: left; margin-right: 15px;"><?php echo $captcha['image'];?></div>
+          <div style="font-size: 18px;">Can't read the image? 
+            <a href="javascript:void(0);" class="refreshCaptcha"><strong>click here</strong></a> to refresh.
+          </div>
+        </div>
+        <input type="text" class="input-form" name="captcha" value="" placeholder="Enter the captcha code " autocomplete="off"/>
+
         <input class="loginhny-btn btn" type="submit" name="loginSubmit" value="login" onclick="encode(this)" />
 
         <p class="text-orange">If you want to go Home page <br><a href="<?php echo base_url(); ?>home/index"><strong>Please click here!</strong></a></a></p>
