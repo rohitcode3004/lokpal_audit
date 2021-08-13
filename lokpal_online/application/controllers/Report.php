@@ -43,6 +43,9 @@
 		{	
 			$data['user'] = $this->login_model->getRows($this->con);
 
+			if(!($data['user']['role'] == 138 || $data['user']['role'] == 147 || $data['user']['role'] == 170))
+				die('Access Denied!');
+
 			$data['menus'] = $this->menus_lib->get_menus($data['user']['role']);
 
 			$data['under_prem_inq'] = $this->reports_model->get_prem_inq_count();
@@ -71,6 +74,9 @@
 			//$flag='I';
 			$data['user'] = $this->login_model->getRows($this->con);
 
+			if(!($data['user']['role'] == 138 || $data['user']['role'] == 147 || $data['user']['role'] == 170))
+				die('Access Denied!');
+
 			$data['menus'] = $this->menus_lib->get_menus($data['user']['role']);
 
 			$data['list_data'] = $this->reports_model->get_list_data($flag);
@@ -96,6 +102,9 @@
   			//print_r($bid_array);
 			$data['user'] = $this->login_model->getRows($this->con);
 
+			if(!($data['user']['role'] == 138 || $data['user']['role'] == 147 || $data['user']['role'] == 170))
+				die('Access Denied!');
+
 			$data['menus'] = $this->menus_lib->get_menus($data['user']['role']);
 
 			$data['list_data'] = $this->reports_model->get_list_data_2($flag, $bid_array);
@@ -117,6 +126,9 @@
 		public function status_of_complaints_under_loi()
 		{	
 			$data['user'] = $this->login_model->getRows($this->con);
+
+			if(!($data['user']['role'] == 138 || $data['user']['role'] == 147 || $data['user']['role'] == 170))
+				die('Access Denied!');
 
 			$data['menus'] = $this->menus_lib->get_menus($data['user']['role']);
 
@@ -158,6 +170,8 @@
 		{	
 			//echo "here";die;
 			$data['user'] = $this->login_model->getRows($this->con);
+			if(!($data['user']['role'] == 138 || $data['user']['role'] == 147 || $data['user']['role'] == 170))
+				die('Access Denied!');
 			$data['menus'] = $this->menus_lib->get_menus($data['user']['role']);
 			$data['member_of_parliyament'] = $this->reports_model->get_member_of_parliyament_count();			
 			$data['officials_groupa_groupb'] = $this->reports_model->get_officials_count();
@@ -178,6 +192,9 @@
 		{	
 			//$flag='I';
 			$data['user'] = $this->login_model->getRows($this->con);
+
+			if(!($data['user']['role'] == 138 || $data['user']['role'] == 147 || $data['user']['role'] == 170))
+				die('Access Denied!');
 
 			$data['menus'] = $this->menus_lib->get_menus($data['user']['role']);
 
