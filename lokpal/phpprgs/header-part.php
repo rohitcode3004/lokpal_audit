@@ -54,7 +54,7 @@
 						<img src="images/infl.jpg" alt="Indian Flag" style="vertical-align:middle;width:20px;height:14px;">
 				</span>
 				<span class="col-6 float-right text-right mtop--4">
-					<span class="dp-login" title="Click here to go main content."><a class="text-black" href="<?php echo "http://" . $_SERVER['SERVER_NAME'] ."/". $uri_parts2[1] ."/". $uri_parts2[2]; ?>/lokpal_online/admin/authenticate">Departmental Login</a></span>
+					<span class="dp-login" title="Click here to go main content."><a class="text-black" href="<?php echo "http://" . $_SERVER['SERVER_NAME'] ."/". $uri_parts2[1]; ?>/lokpal_online/admin/authenticate">Departmental Login</a></span>
 					<span id="skip-content" title="Click here to go main content.">Skip to main content</span>
 					<span class="size-sm" title="Click here for small size">A<sup>-</sup></span>
 					<span class="size-normal" title="Click here for normal size">A</span>

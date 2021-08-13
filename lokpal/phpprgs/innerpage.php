@@ -147,12 +147,13 @@
 		case '0304': $heading1=''; $heading2=str_replace('_', ' ', IPVAR_ARRAY_2);
 
 				$uri_parts = explode('?', $_SERVER['REQUEST_URI'], 2);
+				//print_r($uri_parts);
 				$uri_parts2 = explode('/', $uri_parts[0]);
-
+				//print_r($uri_parts2);
 				$matter='
 				<ul class="complaints-list">
-					<li>Are you filling a complaint for the first time? &nbsp;&nbsp;<a href="http://'. $_SERVER['SERVER_NAME'] .'/'. $uri_parts2[1] .'/'. $uri_parts2[2] .'/lokpal_online/user/user_register" class="text-primary text-bold">Please Register Here</a></li>
-					<li>Whether you have filed a complaint? &nbsp;&nbsp;<a href="http://'. $_SERVER['SERVER_NAME'] .'/'. $uri_parts2[1] .'/'. $uri_parts2[2] .'/lokpal_online/user/login" class="text-primary text-bold">Please Login Here</a></li>
+					<li>Are you filling a complaint for the first time? &nbsp;&nbsp;<a href="http://'. $_SERVER['SERVER_NAME'] .'/'. $uri_parts2[1] .'/lokpal_online/user/user_register" class="text-primary text-bold">Please Register Here</a></li>
+					<li>Whether you have filed a complaint? &nbsp;&nbsp;<a href="http://'. $_SERVER['SERVER_NAME'] .'/'. $uri_parts2[1] . '/lokpal_online/user/login" class="text-primary text-bold">Please Login Here</a></li>
 					
 				</ul>
 				';

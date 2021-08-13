@@ -175,7 +175,7 @@
                 $uri_parts2 = explode('/', $uri_parts[0]);
               ?>
               <hr>
-              <p class="text-orange mt-50">If you want to go back <a href="<?php echo "http://" . $_SERVER['SERVER_NAME'] ."/". $uri_parts2[1] ."/". $uri_parts2[2]; ?>/lokpal?menu_bar?Lodge_Your_Complaints?0304"><strong>Please click here!</strong></a></p>
+              <p class="text-orange mt-50">If you want to go back <a href="<?php echo "http://" . $_SERVER['SERVER_NAME'] ."/". $uri_parts2[1]; ?>/lokpal?menu_bar?Lodge_Your_Complaints?0304"><strong>Please click here!</strong></a></p>
             </form>                                                                
           </div>
         </div>
