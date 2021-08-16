@@ -617,10 +617,10 @@ $ref_no=$this->session->userdata('ref_no');
 </div>
 
   <script type="text/javascript">
-            $(document).ready(function () {
+                       $(document).ready(function () {
 
               $(function () {
-                $("#periodf_coa").datepicker({
+                $("#ad_periodf_coa").datepicker({
                     format: "dd-mm-yyyy",
                     endDate: new Date(),
                     autoclose: true,
@@ -628,10 +628,10 @@ $ref_no=$this->session->userdata('ref_no');
                 }).on('changeDate', function (selected) {
                     var minDate = new Date(selected.date);
                     minDate.setDate(minDate.getDate() + 1);
-                    $('#periodt_coa').datepicker('setStartDate', minDate);
+                    $('#ad_periodt_coa').datepicker('setStartDate', minDate);
                 });
  
-                $("#periodt_coa").datepicker({
+                $("#ad_periodt_coa").datepicker({
                     format: "dd-mm-yyyy",
                     endDate: new Date(),
                     autoclose: true,
@@ -639,11 +639,10 @@ $ref_no=$this->session->userdata('ref_no');
                 }).on('changeDate', function (selected) {
                     var minDate = new Date(selected.date);
                     minDate.setDate(minDate.getDate() - 1);
-                    $('#periodf_coa').datepicker('setEndDate', minDate);
+                    $('#ad_periodf_coa').datepicker('setEndDate', minDate);
                 });
               });
-            });  
-
+            });    
      function isNumberKey(evt){
     var charCode = (evt.which) ? evt.which : event.keyCode
     if (charCode > 31 && (charCode < 48 || charCode > 57))

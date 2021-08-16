@@ -901,8 +901,7 @@ $(document).ready(function(){
                     $('#periodf_coa').datepicker('setEndDate', minDate);
                 });
               });
-            });   
-                
+            });  
 
      function isNumberKey(evt){
     var charCode = (evt.which) ? evt.which : event.keyCode
