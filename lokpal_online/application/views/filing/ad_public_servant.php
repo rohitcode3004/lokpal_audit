@@ -642,7 +642,8 @@ $ref_no=$this->session->userdata('ref_no');
                     $('#ad_periodf_coa').datepicker('setEndDate', minDate);
                 });
               });
-            });    
+            });                 
+                
      function isNumberKey(evt){
     var charCode = (evt.which) ? evt.which : event.keyCode
     if (charCode > 31 && (charCode < 48 || charCode > 57))
