@@ -5,6 +5,7 @@ $elements = $this->label->view(1);
 
 <!-- Bootstrap Datepicker  Css -->
 <link href="<?php echo base_url();?>assets/admin_material/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+<script src="<?php echo base_url();?>assets/customjs/password_encryption.js"></script>
 
   <?php 
 
@@ -352,7 +353,7 @@ $elements = $this->label->view(1);
 
                     <div class="col-md-4 mb-15">
                       <label for="aidentity_proof_no"><?php print_r($this->label->get_short_name($elements, 84)); ?></label>
-                      <input type="text" class="form-control" name="aidentity_proof_no" id="aidentity_proof_no" value="<?php if(isset($partb)) echo $partb['aidentity_proof_no']; else echo set_value('aidentity_proof_no');?>" placeholder="" maxlength="200">
+                      <input type="text" class="form-control" name="aidentity_proof_no" id="aidentity_proof_no" value="<?php if(isset($partb)) echo $partb['aidentity_proof_no']; else echo set_value('aidentity_proof_no');?>" placeholder="" maxlength="500">
                     </div>
 
                     <div class="col-md-4 mb-15">
@@ -414,7 +415,7 @@ $elements = $this->label->view(1);
 
                     <div class="col-md-4 mb-15">
                       <label for="aidres_proof_no"><?php print_r($this->label->get_short_name($elements, 114)); ?></label>
-                      <input type="text" class="form-control" name="aidres_proof_no" id="aidres_proof_no" value="<?php   if(isset($partb)) echo $partb['aidres_proof_no']; else echo set_value('aidres_proof_no');?>" placeholder="" maxlength="200">
+                      <input type="text" class="form-control" name="aidres_proof_no" id="aidres_proof_no" value="<?php   if(isset($partb)) echo $partb['aidres_proof_no']; else echo set_value('aidres_proof_no');?>" placeholder="" maxlength="500">
                     </div>
 
                     <div class="col-md-4 mb-15">
@@ -653,8 +654,8 @@ $elements = $this->label->view(1);
 
                   <div class="row">
                     <div class="col-md-12 text-right">       
-                      <button type="submit" class="btn btn-success" id="submitbtn">Save as Draft</button>
-                      <button type="submit" class="btn btn-success" id="submitbtn">Save & Next</button>
+                      <button type="submit" class="btn btn-success" id="submitbtn" onclick="encode_dl_passport('aidentity_proof_no', 'aidres_proof_no')">Save as Draft</button>
+                      <button type="submit" class="btn btn-success" id="submitbtn" onclick="encode_dl_passport('aidentity_proof_no', 'aidres_proof_no')">Save & Next</button>
                     </div>
                   </div>     
                 </form>
