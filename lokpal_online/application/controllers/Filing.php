@@ -323,6 +323,7 @@ class Filing extends CI_Controller {
 				if ( ! $this->upload->do_upload('identity_proof_upload'))
 				{
 					$error = array('error' => $this->upload->display_errors()); 
+					redirect('filing/filing'); 
 
 				}else
 				{ 
@@ -351,6 +352,7 @@ class Filing extends CI_Controller {
 				if ( ! $this->upload->do_upload('a_affidavit_upload'))
 				{
 					$error = array('error' => $this->upload->display_errors()); 
+					redirect('filing/filing'); 
 
 				}else
 				{ 
@@ -455,6 +457,13 @@ class Filing extends CI_Controller {
 			}
 			else
 			{
+				
+				 $identity_proof_no_encrypted=$this->input->post('identity_proof_no');
+				 $identity_proof_no_decrypted = decode($identity_proof_no_encrypted);
+				 $idres_proof_no_encrypted=$this->input->post('idres_proof_no'); 
+				 $idres_proof_no_decrypted = decode($idres_proof_no_encrypted);
+
+
 
 					     	//echo "here"; die;
 				$curYear = date('Y');
@@ -474,12 +483,14 @@ class Filing extends CI_Controller {
 				$gender_id= ($this->input->post('gender_id'));
 				$age_years= trim($this->input->post('age_years'));
 				$identity_proof_id= ($this->input->post('identity_proof_id'));
-				$identity_proof_no= trim($this->input->post('identity_proof_no'));
+				//$identity_proof_no= trim($this->input->post('identity_proof_no'));
+				$identity_proof_no=md5($identity_proof_no_decrypted);
 				$identity_proof_doi=$identity_proof_doi;
 				$identity_proof_vupto= trim($this->input->post('identity_proof_vupto'));	
 				$identity_proof_iauth= trim($this->input->post('identity_proof_iauth'));
 				$idres_proof_id= ($this->input->post('idres_proof_id'));
-				$idres_proof_no= trim($this->input->post('idres_proof_no'));		
+				//$idres_proof_no= trim($this->input->post('idres_proof_no'));
+				 $idres_proof_no=md5($idres_proof_no_decrypted);
 				$idres_proof_doi=$idres_proof_doi;
 				$idres_proof_vupto= trim($this->input->post('idres_proof_vupto'));
 				$idres_proof_iauth= trim($this->input->post('idres_proof_iauth'));
@@ -579,6 +590,7 @@ class Filing extends CI_Controller {
 		else
 		{
 
+		
 			/* code for first time entry */
 			$this->form_validation->set_rules('first_name', 'First Name', 'required');
 			$this->form_validation->set_rules('age_years', 'Age Years', 'required');
@@ -682,7 +694,8 @@ class Filing extends CI_Controller {
 					         $this->load->library('upload', $config);
 					         if ( ! $this->upload->do_upload('identity_proof_upload'))
 					         {
-					         	$error = array('error' => $this->upload->display_errors());          
+					         	$error = array('error' => $this->upload->display_errors());  
+					         	redirect('filing/filing');         
 					         }
 					         else
 					         { 
@@ -713,6 +726,7 @@ class Filing extends CI_Controller {
 					     	if ( ! $this->upload->do_upload('a_affidavit_upload'))
 					     	{
 					     		$error = array('error' => $this->upload->display_errors()); 
+					     		redirect('filing/filing'); 
 
 					     	}
 					     	else
@@ -751,6 +765,12 @@ class Filing extends CI_Controller {
 
 						//echo $nationality_id=($this->input->post('nationality_id'));die;
 
+					     $identity_proof_no_encrypted=$this->input->post('identity_proof_no');
+						 $identity_proof_no_decrypted = decode($identity_proof_no_encrypted);
+
+						echo $idres_proof_no_encrypted=$this->input->post('idres_proof_no');die('second');
+						 $idres_proof_no_decrypted = decode($idres_proof_no_encrypted);
+
 					     $curYear = date('Y');
 					     $cur_year=$curYear;
 					     $complaint_no=mt_rand();		
@@ -768,12 +788,14 @@ class Filing extends CI_Controller {
 					     $gender_id= ($this->input->post('gender_id'));
 					     $age_years= trim($this->input->post('age_years'));
 					     $identity_proof_id= ($this->input->post('identity_proof_id'));
-					     $identity_proof_no= trim($this->input->post('identity_proof_no'));
+					    // $identity_proof_no= trim($this->input->post('identity_proof_no'));
+					      $identity_proof_no=md5($identity_proof_no_decrypted);
 					     $identity_proof_doi=$identity_proof_doi;
 					     $identity_proof_vupto= trim($this->input->post('identity_proof_vupto'));	
 					     $identity_proof_iauth= trim($this->input->post('identity_proof_iauth'));
 					     $idres_proof_id= ($this->input->post('idres_proof_id'));
-					     $idres_proof_no= trim($this->input->post('idres_proof_no'));			
+					     $idres_proof_no=md5($idres_proof_no_decrypted);
+					    // $idres_proof_no= trim($this->input->post('idres_proof_no'));			
 					     $idres_proof_doi=$idres_proof_doi;
 					     $idres_proof_vupto= trim($this->input->post('idres_proof_vupto'));	
 					     $idres_proof_iauth= trim($this->input->post('idres_proof_iauth'));

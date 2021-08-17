@@ -44,6 +44,9 @@
 		{	
 			$data['user'] = $this->login_model->getRows($this->con);
 
+			if(!($data['user']['role'] == 147 || $data['user']['role'] == 170))
+				die('Access Denied!');
+
 	            //print_r($data['user']['id']);die;
 
 			$data['menus'] = $this->menus_lib->get_menus($data['user']['role']);
@@ -118,6 +121,9 @@
 
 			$data['user'] = $this->login_model->getRows($this->con);
 
+			if(!($data['user']['role'] == 147 || $data['user']['role'] == 170))
+				die('Access Denied!');
+
 			//print_r($data['user']['id']);die;
 
 			$data['menus'] = $this->menus_lib->get_menus($data['user']['role']);
@@ -173,7 +179,10 @@
 				$filing_no = $details[0];
 				$listing_date = $details[1];
 				$bench_id = $details[2];
-			$data['user'] = $this->login_model->getRows($this->con);	
+			$data['user'] = $this->login_model->getRows($this->con);
+
+			if(!($data['user']['role'] == 147 || $data['user']['role'] == 170))
+				die('Access Denied!');	
 				
 			$data['menus'] = $this->menus_lib->get_menus($data['user']['role']);
 			//$filing_no = $this->input->post('filing_no');

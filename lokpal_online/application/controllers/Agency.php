@@ -29,6 +29,10 @@ class Agency extends CI_Controller {
 		$this->load->library('label');
 		$this->load->helper("date_helper");
 		$this->load->helper("proceeding_helper");
+
+		$data['user'] = $this->login_model->getRows($this->con);
+		if(!($data['user']['role'] == 149 || $data['user']['role'] == 150 || $data['user']['role'] == 151))
+			die('Access Denied!');
 	}
 
 	public function dashboard()

@@ -438,7 +438,8 @@ if (empty($data['partc']))
           $this->load->library('upload', $config);
           if ( ! $this->upload->do_upload('relevant_evidence_upload'))
           {
-             $error = array('error' => $this->upload->display_errors());            
+             $error = array('error' => $this->upload->display_errors());   
+             redirect('respondent/respondentfiling');          
           }
           else
           { 
@@ -468,7 +469,8 @@ if (empty($data['partc']))
           $this->load->library('upload', $config);
             if ( ! $this->upload->do_upload('sum_fact_allegation_upload'))
             {
-              $error = array('error' => $this->upload->display_errors());               
+              $error = array('error' => $this->upload->display_errors()); 
+               redirect('respondent/respondentfiling');               
             }
             else
             { 
@@ -498,6 +500,7 @@ if (empty($data['partc']))
               if ( ! $this->upload->do_upload('detail_offence_upload'))
               {
                     $error = array('error' => $this->upload->display_errors()); 
+                     redirect('respondent/respondentfiling');  
                 
               }
               else
@@ -772,6 +775,7 @@ if (empty($data['partc']))
         if ( ! $this->upload->do_upload('relevant_evidence_upload'))
         {
           $error = array('error' => $this->upload->display_errors()); 
+          redirect('respondent/respondentfiling'); 
           
         }else
         { 
@@ -801,6 +805,7 @@ if (empty($data['partc']))
               if ( ! $this->upload->do_upload('sum_fact_allegation_upload'))
               {
                 $error = array('error' => $this->upload->display_errors()); 
+                redirect('respondent/respondentfiling'); 
                 
               }else
               { 
@@ -830,6 +835,7 @@ if (empty($data['partc']))
         if ( ! $this->upload->do_upload('detail_offence_upload'))
             {
               $error = array('error' => $this->upload->display_errors()); 
+              redirect('respondent/respondentfiling'); 
               
             }
           else

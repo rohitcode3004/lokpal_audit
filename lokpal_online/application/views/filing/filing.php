@@ -1,5 +1,6 @@
 <!-- Bootstrap Datepicker  Css -->
 <link href="<?php echo base_url();?>assets/admin_material/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+<script src="<?php echo base_url();?>assets/customjs/password_encryption.js"></script>
 
 <?php
 //print_r($user_profile);die;
@@ -18,7 +19,7 @@ if(isset($farma))
   $myArray=(array)$farma;
 
   //echo "<pre>";
-  //print_r($myArray);
+  //print_r($myArray);die;
 
   $myArray[0]->first_name;
   $myArray[0]->age_years;
@@ -206,7 +207,7 @@ if(isset($farma))
               </div>
               <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
                 <label for="identity_proof_no"><?php print_r($this->label->get_short_name($elements, 19)); ?></label>
-                <input type="text" class="form-control" name="identity_proof_no" value="<?php echo set_value('identity_proof_no', @$myArray[0]->identity_proof_no); ?>" id="identity_proof_no" maxlength="50" placeholder="">
+                <input type="text" class="form-control" name="identity_proof_no" value="<?php echo set_value('identity_proof_no', @$myArray[0]->identity_proof_no); ?>" id="identity_proof_no" maxlength="500" placeholder="" hidden="true">
               </div>
               <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
                 <label for="identity_proof_doi"><?php print_r($this->label->get_short_name($elements, 20)); ?></label>
@@ -259,7 +260,7 @@ if(isset($farma))
               </div>
               <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
                 <label for="idres_proof_no"><?php print_r($this->label->get_short_name($elements, 25)); ?></label>
-                <input type="text" class="form-control" name="idres_proof_no" id="idres_proof_no" value="<?php echo set_value('idres_proof_no', @$myArray[0]->idres_proof_no); ?>" maxlength="50" placeholder="">
+                <input type="text" class="form-control" name="idres_proof_no" id="idres_proof_no" value="<?php echo set_value('idres_proof_no',(@$myArray[0]->idres_proof_no)); ?>" maxlength="500" placeholder="">
               </div>
               <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
                 <label for="idres_proof_doi"><?php print_r($this->label->get_short_name($elements, 26)); ?></label> 
@@ -273,7 +274,7 @@ if(isset($farma))
               </div>
               <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
                 <label for="idres_proof_iauth"><?php print_r($this->label->get_short_name($elements, 28)); ?></label>
-                <input type="text" class="form-control" name="idres_proof_iauth" id="idres_proof_iauth" value="<?php echo set_value('idres_proof_iauth', @$myArray[0]->idres_proof_iauth); ?>" maxlength="50" placeholder="">
+                <input type="text" class="form-control" name="idres_proof_iauth" id="idres_proof_iauth" value="<?php echo set_value('idres_proof_iauth', @$myArray[0]->idres_proof_iauth); ?>" maxlength="500" placeholder="">
               </div>
               <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
                 <?php   $residence_upload=$myArray[0]->residence_url_parta ?? ''; ?>
@@ -558,8 +559,8 @@ if(isset($farma))
 
       <div class="row">
         <div class="col-md-12 text-right">
-          <button type="submit" class="btn btn-success" id="submitbtn">Save as Draft</button> 
-          <button type="submit" class="btn btn-success" id="submitbtn">Save & Next</button>    
+          <button type="submit" class="btn btn-success" id="submitbtn" onclick="encode_dl_passport('identity_proof_no', 'idres_proof_no')" >Save as Draft</button> 
+          <button type="submit" class="btn btn-success" id="submitbtn" onclick="encode_dl_passport('identity_proof_no', 'idres_proof_no')">Save & Next</button>    
         </div>
       </div>
                     </form>

@@ -63,6 +63,10 @@ class Counter extends CI_Controller {
 	public function dashboard_registry()
 	{	
 		$data['user'] = $this->login_model->getRows($this->con);
+		if(!($data['user']['role'] == 143))
+			die('Access Denied!');
+		
+		$data['user'] = $this->login_model->getRows($this->con);
 
             //print_r($data['user']['id']);die;
 
@@ -83,6 +87,10 @@ class Counter extends CI_Controller {
 
 	public function dashboard_main_registry()
 	{	
+		$data['user'] = $this->login_model->getRows($this->con);
+		if(!($data['user']['role'] == 143))
+			die('Access Denied!');
+
 		$data['user'] = $this->login_model->getRows($this->con);
 		$data['role'] = $data['user']['role'];
 
@@ -109,6 +117,10 @@ class Counter extends CI_Controller {
 	}
 
 	public function counterfiling($dash_ref_no=NULL){
+
+		$data['user'] = $this->login_model->getRows($this->con);
+		if(!($data['user']['role'] == 131 || $data['user']['role'] == 161 || $data['user']['role'] == 162))
+			die('Access Denied!');
 
 		$data['user'] = $this->login_model->getRows($this->con);
 		$data['role'] = $data['user']['role'];

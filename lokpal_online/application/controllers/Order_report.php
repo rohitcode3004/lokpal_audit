@@ -44,6 +44,8 @@ class Order_report extends CI_Controller {
 
 	public function list_of_case(){
 		$data['user'] = $this->login_model->getRows($this->con); 
+		if(!($data['user']['role'] == 138 || $data['user']['role'] == 147 || $data['user']['role'] == 170))
+				die('Access Denied!');
 		$data['menus'] = $this->menus_lib->get_menus($data['user']['role']);
 		$this->load->helper("date_helper");	
 		$this->load->helper("compno_helper");
@@ -56,6 +58,9 @@ class Order_report extends CI_Controller {
 	public function search_case_action(){
 
 		$data['user'] = $this->login_model->getRows($this->con);
+
+		if(!($data['user']['role'] == 138 || $data['user']['role'] == 147 || $data['user']['role'] == 170))
+				die('Access Denied!');
 
 		$this->load->helper("date_helper");
 		$this->load->helper("compno_helper");

@@ -30,6 +30,7 @@ class User extends CI_Controller {
 	
 	public function login(){ 
 		//print_r($this->session->all_userdata('captchaCode'));
+
 		if($this->session->userdata('success_msg')){ 
 			$data['success_msg'] = $this->session->userdata('success_msg'); 
 			$this->session->unset_userdata('success_msg'); 
@@ -720,8 +721,6 @@ class User extends CI_Controller {
 public function user_register(){
 	$data['salution'] = $this->common_model->getSalution();
 	$data['captcha'] =  $this->captcha();
-
-
 	$this->load->view('front/user/user_registration.php',$data);
 	
 	/*
@@ -746,7 +745,6 @@ public function user_register(){
 
 	public function new_user_save(){
 		$data['salution'] = $this->common_model->getSalution();
-		
 		$ref_no=mt_rand();
 
 		//if($this->isUserLoggedIn) 
@@ -897,15 +895,11 @@ public function user_register(){
                 )
         );
         $captcha = create_captcha($config);
-        //print_r($captcha);die;
         // Unset previous captcha and set new captcha word
         $this->session->unset_userdata('captchaCode');
         $this->session->set_userdata('captchaCode',$captcha['word']);
         
         // Display captcha image
-
-
-
         return $captcha;
     }
 
@@ -914,5 +908,5 @@ public function user_register(){
         $captcha = $this->captcha();
         echo $captcha['image'];
     }
-
 }
+

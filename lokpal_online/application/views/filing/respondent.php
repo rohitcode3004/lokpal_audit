@@ -876,40 +876,33 @@ $(document).ready(function(){
 
 
  <script type="text/javascript">
-            // When the document is ready
             $(document).ready(function () {
-                 autoclose: true,  
-                $('#periodf_coa').datepicker({
-                    format: "dd-mm-yyyy"
-                });  
-            
-            });
-       
 
-        $(document).ready(function () {
-                 autoclose: true,  
-                $('#periodt_coa').datepicker({
-                    format: "dd-mm-yyyy"
-                });  
-            
-            });
-
-               $('#periodf_coa').datepicker({
+              $(function () {
+                $("#periodf_coa").datepicker({
                     format: "dd-mm-yyyy",
                     endDate: new Date(),
                     autoclose: true,
                     todayHighlight: true
-
-                  });
-
-                $('#periodt_coa').datepicker({
+                }).on('changeDate', function (selected) {
+                    var minDate = new Date(selected.date);
+                    minDate.setDate(minDate.getDate() + 1);
+                    $('#periodt_coa').datepicker('setStartDate', minDate);
+                });
+ 
+                $("#periodt_coa").datepicker({
                     format: "dd-mm-yyyy",
                     endDate: new Date(),
                     autoclose: true,
                     todayHighlight: true
+                }).on('changeDate', function (selected) {
+                    var minDate = new Date(selected.date);
+                    minDate.setDate(minDate.getDate() - 1);
+                    $('#periodf_coa').datepicker('setEndDate', minDate);
+                });
+              });
+            });  
 
-                  }); 
-                
 
      function isNumberKey(evt){
     var charCode = (evt.which) ? evt.which : event.keyCode

@@ -59,6 +59,9 @@ class Bench extends CI_Controller {
 
 			$data['user'] = $this->login_model->getRows($this->con);
 
+			if(!($data['user']['role'] == 138))
+				die('Access Denied!');
+
             //print_r($data['user']['id']);die;
 
 			$data['menus'] = $this->menus_lib->get_menus($data['user']['role']);
@@ -89,9 +92,12 @@ class Bench extends CI_Controller {
 
 	public function benchcomposition(){	
 		//print_r($this->input->post());die;
+		$data['user'] = $this->login_model->getRows($this->con);	
+
+		if(!($data['user']['role'] == 138))
+			die('Access Denied!');
 		if($this->input->post('filing_no'))
 			{
-		$data['user'] = $this->login_model->getRows($this->con);	
 			
 		$data['menus'] = $this->menus_lib->get_menus($data['user']['role']);
 		$filing_no = $this->input->post('filing_no');
@@ -796,6 +802,9 @@ class Bench extends CI_Controller {
 	public function benchcomposition_separate(){	
 		$data['user'] = $this->login_model->getRows($this->con);	
 			
+		if(!($data['user']['role'] == 138))
+			die('Access Denied!');
+
 		$data['menus'] = $this->menus_lib->get_menus($data['user']['role']);
 
 		$data['judge_master'] = $this->bench_model->getJudge();
@@ -837,6 +846,9 @@ class Bench extends CI_Controller {
 
 	public function benches_all(){	
 		$data['user'] = $this->login_model->getRows($this->con);	
+
+		if(!($data['user']['role'] == 138))
+			die('Access Denied!');
 			
 		$data['menus'] = $this->menus_lib->get_menus($data['user']['role']);
 
@@ -911,7 +923,11 @@ class Bench extends CI_Controller {
 
 	public function get_complaints($flag=NULL)
 	{	
+
 		$data['user'] = $this->login_model->getRows($this->con);
+
+		if(!($data['user']['role'] == 138))
+			die('Access Denied!');
 
             //print_r($data['user']['id']);die;
 
@@ -980,6 +996,10 @@ public function search_case(){
 
 $data['user'] = $this->login_model->getRows($this->con);
 
+if(!($data['user']['role'] == 138 || $data['user']['role'] == 147))
+	die('Access Denied!');
+
+
 $this->load->helper("date_helper");
 $this->load->helper("compno_helper");
 $userid=$data['user']['id'];
@@ -1002,6 +1022,10 @@ $this->load->view('templates/front/dfooter.php',$data);
 
 public function search_case_detail(){
 $data['user'] = $this->login_model->getRows($this->con);
+
+if(!($data['user']['role'] == 138 || $data['user']['role'] == 147))
+	die('Access Denied!');
+
 $this->load->helper("date_helper");
 $this->load->helper("compno_helper");
 $userid=$data['user']['id'];
@@ -1121,6 +1145,10 @@ $this->load->view('templates/front/dfooter.php',$data);
 public function get_complaints_ops($flag=NULL)
 	{	
 		$data['user'] = $this->login_model->getRows($this->con);
+
+		if(!($data['user']['role'] == 138))
+			die('Access Denied!');
+
 
             //print_r($data['user']['id']);die;
 

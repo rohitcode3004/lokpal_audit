@@ -463,6 +463,7 @@ if(!empty($_FILES['ob_identity_proof_upload']['name']))
   if ( ! $this->upload->do_upload('ob_identity_proof_upload'))
   {
     $error = array('error' => $this->upload->display_errors()); 
+    redirect('applet/officebeared');  
 
   }
   else
@@ -520,6 +521,7 @@ if(!empty($_FILES['ob_idres_proof_upload']['name']))
   if ( ! $this->upload->do_upload('ob_idres_proof_upload'))
   {
     $error = array('error' => $this->upload->display_errors()); 
+    redirect('applet/officebeared');
 
   }
   else
@@ -630,6 +632,14 @@ else
       }
 else
 {
+
+
+$ob_identity_proof_no_encrypted=$this->input->post('ob_identity_proof_no');
+$ob_identity_proof_no_decrypted = decode($ob_identity_proof_no_encrypted);
+$ob_idres_proof_no_encrypted=$this->input->post('ob_idres_proof_no');
+$ob_idres_proof_no_decrypted = decode($ob_idres_proof_no_encrypted);
+
+
 $ip = get_ip();
 $ip = $ip;
 $ts = date('Y-m-d H:i:s');
@@ -647,12 +657,14 @@ $ob_gender_id= ($this->input->post('ob_gender_id'));
 $ob_age_years= ($this->input->post('ob_age_years'));        
 $ob_nationality_id= ($this->input->post('ob_nationality_id'));          
 $ob_identity_proof_id= ($this->input->post('ob_identity_proof_id'));        
-$ob_identity_proof_no= ($this->input->post('ob_identity_proof_no'));
+//$ob_identity_proof_no= ($this->input->post('ob_identity_proof_no'));
+$ob_identity_proof_no=md5($ob_identity_proof_no_decrypted);
 $ob_identity_proof_doi=$ob_identity_proof_doi;
 $ob_identity_proof_vupto=$ob_identity_proof_vupto;
 $ob_identity_proof_iauth= ($this->input->post('ob_identity_proof_iauth'));
 $ob_idres_proof_id= ($this->input->post('ob_idres_proof_id'));
-$ob_idres_proof_no= ($this->input->post('ob_idres_proof_no'));
+//$ob_idres_proof_no= ($this->input->post('ob_idres_proof_no'));
+$ob_idres_proof_no=md5($ob_idres_proof_no_decrypted);
 $ob_idres_proof_doi=$ob_idres_proof_doi;
 $ob_idres_proof_vupto=$ob_idres_proof_vupto;
 $ob_idres_proof_iauth= ($this->input->post('ob_idres_proof_iauth'));
@@ -806,7 +818,8 @@ if(!empty($_FILES['ob_identity_proof_upload']['name']))
   $this->load->library('upload', $config);
   if ( ! $this->upload->do_upload('ob_identity_proof_upload'))
   {
-    $error = array('error' => $this->upload->display_errors());          
+    $error = array('error' => $this->upload->display_errors());
+    redirect('applet/officebeared');          
   }
   else
   { 
@@ -854,7 +867,8 @@ if(!empty($_FILES['ob_idres_proof_upload']['name']))
   $this->load->library('upload', $config);
   if ( ! $this->upload->do_upload('ob_idres_proof_upload'))
   {
-    $error = array('error' => $this->upload->display_errors());          
+    $error = array('error' => $this->upload->display_errors()); 
+    redirect('applet/officebeared');         
   }
   else
   { 
@@ -964,6 +978,15 @@ else
 else
 {
 
+
+
+$ob_identity_proof_no_encrypted=$this->input->post('ob_identity_proof_no');
+$ob_identity_proof_no_decrypted = decode($ob_identity_proof_no_encrypted);
+$ob_idres_proof_no_encrypted=$this->input->post('ob_idres_proof_no');
+$ob_idres_proof_no_decrypted = decode($ob_idres_proof_no_encrypted);
+
+
+
 $ip = get_ip();
 $ip = $ip;
 $ts = date('Y-m-d H:i:s');
@@ -988,6 +1011,7 @@ $ob_age_years= ($this->input->post('ob_age_years'));
 $ob_nationality_id= ($this->input->post('ob_nationality_id'));      
 $ob_identity_proof_id= ($this->input->post('ob_identity_proof_id'));      
 $ob_identity_proof_no= ($this->input->post('ob_identity_proof_no')); 
+$ob_identity_proof_no=md5($ob_identity_proof_no_decrypted);
 /*
 $ob_identity_proof_doi= ($this->input->post('ob_identity_proof_doi'));
 $ob_identity_proof_doi= get_entrydate($ob_identity_proof_doi);
@@ -1000,7 +1024,9 @@ $ob_identity_proof_vupto=$ob_identity_proof_vupto;
 
 $ob_identity_proof_iauth= ($this->input->post('ob_identity_proof_iauth'));
 $ob_idres_proof_id= ($this->input->post('ob_idres_proof_id'));
-$ob_idres_proof_no= ($this->input->post('ob_idres_proof_no')); 
+//$ob_idres_proof_no= ($this->input->post('ob_idres_proof_no')); 
+
+$ob_idres_proof_no=md5($ob_idres_proof_no_decrypted);
 /*      
 $ob_idres_proof_doi= ($this->input->post('ob_idres_proof_doi'));
 $ob_idres_proof_doi= get_entrydate($ob_idres_proof_doi);      
@@ -1144,6 +1170,8 @@ public function save(){
     {
       $error = array('error' => $this->upload->display_errors()); 
 
+    redirect('applet/appletfiling'); 
+
     }else
     { 
       $uploadedImage = $this->upload->data();      
@@ -1162,7 +1190,7 @@ public function save(){
   $filename = substr($filename, 0, strrpos($filename, '.'));
   $filename = str_replace(' ','',$filename);  
   $filename = str_replace('.','',$filename);  
-  if(!empty($_FILES['identity_proof_upload']['name']))
+  if(!empty($_FILES['aidres_proof_upload']['name']))
   {     
           // $config['encrypt_name'] = TRUE;  
     $config['upload_path']   = './cdn/residenceformb/'; 
@@ -1174,6 +1202,7 @@ public function save(){
     if ( ! $this->upload->do_upload('aidres_proof_upload'))
     {
      $error = array('error' => $this->upload->display_errors()); 
+      redirect('applet/appletfiling'); 
    }
    else
    { 
@@ -1203,7 +1232,7 @@ if(!empty($_FILES['auth_doc_upload']['name']))
   if ( ! $this->upload->do_upload('auth_doc_upload'))
   {
     $error = array('error' => $this->upload->display_errors()); 
-
+   redirect('applet/appletfiling'); 
   }else
   { 
     $uploadedImage = $this->upload->data();      
@@ -1338,6 +1367,12 @@ else
 {
  //echo "rrrrrrrrrrrrrrr";die;
 
+   $aidentity_proof_no_encrypted=$this->input->post('aidentity_proof_no');
+   $aidentity_proof_no_decrypted = decode($aidentity_proof_no_encrypted);
+   $aidres_proof_no_encrypted=$this->input->post('aidres_proof_no'); 
+   $aidres_proof_no_decrypted = decode($aidres_proof_no_encrypted);
+
+
 
              // $array['user_id'];
  $ref_no=$ref_no;
@@ -1373,12 +1408,14 @@ else
  $a_age_years= ($this->input->post('a_age_years'));
  $a_nationality_id= ($this->input->post('a_nationality_id'));
  $aidentity_proof_id= ($this->input->post('aidentity_proof_id'));
- $aidentity_proof_no= ($this->input->post('aidentity_proof_no'));
+ //$aidentity_proof_no= ($this->input->post('aidentity_proof_no'));
+ $aidentity_proof_no= md5($aidentity_proof_no_decrypted);
  $aidentity_proof_doi=$aidentity_proof_doi;
  $aidentity_proof_vupto=$aidentity_proof_vupto;
  $aidentity_proof_iauth= ($this->input->post('aidentity_proof_iauth'));
  $aidres_proof_id= ($this->input->post('aidres_proof_id'));
- $aidres_proof_no= ($this->input->post('aidres_proof_no'));
+ //$aidres_proof_no= ($this->input->post('aidres_proof_no'));
+ $aidres_proof_no=md5($aidres_proof_no_decrypted);
  $aidres_proof_doi=$aidres_proof_doi;
  $aidres_proof_vupto=$aidres_proof_vupto;
  $aidres_proof_iauth= ($this->input->post('aidres_proof_iauth'));
@@ -1525,6 +1562,7 @@ else
     if ( ! $this->upload->do_upload('identity_proof_upload'))
     {
       $error = array('error' => $this->upload->display_errors()); 
+        redirect('applet/appletfiling'); 
 
     }else
     { 
@@ -1537,35 +1575,39 @@ else
           //$part_c = $this->report_model->getPartc($ref_no);
     $identity_url_partb=$datapartb['identity_url_partb'] ?? '';
   } 
+
+
+
   $filename=$_FILES['aidres_proof_upload']['name'];
   $ext = substr($filename, -4, strrpos($filename, '.'));
   $filename = substr($filename, 0, strrpos($filename, '.'));
   $filename = str_replace(' ','',$filename);  
   $filename = str_replace('.','',$filename);  
-
   if(!empty($_FILES['aidres_proof_upload']['name']))
-  {        
-    $config['upload_path']   = './cdn/identityformb/'; 
+  {     
+          // $config['encrypt_name'] = TRUE;  
+    $config['upload_path']   = './cdn/residenceformb/'; 
     $config['allowed_types'] = 'gif|jpg|pdf';      
-          //$config['max_size']      = 15000;
+              //$config['max_size']      = 15000;
     $config['file_name'] = $new_name.$filename;
     $this->upload->initialize($config);
     $this->load->library('upload', $config);
     if ( ! $this->upload->do_upload('aidres_proof_upload'))
     {
-      $error = array('error' => $this->upload->display_errors()); 
+     $error = array('error' => $this->upload->display_errors()); 
+       redirect('applet/appletfiling'); 
 
-    }else
-    { 
-      $uploadedImage = $this->upload->data();      
-    } 
-    $residence_url_partb='cdn/identityformb/'.$new_name.$filename.$ext;
-  }      
-  else
-  {        
-          //$part_c = $this->report_model->getPartc($ref_no);
-    $residence_url_partb=$datapartb['residence_url_partb'] ?? '';
-  } 
+   }
+   else
+   { 
+     $uploadedImage = $this->upload->data();      
+   } 
+   $residence_url_partb='cdn/residenceformb/'.$new_name.$filename.$ext;
+ }      
+ else
+ {
+  $residence_url_partb='';
+} 
 
 
           //auth_doc_upload
@@ -1588,7 +1630,7 @@ else
     if ( ! $this->upload->do_upload('auth_doc_upload'))
     {
       $error = array('error' => $this->upload->display_errors()); 
-
+      redirect('applet/appletfiling'); 
     }else
     { 
       $uploadedImage = $this->upload->data();      
