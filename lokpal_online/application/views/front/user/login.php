@@ -25,7 +25,7 @@
                 $uri_parts = explode('?', $_SERVER['REQUEST_URI'], 2);
                 $uri_parts2 = explode('/', $uri_parts[0]);
         ?>
-      <form class="form-horizontal" role="form" action="<?php echo base_url('user/login') ?>" method="post">
+      <form class="form-horizontal" role="form" action="<?php echo base_url('user/login') ?>" method="post" autocomplete="off">
         <input class="input-form" placeholder="Email ID" name="username" type="text" autofocus>
         <input class="input-form" placeholder="Password" name="password" type="password" value="" id="pwd">
 
@@ -35,7 +35,7 @@
             <a href="javascript:void(0);" class="refreshCaptcha"><strong>click here</strong></a> to refresh.
           </div>
         </div>
-        <input type="text" class="input-form" name="captcha" value="" placeholder="Enter the captcha code " autocomplete="off"/>
+        <input type="text" class="input-form" name="captcha" value="" placeholder="Enter the captcha code "/>
 
 
         <input class="loginhny-btn btn" type="submit" name="userloginSubmit" value="login"/>

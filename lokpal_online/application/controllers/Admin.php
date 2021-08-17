@@ -13,7 +13,6 @@ class Admin extends CI_Controller {
 		$this->load->library('session'); 
 		$this->load->helper('url'); 
 		$this->load->helper('common_helper'); 
-
 		$this->load->library('Menus_lib');
 		$this->load->helper('captcha');
 
@@ -24,13 +23,15 @@ class Admin extends CI_Controller {
 		if($this->isUserLoggedIn){ 
 			redirect('admin/dashboard'); 
 		}else{ 
-			$this->load->view('admin/user/login'); 
+
+			$data['captcha'] =  $this->captcha();
+			$this->load->view('admin/user/login', $data); 
 		} 
 	}
 	
+	
 	public function authenticate(){				
 		$data = array(); 
-		$data['captcha'] =  $this->captcha();
         // Get messages from the session 
 		if($this->session->userdata('success_msg')){ 
 			$data['success_msg'] = $this->session->userdata('success_msg'); 
@@ -46,18 +47,28 @@ class Admin extends CI_Controller {
 			$this->form_validation->set_rules('username', 'Username', 'required'); 
 			$this->form_validation->set_rules('password', 'password', 'required'); 
 			$this->form_validation->set_rules('captcha', 'captcha', 'required');
-
+			
 			if($this->form_validation->run() == true){ 
 				$data['username'] = strip_tags($this->input->post('username'));
+				$data['password'] = md5(strip_tags($this->input->post('password')));
 
-				$password_encrypted = $this->input->post('password');
-				$password_decrypted = decode($password_encrypted);
-				$data['password'] = md5(strip_tags($password_decrypted));
+				 $data['captcha_input'] = trim($this->input->post('captcha'));
+			    $captcha_session = $this->session->all_userdata('captchaCode');
+			   // print_r($data['captcha_input']);
+			  
+			    if($data['captcha_input'] == $captcha_session['captchaCode'])
+			    {
+			    	$checkcaptch='t';
+			    }
+			    else
+			    {
+				$checkcaptch='f';
+			    }
 
 				$checkLogin = $this->login_model->authenticate($data);
                 //$checkStaff = $this->login_model->chkstf($data);
                 //if($checkStaff){die('nn');}else{die('mm');}
-				if($checkLogin && $checkLogin['is_staff'] == 't'){
+				if($checkLogin && $checkLogin['is_staff'] == 't' && $checkcaptch == 't'){
 					$log_data = array( 
 					'user_id' => $checkLogin['id'], 
 					'username' => strip_tags($this->input->post('username')),
@@ -76,12 +87,16 @@ class Admin extends CI_Controller {
 					die('Unable to maintain your log.Go back and try again.');
 				}
 				}else{ 
-					$data['error_msg'] = '<div class="alert alert-info"><h4 class="m-0">Wrong email, password  or captcha, please try again.</h4></div>'; 
+					$data['error_msg'] = '<div class="alert alert-info"><h4 class="m-0">Wrong email, password  or captcha, please try again.</h4></div>';
+					$data['captcha'] =  $this->captcha();  
 				} 
 			}else{ 
 				$data['error_msg'] = '<div class="alert alert-danger"><h4 class="m-0">Please fill all the mandatory fields.</h4>'; 
+				$data['captcha'] =  $this->captcha(); 
 			} 
-		} 
+		} else{
+			$data['captcha'] =  $this->captcha();
+		}
 
         // Load view 
 		$this->load->view('admin/user/login', $data); 			
