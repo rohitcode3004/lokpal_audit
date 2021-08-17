@@ -52,5 +52,6 @@ function encode_dl_passport(id1, id2) {
   }
   encoded = btoa(encoded);
   document.getElementById(pwdObj[j]).value = encoded;
+  //just for checking
 }
 }
