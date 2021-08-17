@@ -33,7 +33,7 @@
                     <label for="salutation_id" >Title<span class="text-danger">*</span></label>    
                     <select type="text" class="form-control" name="salutation_id" id="salutation_id">
                       <option value="">Select Title</option>
-                      <?php foreach($salution as $row):?>                     
+                      <?php foreach($salution as $row):?>                 
                       <option value="<?php echo $row->salutation_id; ?>" <?php echo set_select('salutation_id',  $row->salutation_id); ?>><?php echo $row->salutation_desc; ?></option>                   
                       <?php endforeach;?>
                     </select>  
@@ -160,11 +160,24 @@
                 </div>
               </div>
 
-
+              <div class="row">
+                <div class="col-md-12">
+                  <label for="captcha_code">Captcha<span class="text-danger">*</span></label>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div id="captImg" style="float: left; margin-right: 15px;"><?php echo $captcha['image'];?></div>
+                      <div style="font-size: 18px;">Can't read the image?  
+                        <a href="javascript:void(0);" class="refreshCaptcha"><strong>click here</strong></a> to refresh.
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <input type="text" class="form-control" id="captcha_code" name="captcha_code" value="" placeholder="Enter the captcha code : " autocomplete="off"/>
+                      <?php echo form_error('captcha_code','<div class="text-danger">','</div>'); ?>
+                    </div>
+                  </div>
+                </div>                
+              </div>
               
-
-              
-
               <div class="row">                   
                 <div class="col-md-4 col-md-offset-4">
                   <button type="submit" class="loginhny-btn btn" name="submitform" value="subacc" align="center">Submit</button>
