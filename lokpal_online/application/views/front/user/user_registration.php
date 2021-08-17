@@ -33,7 +33,7 @@
                     <label for="salutation_id" >Title<span class="text-danger">*</span></label>    
                     <select type="text" class="form-control" name="salutation_id" id="salutation_id">
                       <option value="">Select Title</option>
-                      <?php foreach($salution as $row):?>                     
+                      <?php foreach($salution as $row):?>                 
                       <option value="<?php echo $row->salutation_id; ?>" <?php echo set_select('salutation_id',  $row->salutation_id); ?>><?php echo $row->salutation_desc; ?></option>                   
                       <?php endforeach;?>
                     </select>  
@@ -158,8 +158,8 @@
                     <?php echo form_error('password2','<div class="text-danger">','</div>'); ?>
                   </div>
                 </div>
-              </div>  
-              
+              </div>
+
               <div class="row">
                 <div class="col-md-12">
                   <label for="captcha_code">Captcha<span class="text-danger">*</span></label>
@@ -178,7 +178,6 @@
                 </div>                
               </div>
               
-
               <div class="row">                   
                 <div class="col-md-4 col-md-offset-4">
                   <button type="submit" class="loginhny-btn btn" name="submitform" value="subacc" align="center">Submit</button>

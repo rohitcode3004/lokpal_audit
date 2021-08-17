@@ -29,11 +29,8 @@ class User extends CI_Controller {
 	}
 	
 	public function login(){ 
-		//print_r($_POST);die;
-		$data = array(); 
-		$data['captcha'] =  $this->captcha();
+		//print_r($this->session->all_userdata('captchaCode'));
 
-        // Get messages from the session 
 		if($this->session->userdata('success_msg')){ 
 			$data['success_msg'] = $this->session->userdata('success_msg'); 
 			$this->session->unset_userdata('success_msg'); 
@@ -45,26 +42,33 @@ class User extends CI_Controller {
 
         // If login request submitted 
 		if($this->input->post('userloginSubmit')){ 
+
 			$this->form_validation->set_rules('username', 'Username', 'required'); 
 			$this->form_validation->set_rules('password', 'password', 'required'); 
 			$this->form_validation->set_rules('captcha', 'captcha', 'required'); 
-			
-			if($this->form_validation->run() == true){ 
+
+			if($this->form_validation->run() == true){
 				$data['username'] = $this->input->post('username');
-				$password_encrypted = $this->input->post('password');
-				$password_decrypted = decode($password_encrypted);
-				//echo $password_decrypted;die;
-			    $data['password'] = md5($password_decrypted);
-
-
-			// die('@@@');
+			    $data['password'] = md5($this->input->post('password'));
+			    $data['captcha_input'] = trim($this->input->post('captcha'));
+			    $captcha_session = $this->session->all_userdata('captchaCode');
+			   // print_r($data['captcha_input']);
+			  
+			    if($data['captcha_input'] == $captcha_session['captchaCode'])
+			    {
+			    	$checkcaptch='t';
+			    }
+			    else
+			    {
+				$checkcaptch='f';
+			    }
 				//$data['password'] = $this->input->post('password');
 
 				$checkLogin = $this->login_model->authenticate($data);
                 //$checkStaff = $this->login_model->chkstf($data);
                 //if($checkStaff){die('nn');}else{die('mm');}
                 //print_r($checkLogin);die();
-				if($checkLogin && $checkLogin['role'] == 18 && $checkLogin['display'] == 't'){
+				if($checkLogin && $checkLogin['role'] == 18 && $checkLogin['display'] == 't' && $checkcaptch == 't'){
 					$this->session->set_userdata('isUserLoggedIn', TRUE); 
 					$this->session->set_userdata('userId', $checkLogin['id']); 
 					//$parta_status = get_parts_status_onid($checkLogin['id'], 'A');
@@ -76,13 +80,21 @@ class User extends CI_Controller {
 						$ref_no = get_refno_latest($user_id);
 						redirect('/filing/filing/'.$ref_no); 
 					}
-				}else{ 
-					$data['error_msg'] = '<div class="alert alert-info"><h4 class="m-0">Wrong email, password  or captcha, please try again.</h4></div>'; 
+				}else{
+				//die('here2'); 
+					$data['error_msg'] = '<div class="alert alert-info"><h4 class="m-0">Wrong email, password  or captcha, please try again.</h4></div>';
+					$data['captcha'] =  $this->captcha();  
 				} 
 			}else{ 
+				//die('here');
+				$data['captcha'] =  $this->captcha();
 				$data['error_msg'] = '<div class="alert alert-danger"><h4 class="m-0">Please fill all the mandatory fields.</h4></div>	'; 
 			} 
-		} 
+		} else{
+			$data['captcha'] =  $this->captcha();
+			//$data['captcha'] =  $this->captcha();   //this is completely wrong
+		}
+
 
         // Load view 
 		$this->load->view('front/user/login.php', $data); 			
@@ -707,7 +719,6 @@ class User extends CI_Controller {
 
 
 public function user_register(){
-
 	$data['salution'] = $this->common_model->getSalution();
 	$data['captcha'] =  $this->captcha();
 	$this->load->view('front/user/user_registration.php',$data);
@@ -732,12 +743,8 @@ public function user_register(){
 }
 
 
-public function new_user_save(){
+	public function new_user_save(){
 		$data['salution'] = $this->common_model->getSalution();
-		$data = $userData = array(); 
-		$data=$partaData=array();
-		$data['captcha'] =  $this->captcha();
-
 		$ref_no=mt_rand();
 
 		//if($this->isUserLoggedIn) 
@@ -748,7 +755,7 @@ public function new_user_save(){
 				$this->form_validation->set_rules('salutation_id', 'Tilte', 'required'); 
 				$this->form_validation->set_rules('first_name', 'First Name', 'required'); 	
 							
-				$this->form_validation->set_rules('mobile', 'Mobile Number ', 'is_unique[users.mobile]|regex_match[/^[0-9]{10}$/]');
+				$this->form_validation->set_rules('mobile', 'Mobile Number ', 'required|is_unique[users.mobile]|regex_match[/^[0-9]{10}$/]');
 				$this->form_validation->set_rules('email', 'Email', 'valid_email|is_unique[users.email]|required'); 
 				
 				$this->form_validation->set_rules('password2', 'Confirm Password', 'required'); 
@@ -759,6 +766,11 @@ public function new_user_save(){
 					$this->form_validation->set_rules('password2', 'confirm password', 'trim|matches[password]'); 			
 				}
 
+				$captcha_session = $this->session->all_userdata('captchaCode');
+
+				//echo $captcha_session['captchaCode'];
+				//echo $data['captcha']['word'];
+				
 				$ts = date('Y-m-d H:i:s', time());
 				$ip = $this->get_ip();
 				$userData = array( 
@@ -772,97 +784,94 @@ public function new_user_save(){
 					'create_date' => $ts,
 					'ip' => $ip,
 				); 
+				if($this->form_validation->run() == true){
+					//echo "here";die('@@@@');
+					$captcha_code=$this->input->post('captcha_code');
 
-				/*
-				$partaData = array( 
-					'ref_no'=>$ref_no,
-					'salutation_id' => strip_tags($this->input->post('salutation_id')),
-					'first_name' => strip_tags($this->input->post('first_name')), 
-					'mid_name' => strip_tags($this->input->post('mid_name')), 
-					'sur_name' => strip_tags($this->input->post('sur_name')), 
-					'email_id' => strip_tags($this->input->post('email')),
-					'mob_no' => strip_tags($this->input->post('mobile')),
+					if($captcha_code == $captcha_session['captchaCode'])
+			   		{
+			    		$checkcaptch='t';
+			    	}
+			    	else
+			    	{
+						$checkcaptch='f';
+			    	}
 
-					 'filing_status' => 'false',
-					 'flag'=>'EF',										
-					'created_at' => $ts,
-					'ip' => $ip,
-				); */
-
-				if($this->form_validation->run() == true){ 
-					$insert = $this->users_model->user_register($userData); 
+					if($checkcaptch == 't')
+					{
+						$insert = $this->users_model->user_register($userData); 
 				
-					if($insert){ 
+						if($insert){ 
 
-				 $user_id=$this->db->insert_id();
+				 			$user_id=$this->db->insert_id();
 
-				 $user_profile_data = array( 
-					'salutation_id' => strip_tags($this->input->post('salutation_id')),
-					'first_name' => strip_tags($this->input->post('first_name')), 
-					'middle_name' => strip_tags($this->input->post('mid_name')), 
-					'last_name' => strip_tags($this->input->post('sur_name')),
-					'user_id' => $user_id,									
-					'created_at' => $ts,
-					'ip' => $ip,
-				); 
-					$user_profile = $this->users_model->user_profile_insert($user_profile_data); 
+				 			$user_profile_data = array( 
+								'salutation_id' => strip_tags($this->input->post('salutation_id')),
+								'first_name' => strip_tags($this->input->post('first_name')), 
+								'middle_name' => strip_tags($this->input->post('mid_name')), 
+								'last_name' => strip_tags($this->input->post('sur_name')),
+								'user_id' => $user_id,									
+								'created_at' => $ts,
+								'ip' => $ip,
+								); 
+							$user_profile = $this->users_model->user_profile_insert($user_profile_data); 
 
-					if($user_profile){
+							if($user_profile){
+								$partaData = array( 
+									'ref_no'=>$ref_no,
+									'salutation_id' => strip_tags($this->input->post('salutation_id')),
+									'first_name' => strip_tags($this->input->post('first_name')), 
+									'mid_name' => strip_tags($this->input->post('mid_name')), 
+									'sur_name' => strip_tags($this->input->post('sur_name')), 
+									'email_id' => strip_tags($this->input->post('email')),
+									'mob_no' => strip_tags($this->input->post('mobile')),
+									'user_id' => $user_id,
+					 				'filing_status' => 'false',
+					 				'flag'=>'EF',										
+									'created_at' => $ts,
+									'ip' => $ip,
+									); 
+								$partaData = $this->users_model->user_parta_data_insert($partaData); 
 
-				$partaData = array( 
-					'ref_no'=>$ref_no,
-					'salutation_id' => strip_tags($this->input->post('salutation_id')),
-					'first_name' => strip_tags($this->input->post('first_name')), 
-					'mid_name' => strip_tags($this->input->post('mid_name')), 
-					'sur_name' => strip_tags($this->input->post('sur_name')), 
-					'email_id' => strip_tags($this->input->post('email')),
-					'mob_no' => strip_tags($this->input->post('mobile')),
-					'user_id' => $user_id,
-					 'filing_status' => 'false',
-					 'flag'=>'EF',										
-					'created_at' => $ts,
-					'ip' => $ip,
-				); 
-					$partaData = $this->users_model->user_parta_data_insert($partaData); 
+								if($partaData){
 
-					if($partaData){
+									$this->session->set_flashdata('success_msg', '<div class="alert alert-success text-center"><h4 class="m-0">Account registration has been successful. Please login to lodge a complaint.</h4></div>');
+									redirect('user/login');
+								}else{
+									$data['error_msg'] = '<div class="alert alert-danger text-center"><h4 class="m-0">Some problems occured, please try again.</h4></div>';
+									$data['captcha'] =  $this->captcha();
+								}
 
-						$this->session->set_flashdata('success_msg', '<div class="alert alert-success text-center"><h4 class="m-0">Account registration has been successful. Please login to lodge a complaint.</h4></div>');
-						redirect('user/login');
-					}else{
-						$data['error_msg'] = '<div class="alert alert-danger text-center"><h4 class="m-0">Some problems occured, please try again.</h4></div>';
+								}else{
+									$data['error_msg'] = '<div class="alert alert-danger text-center"><h4 class="m-0">Some problems occured, please try again.</h4></div>';
+									$data['captcha'] =  $this->captcha();  
+								}
+
+								}else{
+									$data['error_msg'] = '<div class="alert alert-danger text-center"><h4 class="m-0">Some problems occured, please try again.</h4></div>';
+									$data['captcha'] =  $this->captcha();  
+								}
 					}
 
-					}else{
-						$data['error_msg'] = '<div class="alert alert-danger text-center"><h4 class="m-0">Some problems occured, please try again.</h4></div>';
+					else{
+						$data['error_msg'] = '<div class="alert alert-danger text-center"><h4 class="m-0">Captcha is incorrect. Try Again</h4></div>';
+						$data['captcha'] =  $this->captcha(); 
+
 					}
 
-					}else{
-						$data['error_msg'] = '<div class="alert alert-danger text-center"><h4 class="m-0">Some problems occured, please try again.</h4></div>';
-					}
-				}else{
-            //echo validation_errors();
+				}
+					
+                else{
+            		//echo validation_errors();
 					$data['salution'] = $this->common_model->getSalution();
 					$data['error_msg'] = '<div class="alert alert-info text-center"><h4 class="m-0">Please fill all the mandatory fields.</h4></div>';
+					$data['captcha'] =  $this->captcha();  
 					}
-				}
-
-			$con = array( 
-				'id' => $this->session->userdata('userId') 
-			); 
-			$data['user'] = $this->login_model->getRows($con);
-
-        // Posted data 
-			$data['roles'] = $this->login_model->get_roles();
-			//echo json_encode($data->result_array());
+			}else{
+				$data['captcha'] =  $this->captcha(); 
+			}
+				
 			$this->load->view('front/user/user_registration', $data);
-		//}
-
-
-/*
-		else{
-			redirect('admin/login'); 
-		}*/
 		
 	}
 
@@ -886,13 +895,11 @@ public function new_user_save(){
                 )
         );
         $captcha = create_captcha($config);
-        
         // Unset previous captcha and set new captcha word
         $this->session->unset_userdata('captchaCode');
         $this->session->set_userdata('captchaCode',$captcha['word']);
         
         // Display captcha image
-
         return $captcha;
     }
 
@@ -901,5 +908,5 @@ public function new_user_save(){
         $captcha = $this->captcha();
         echo $captcha['image'];
     }
-
 }
+
