@@ -20,17 +20,17 @@ class User extends CI_Controller {
 		$this->isUserLoggedIn = $this->session->userdata('isUserLoggedIn'); 
 		$this->load->library('Menus_lib');
 		$this->load->helper('captcha');
+	}
+
+	function index()
+	{
 		$con = array( 
 				'id' => $this->session->userdata('userId') 
 			); 
 			$data['user'] = $this->login_model->getRows($con);
 
-			if(!($data['user']['role'] == 12))
-				die('Access Denied!');
-	}
-
-	function index()
-	{
+		if(!($data['user']['role'] == 12))
+			die('Access Denied!');
 		$data = $this->login_model->fetch_all();
 		echo json_encode($data->result_array());
 	}
