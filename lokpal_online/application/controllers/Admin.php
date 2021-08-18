@@ -49,21 +49,27 @@ class Admin extends CI_Controller {
 
 			if($this->form_validation->run() == true){ 
 				$data['username'] = strip_tags($this->input->post('username'));
+				$current_failed = $this->login_model->current_failed(strip_tags($this->input->post('username')), date('Y-m-d'));
+				$current_lock = $this->login_model->current_lock(strip_tags($this->input->post('username')), date('Y-m-d'));
 
 				$password_encrypted = $this->input->post('password');
 				$password_decrypted = decode($password_encrypted);
 				$data['password'] = md5(strip_tags($password_decrypted));
 
 				$checkLogin = $this->login_model->authenticate($data);
+				$checkLock = $this->login_model->check_lock($data['username']);
+				//print_r($checkLock);die;
                 //$checkStaff = $this->login_model->chkstf($data);
                 //if($checkStaff){die('nn');}else{die('mm');}
-				if($checkLogin && $checkLogin['is_staff'] == 't'){
+				if($checkLogin && $checkLogin['is_staff'] == 't' && $checkLock[0]->lock == 'N'){
+					$current_failed_upd = $current_failed[0]->failed;
+					$current_lock_upd = $checkLock[0]->lock;
 					$log_data = array( 
 					'user_id' => $checkLogin['id'], 
 					'username' => strip_tags($this->input->post('username')),
 					'form_type' => 'A',  
-					//'lock' => strip_tags($this->input->post('mobile')), 
-					//'failed' => $this->input->post('role'), 
+					'lock' => $current_lock_upd, 
+					'failed' => $current_failed_upd, 
 					'ip' => get_ip(),
 					'datetime' => date('Y-m-d H:i:s', time()),
 				); 
@@ -72,12 +78,55 @@ class Admin extends CI_Controller {
 					$this->session->set_userdata('isUserLoggedIn', TRUE); 
 					$this->session->set_userdata('userId', $checkLogin['id']); 
 					redirect('admin/dashboard/'); 
-				}else{
+					}else{
 					die('Unable to maintain your log.Go back and try again.');
-				}
-				}else{ 
-					$data['error_msg'] = '<div class="alert alert-info"><h4 class="m-0">Wrong email, password  or captcha, please try again.</h4></div>'; 
-				} 
+					}
+					}else{
+					//print_r($current_failed);die;
+					if(!empty($current_failed) && $current_failed[0]->failed >= 5){
+						//print_r($current_failed[0]->failed);die('hassomething');
+						$current_failed_upd = $current_failed[0]->failed;
+						$log_data = array( 
+							//'user_id' => $checkLogin['id'], 
+							'username' => strip_tags($this->input->post('username')),
+							'form_type' => 'A',  
+							'lock' => 'Y',
+							'failed' => $current_failed_upd,
+							'ip' => get_ip(),
+							'datetime' => date('Y-m-d H:i:s', time()),
+							); 
+							$is_locked = 1;
+					}elseif(!empty($current_failed) && $current_failed[0]->failed < 5){
+							$current_failed_upd = $current_failed[0]->failed+1;
+							//$current_lock_upd = $checkLock[0]->lock;
+							$log_data = array( 
+							//'user_id' => $checkLogin['id'], 
+							'username' => strip_tags($this->input->post('username')),
+							'form_type' => 'A',  
+							//'lock' => $current_lock_upd,
+							'failed' => $current_failed_upd,
+							'ip' => get_ip(),
+							'datetime' => date('Y-m-d H:i:s', time()),
+							); 
+					}elseif(empty($current_failed)){
+							//print_r($current_failed);die('nothing');
+							$log_data = array( 
+							//'user_id' => $checkLogin['id'], 
+							'username' => strip_tags($this->input->post('username')),
+							'form_type' => 'A',
+							'ip' => get_ip(),
+							'datetime' => date('Y-m-d H:i:s', time()),
+							); 
+					}else{
+							die('no condition exception');
+					}
+							$insert_log = $this->login_model->loginlog_ins($log_data);
+							if(isset($is_locked)){
+								$data['error_msg'] = '<div class="alert alert-info"><h4 class="m-0">Your account is locked due to multiple entry of wrong credentials. Contact Admin to unlock.</h4></div>';
+							}else{
+								$data['error_msg'] = '<div class="alert alert-info"><h4 class="m-0">Wrong email, password  or captcha, please try again.</h4></div>'; 
+							}
+					} 
 			}else{ 
 				$data['error_msg'] = '<div class="alert alert-danger"><h4 class="m-0">Please fill all the mandatory fields.</h4>'; 
 			} 
@@ -202,8 +251,8 @@ class Admin extends CI_Controller {
 			); 
 			$data['user'] = $this->login_model->getRows($con);
 
-			if(!($data['user']['role'] == 12))
-				die('Access Denied!');
+			//if(!($data['user']['role'] == 12))
+				//die('Access Denied!');
 
             //print_r($data);die('o');
 			if($data['user']['id'] == 1255){

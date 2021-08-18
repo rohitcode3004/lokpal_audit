@@ -26,6 +26,25 @@ class Login_model extends CI_Model {
 		return $query;				
 	}
 
+		Public function check_lock($username)
+	{
+		/*echo "<pre>";
+		print_r($data);
+
+		echo $data['username'];
+
+		echo $data['password'];
+		die;
+*/
+
+		$query = $this->db->get_where('login_log', array( 'username' => $username))->row_array();
+
+	//die('@@');
+		// $query = $this->db->get_where('users', array( 'username' => $data['username']))->row_array();
+		
+		return $query;				
+	}
+
 	function chkstf($data)
 	{
 		$this->db->select('is_staff');
@@ -265,6 +284,33 @@ class Login_model extends CI_Model {
 
 	function loginlog_ins($data){ 	
 			$this->db->insert('login_log', $data);
+			//echo $this->db->last_query();die;
 			return true;	    
 		}
+
+	function current_failed($username, $date)
+	{
+		//echo $userid;die;
+		$this->db->select('failed');
+		$this->db->from('login_log');
+		$this->db->where('date(datetime)', $date);
+		$this->db->where('datetime = (SELECT max(datetime) FROM login_log)', NULL, FALSE);
+		$this->db->where('username', $username);
+		$query = $this->db->get();
+		//echo $this->db->last_query();die;
+		return $query->result();
+	}
+
+	function current_lock($username, $date)
+	{
+		//echo $userid;die;
+		$this->db->select('lock');
+		$this->db->from('login_log');
+		$this->db->where('date(datetime)', $date);
+		$this->db->where('datetime = (SELECT max(datetime) FROM login_log)', NULL, FALSE);
+		$this->db->where('username', $username);
+		$query = $this->db->get();
+		//echo $this->db->last_query();die;
+		return $query->result();
+	}
 }
