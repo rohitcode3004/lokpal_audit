@@ -23,6 +23,16 @@
   <script>
 	$.sidebarMenu($('.sidebar-menu'))
   </script>
-
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('input, textarea').bind("cut copy paste", function(e) {
+        e.preventDefault();
+        alert("You cannot paste text into this textbox!");
+        $('input, textarea').bind("contextmenu", function(e) {
+            e.preventDefault();
+        });
+    });
+  });
+</script>
 </body>
 </html>
