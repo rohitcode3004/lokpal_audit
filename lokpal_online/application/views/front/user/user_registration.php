@@ -84,7 +84,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>Enter Your Mobile OTP<span class="text-danger">*</span></label>     
+                    <label>Enter Your Mobile OTP</label>     
                     <div class="input-group mb-3">               
                       <input type="text" id="otp-mobile" class="form-control" placeholder="Enter OTP Here" name="otp-mobile">
                       <div class="input-group-btn">

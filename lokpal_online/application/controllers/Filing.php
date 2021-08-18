@@ -768,7 +768,7 @@ class Filing extends CI_Controller {
 					     $identity_proof_no_encrypted=$this->input->post('identity_proof_no');
 						 $identity_proof_no_decrypted = decode($identity_proof_no_encrypted);
 
-						echo $idres_proof_no_encrypted=$this->input->post('idres_proof_no');die('second');
+						 $idres_proof_no_encrypted=$this->input->post('idres_proof_no');
 						 $idres_proof_no_decrypted = decode($idres_proof_no_encrypted);
 
 					     $curYear = date('Y');

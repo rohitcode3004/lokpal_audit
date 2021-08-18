@@ -38,7 +38,7 @@
         <input type="text" class="input-form" name="captcha" value="" placeholder="Enter the captcha code "/>
 
 
-        <input class="loginhny-btn btn" type="submit" name="userloginSubmit" value="login"/>
+        <input class="loginhny-btn btn" type="submit" name="userloginSubmit" value="login" onclick="encode(this)" />
 
         <div class="login-divider"><span><i class="fa fa-hand-o-down" aria-hidden="true"></i></span></div>
 

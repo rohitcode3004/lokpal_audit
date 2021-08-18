@@ -73,13 +73,21 @@ class Admin extends CI_Controller {
 
 				$checkLogin = $this->login_model->authenticate($data);
 				$checkLock = $this->login_model->check_lock($data['username']);
-				//print_r($checkLock);die;
+				//print_r($checkLogin);die;
                 //$checkStaff = $this->login_model->chkstf($data);
-                //if($checkStaff){die('nn');}else{die('mm');}					
+                //if($checkStaff){die('nn');}else{die('mm');}	
+                //print_r($checkLogin);
+                //echo "<br>";
+                //print_r($checkLogin['is_staff']."2");
+                //echo "<br>";
+                //echo $checkcaptch."3";
+                //echo "<br>";
+                //print_r($checkLock['lock']."4");	
+                //die;			
 
-				if($checkLogin && $checkLogin['is_staff'] == 't' && $checkcaptch == 't' && $checkLock[0]->lock == 'N'){
-          $current_failed_upd = $current_failed[0]->failed;
-					$current_lock_upd = $checkLock[0]->lock;
+				if(!empty($checkLogin) && $checkLogin['is_staff'] == 't' && $checkcaptch == 't' && $checkLock['lock'] == 'N'){
+          			$current_failed_upd = $current_failed[0]->failed;
+					$current_lock_upd = $checkLock['lock'];
 					$log_data = array( 
 					'user_id' => $checkLogin['id'], 
 					'username' => strip_tags($this->input->post('username')),
@@ -96,7 +104,7 @@ class Admin extends CI_Controller {
 					redirect('admin/dashboard/'); 
 					}else{
 					die('Unable to maintain your log.Go back and try again.');
-					}else{
+					}
 					//print_r($current_failed);die;
 					if(!empty($current_failed) && $current_failed[0]->failed >= 5){
 						//print_r($current_failed[0]->failed);die('hassomething');
@@ -138,11 +146,11 @@ class Admin extends CI_Controller {
 							$insert_log = $this->login_model->loginlog_ins($log_data);
 							if(isset($is_locked)){
 								$data['error_msg'] = '<div class="alert alert-info"><h4 class="m-0">Your account is locked due to multiple entry of wrong credentials. Contact Admin to unlock.</h4></div>';
-							}else{
+							}
+					}else{
 								$data['error_msg'] = '<div class="alert alert-info"><h4 class="m-0">Wrong email, password  or captcha, please try again.</h4></div>'; 
                 $data['captcha'] =  $this->captcha();  
-							}
-					} 
+							} 
 			}else{ 
 				$data['error_msg'] = '<div class="alert alert-danger"><h4 class="m-0">Please fill all the mandatory fields.</h4>'; 
 				$data['captcha'] =  $this->captcha(); 

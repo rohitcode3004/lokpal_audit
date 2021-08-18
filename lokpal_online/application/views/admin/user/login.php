@@ -34,7 +34,7 @@
         </div>
         <input type="text" class="input-form" name="captcha" value="" placeholder="Enter the captcha code "/>
 
-        <input class="loginhny-btn btn" type="submit" name="loginSubmit" value="login"/>
+        <input class="loginhny-btn btn" type="submit" name="loginSubmit" value="login" onclick="encode(this)"/>
 
         <p class="text-orange">If you want to go Home page <br><a href="<?php echo base_url(); ?>home/index"><strong>Please click here!</strong></a></a></p>
       </form>

@@ -56,7 +56,11 @@ class User extends CI_Controller {
 
 			if($this->form_validation->run() == true){
 				$data['username'] = $this->input->post('username');
-			    $data['password'] = md5($this->input->post('password'));
+
+			    $password_encrypted = $this->input->post('password');
+				$password_decrypted = decode($password_encrypted);
+				$data['password'] = md5(strip_tags($password_decrypted));
+
 			    $data['captcha_input'] = trim($this->input->post('captcha'));
 			    $captcha_session = $this->session->all_userdata('captchaCode');
 			   // print_r($data['captcha_input']);
@@ -762,7 +766,7 @@ public function user_register(){
 				$this->form_validation->set_rules('salutation_id', 'Tilte', 'required'); 
 				$this->form_validation->set_rules('first_name', 'First Name', 'required'); 	
 							
-				$this->form_validation->set_rules('mobile', 'Mobile Number ', 'required|is_unique[users.mobile]|regex_match[/^[0-9]{10}$/]');
+				$this->form_validation->set_rules('mobile', 'Mobile Number ', 'is_unique[users.mobile]|regex_match[/^[0-9]{10}$/]');
 				$this->form_validation->set_rules('email', 'Email', 'valid_email|is_unique[users.email]|required'); 
 				
 				$this->form_validation->set_rules('password2', 'Confirm Password', 'required'); 
