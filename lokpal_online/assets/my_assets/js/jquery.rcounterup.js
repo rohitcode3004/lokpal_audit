@@ -1,6 +1,6 @@
 /**
  * Jquery.rcounter.js 
- * Version: 1.0.0
+ * Version: 
  * Author: Sharifur
  * Inspired By Benjamin Intal
  * */

@@ -6,6 +6,7 @@ $elements = $this->label->view(1);
   <script src="<?php echo base_url();?>assets/bootstrap/js/bootstrap-datepicker.js"></script>
   <script src="<?php echo base_url();?>assets/bootstrap/js/jquery.validate.min.js"></script>
   <script src="<?php echo base_url();?>assets/bootstrap/js/additional-methods.min.js"></script>
+  <script src="<?php echo base_url();?>assets/customjs/password_encryption.js"></script>
   
 <script type="text/javascript">
   
@@ -575,7 +576,7 @@ $ref_no=$this->session->userdata('ref_no');
 
       <div class="col-md-6 mb-15">
         <label for="ob_idres_proof_no"><?php print_r($this->label->get_short_name($elements, 114)); ?></label>
-        <input type="text" class="form-control" name="ob_idres_proof_no" id="ob_idres_proof_no" placeholder="" maxlength="50" value="<?php echo set_value('ob_idres_proof_no') ?>">
+        <input type="text" class="form-control" name="ob_idres_proof_no" id="ob_idres_proof_no" placeholder="" maxlength="500" value="<?php echo set_value('ob_idres_proof_no') ?>">
       </div>
     </div>
 
@@ -764,7 +765,7 @@ $ref_no=$this->session->userdata('ref_no');
       </div>
 
       <div class="col-md-6 text-right mb-15">
-        <button type="submit" class="btn btn-success" id="submitbtn">Save details</button>
+        <button type="submit" class="btn btn-success" id="submitbtn" onclick="encode_dl_passport('ob_identity_proof_no', 'ob_idres_proof_no')">Save details</button>
         <a class="btn btn-danger" href="javascript:close_window();">Close this windows</a>
       </div>
     </div>
