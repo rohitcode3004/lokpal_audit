@@ -10,7 +10,7 @@ class Filing extends CI_Controller {
 		$this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
 		$this->load->library('encryption');
-		$this->load->library('session');
+		  
 		$this->load->library('image_lib');
 		$this->load->library('label');
 		$this->load->library('Menus_lib');
@@ -22,6 +22,30 @@ class Filing extends CI_Controller {
 		$this->load->model('users_model');
 		$this->load->helper("compno_helper");	
 		$this->load->helper("parts_status_helper");
+		//print_r($this->session->userdata);die;
+		//check to check user/login or admin/login
+		if($this->isUserLoggedIn) 
+		{
+			if(time()-$_SESSION["login_time_stamp"] > 50) 
+    		{
+    			if($_SESSION["is_staff"] == 't')
+    			{
+        			session_unset();
+        			$this->session->sess_destroy();
+        			redirect('admin/login'); 
+        		}else{
+        			session_unset();
+        			$this->session->sess_destroy();
+        			redirect('user/login'); 
+        		}
+    		}else{
+    			$this->session->set_userdata('login_time_stamp', time());
+    		}
+    	}
+		else
+		{
+			redirect('user/login'); 
+		}
 	}
 
 
@@ -76,7 +100,7 @@ class Filing extends CI_Controller {
 	{	
 
 		if($this->isUserLoggedIn) 
-		{
+		{			
 			$con = array( 
 				'id' => $this->session->userdata('userId') 
 			); 

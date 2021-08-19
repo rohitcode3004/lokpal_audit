@@ -35,6 +35,35 @@
         });
     });
   });
+
+  /*  ==================  Script of popover ================== */
+  $(document).ready(function(){
+      $('[data-toggle="popover"]').popover();  
+  });
+ 
+
+/*  ==================  Create Strong password Script ================== */
+
+        function checkPasswordStrength() {
+            var number = /([0-9])/;
+            var alphabets = /([a-zA-Z])/;
+            var special_characters = /([~,!,@,#,$,%,^,&,*,-,_,+,=,?,>,<])/;
+            if ($('#pwd').val().length < 6) {
+                $('#password-strength-status').removeClass();
+                $('#password-strength-status').addClass('weak-password');
+                $('#password-strength-status').html("Weak Password");
+            } else {
+                if ($('#pwd').val().match(number) && $('#pwd').val().match(alphabets) && $('#pwd').val().match(special_characters)) {
+                    $('#password-strength-status').removeClass();
+                    $('#password-strength-status').addClass('strong-password');
+                    $('#password-strength-status').html("Strong Password");
+                } else {
+                    $('#password-strength-status').removeClass();
+                    $('#password-strength-status').addClass('medium-password');
+                    $('#password-strength-status').html("Medium Password");
+                }
+            }
+        }
 </script>    
 </body>
 </html>

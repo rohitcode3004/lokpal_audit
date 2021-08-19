@@ -3,18 +3,36 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Respondent extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
-      $this->load->library('File_upload');
-      $this->load->helper('file');
+    
+    $this->load->library('session');
     $this->isUserLoggedIn = $this->session->userdata('isUserLoggedIn');
     if($this->isUserLoggedIn) 
     {
-      $this->con = array( 
+      if(time()-$_SESSION["login_time_stamp"] > 50) 
+        {
+          if($_SESSION["is_staff"] == 't')
+          {
+              session_unset();
+              $this->session->sess_destroy();
+              redirect('admin/login'); 
+            }else{
+              session_unset();
+              $this->session->sess_destroy();
+              redirect('user/login'); 
+            }
+            $this->con = array( 
         'id' => $this->session->userdata('userId') 
       );
+        }else{
+          $this->session->set_userdata('login_time_stamp', time());
+        }
+      }
+    else
+    {
+      redirect('user/login'); 
     }
-    else{
-      redirect('admin/login'); 
-    }
+    $this->load->library('File_upload');
+    $this->load->helper('file');
     $this->load->library('label');
     $this->load->helper("compno_helper");
     $this->load->helper("parts_status_helper");

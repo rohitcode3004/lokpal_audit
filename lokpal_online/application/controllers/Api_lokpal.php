@@ -5,12 +5,59 @@ class Api_lokpal extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		$this->isUserLoggedIn = $this->session->userdata('isUserLoggedIn');
+		if($this->isUserLoggedIn) 
+		{
+			if(time()-$_SESSION["login_time_stamp"] > 50) 
+    		{
+    			if($_SESSION["is_staff"] == 't')
+    			{
+        			session_unset();
+        			$this->session->sess_destroy();
+        			redirect('admin/login'); 
+        		}else{
+        			session_unset();
+        			$this->session->sess_destroy();
+        			redirect('user/login'); 
+        		}
+    		}else{
+    			$this->session->set_userdata('login_time_stamp', time());
+    		}
+    	}
+		else
+		{
+			redirect('user/login'); 
+		}
 		$this->load->helper('url', 'form');
 		$this->load->model('Api_lokpal_model');
 		$this->load->library('form_validation');
 		$this->load->helper("api_lok_helper");
 		$this->load->helper("date_helper");
 		$this->load->helper("compno_helper");
+		$this->load->library('session');
+		$this->isUserLoggedIn = $this->session->userdata('isUserLoggedIn');
+		if($this->isUserLoggedIn) 
+		{
+			if(time()-$_SESSION["login_time_stamp"] > 50) 
+    		{
+    			if($_SESSION["is_staff"] == 1)
+    			{
+        			session_unset();
+        			$this->session->sess_destroy();
+        			redirect('admin/login'); 
+        		}else{
+        			session_unset();
+        			$this->session->sess_destroy();
+        			redirect('user/login'); 
+        		}
+    		}else{
+    			$this->session->set_userdata('login_time_stamp', time());
+    		}
+    	}
+		else
+		{
+			redirect('user/login'); 
+		}
 	}
 
 	/*function index()

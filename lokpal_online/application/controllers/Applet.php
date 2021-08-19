@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Applet extends CI_Controller {
   public function __construct(){
     parent::__construct();
+    
     $this->load->library('File_upload');
     $this->load->helper('file');
     $this->load->model('filing_model');
@@ -12,6 +13,32 @@ class Applet extends CI_Controller {
     $this->load->library('form_validation');
     $this->load->library('encryption');
     $this->load->library('session');
+    $this->isUserLoggedIn = $this->session->userdata('isUserLoggedIn');
+    if($this->isUserLoggedIn) 
+    {
+      if(time()-$_SESSION["login_time_stamp"] > 50) 
+        {
+          if($_SESSION["is_staff"] == 't')
+          {
+              session_unset();
+              $this->session->sess_destroy();
+              redirect('admin/login'); 
+            }else{
+              session_unset();
+              $this->session->sess_destroy();
+              redirect('user/login'); 
+            }
+            $this->con = array( 
+        'id' => $this->session->userdata('userId') 
+      );
+        }else{
+          $this->session->set_userdata('login_time_stamp', time());
+        }
+      }
+    else
+    {
+      redirect('user/login'); 
+    }
     $this->load->library('image_lib');
     $this->load->library('Menus_lib');
     $this->load->helper("common_helper"); 
@@ -20,16 +47,6 @@ class Applet extends CI_Controller {
     $this->load->helper("compno_helper"); 
     $this->load->helper("parts_status_helper");
     $this->load->library('label');
-    $this->isUserLoggedIn = $this->session->userdata('isUserLoggedIn');
-    if($this->isUserLoggedIn) 
-    {
-      $this->con = array( 
-        'id' => $this->session->userdata('userId') 
-      );
-    }
-    else{
-      redirect('admin/login'); 
-    }
     $this->load->helper("date_helper");
     $this->load->library('Menus_lib');
     $this->load->model('login_model');

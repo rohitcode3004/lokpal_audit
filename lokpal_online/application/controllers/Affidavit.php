@@ -20,6 +20,28 @@ class Affidavit extends CI_Controller {
     $this->load->model('login_model');
     $this->load->helper("compno_helper");
     $this->load->helper("parts_status_helper");
+    if($this->isUserLoggedIn) 
+    {
+      if(time()-$_SESSION["login_time_stamp"] > 50) 
+        {
+          if($_SESSION["is_staff"] == 't')
+          {
+              session_unset();
+              $this->session->sess_destroy();
+              redirect('admin/login'); 
+            }else{
+              session_unset();
+              $this->session->sess_destroy();
+              redirect('user/login'); 
+            }
+        }else{
+          $this->session->set_userdata('login_time_stamp', time());
+        }
+      }
+    else
+    {
+      redirect('user/login'); 
+    }
 
   }
 

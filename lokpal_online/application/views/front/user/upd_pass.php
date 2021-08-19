@@ -34,9 +34,7 @@
         </div>
       </div>
       <form id="upd-pass-form" class="form-horizontal" role="form" method="post" action='<?= base_url();?>user/submit_user_pass'  name="upd-pass-form" enctype="multipart/form-data">
-        <div class="alert alert-danger text-center update-pass-message">
           <?php echo validation_errors(); ?>
-        </div>
         <div class="box-group">
           <label for="exampleInputEmail1">Email Id</label>
           <input type="text" name="username" class="input-form" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email Id" value="<?php echo $user['username']; ?>" readonly>
@@ -49,7 +47,8 @@
 
         <div class="box-group">
           <label for="exampleInputPassword1">New Password</label>
-          <input type="password" name="password" class="input-form" id="pwd" placeholder="New Password">
+          <input type="password" name="password" class="input-form password_Strength" id="pwd" placeholder="New Password" onKeyUp="checkPasswordStrength();" data-toggle="popover" title="Password Must include" data-content="Minimum 6 characters, At least one capital letter, At least one number" data-placement="bottom">
+          <div id="password-strength-status"></div>
         </div>
 
         <div class="box-group">

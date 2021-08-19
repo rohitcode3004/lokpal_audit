@@ -101,6 +101,8 @@ class Admin extends CI_Controller {
 					if($insert_log){
 					$this->session->set_userdata('isUserLoggedIn', TRUE); 
 					$this->session->set_userdata('userId', $checkLogin['id']); 
+					$this->session->set_userdata('is_staff', $checkLogin['is_staff']);
+					$this->session->set_userdata('login_time_stamp', time());
 					redirect('admin/dashboard/'); 
 					}else{
 					die('Unable to maintain your log.Go back and try again.');

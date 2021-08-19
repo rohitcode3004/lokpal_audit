@@ -7,6 +7,30 @@ class Label extends CI_Controller {
 		parent::__construct();
 		$this->load->model('label_model');
 		$this->load->library('form_validation');
+		$this->load->library('session');
+		$this->isUserLoggedIn = $this->session->userdata('isUserLoggedIn');
+		if($this->isUserLoggedIn) 
+		{
+			if(time()-$_SESSION["login_time_stamp"] > 50) 
+    		{
+    			if($_SESSION["is_staff"] == 't')
+    			{
+        			session_unset();
+        			$this->session->sess_destroy();
+        			redirect('admin/login'); 
+        		}else{
+        			session_unset();
+        			$this->session->sess_destroy();
+        			redirect('user/login'); 
+        		}
+    		}else{
+    			$this->session->set_userdata('login_time_stamp', time());
+    		}
+    	}
+		else
+		{
+			redirect('user/login'); 
+		}
 	}
 
 	function index()

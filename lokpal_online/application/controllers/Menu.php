@@ -5,10 +5,34 @@ class Menu extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		
 		$this->load->model('menu_model');
 		$this->load->model('login_model');
 		$this->load->library('form_validation');
-		$this->isUserLoggedIn = $this->session->userdata('isUserLoggedIn'); 
+		$this->load->library('session');
+		$this->isUserLoggedIn = $this->session->userdata('isUserLoggedIn');
+		if($this->isUserLoggedIn) 
+		{
+			if(time()-$_SESSION["login_time_stamp"] > 50) 
+    		{
+    			if($_SESSION["is_staff"] == 't')
+    			{
+        			session_unset();
+        			$this->session->sess_destroy();
+        			redirect('admin/login'); 
+        		}else{
+        			session_unset();
+        			$this->session->sess_destroy();
+        			redirect('user/login'); 
+        		}
+    		}else{
+    			$this->session->set_userdata('login_time_stamp', time());
+    		}
+    	}
+		else
+		{
+			redirect('user/login'); 
+		}
 	}
 
 	function index()

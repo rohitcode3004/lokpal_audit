@@ -126,7 +126,7 @@
                   <div class="form-group">
                     <label>Enter Your Email OTP<span class="text-danger">*</span></label>
                     <div class="input-group mb-3">                     
-                    <input type="text" class="form-control" id="otp-email" placeholder="Enter OTP Here" name="OTP">
+                    <input type="text" class="form-control password_Strength" id="otp-email" placeholder="Enter OTP Here" name="OTP">
                     <div class="input-group-btn">
                         <button class="btn btn-primary" type="button" onclick="submit_otp_new('email')">Submit OTP</button>
                     </div>
@@ -146,7 +146,8 @@
                 <div class="col-md-6">                  
                   <div class="form-group">
                     <label>Password<span class="text-danger">*</span></label>
-                    <input type="password" class="form-control" placeholder="Enter Password" name="password">
+                    <input type="password" name="password" class="form-control" id="pwd" placeholder="New Password" onKeyUp="checkPasswordStrength();" data-toggle="popover" title="Password Must include" data-content="Minimum 6 characters, At least one capital letter, At least one number" data-placement="bottom">
+                  <div id="password-strength-status"></div>
                     <?php echo form_error('password','<div class="text-danger">','</div>'); ?>
                   </div>
                 </div>

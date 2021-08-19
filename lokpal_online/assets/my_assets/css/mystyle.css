@@ -692,3 +692,48 @@ input[type="checkbox"]::before {
 }
 
 
+
+/*  ==================  Strong password Style ================== */
+.form-group{
+    position: relative;
+}
+.box-group{
+    position: relative;
+}
+
+.password_Strength{
+    position: absolute;
+    left: 0;
+    top: 30px;
+    background: transparent;
+}
+#password-strength-status {
+    padding: 12px 15px;
+    height: 50px;
+    color: #FFFFFF;
+    border-radius: 4px;
+    width: 100%;
+    text-align: right;
+    font-size: 18px;
+}
+#upd-pass-form #password-strength-status {
+    padding: 18px 15px;
+    margin-bottom: 12px;
+    height: 61px;
+    color: #FFFFFF;
+    border-radius: 0;
+    width: 100%;
+    text-align: right;
+    font-size: 18px;
+}
+.medium-password {
+    background-color: #ffbc00;
+}
+
+.weak-password {
+    background-color: #fd4f46;
+}
+
+.strong-password {
+    background-color: #0abb12;
+}

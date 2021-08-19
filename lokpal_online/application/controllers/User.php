@@ -81,7 +81,9 @@ class User extends CI_Controller {
                 //print_r($checkLogin);die();
 				if($checkLogin && $checkLogin['role'] == 18 && $checkLogin['display'] == 't' && $checkcaptch == 't'){
 					$this->session->set_userdata('isUserLoggedIn', TRUE); 
-					$this->session->set_userdata('userId', $checkLogin['id']); 
+					$this->session->set_userdata('userId', $checkLogin['id']);
+					$this->session->set_userdata('is_staff', $checkLogin['is_staff']);
+					$this->session->set_userdata('login_time_stamp', time());
 					//$parta_status = get_parts_status_onid($checkLogin['id'], 'A');
 					$parta_status = 1;
 					if($parta_status){
@@ -657,19 +659,19 @@ class User extends CI_Controller {
     				if($check_old_password == 1){
     				$update = $this->login_model->upd_pass($userData, $id); 
     				if($update){ 
-    					$this->session->set_flashdata('success_msg', 'Username and password successfully updated.'); 
+    					$this->session->set_flashdata('success_msg', '<div class="alert alert-success text-center"><h4 class="m-0">Username and password successfully updated.</h4></div>'); 
     					redirect('user/update_user_pass'); 
     				}else{
-    					$this->session->set_flashdata('error_msg', 'Some problems occured, please try again.');
+    					$this->session->set_flashdata('error_msg', '<div class="alert alert-danger text-center"><h4 class="m-0">Some problems occured, please try again.</h4></div>');
 						redirect('user/submit_user_pass/'); 
     				}
     				} else{
-    					$this->session->set_flashdata('error_msg', 'Please enter old password correctly.');
+    					$this->session->set_flashdata('error_msg', '<div class="alert alert-danger text-center"><h4 class="m-0">Please enter old password correctly.</h4></div>');
 						redirect('user/submit_user_pass/');
     				}
     			}else{ 
             	//echo validation_errors();
-    				$this->session->set_flashdata('error_msg', 'Please fill all the mandatory fields.');
+    				$this->session->set_flashdata('error_msg', '<div class="alert alert-danger text-center"><h4 class="m-0">Please fill all the mandatory fields.</h4></div>');
 					redirect('user/submit_user_pass/');
     			} 
     		} 

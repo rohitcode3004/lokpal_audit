@@ -5,16 +5,6 @@ class Order_report extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		$this->isUserLoggedIn = $this->session->userdata('isUserLoggedIn');
-		if($this->isUserLoggedIn) 
-		{
-			$this->con = array( 
-				'id' => $this->session->userdata('userId') 
-			);
-		}
-		else{
-			redirect('admin/login'); 
-		}
 		
 		$this->load->library('Menus_lib');
 		$this->load->model('login_model');
@@ -38,6 +28,33 @@ class Order_report extends CI_Controller {
 		$this->load->helper("reports_helper");
 		$this->load->helper("scrutiny_helper");
 		$this->load->model('order_report_model');
+		$this->load->library('session');
+		$this->isUserLoggedIn = $this->session->userdata('isUserLoggedIn');
+		if($this->isUserLoggedIn) 
+		{
+			if(time()-$_SESSION["login_time_stamp"] > 50) 
+    		{
+    			if($_SESSION["is_staff"] == 't')
+    			{
+        			session_unset();
+        			$this->session->sess_destroy();
+        			redirect('admin/login'); 
+        		}else{
+        			session_unset();
+        			$this->session->sess_destroy();
+        			redirect('user/login'); 
+        		}
+        		$this->con = array( 
+				'id' => $this->session->userdata('userId') 
+			);
+    		}else{
+    			$this->session->set_userdata('login_time_stamp', time());
+    		}
+    	}
+		else
+		{
+			redirect('user/login'); 
+		}
 	}
 
 

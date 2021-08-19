@@ -4,17 +4,6 @@ class Scrutiny extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 
-		$this->isUserLoggedIn = $this->session->userdata('isUserLoggedIn');
-		if($this->isUserLoggedIn) 
-		{
-			$this->con = array( 
-				'id' => $this->session->userdata('userId') 
-			);
-		}
-		else{
-			redirect('admin/login'); 
-		}
-
 		$this->load->library('Menus_lib');
 		$this->load->model('login_model');
 		$this->load->model('scrutiny_model');
@@ -41,6 +30,33 @@ class Scrutiny extends CI_Controller {
 			$this->load->helper("proceeding_helper");			
 			$this->load->helper(array('form', 'url'));
 			$this->load->library('form_validation');
+			$this->load->library('session');
+			$this->isUserLoggedIn = $this->session->userdata('isUserLoggedIn');
+		if($this->isUserLoggedIn) 
+		{
+			if(time()-$_SESSION["login_time_stamp"] > 50) 
+    		{
+    			if($_SESSION["is_staff"] == 't')
+    			{
+        			session_unset();
+        			$this->session->sess_destroy();
+        			redirect('admin/login'); 
+        		}else{
+        			session_unset();
+        			$this->session->sess_destroy();
+        			redirect('user/login'); 
+        		}
+    		}else{
+    			$this->session->set_userdata('login_time_stamp', time());
+    		}
+    		$this->con = array( 
+				'id' => $this->session->userdata('userId') 
+			);
+    	}
+		else
+		{
+			redirect('user/login'); 
+		}
 
 		$data['user'] = $this->login_model->getRows($this->con);
 		if(!($data['user']['role'] == 161 || $data['user']['role'] == 162 || $data['user']['role'] == 163 || $data['user']['role'] == 164 || $data['user']['role'] == 147))
