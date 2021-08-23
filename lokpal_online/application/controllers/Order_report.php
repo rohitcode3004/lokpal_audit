@@ -32,7 +32,7 @@ class Order_report extends CI_Controller {
 		$this->isUserLoggedIn = $this->session->userdata('isUserLoggedIn');
 		if($this->isUserLoggedIn) 
 		{
-			if(time()-$_SESSION["login_time_stamp"] > 50) 
+			if(time()-$_SESSION["login_time_stamp"] > 900) 
     		{
     			if($_SESSION["is_staff"] == 't')
     			{

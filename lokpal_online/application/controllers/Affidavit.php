@@ -22,7 +22,7 @@ class Affidavit extends CI_Controller {
     $this->load->helper("parts_status_helper");
     if($this->isUserLoggedIn) 
     {
-      if(time()-$_SESSION["login_time_stamp"] > 50) 
+      if(time()-$_SESSION["login_time_stamp"] > 900) 
         {
           if($_SESSION["is_staff"] == 't')
           {

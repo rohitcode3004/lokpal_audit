@@ -26,7 +26,7 @@ class Filing extends CI_Controller {
 		//check to check user/login or admin/login
 		if($this->isUserLoggedIn) 
 		{
-			if(time()-$_SESSION["login_time_stamp"] > 50) 
+			if(time()-$_SESSION["login_time_stamp"] > 900) 
     		{
     			if($_SESSION["is_staff"] == 't')
     			{
@@ -426,7 +426,7 @@ class Filing extends CI_Controller {
 			$this->form_validation->set_rules('c_country_id', 'Correspondance Country Name', 'required');
 			$this->form_validation->set_rules('idres_proof_id', 'Address Proof', 'required');
 			$this->form_validation->set_rules('mob_no', 'Mobile No', 'required');
-			$this->form_validation->set_rules('salutation_id', 'Mobile No', 'required');
+			//$this->form_validation->set_rules('salutation_id', 'Mobile No', 'required');
 
 			if(!empty($_FILES['a_affidavit_upload']['name']))
 			{		
@@ -631,7 +631,7 @@ class Filing extends CI_Controller {
 			$this->form_validation->set_rules('c_country_id', 'Correspondance Country Name', 'required');
 			$this->form_validation->set_rules('idres_proof_id', 'Address Proof', 'required');
 			$this->form_validation->set_rules('mob_no', 'Mobile No', 'required');
-			$this->form_validation->set_rules('salutation_id', 'Title', 'required');
+			//$this->form_validation->set_rules('salutation_id', 'Title', 'required');
 			if(!empty($_FILES['a_affidavit_upload']['name']))
 			{		
 				$parameters = $_FILES['a_affidavit_upload']['name']."||".$_FILES['a_affidavit_upload']['size']."||".$_FILES['a_affidavit_upload']['tmp_name'];			
