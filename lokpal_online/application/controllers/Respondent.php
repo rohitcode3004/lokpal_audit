@@ -20,12 +20,12 @@ class Respondent extends CI_Controller {
               $this->session->sess_destroy();
               redirect('user/login'); 
             }
-            $this->con = array( 
-        'id' => $this->session->userdata('userId') 
-      );
         }else{
           $this->session->set_userdata('login_time_stamp', time());
         }
+        $this->con = array( 
+        'id' => $this->session->userdata('userId') 
+      );
       }
     else
     {
