@@ -45,6 +45,14 @@ class Login_model extends CI_Model {
 		return $query;				
 	}
 
+
+
+
+
+
+
+
+
 	function chkstf($data)
 	{
 		$this->db->select('is_staff');
@@ -313,4 +321,36 @@ class Login_model extends CI_Model {
 		//echo $this->db->last_query();die;
 		return $query->result();
 	}
+
+
+		function checkUserName($username_exist){
+		$this->db->where('username', $username_exist);
+		$query = $this->db->get('users');
+
+		//echo $this->db->last_query();die;
+		return $query->result();
+	}
+
+
+function forget_pass_his_ins($id){
+    	$this->db->where('id', $id);
+    	$query = $this->db->get('users');
+    	foreach ($query->result() as $row) {
+          $this->db->insert('users_history',$row);
+    	}
+    	//echo $this->db->last_query();die;
+
+    	return ($this->db->affected_rows() != 1) ? false : true;
+    }
+
+	function forget_pass_change($user_data,$id){
+    		$this->db->where('id', $id);	
+      		$this->db->update('users', $user_data); 
+			$this->db->last_query();			//die;
+      		return ($this->db->affected_rows() != 1) ? false : true;   
+		}
+
+
+
+
 }

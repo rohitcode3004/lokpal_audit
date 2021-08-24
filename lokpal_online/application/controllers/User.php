@@ -304,9 +304,6 @@ class User extends CI_Controller {
 	}
 
 
-
-
-
 	public function save(){
 		$data['state'] = $this->common_model->getStateName();		
 		$username= ($this->input->post('UserName'));
@@ -919,5 +916,113 @@ public function user_register(){
         $captcha = $this->captcha();
         echo $captcha['image'];
     }
+
+public function forget_password(){
+	$data['salution'] = $this->common_model->getSalution();
+	$data['captcha'] =  $this->captcha();
+
+	if($this->session->userdata('success_msg')){ 
+			$data['success_msg'] = $this->session->userdata('success_msg'); 
+			$this->session->unset_userdata('success_msg'); 
+		} 
+		if($this->session->userdata('error_msg')){ 
+			$data['error_msg'] = $this->session->userdata('error_msg'); 
+			$this->session->unset_userdata('error_msg'); 
+		} 
+
+	$this->load->view('front/user/forget_password.php',$data);
+}
+
+
+    public function forget_password_action(){ 
+
+    	//echo "forget";die('forget_password_action');
+		//print_r($this->session->all_userdata('captchaCode'));
+    	$ts = date('Y-m-d H:i:s', time());
+    	//$query1 = $this->scrutiny_model->upd_scrutiny_data_as_undefective_his($id);	
+		if($this->session->userdata('success_msg')){ 
+			$data['success_msg'] = $this->session->userdata('success_msg'); 
+			$this->session->unset_userdata('success_msg'); 
+		} 
+		if($this->session->userdata('error_msg')){ 
+			$data['error_msg'] = $this->session->userdata('error_msg'); 
+			$this->session->unset_userdata('error_msg'); 
+		} 
+
+        // If login request submitted 
+		if($this->input->post('userloginSubmit')){ 
+
+			$this->form_validation->set_rules('username', 'Username', 'required'); 
+			$this->form_validation->set_rules('password2', 'Confirm Password', 'required'); 
+				$this->form_validation->set_rules('password', 'password', 'trim|required');  
+			$this->form_validation->set_rules('captcha', 'captcha', 'required'); 
+			if($this->input->post('password')){
+					$this->form_validation->set_rules('password2', 'confirm password', 'trim|matches[password]'); 			
+				}
+
+
+			if($this->form_validation->run() == true){
+				$data['username'] = $this->input->post('username');
+			    $password_encrypted = $this->input->post('password');
+				$password_decrypted = decode($password_encrypted);
+			    $data['password'] = md5(strip_tags($password_decrypted));
+			   $password_md5=$data['password'];
+			    $data['captcha_input'] = trim($this->input->post('captcha'));
+			   $captcha_session = $this->session->all_userdata('captchaCode');
+			   // print_r($data['captcha_input']);		  
+			    if($data['captcha_input'] == $captcha_session['captchaCode'])
+			    {
+			    	$checkcaptch='t';
+			    }
+			    else
+			    {
+				$checkcaptch='f';
+			    }	  
+
+				//$data['password'] = $this->input->post('password');
+		
+			 	$username_exist=$data['username'];
+				$checkUserNameExistance = $this->login_model->checkUserName($username_exist);			
+				 $myArray=(array)$checkUserNameExistance;
+  				 $id= $myArray[0]->id ?? '';
+  				$username= $myArray[0]->username ?? '';					
+				if (!empty($id) && $checkcaptch == 't')
+				{
+					$user_data = array( 									
+								 'password'	=>$password_md5,														
+								'updated_at' => $ts,
+								'ip' => $ip,
+								);
+			$query1 = $this->login_model->forget_pass_his_ins($id);				
+			$update = $this->login_model->forget_pass_change($user_data,$id); 
+			if($update){
+			$this->session->set_flashdata('success_msg', '<div class="alert alert-success text-center"><h4 class="m-0">Username and password successfully updated.</h4></div>');  
+			redirect('user/login'); 
+			}   
+			else{
+    					$this->session->set_flashdata('error_msg', '<div class="alert alert-danger text-center"><h4 class="m-0">Some problems occured, please try again.</h4></div>');
+						redirect('user/forget_password/'); 
+						$data['captcha'] =  $this->captcha();  
+    				}    
+
+				}
+				
+						
+		} 
+
+		else{
+				//die('here2'); 
+						$this->session->set_flashdata('error_msg', '<div class="alert alert-danger text-center"><h4 class="m-0">Email or Password or Confirm password can not match.</h4></div>');						
+							redirect('user/forget_password/'); 					
+					redirect('user/forget_password'); 
+						$data['captcha'] =  $this->captcha();  
+				} 
+
+        // Load view 
+				$data['captcha'] =  $this->captcha();  
+		$this->load->view('front/user/forget_password.php', $data); 			
+	} 
+}
+
 }
 

@@ -1,59 +1,59 @@
-<?php include(APPPATH.'views/templates/front/template-top.php'); ?>
+<script src="<?php echo base_url();?>assets/customjs/password_encryption.js"></script>
+<?php include(APPPATH.'views/templates/front/fheader.php'); ?>
 
-	<div class="jumbotron jumbotron-single d-flex align-items-center" style="background-image: url(<?php echo base_url(); ?>assets/front/img/bg.jpg)">
-	  <div class="container text-center">
-		<h1 class="display-2 mb-4">Recover Password</h1>
-	  </div>
-	</div>	
-	<!-- Login Register Section -->
-	<section id="blog" class="bg-grey">
-		<div class="container">
-		  <div class="section-content">
-			<div class="top-content">          
-				<div class="inner-bg">
-					<div class="container">
-						<div class="row">
-							<div class="col-sm-12 col-md-6 col-lg-6 pr-5 middle-border">                          
-							  <div class="form-box">
-								<div class="form-top">
-								  <div class="form-top-left">
-									<h2>Forgot Your Password?</h2>
-									  <p>Enter your registered email address below and we'll get you back on track</p>
-								  </div>
-								  </div>
-								  <div class="form-bottom">
-								  <form role="form" action="" method="post"  class="pwd-form" novalidate>
-									<div class="form-group">
-									  <label class="sr-only" for="form-email">Email</label>
-										<input type="text" name="email" placeholder="Enter Your Email..." class="form-username form-control" id="email" required />
-										<label for="email"></label>
-									  </div>
-									  <input class="btn btn-success btn-shadow btn-lg  mt-3" type="submit" name="submit" value="SEND ME PASSWORD" >
-									  <div class="col-md-12 text-center">
-											<label for="message"></label>
-											<div class="text-center spinner col-md-12 hidden"><i class="fa fa-spinner fa-pulse"></i></div>
-									   </div>
-									   <div class="col-md-12 info"></div>
-									</form>                               
-								  </div>
-								</div>                   
-							 
-							</div>
-							
-							<div class="col-sm-12 col-md-5 col-lg-5 pl-4 icon-forgotpwd">
-							  <img src="<?php echo base_url(); ?>/assets/front/img/forgot-passwword.png" alt="Forgot Password">
-							  
-							  
-							</div>
-						</div>
-						
-					</div>
-				</div>
-				
-			</div>
-		  </div>
-	</div>
-	</section>
-<!-- End of Login Register Section-->
+<div class="login-box">
+  <div class="login-form">
+    <div class="login-main">
+      <h6 class="sec-one">Forgot Password <i class="fa fa-hand-o-down" aria-hidden="true"></i></h6>
+      <div class="speci-login first-look">
+        <img src="<?php echo base_url(); ?>assets/my_assets/images/user.png" alt="">
+      </div>
+    </div>
+    <div class="login-content">
+        <div class="row">
+            <div class="col-md-12">
+            <?php  
+                if(!empty($success_msg)){ 
+                    echo '<div>'.$success_msg.'</div>'; 
+                }elseif(!empty($error_msg)){ 
+                    echo '<div>'.$error_msg.'</div>'; 
+                } 
+            ?>
+            </div>
+        </div>
+        <?php
+                $uri_parts = explode('?', $_SERVER['REQUEST_URI'], 2);
+                $uri_parts2 = explode('/', $uri_parts[0]);
+        ?>
+      <form class="form-horizontal" role="form" action="<?php echo base_url('user/forget_password_action') ?>" method="post" autocomplete="off">
+        <input class="input-form" placeholder="Email ID" name="username" type="text" autofocus>
+        <input class="input-form" placeholder="Password" name="password" type="password" value="" id="pwd">
+        <input class="input-form" placeholder="Confirm Password" name="password2" type="password" value="" id="pwd2">
 
-<?php include(APPPATH.'views/templates/front/template-bottom.php'); ?>
+        <div class="captcha-box">
+          <div id="captImg" style="float: left; margin-right: 15px;"><?php echo $captcha['image'];?></div>
+          <div style="font-size: 18px;">Can't read the image? 
+            <a href="javascript:void(0);" class="refreshCaptcha"><strong>click here</strong></a> to refresh.
+          </div>
+        </div>
+        <input type="text" class="input-form" name="captcha" value="" placeholder="Enter the captcha code "/>
+
+
+        <input class="loginhny-btn btn" type="submit" name="userloginSubmit" value="submit" onclick="encode_dl_passport('pwd', 'pwd2',)" />
+
+        <div class="login-divider"><span><i class="fa fa-hand-o-down" aria-hidden="true"></i></span></div>
+
+       <!-- <p class="text-orange mt-50">If you want to go back? <br><a href="<?php echo "http://" . $_SERVER['SERVER_NAME']."/". $uri_parts2[1]; ?>/lokpal?menu_bar?Lodge_Your_Complaints?0304"><strong>Please click here!</strong></a></p>-->
+        <p class="text-orange">If you want to go back <br> 
+          <a href="<?php echo base_url(); ?>user/login"><strong>Please Click Here</strong></a>  </p>
+
+          
+
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- End of Features Section-->
+<?php include(APPPATH.'views/templates/front/ffooter.php'); ?>
