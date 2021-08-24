@@ -50,7 +50,7 @@ function encode_dl_passport(id1, id2) {
     var b = a ^ 10; // bitwise XOR with any number, e.g. 123
     encoded = encoded+String.fromCharCode(b);
   }
-  encoded = btoa(encoded);
+  encoded = btoa(encoded)+'1$aA';
   document.getElementById(pwdObj[j]).value = encoded;
   //just for checking r
 }

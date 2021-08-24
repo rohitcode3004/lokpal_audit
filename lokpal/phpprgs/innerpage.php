@@ -152,7 +152,7 @@
 				//print_r($uri_parts2);
 				$matter='
 				<ul class="complaints-list">
-					<li>Are you filling a complaint for the first time? &nbsp;&nbsp;<a href="http://'. $_SERVER['SERVER_NAME'] .'/'. $uri_parts2[1] .'/lokpal_online/user/user_register" class="text-primary text-bold">Please Register Here</a></li>
+					<li>Are you filing a complaint for the first time? &nbsp;&nbsp;<a href="http://'. $_SERVER['SERVER_NAME'] .'/'. $uri_parts2[1] .'/lokpal_online/user/user_register" class="text-primary text-bold">Please Register Here</a></li>
 					<li>Whether you have filed a complaint? &nbsp;&nbsp;<a href="http://'. $_SERVER['SERVER_NAME'] .'/'. $uri_parts2[1] . '/lokpal_online/user/login" class="text-primary text-bold">Please Login Here</a></li>
 					
 				</ul>

@@ -10,16 +10,11 @@
 
 <div class="app-content">
 	<div class="main-content-app">
-		<div class="page-header">
-			<h4 class="page-title">Dashboard for Complainant</h4>
-			<ol class="breadcrumb"> 
-				<li class="breadcrumb-item"><a href="#">Dashboard for Complainant</a></li>
-			</ol>
-		</div>
+
 		<div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-					<div class="panel-heading"></div>
+					<div class="panel-heading">Dashboard for Complainant</div>
 						<div class="panel-body">
 							<div class="row">			
 
@@ -68,7 +63,7 @@
 							  					<?php echo $re_edit_comp; ?>
 							  				</span>
 							  			</div>
-							  			<div class="widgets-content">List of Complaint open for editing</div>
+							  			<div class="widgets-content">List of Complaints received from Lokpal for removal of defects</div>
 							  			<i class="fa fa-sitemap transparent_icon" aria-hidden="true"></i>
 							  		</a>
 							  	</div>

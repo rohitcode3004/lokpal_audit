@@ -33,7 +33,7 @@
           ?>
         </div>
       </div>
-      <form id="upd-pass-form" class="form-horizontal" role="form" method="post" action='<?= base_url();?>user/submit_user_pass'  name="upd-pass-form" enctype="multipart/form-data">
+      <form id="upd-pass-form" class="form-horizontal password_form_upd" role="form" method="post" action='<?= base_url();?>user/submit_user_pass'  name="upd-pass-form" enctype="multipart/form-data">
           <?php echo validation_errors(); ?>
         <div class="box-group">
           <label for="exampleInputEmail1">Email Id</label>
@@ -57,7 +57,9 @@
           <input type="password" name="password2" class="input-form" id="pwd2" placeholder="Confirm Password">
         </div>
         <button type="submit" class="loginhny-btn btn" name="upd-pass-form" value="upd" onclick="encode_upd_pass('pwd_old', 'pwd', 'pwd2')">Submit</button>
-        <hr>
+        
+        <div class="login-divider"><span><i class="fa fa-hand-o-down" aria-hidden="true"></i></span></div>
+        
         <p class="text-orange">If you want to go back? <a href="<?php echo base_url(); ?>filing/dashboard">Please click here!</a></a></p>
       </form>
     </div>

@@ -40,7 +40,7 @@
 					<h2 class="hr-bottom">Complaint Corner<span>&nbsp;</span></h2>	
 					<div class="row mt-3">
 						<div class="col-lg-6 col-md-6">
-							<a href="?menu_bar?Lodge_Your_Complaints?0304" class="icon-box">
+							<a href="?menu_bar?Lodge_a_Complaint?0304" class="icon-box">
 								<div class="user-icon">
 								  <i class="far fa-address-card"></i>
 								</div>
@@ -48,12 +48,23 @@
 							</a>
 						</div>
 						<div class="col-lg-6 col-md-6">
-							<a href="#" class="icon-box">
+
+							<?php 
+
+							$uri_parts = explode('?', $_SERVER['REQUEST_URI'], 2);
+							//print_r($uri_parts);
+							$uri_parts2 = explode('/', $uri_parts[0]);
+							//print_r($uri_parts2);
+
+							?>
+						
+							<a href="<?php echo "http://" . $_SERVER['SERVER_NAME'] ."/". $uri_parts2[1]; ?>/lokpal_online/user/login" class="icon-box">
 								<div class="user-icon">
 								  <i class="fas fa-file-contract"></i>
 								</div>
 								<div class="user-title">Check Status of Complaint</div>
 							</a>
+							
 						</div>
 						<div class="col-lg-6 col-md-6">
 							<a href="?menu_bar?Important_Instructions_to_Lodge_a_Complaint?0306" class="icon-box">

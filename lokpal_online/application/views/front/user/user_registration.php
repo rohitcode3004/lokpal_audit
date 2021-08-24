@@ -7,7 +7,7 @@
   <div class="register-box">
     <div class="register-form">
       <div class="register-main">
-        <h6 class="sec-one">Are you filling a complaint for first time <br>Please Register Here <i class="fa fa-hand-o-down" aria-hidden="true"></i></h6>
+        <h6 class="sec-one">Are you filing a complaint for first time <br>Please Register Here <i class="fa fa-hand-o-down" aria-hidden="true"></i></h6>
         <div class="speci-login first-look">
           <img src="<?php echo base_url(); ?>assets/my_assets/images/user.png" alt="">
         </div>
@@ -28,7 +28,7 @@
             ?>
             <form method="POST" action="<?php echo base_url('user/new_user_save') ?>" autocomplete="off">
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-3">
                   <div class="form-group">
                     <label for="salutation_id" >Title<span class="text-danger">*</span></label>    
                     <select type="text" class="form-control" name="salutation_id" id="salutation_id">
@@ -40,16 +40,13 @@
                     <div><?php echo form_error('salutation_id','<div class="text-danger">','</div>'); ?></div> 
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-3">
                   <div class="form-group">
                     <label>Surname</label>
                     <input type="text" class="form-control" placeholder="Enter Sur Name" name="sur_name" maxlength="25" onkeypress="return ValidateAlpha(event)" value="<?php echo set_value('sur_name'); ?>" oninput="this.value = this.value.toUpperCase()">
                     <?php echo form_error('sur_name','<div class="text-danger">','</div>'); ?>
                   </div>
                 </div>
-              </div>
-
-              <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Middle Name</label>
@@ -57,7 +54,9 @@
                     <?php echo form_error('mid_name','<div class="text-danger">','</div>'); ?>
                   </div>
                 </div>
+              </div>
 
+              <div class="row">            
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>First Name<span class="text-danger">*</span></label>
@@ -65,12 +64,18 @@
                     <?php echo form_error('first_name','<div class="text-danger">','</div>'); ?>
                   </div>
                 </div>
-              </div>
-
-              <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Mobile no</label>
+                    <input type="text" id="mob_no" class="form-control" placeholder="Enter Mobile no" name="mobile" onkeypress="return isNumberKey(event)" maxlength="10" value="<?php echo set_value('mobile'); ?>">
+                  </div>
+                </div>
+              </div>
+
+              <!--
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
                     <div class="input-group mb-3">
                       <input type="text" id="mob_no" class="form-control" placeholder="Enter Mobile no" name="mobile" onkeypress="return isNumberKey(event)" maxlength="10" value="<?php echo set_value('mobile'); ?>">
                       <div class="input-group-btn">
@@ -102,6 +107,7 @@
                   <div class="alert alert-success">Your Mobile no. is Verifyed Successfully! now submit your details to complete registeration.</div>
                 </div>
               </div>
+            -->
 
 
 

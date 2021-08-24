@@ -106,7 +106,7 @@ if(isset($farma))
                 <div class="row">
                   <div class="col-lg-2 col-md-2 col-sm-4 mb-15">
                     <label for="salutation_id" ><?php print_r($this->label->get_short_name($elements, 10)); ?><span class="text-danger">*</span></label>    
-                    <select type="text" class="form-control" name="salutation_id" id="salutation_id" <?php if(isset($user_profile[0]->salutation_id) && $user['role'] == 18) echo 'disabled="true"'; ?>>
+                    <select type="text" class="form-control" name="salutation_id" id="salutation_id" <?php if(isset($user_profile[0]->salutation_id) && $user['role'] == 18) echo 'readonly'; ?>>
                       <option value="">Select Title</option>
                       <?php foreach($salution as $row):?>          
                         <?php if (!empty($sal)){             ?>

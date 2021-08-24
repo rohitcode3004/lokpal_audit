@@ -40,11 +40,14 @@
 
         <input class="loginhny-btn btn" type="submit" name="userloginSubmit" value="login" onclick="encode(this)" />
 
-        <div class="login-divider"><span><i class="fa fa-hand-o-down" aria-hidden="true"></i></span></div>
+        
 
         <p class="text-orange mt-50">If you want to go back? <br><a href="<?php echo "http://" . $_SERVER['SERVER_NAME']."/". $uri_parts2[1]; ?>/lokpal?menu_bar?Lodge_Your_Complaints?0304"><strong>Please click here!</strong></a></p>
-        <!--<p class="text-orange">If you are a new Complainant, Create your account to make a Complaint <br> 
-          <a href="<?php echo base_url(); ?>user/user_register"><strong>Please Click Here</strong></a>  </p>-->
+
+        <div class="login-divider"><span>OR</span></div>
+
+        <p class="text-orange">Forgot password <br> 
+          <a href="<?php echo base_url(); ?>user/forget_password"><strong>Please Click Here</strong></a>  </p>
 
           
 

@@ -97,14 +97,17 @@ function freshApp(){
                 <div class="app-sidebar_user">
                 	<div class="user-box">
                 		<!--<div class="user-img"><img src="<?php echo base_url();?>assets/admin_material/dashboard/images/avatar.jpg" alt="logo"></div>-->
-                		<h5>
+                        <h5>
+                            Dindayal Verma  
+                        </h5>
+                		<h6>
                             <?php if($user['username']){
                                 echo $user['username'];
                               }else{
                                 echo 'n/a';
                               }
                             ?>       
-                        </h5>
+                        </h6>
                         <?php if($user['is_staff'] == 'f'){ ?> 
                         <a href="<?php echo base_url('user/logout'); ?>"><i class="fa fa-power-off" aria-hidden="true"></i> Logout</a>
                         <?php } else { ?>
