@@ -36,11 +36,11 @@
     });
   });
 
-  /*  ==================  Script of popover ================== */
+/*  ==================  Script of popover ================== */
   $(document).ready(function(){
-      $('[data-toggle="popover"]').popover();  
+      $('[data-toggle="popover"]').popover();   
   });
- 
+
 
 /*  ==================  Create Strong password Script ================== */
 

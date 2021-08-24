@@ -146,10 +146,12 @@
                 <div class="col-md-6">                  
                   <div class="form-group">
                     <label>Password<span class="text-danger">*</span></label>
-                    <input type="password" name="password" class="form-control" id="pwd" placeholder="New Password" onKeyUp="checkPasswordStrength();" data-toggle="popover" title="Password Must include" data-content="Minimum 6 characters, At least one capital letter, At least one number" data-placement="bottom">
-                  <div id="password-strength-status"></div>
+                    <!--<input type="password" name="password" class="form-control" id="pwd" placeholder="New Password" onKeyUp="checkPasswordStrength();" data-toggle="popover" title="Password Must include" data-content="Minimum 6 characters, At least one capital letter, At least one number" data-placement="bottom">-->
+                    <input id="pwd" type="password" class="form-control" placeholder="Enter Password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&\*]).{6,}" onKeyUp="checkPasswordStrength();" data-toggle="popover" title="Password must use a combination of these" data-content="Minimum 6 characters, At least one capital letter, one small letter, one number and one spcial character" data-placement="bottom">
+                    <div id="password-strength-status"></div>
                     <?php echo form_error('password','<div class="text-danger">','</div>'); ?>
                   </div>
+                  <!--<span class="text-danger"><strong>Notes:</strong> Password must use a combination of these: Minimum 6 characters, At least one capital letter, one number and one spcial character</span>-->
                 </div>
 
                 <div class="col-md-6">

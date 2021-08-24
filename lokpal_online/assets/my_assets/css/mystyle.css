@@ -700,8 +700,7 @@ input[type="checkbox"]::before {
 .box-group{
     position: relative;
 }
-
-.password_Strength{
+#pwd{
     position: absolute;
     left: 0;
     top: 30px;
@@ -736,4 +735,11 @@ input[type="checkbox"]::before {
 
 .strong-password {
     background-color: #0abb12;
+}
+
+.login_wapper #pwd{
+    position: relative;
+    left: 0;
+    top: 0;
+    background: #fff;
 }
