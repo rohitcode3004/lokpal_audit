@@ -1001,3 +1001,8 @@ ul.more-action > li > a {
     line-height: 40px;
     border-radius: 50%;
 }
+
+.table-mm-width{
+    max-width: 600px;
+    min-width: 300px;
+}
