@@ -1043,20 +1043,20 @@ $this->load->helper("date_helper");
                   $ccapacity=$sc_complaint_capacity_desc;
                   $subcat_desc=$sc_ps_desc; ?>          
                   <td><?php echo $ccapacity; ?> </td>
-                  <td><?php echo $subcat_desc; ?> </td>
+                 
                   <?php } else {
                     $psectorid =$public_servantc['complaint_capacity_id'] ?? '';
 
                     if($psectorid !='')
                     {
                     $pssalution = $this->report_model->getPublicsector($psectorid);
-                    $ccapacity=$pssalution['complaint_capacity_desc'];
+                    $ccapacity=$pssalution['ps_desc'];
                     }
                     else
                     {
                     $ccapacity='';
                     }
-
+                    /*
                     $subcat =$public_servantc['ps_id'] ?? '';
                     if($subcat !='')
                     {
@@ -1066,12 +1066,12 @@ $this->load->helper("date_helper");
                     else
                     {
                     $subcat_desc='';
-                    } 
+                    } */
                   ?>
                   <td><?php echo $ccapacity;?> </td>
-                  <th>Public Sector</th>
+                  <!--  <th>Public Sector</th>
                   <td>:</td>
-                  <td><?php echo $subcat_desc; ?> </td>
+                <td><?php echo $subcat_desc; ?> </td>-->
                 <?php } ?>
             </tr> 
             <tr>
@@ -1085,7 +1085,7 @@ $this->load->helper("date_helper");
 
       <!-----------------category history detail------------------>
 
-      <?php
+     <?php
        if($status == 't' and $sc_complaint_capacity_desc !='') { ?>
         <h4 class="section-title text-theme">Category update history -</h4>
         <table class="mytable">
@@ -1368,8 +1368,7 @@ $this->load->helper("date_helper");
           <th>Name</th>
           <th>Designation</th>
           <th>Organization</th>
-          <th>P.S Category</th>
-          <th>P.S Sub Category</th>    
+          <th>P.S Category</th>          
           <th>Post Held</th>
           <th>Offence From</th>
           <th>Offence To</th>
@@ -1388,8 +1387,8 @@ $this->load->helper("date_helper");
         echo "<td>".$row->ad_ps_first_name.' '.$row->ad_ps_mid_name.' '.$row->ad_ps_mid_name."</td>";
         echo "<td>".$row->ad_ps_desig ?? ''."</td>";
         echo "<td>".$row->ad_ps_orgn ?? ''."</td>";
-         echo "<td>".$row->complaint_capacity_desc ?? ''."</td>";
-        echo "<td>".$row->ps_desc ?? ''."</td>";
+         echo "<td>".$row->ps_desc ?? ''."</td>";
+      
         echo "<td>".$row->ad_psc_postheld ?? ''."</td>";
          echo "<td>".get_displaydate($row->ad_periodf_coa ?? '')."</td>";
         echo "<td>".get_displaydate($row->ad_periodt_coa ?? '')."</td>";

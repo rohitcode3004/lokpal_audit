@@ -51,11 +51,21 @@
                <th>Complainant name</th>
                <th>Complaint against</th>
                <th>Date of Filing</th>
-               <th>Preview</th>
-               <th>Pdf</th>
+               <th>Application Preview</th>
+              <th>Complainant Pdf</th>
+               <th>Scrutiny Pdf</th>
+              <th>Complainant(Part A) Pdf</th>
+              <th>Complainant(Part B) Pdf</th>
+              <th>Complainant(Part C) Pdf</th>
+            
             </thead>
             <tbody>
-              <?php
+              <?php  
+              /*
+              echo "<pre>";  
+              print_r($scrpen_comps); 
+              */      
+
               $c = 1;
               foreach($scrpen_comps as $row):
               ?>
@@ -88,10 +98,21 @@
 
                   <td>
                     <a href="<?php echo base_url().'scrutiny/affidavit_detail_pre/'.$row->ref_no ?>" target="_blank">Application preview</a>
-                  </td>               
+                  </td> 
+
+
+                  <?php if($row->gazzette_notification_url ?? '' !=''){?>
+                  <td><a href="<?php echo base_url();?><?php echo $row->gazzette_notification_url ?? ''; ?>" target="_blank" alt="">C-<?php echo $row->filing_no;?></a>
+                  </td> 
+                  <?php }
+                  else {
+                  ?> 
+                  <td></td>
+
+                  <?php } ?>              
 
                   <?php if($myArray[0]['scrutiny_def_url'] ?? '' !=''){?>
-                  <td><a href="<?php echo base_url();?><?php echo $myArray[0]['scrutiny_def_url'] ?? ''; ?>.pdf" target="_blank" alt="">Show created pdf </a>
+                  <td><a href="<?php echo base_url();?><?php echo $myArray[0]['scrutiny_def_url'] ?? ''; ?>.pdf" target="_blank" alt="">S-<?php echo $row->filing_no;?></a>
                   </td> 
                   <?php }
                   else {
@@ -99,6 +120,41 @@
                   <td></td>
 
                   <?php } ?>
+
+
+                    <?php if($row->partapdf ?? '' !=''){?>
+                  <td><a href="<?php echo base_url();?><?php echo $row->partapdf ?? ''; ?>" target="_blank" alt="">C-<?php echo $row->filing_no;?>-PartA</a>
+                  </td> 
+                  <?php }
+                  else {
+                  ?> 
+                  <td></td>
+
+                  <?php } ?>
+
+
+                    <?php if($row->partbpdf ?? '' !=''){?>
+                  <td><a href="<?php echo base_url();?><?php echo $row->partbpdf ?? ''; ?>" target="_blank" alt="">C-<?php echo $row->filing_no;?>-PartB</a>
+                  </td> 
+                  <?php }
+                  else {
+                  ?> 
+                  <td></td>
+
+                  <?php } ?>
+
+                    <?php if($row->partcpdf ?? '' !=''){?>
+                  <td><a href="<?php echo base_url();?><?php echo $row->partcpdf ?? ''; ?>" target="_blank" alt="">C-<?php echo $row->filing_no;?>-PartC</a>
+                  </td> 
+                  <?php }
+                  else {
+                  ?> 
+                  <td></td>
+
+                  <?php } ?>
+
+
+
 
                 </tr>
               </form>

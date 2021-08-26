@@ -389,9 +389,10 @@ class Scrutiny_model extends CI_Model{
 
 
 	function get_scrutiny_pdf($role_id){  
-		$this->db->select('C.ref_no, C.sur_name, C.mid_name, C.first_name, C.dt_of_filing, S.filing_no, S.scrutiny_status, S.objections');
+		$this->db->select('C.ref_no, C.sur_name, C.mid_name, C.first_name, C.dt_of_filing,C.gazzette_notification_url, S.filing_no, S.scrutiny_status, S.objections,P.partapdf,P.partbpdf,P.partcpdf');
 		$this->db->from('scrutiny S');
 		$this->db->join('complainant_details_parta C', 'S.filing_no = C.filing_no');
+		$this->db->join('part_pdf_abc P', 'S.filing_no = P.filing_no');
 		$this->db->join('scrutinyteam_master T', 'S.level = T.level_id');
 		$this->db->order_by('C.dt_of_filing','ASC');
 		//$this->db->where('T.roleid', $role_id);
@@ -802,6 +803,8 @@ function get_previous_complaint_remarks($fn)
 			$this->db->select('previous_complaint_description');
 			$this->db->where('filing_no', $fn);
 			$query = $this->db->get('scrutiny');
+
+			//echo $this->db->last_query();die('ooo');
 
 			if ($query->num_rows() > 0){
 		        return $query->result();;

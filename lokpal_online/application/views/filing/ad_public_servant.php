@@ -35,38 +35,66 @@ else
   }
 }
 </script>
- <script type="text/javascript">
+ 
+<script type="text/javascript">
+  $(document).ready(function(){
 
-  $(document).ready(function(){    //   hide section
-  $("#otherid").hide();
-
-  $("#comhide").hide();
-
-    //$("#dvdatahide").hide();
-
+    //   hide section            
+    
       $(function () {        
         $("#ad_complaint_capacity_id").change(function () {
           var mod_party=$('#ad_complaint_capacity_id').val(); 
           if ($(this).val() == "0") {    
              $("#comhide").hide();
           }
-            if ($(this).val() == "2") {
-               // $("#dvdatahide").show();
+            if ($(this).val() == "7") {
+               $("#otherid").hide();
                  $("#comhide").show();
             }
-             else  if ($(this).val() == "4") {
+            else  if ($(this).val() == "8") {
                 $("#comhide").show();
                  $("#otherid").hide();
-
+            }
+            else  if ($(this).val() == "9") {
+                $("#comhide").show();
+                 $("#otherid").hide();
+            }
+            else  if ($(this).val() == "10") {
+                $("#comhide").show();
+                 $("#otherid").hide();
+            }
+            else  if ($(this).val() == "11") {
+                $("#comhide").show();
+                 $("#otherid").hide();
+            }
+            else  if ($(this).val() == "12") {
+                $("#comhide").show();
+                 $("#otherid").hide();
+            }
+            else  if ($(this).val() == "13") {
+                $("#comhide").show();
+                 $("#otherid").hide();
+            }
+            else  if ($(this).val() == "14") {
+                $("#comhide").show();
+                 $("#otherid").hide();
             }
 
-           else  if ($(this).val() == "1") {
+            else  if ($(this).val() == "1") {
+                $("#comhide").hide();
+                 $("#otherid").hide();
+            }
+            else  if ($(this).val() == "2") {
                 $("#comhide").hide();
                  $("#otherid").hide();
             }
              else  if ($(this).val() == "3") {
                $("#comhide").hide();
                 $("#otherid").hide();
+            }
+            else  if ($(this).val() == "4") {
+                $("#comhide").hide();
+                 $("#otherid").hide();
             }
             else  if ($(this).val() == "5") {
                 $("#comhide").hide();
@@ -76,30 +104,48 @@ else
                 $("#comhide").hide();
                  $("#otherid").hide();
             }
-             else  if ($(this).val() == "7") {
+            else  if ($(this).val() == "15") {
                 $("#comhide").hide();
                  $("#otherid").hide();
             }
-             else  if ($(this).val() == "8") {
+            else  if ($(this).val() == "16") {
                 $("#comhide").hide();
                  $("#otherid").hide();
             }
-             else  if ($(this).val() == "9") {
+            else  if ($(this).val() == "17") {
                 $("#comhide").hide();
                  $("#otherid").hide();
             }
-             else  if ($(this).val() == "10") {
+            else  if ($(this).val() == "18") {
                 $("#comhide").hide();
                  $("#otherid").hide();
             }
-            else  if ($(this).val() == "11") {
+            else  if ($(this).val() == "19") {
+                $("#comhide").hide();
+                 $("#otherid").hide();
+            }
+            else  if ($(this).val() == "20") {
+                $("#comhide").hide();
+                 $("#otherid").hide();
+            }
+            else  if ($(this).val() == "21") {
+                $("#comhide").hide();
+                 $("#otherid").hide();
+            }
+            else  if ($(this).val() == "22") {
+                $("#comhide").hide();
+                 $("#otherid").hide();
+            }
+            else  if ($(this).val() == "23") {
+                $("#comhide").hide();
+                 $("#otherid").hide();
+            }
+            else  if ($(this).val() == "24") {
                 $("#otherid").show();
                                                
 
             }
-             else {                
-                 $("#dvdatahide").hide();
-            }
+
         });
     });
 });
@@ -457,18 +503,18 @@ $ref_no=$this->session->userdata('ref_no');
           <label class="text-orange" for="ad_complaint_capacity_id"><?php print_r($this->label->get_short_name($elements, 133)); ?><span class="text-danger">*</span></label>    
           <select type="text" class="form-control chosen-single chosen-default" name="ad_complaint_capacity_id" id="ad_complaint_capacity_id" onChange="PageComplain(this.value);" >
             <option value="">Select</option>
-            <?php foreach($complainant_type as $row):?>
-            <option value="<?php echo $row->complaint_capacity_id;?>"> <?php echo $row->complaint_capacity_desc; ?> </option>              
+            <?php foreach($pscategory as $row):?>
+            <option value="<?php echo $row->ps_id;?>"> <?php echo $row->ps_desc; ?> </option>              
             <?php endforeach;?>
           </select>        
         </div> 
-       
+       <!--
         <div class="col-md-6 mb-15">
           <label for="ad_ps_id"><?php print_r($this->label->get_short_name($elements, 134)); ?><span class="text-danger">*</span></label>
           <select type="text" class="form-control chosen-single chosen-default" name="ad_ps_id" id="ad_ps_id">
               
           </select>     
-        </div>  
+        </div>  -->
 
         <div class="col-md-6 mb-15">
           <div id="otherid">

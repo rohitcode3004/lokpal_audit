@@ -434,13 +434,14 @@ $psectorid =$datac['complaint_capacity_id'] ?? '';
 if($psectorid !='')
 {
   $pssalution = $this->report_model->getPublicsector($psectorid);
-  $ccapacity=$pssalution['complaint_capacity_desc'];
+  $ccapacity=$pssalution['ps_desc'];
 }
 else
 {
  $ccapacity='';
 }
- 
+
+/* 
 $subcat =$datac['ps_id'] ?? '';
 if($subcat !='')
 {
@@ -450,7 +451,7 @@ if($subcat !='')
 else
 {
   $subcat_desc='';
-}
+}*/
 
 $cstateid =$datac['ps_pl_stateid'] ?? '';
 if($cstateid !='')
@@ -1027,11 +1028,11 @@ if($addparty_partc){
 
 //$datawitness = $this->report_model->getPartc_Witness($refe_no);
 $public_servant_detail = $this->report_model->getPublic_servant_detail($refe_no);
-/*
-echo "<pre>";
-print_r($public_servant_detail);
-*/
 
+/*echo "<pre>";
+print_r($public_servant_detail);
+die('@@@');
+*/
 
 $pscount=count($public_servant_detail);
 $publicservantdetail_list ='';
@@ -1142,14 +1143,10 @@ officer or employee or agency(including the Delhi Special Police Establishment),
 <tr>
 <td style="border: 1px solid black;" align="center">5(a).</td>
 <td style="border: 1px solid black;">Category of the public servant against whome the complaint <br> is being made</td><td style="border: 1px solid black;">
-'.$value->complaint_capacity_desc.'</td>
-</tr>
-
-<tr>
-<td style="border: 1px solid black;" align="center"></td>
-<td style="border: 1px solid black;">Sub Category</td><td style="border: 1px solid black;">
 '.$value->ps_desc.'</td>
 </tr>
+
+
 
 <tr>
 <td style="border: 1px solid black;" align="center">5(b).</td>
@@ -1818,11 +1815,6 @@ $getallwidget .= '
 '.$ccapacity.'</td>
 </tr>
 
-<tr>
-<td style="border: 1px solid black;" align="center"></td>
-<td style="border: 1px solid black;">Sub Category</td><td style="border: 1px solid black;">
-'.$subcat_desc.'</td>
-</tr>
 
 <tr>
 <td style="border: 1px solid black;" align="center">5(b).</td>
