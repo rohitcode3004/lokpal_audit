@@ -85,7 +85,7 @@ class Counter extends CI_Controller {
 	{	
 		$data['user'] = $this->login_model->getRows($this->con);
 		if(!($data['user']['role'] == 143))
-			die('Access Denied!');
+			redirect('Error_controller/access_denied_error');
 		
 		$data['user'] = $this->login_model->getRows($this->con);
 
@@ -110,7 +110,7 @@ class Counter extends CI_Controller {
 	{	
 		$data['user'] = $this->login_model->getRows($this->con);
 		if(!($data['user']['role'] == 143))
-			die('Access Denied!');
+			redirect('Error_controller/access_denied_error');
 
 		$data['user'] = $this->login_model->getRows($this->con);
 		$data['role'] = $data['user']['role'];
@@ -141,7 +141,7 @@ class Counter extends CI_Controller {
 
 		$data['user'] = $this->login_model->getRows($this->con);
 		if(!($data['user']['role'] == 131 || $data['user']['role'] == 161 || $data['user']['role'] == 162))
-			die('Access Denied!');
+			redirect('Error_controller/access_denied_error');
 
 		$data['user'] = $this->login_model->getRows($this->con);
 		$data['role'] = $data['user']['role'];

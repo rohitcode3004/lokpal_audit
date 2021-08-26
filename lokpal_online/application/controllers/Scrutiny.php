@@ -60,7 +60,7 @@ class Scrutiny extends CI_Controller {
 
 		$data['user'] = $this->login_model->getRows($this->con);
 		if(!($data['user']['role'] == 161 || $data['user']['role'] == 162 || $data['user']['role'] == 163 || $data['user']['role'] == 164 || $data['user']['role'] == 147))
-			die('Access Denied!');
+			redirect('Error_controller/access_denied_error');
 	}
 
 	public function dashboard()

@@ -62,7 +62,7 @@
 			$data['user'] = $this->login_model->getRows($this->con);
 
 			if(!($data['user']['role'] == 147 || $data['user']['role'] == 170))
-				die('Access Denied!');
+				redirect('Error_controller/access_denied_error');
 
 	            //print_r($data['user']['id']);die;
 
@@ -139,7 +139,7 @@
 			$data['user'] = $this->login_model->getRows($this->con);
 
 			if(!($data['user']['role'] == 147 || $data['user']['role'] == 170))
-				die('Access Denied!');
+				redirect('Error_controller/access_denied_error');
 
 			//print_r($data['user']['id']);die;
 
@@ -199,7 +199,7 @@
 			$data['user'] = $this->login_model->getRows($this->con);
 
 			if(!($data['user']['role'] == 147 || $data['user']['role'] == 170))
-				die('Access Denied!');	
+				redirect('Error_controller/access_denied_error');	
 				
 			$data['menus'] = $this->menus_lib->get_menus($data['user']['role']);
 			//$filing_no = $this->input->post('filing_no');

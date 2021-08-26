@@ -348,7 +348,7 @@ class Admin extends CI_Controller {
 			$data['user'] = $this->login_model->getRows($con);
 
 			if(!($data['user']['role'] == 12))
-				die('Access Denied!');
+				redirect('Error_controller/access_denied_error');
 
             //print_r($data);die('o');	
 			$this->load->view('admin/dashboard/menus_view', $data);
@@ -368,7 +368,7 @@ class Admin extends CI_Controller {
             //print_r($data);die('o');
 
             if(!($data['user']['role'] == 12))
-				die('Access Denied!');
+				redirect('Error_controller/access_denied_error');
 
 			$data['menus'] = $this->menu_model->fetch_menus();
 			//echo json_encode($data->result_array());
@@ -388,7 +388,7 @@ class Admin extends CI_Controller {
 			$data['user'] = $this->login_model->getRows($con);
             //print_r($data);die('o');
             if(!($data['user']['role'] == 12))
-				die('Access Denied!');
+				redirect('Error_controller/access_denied_error');
 
 			$data['roles'] = $this->menu_model->fetch_roles();
 			$data['menus'] = $this->menu_model->fetch_menus();
@@ -522,7 +522,7 @@ class Admin extends CI_Controller {
 			$data['user'] = $this->login_model->getRows($con);
             //print_r($data);die('o');
             if(!($data['user']['role'] == 12))
-				die('Access Denied!');
+				redirect('Error_controller/access_denied_error');
 
 			$this->load->view('admin/dashboard/users_view', $data);
 		}
@@ -629,7 +629,7 @@ class Admin extends CI_Controller {
 			$data['user'] = $this->login_model->getRows($con);
             //print_r($data);die('o');
             if(!($data['user']['role'] == 12))
-				die('Access Denied!');
+				redirect('Error_controller/access_denied_error');
 
 			$data['roles'] = $this->login_model->get_roles();
 			//echo json_encode($data->result_array());
@@ -649,7 +649,7 @@ class Admin extends CI_Controller {
 			$data['user'] = $this->login_model->getRows($con);
             //print_r($data);die('o');
             if(!($data['user']['role'] == 12))
-				die('Access Denied!');
+				redirect('Error_controller/access_denied_error');
 
 			$this->load->view('admin/dashboard/roles_view', $data);
 		}
@@ -793,7 +793,7 @@ class Admin extends CI_Controller {
 			$data['user'] = $this->login_model->getRows($con);
             //print_r($data);die('o');
             if(!($data['user']['role'] == 12))
-				die('Access Denied!');
+				redirect('Error_controller/access_denied_error');
 
 			$this->load->view('admin/dashboard/permissions_view', $data);
 		}

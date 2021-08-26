@@ -49,7 +49,7 @@ class Agency extends CI_Controller {
 
 		$data['user'] = $this->login_model->getRows($this->con);
 		if(!($data['user']['role'] == 149 || $data['user']['role'] == 150 || $data['user']['role'] == 151))
-			die('Access Denied!');
+			redirect('Error_controller/access_denied_error');
 	}
 
 	public function dashboard()

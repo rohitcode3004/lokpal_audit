@@ -21,6 +21,7 @@ class Filing extends CI_Controller {
 		$this->load->model('login_model');
 		$this->load->model('users_model');
 		$this->load->helper("compno_helper");	
+		$this->load->helper("user_helper");	
 		$this->load->helper("parts_status_helper");
 		//print_r($this->session->userdata);die;
 		//check to check user/login or admin/login
