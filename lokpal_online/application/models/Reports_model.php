@@ -428,12 +428,12 @@ class Reports_model extends CI_Model
 		}
 
 		function getscrutinyCategory($filing_no){
-			$sql="SELECT sc.complaint_capacity_id,sc.ps_id,sc.filing_no,ps_desc,complaint_capacity_desc FROM
+		 $sql="SELECT sc.complaint_capacity_id,sc.filing_no,ps_desc FROM
 			scrutiny_correction_parta_partc sc
-			LEFT JOIN complaint_capacity ON complaint_capacity.complaint_capacity_id = sc.complaint_capacity_id
-   			LEFT JOIN ps_category ON ps_category.comlaint_capacity_id = sc.complaint_capacity_id and ps_category.ps_id = sc.ps_id
+			LEFT JOIN ps_category ON ps_category.ps_id = sc.complaint_capacity_id   			
 			WHERE sc.filing_no = '$filing_no'";
 			$query = $this->db->query($sql)->result();
+				//echo $this->db->last_query();
 			return $query;
 		}
 

@@ -166,7 +166,9 @@ class Scrutiny extends CI_Controller {
 
 			$data['menus'] = $this->menus_lib->get_menus($data['user']['role']);
 			$data['gender'] = $this->common_model->getGender();
-			 $data['complainant_type'] = $this->common_model->getComplaint();
+			 //$data['complainant_type'] = $this->common_model->getComplaint();
+
+			 $data['pscategory'] = $this->common_model->getPscategory();
 
 			$filing_no = $this->input->post('filing_no');
 			$data['filing_no'] = $filing_no;
@@ -1288,6 +1290,7 @@ authorised signatory    </div></b>
 
 public function partcpdf($filing_no)
 {
+
 	$this->load->helper("date_helper");  
 	$chkdate= date("l jS \of F Y");
 	$ref_no = $this->causelist_model->getRefNo($filing_no);
@@ -1297,10 +1300,13 @@ public function partcpdf($filing_no)
 	$myArray=(array)$farmadata;
 	$cp=$myArray[0]->complaint_capacity_id ?? '';
 	$complaint_capacity = $this->report_model->getComplaincapicity($cp);
-	$complaint_desc= $complaint_capacity['complaint_capacity_desc'];
+	 $complaint_desc= $complaint_capacity['complaint_capacity_desc'];
 
 
 	$datac = $this->report_model->getPartc($refe_no);
+
+	//echo "<pre>";
+	//print_r($datac);die;
 	$psid=$datac['ps_salutation_id'] ?? '';
 	if($psid !='')
 	{
@@ -1414,24 +1420,31 @@ else
 }*/
 
 $getscrutinyCategory = $this->reports_model->getscrutinyCategory($filing_no);
- $sc_complaint_capacity_desc=$getscrutinyCategory[0]->complaint_capacity_desc ?? '';
- $sc_ps_desc=$getscrutinyCategory[0]->ps_desc ?? '';
 
-if (!empty($sc_complaint_capacity_desc))
+echo "<pre>";
+print_r($getscrutinyCategory);
+ $sc_complaint_capacity_desc=$getscrutinyCategory[0]->complaint_capacity_desc ?? '';
+  $sc_ps_desc=$getscrutinyCategory[0]->ps_desc ?? '';
+
+if (empty($sc_complaint_capacity_desc))
 {
-$ccapacity=$sc_complaint_capacity_desc;
-$subcat_desc=$sc_ps_desc;
+	
+ $ccapacity=$sc_ps_desc;
+//$subcat_desc=$sc_ps_desc;
 }
 else
 {
+
+	
 $psectorid =$datac['complaint_capacity_id'] ?? '';
 $pssalution = $this->report_model->getPublicsector($psectorid);
- $ccapacity=$pssalution['complaint_capacity_desc'];
- $subcat =$datac['ps_id'] ?? '';
- $pssubcat = $this->report_model->getSubcategory($psectorid,$subcat);
- $subcat_desc=$pssubcat['ps_desc'] ;
+ $ccapacity=$pssalution['ps_desc'];
+// $subcat =$datac['ps_id'] ?? '';
+// $pssubcat = $this->report_model->getSubcategory($psectorid,$subcat);
+// $subcat_desc=$pssubcat['ps_desc'] ;
 }
 
+//echo $ccapacity;die;
 $cstateid =$datac['ps_pl_stateid'] ?? '';
 if($cstateid !='')
 {
@@ -1497,23 +1510,14 @@ $sc_ps_desc=$getscrutinyCategory[0]->ps_desc ?? '';
 */
 
 $scCategory ='';
-if(!empty($sc_complaint_capacity_desc)){
-
-
-//echo "<pre>";
-//print_r($datac);
+if(empty($sc_complaint_capacity_desc)){
  $psectorid =$datac['complaint_capacity_id'] ?? '';
 $pssalution = $this->report_model->getPublicsector($psectorid);
- $ccapacity_h=$pssalution['complaint_capacity_desc'];
- $subcat =$datac['ps_id'] ?? '';
- $pssubcat = $this->report_model->getSubcategory($psectorid,$subcat);
- $subcat_desc_h=$pssubcat['ps_desc'] ;
-
+ $ccapacity_h=$pssalution['ps_desc'];
 $scCategory .= ' 
 <td style="border: 1px solid black;">Category <br>
 </td><td style="border: 1px solid black;">'.$ccapacity_h.'</td>
-<td style="border: 1px solid black;">Sub Category <br>
-</td><td style="border: 1px solid black;">'.$subcat_desc_h.'</td>
+
 </tr>';
 }
 else
@@ -1523,11 +1527,6 @@ $scCategory .= '
 <td style="border: 1px solid black;" align="center">Nill</td>
 </tr>';
 }
-
-
-
-
-
 /*  start part witness detail  */
 $datawitness = $this->report_model->getPartc_Witness($refe_no);
 $witnesscount=count($datawitness);
@@ -1656,10 +1655,8 @@ if($addparty_partc){
 
 //$datawitness = $this->report_model->getPartc_Witness($refe_no);
 $public_servant_detail = $this->report_model->getPublic_servant_detail($refe_no);
-/*
-echo "<pre>";
-print_r($public_servant_detail);
-*/
+
+
 
 
 $pscount=count($public_servant_detail);
@@ -1771,12 +1768,6 @@ officer or employee or agency(including the Delhi Special Police Establishment),
 <tr>
 <td style="border: 1px solid black;" align="center">5(a).</td>
 <td style="border: 1px solid black;">Category of the public servant against whome the complaint <br> is being made</td><td style="border: 1px solid black;">
-'.$value->complaint_capacity_desc.'</td>
-</tr>
-
-<tr>
-<td style="border: 1px solid black;" align="center"></td>
-<td style="border: 1px solid black;">Sub Category</td><td style="border: 1px solid black;">
 '.$value->ps_desc.'</td>
 </tr>
 
@@ -1936,11 +1927,7 @@ $getallwidget =
 '.$ccapacity.'</td>
 </tr>
 
-<tr>
-<td style="border: 1px solid black;" align="center"></td>
-<td style="border: 1px solid black;">Sub Category</td><td style="border: 1px solid black;">
-'.$subcat_desc.'</td>
-</tr>
+
 
 <tr>
 <td style="border: 1px solid black;" align="center">5(b).</td>
@@ -3200,7 +3187,7 @@ function updategender()
 	 $ts = date('Y-m-d H:i:s', time());
 	 $filing_no = $this->input->post('filing_no');
 	 $complaint_capacity_id = trim($this->security->xss_clean($this->input->post('complaint_capacity_id')));
-	 $ps_id = trim($this->security->xss_clean($this->input->post('ps_id')));
+	// $ps_id = trim($this->security->xss_clean($this->input->post('ps_id')));
 	 $gender_id = trim($this->security->xss_clean($this->input->post('gender_id')));
 	 $data['user'] = $this->login_model->getRows($this->con);
 	 $query = $this->scrutiny_model->getfiling_no($filing_no);
@@ -3211,7 +3198,7 @@ function updategender()
 				$insert_data = array(						
 				'filing_no' => trim($this->security->xss_clean($this->input->post('filing_no'))),
 				'complaint_capacity_id' => ($complaint_capacity_id != '') ? $complaint_capacity_id : NULL,	
-				'ps_id' => ($ps_id != '') ? $ps_id : NULL,	
+				//'ps_id' => ($ps_id != '') ? $ps_id : NULL,	
 				'gender_id' => ($gender_id != '') ? $gender_id : NULL,	
 				'user_id' => $this->con['id'],
 				'created_at' => $ts,
@@ -3253,7 +3240,7 @@ function updatecategory(){
 	$ts = date('Y-m-d H:i:s', time());
 	 $filing_no = $this->input->post('filing_no');
 	 $complaint_capacity_id = trim($this->security->xss_clean($this->input->post('complaint_capacity_id')));
-	 $ps_id = trim($this->security->xss_clean($this->input->post('ps_id')));
+	// $ps_id = trim($this->security->xss_clean($this->input->post('ps_id')));
 	 $gender_id = trim($this->security->xss_clean($this->input->post('gender_id')));
 	 $data['user'] = $this->login_model->getRows($this->con);
 	 $query = $this->scrutiny_model->getfiling_no($filing_no);	
@@ -3264,7 +3251,7 @@ function updatecategory(){
 				$insert_data = array(
 				'filing_no' => trim($this->security->xss_clean($this->input->post('filing_no'))),				
 				'complaint_capacity_id' => ($complaint_capacity_id != '') ? $complaint_capacity_id : NULL,	
-				'ps_id' => ($ps_id != '') ? $ps_id : NULL,	
+				//'ps_id' => ($ps_id != '') ? $ps_id : NULL,	
 				'gender_id' => ($gender_id != '') ? $gender_id : NULL,	
 				'user_id' => $this->con['id'],
 				'created_at' => $ts,
@@ -3279,7 +3266,7 @@ function updatecategory(){
 				$upd_data = array(				
 				'filing_no' => trim($this->security->xss_clean($this->input->post('filing_no'))),
 				'complaint_capacity_id' => ($complaint_capacity_id != '') ? $complaint_capacity_id : NULL,	
-				'ps_id' => ($ps_id != '') ? $ps_id : NULL,
+				//'ps_id' => ($ps_id != '') ? $ps_id : NULL,
 				'user_id' => $this->con['id'],
 				'updated_at' => $ts,
 				'ip' => get_ip(),

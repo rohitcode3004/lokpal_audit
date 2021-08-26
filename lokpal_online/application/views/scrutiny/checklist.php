@@ -533,18 +533,13 @@
                         		<div class="col-sm-3">
 	                        		<select type="text" class="form-control" name="complaint_capacity_id" id="complaint_capacity_id" onChange="pageRefesh(this.value);">
 	                        			<option value="">-- Select --</option>
-	                        			<?php foreach($complainant_type as $crow):?>
-	                        			<option value="<?php echo $crow->complaint_capacity_id;?>"> 
-	                        				<?php echo $crow->complaint_capacity_desc; ?>
+	                        			<?php foreach($pscategory as $crow):?>
+	                        			<option value="<?php echo $crow->ps_id;?>"> 
+	                        				<?php echo $crow->ps_desc; ?>
 	                        			</option>       
 	                        			<?php endforeach;?>
 	                        		</select>
-                        		</div>
-
-                        		<label class="control-label col-sm-2" for="ps_id">Sub Category</label>
-                        		<div class="col-sm-3">
-                        			<select type="text" class="form-control" name="ps_id" id="ps_id"> </select>
-                        		</div>
+                        		</div>           	
                         		<div class="col-sm-2">
                         			<button type="button" class="btn btn-success category_submit"> Update category </button>
                         		</div>
@@ -970,12 +965,12 @@ fetch_data();
             $(document).ready(function() {
             $(document).on('click', '.category_submit', function(){
             var complaint_capacity_id = document.getElementById("complaint_capacity_id").value;
-            var ps_id = document.getElementById("ps_id").value;
+            //var ps_id = document.getElementById("ps_id").value;
             var filing_no = "<?= $filing_no; ?>";                
           $.ajax({
             url: '<?php echo site_url('scrutiny/updatecategory'); ?>',
             type: 'POST',          
-           data: {complaint_capacity_id: complaint_capacity_id, ps_id: ps_id,filing_no:filing_no},
+           data: {complaint_capacity_id: complaint_capacity_id,filing_no:filing_no},
             dataType: 'json',
             success: function(data) {
                 console.log(data);
