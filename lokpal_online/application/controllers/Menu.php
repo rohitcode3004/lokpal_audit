@@ -28,11 +28,18 @@ class Menu extends CI_Controller {
     		}else{
     			$this->session->set_userdata('login_time_stamp', time());
     		}
+    		$this->con = array( 
+				'id' => $this->session->userdata('userId') 
+			);
     	}
 		else
 		{
 			redirect('user/login'); 
 		}
+
+		$data['user'] = $this->login_model->getRows($this->con);
+		if(!($data['user']['role'] == 12))
+				redirect('Error_controller/access_denied_error');
 	}
 
 	function index()

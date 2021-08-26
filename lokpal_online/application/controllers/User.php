@@ -30,7 +30,7 @@ class User extends CI_Controller {
 			$data['user'] = $this->login_model->getRows($con);
 
 		if(!($data['user']['role'] == 12))
-			die('Access Denied!');
+			redirect('Error_controller/access_denied_error');
 		$data = $this->login_model->fetch_all();
 		echo json_encode($data->result_array());
 	}

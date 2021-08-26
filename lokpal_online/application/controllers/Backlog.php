@@ -63,7 +63,7 @@
 		{	
 			$data['user'] = $this->login_model->getRows($this->con);
 			if(!($data['user']['role'] == 172))
-				die('Access Denied!');
+				redirect('Error_controller/access_denied_error');
 			$data['menus'] = $this->menus_lib->get_menus($data['user']['role']);
 			$data['salution'] = $this->common_model->getSalution();
 			$data['state'] = $this->common_model->getStateName();
@@ -201,7 +201,7 @@
 	public function edit($id) {
         $data['user'] = $this->login_model->getRows($this->con);
 		if(!($data['user']['role'] == 173))
-				die('Access Denied!');
+				redirect('Error_controller/access_denied_error');
 		$data['menus'] = $this->menus_lib->get_menus($data['user']['role']);
 		$data['salution'] = $this->common_model->getSalution();
 		$data['state'] = $this->common_model->getStateName();
@@ -358,7 +358,7 @@
 		{
 		$data['user'] = $this->login_model->getRows($this->con);
 		if(!($data['user']['role'] == 173))
-				die('Access Denied!');
+				redirect('Error_controller/access_denied_error');
 
 		//print_r($data['user']['id']);die;
 		$data['legacy_data']= $this->backlog_model->get_legacy_data();
@@ -374,7 +374,7 @@
 		{
 		$data['user'] = $this->login_model->getRows($this->con);
 		if(!($data['user']['role'] == 173))
-				die('Access Denied!');
+				redirect('Error_controller/access_denied_error');
 
 		//print_r($data['user']['id']);die;
 		$id = trim($this->security->xss_clean($this->input->post('id')));	

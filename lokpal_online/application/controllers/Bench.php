@@ -77,7 +77,7 @@ class Bench extends CI_Controller {
 			$data['user'] = $this->login_model->getRows($this->con);
 
 			if(!($data['user']['role'] == 138))
-				die('Access Denied!');
+				redirect('Error_controller/access_denied_error');
 
             //print_r($data['user']['id']);die;
 
@@ -112,7 +112,7 @@ class Bench extends CI_Controller {
 		$data['user'] = $this->login_model->getRows($this->con);	
 
 		if(!($data['user']['role'] == 138))
-			die('Access Denied!');
+			redirect('Error_controller/access_denied_error');
 		if($this->input->post('filing_no'))
 			{
 			
@@ -820,7 +820,7 @@ class Bench extends CI_Controller {
 		$data['user'] = $this->login_model->getRows($this->con);	
 			
 		if(!($data['user']['role'] == 138))
-			die('Access Denied!');
+			redirect('Error_controller/access_denied_error');
 
 		$data['menus'] = $this->menus_lib->get_menus($data['user']['role']);
 
@@ -865,7 +865,7 @@ class Bench extends CI_Controller {
 		$data['user'] = $this->login_model->getRows($this->con);	
 
 		if(!($data['user']['role'] == 138))
-			die('Access Denied!');
+			redirect('Error_controller/access_denied_error');
 			
 		$data['menus'] = $this->menus_lib->get_menus($data['user']['role']);
 
@@ -944,7 +944,7 @@ class Bench extends CI_Controller {
 		$data['user'] = $this->login_model->getRows($this->con);
 
 		if(!($data['user']['role'] == 138))
-			die('Access Denied!');
+			redirect('Error_controller/access_denied_error');
 
             //print_r($data['user']['id']);die;
 
@@ -1014,7 +1014,7 @@ public function search_case(){
 $data['user'] = $this->login_model->getRows($this->con);
 
 if(!($data['user']['role'] == 138 || $data['user']['role'] == 147))
-	die('Access Denied!');
+	redirect('Error_controller/access_denied_error');
 
 
 $this->load->helper("date_helper");
@@ -1041,7 +1041,7 @@ public function search_case_detail(){
 $data['user'] = $this->login_model->getRows($this->con);
 
 if(!($data['user']['role'] == 138 || $data['user']['role'] == 147))
-	die('Access Denied!');
+	redirect('Error_controller/access_denied_error');
 
 $this->load->helper("date_helper");
 $this->load->helper("compno_helper");
@@ -1164,7 +1164,7 @@ public function get_complaints_ops($flag=NULL)
 		$data['user'] = $this->login_model->getRows($this->con);
 
 		if(!($data['user']['role'] == 138))
-			die('Access Denied!');
+			redirect('Error_controller/access_denied_error');
 
 
             //print_r($data['user']['id']);die;
