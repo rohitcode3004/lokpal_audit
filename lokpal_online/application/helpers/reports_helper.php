@@ -38,4 +38,16 @@
             return $parta_row;
         }
 
+        function get_status_mis_ordertype($ot)
+        {
+            $CI =& get_instance();
+            $CI->load->model('reports_model');
+            $data =  $CI->reports_model->fetch_status_mis_ordertype($ot);
+            //print_r($data);die;
+            if($data == 0)
+                return NULL;
+            else
+                return $data[0]->ordertype_name;
+        }
+
     }

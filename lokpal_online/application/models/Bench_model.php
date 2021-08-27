@@ -1046,5 +1046,18 @@ return $query;
 
 	//ysc code end here
 
+      function fetch_fn($cn, $yr)
+	{
+		$sql = "select filing_no from case_detail where complaint_no='$cn' and complaint_year='$yr'";
+		$this->db->select('filing_no');
+		$this->db->where('complaint_no::integer', $cn);
+		$this->db->where('complaint_year', $yr);
+		$query = $this->db->query($sql);
+		$count =  $query->num_rows();
+		if($count === 0)
+			return 0;
+		else
+			return $query->result();
+	} 
 
 }

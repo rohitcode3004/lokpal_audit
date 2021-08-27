@@ -579,7 +579,12 @@ p.remarks, p.ordertype_code, p.action as cp_action,p.bench_id, p.due_date,g.flag
 		//print_r($query);die;
 	}
 
-
-
+	 function fetch_status_mis_ordertype($ot){					
+			$sql = "select ordertype_name from ordertype_master where ordertype_code='$ot'";
+			$query 	= $this->db->query($sql)->result();
+			//echo $this->db->last_query();die();
+			return $query;
+			
+		}
 
 }

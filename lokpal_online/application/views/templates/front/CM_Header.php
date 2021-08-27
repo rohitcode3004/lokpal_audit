@@ -160,8 +160,13 @@ function freshApp(){
                 					<span>Search Status of Complaints</span> 
                 				</a>
                 			</li>
-
-
+                            
+                            <li>
+                                <a href="<?php echo base_url('proceeding/update_backlog_status'); ?>">
+                                    <i class="fa fa-share side-menu_icon" aria-hidden="true"></i>
+                                    <span>Search Status of Complaints</span> 
+                                </a>
+                            </li>
 
                 			<li>
                 				<a href="#">

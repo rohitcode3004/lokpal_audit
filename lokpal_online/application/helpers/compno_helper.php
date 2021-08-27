@@ -107,4 +107,18 @@ if (!function_exists('convertToBase64'))
 		 		return 'n/a';
 		 	}
 	}
+
+		function get_filing_no_c($c_no, $year)
+	     {
+	 	 	//echo $user_id;
+	 	 	$CI =& get_instance();
+	 	 	$CI->load->model('bench_model');
+	 	 	$case_det_row =  $CI->bench_model->fetch_fn($c_no, $year);
+			//print_r($case_det_row);die('hel');
+			if($case_det_row){
+				return $case_det_row[0]->filing_no;
+		 	}else{
+		 		return 'n/a';
+		 	}
+		}
 }

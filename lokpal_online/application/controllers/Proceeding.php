@@ -20,6 +20,7 @@
 			$this->load->helper("bench_helper");
 			$this->load->helper("common_helper");
 			$this->load->helper("report_helper");
+			$this->load->helper("reports_helper");
 			//$this->load->library('html2pdf');
 			$this->load->library('label');
 			$this->load->helper("date_helper");
@@ -1289,4 +1290,257 @@
 	
 
 }
+
+		public function update_backlog_status()
+		{	
+			$data['user'] = $this->login_model->getRows($this->con);
+
+			if(!($data['user']['role'] == 147 || $data['user']['role'] == 170))
+				redirect('Error_controller/access_denied_error');
+
+	            //print_r($data['user']['id']);die;
+
+			$data['menus'] = $this->menus_lib->get_menus($data['user']['role']);
+
+			$data['order_type'] = $this->proceeding_model->fetch_all_order_type();
+			$data['other_action'] = $this->proceeding_model->fetch_all_other_action();
+
+			$this->load->view('templates/front/CM_Header.php',$data);
+
+			$this->load->view('proceeding/status_update.php',$data);
+
+			$this->load->view('templates/front/CE_Footer.php',$data);
+
+		}
+
+		public function update_backlog_status_action()
+		{
+			$search_case = 1;	
+			if($search_case=='1')
+			{
+				$complaint_number= ($this->input->post('n3'));
+				$var = preg_split("#/#", $complaint_number);
+				$case_no=(int)$var['0'];
+				$year=$var['1'];
+				//echo $case_no."&";
+				//echo $year;die;
+				if ($case_no =='' or $year =='')
+				{  
+					$this->session->set_flashdata('success_msg', '<div class="alert alert-danger text-center"><h4 class="m-0">Please Enter Complaint Number / Year</h2></div>');
+					redirect('proceeding/update_backlog_status');
+				}
+				else
+				{
+					$filing_no = get_filing_no_c($case_no, $year);
+					//echo $filing_no;die;
+					$data = $this->proceeding_model->get_status_details($filing_no);
+					print_r($data);
+					$output = '';
+					$count = 0;
+					if (!empty($data)) {
+						foreach ($data as $key => $csm) {
+						$count ++;
+						$output .='
+						<tr>
+						<td>'.$count.'</td>
+						<td>'.$data[$key]->filing_no.'</td>
+						<td>'.$data[$key]->hearing_date.'</td>
+						<td>'.get_status_mis_ordertype($data[$key]->order_type_code).'</td>
+						</tr>
+						'; 
+					}
+					$output .='<input type="hidden" name="fn" value="'.$filing_no.'">';
+					}else{
+						$output .='
+						<tr>
+						<td colspan="4" align="center">No Data Found</td>
+						</tr>
+						';
+					}
+				echo $output;
+				}
+
+			}
+
+		}
+
+		public function update_backlog_status_submit()
+		{
+			//print_r($_POST);die;
+			$this->form_validation->set_rules('listing_date', 'Hearing Date', 'required');
+	        $this->form_validation->set_rules('order_type', 'Order Type', 'required',
+	                        array('required' => 'You must provide a %s.')
+	                );
+	        //$this->form_validation->set_rules('conce_agency', 'Concern Agency', 'required');
+	        //$this->form_validation->set_rules('order_body', 'Order Body', 'required');
+
+			if ($this->form_validation->run() == FALSE){
+				$data['user'] = $this->login_model->getRows($this->con);	
+					
+				$data['menus'] = $this->menus_lib->get_menus($data['user']['role']);
+				$filing_no = trim($this->security->xss_clean($this->input->post('fn')));
+				$data['filing_no'] = $filing_no;
+				$listing_date = $this->input->post('listing_date');
+				$data['listing_date'] = $listing_date;
+				//$bench_no = $this->input->post('bench_no');
+				//$data['bench_no'] = $bench_no;
+				//$bench_id = $this->input->post('bench_id');
+
+				//$coram = get_coram($bench_id);
+				//$data['coram'] = $coram;
+
+				$data['order_type'] = $this->proceeding_model->fetch_order_type();
+				$this->load->view('proceeding/update_backlog_status.php',$data);
+			}
+			else
+			{
+				$hearing_date = trim($this->security->xss_clean($this->input->post('listing_date')));
+				$hearing_date = get_entrydate($hearing_date);
+				$order_type = trim($this->security->xss_clean($this->input->post('order_type')));
+				$due_date = trim($this->security->xss_clean($this->input->post('duedate')));
+				if($due_date != '')
+					$due_date = get_entrydate($due_date);
+				else
+					$due_date = NULL;
+					$conce_agency = NULL;
+					$other_agn = NULL;
+					$closure_sec = NULL;
+					$others_ordertype = NUll;
+					$other_action = NULL;
+					$additional_documents = NULL;
+					$status_rep_dept = NULL;
+
+				if($order_type == 1 || $order_type == 2)
+					$conce_agency = trim($this->security->xss_clean($this->input->post('conce_agency')));
+
+				if($order_type == 5 || $order_type == 8 || $order_type == 9)
+					$closure_sec = trim($this->security->xss_clean($this->input->post('closure_type')));
+
+				if($closure_sec == 'yes')
+					$closure_sec = 46;
+
+				if($conce_agency == 4 || $conce_agency == 8)
+					$other_agn = trim($this->security->xss_clean($this->input->post('other_agency_name')));
+
+				if($order_type == 14){
+					$other_action = trim($this->security->xss_clean($this->input->post('other_action')));
+					if($other_action == 6)
+						$others_ordertype = trim($this->security->xss_clean($this->input->post('others_ordertype')));
+					if($other_action == 13)
+						$additional_documents = trim($this->security->xss_clean($this->input->post('additional_doc')));
+					if($other_action == 12)
+						$status_rep_dept = trim($this->security->xss_clean($this->input->post('status_rep_dept')));
+				}
+				$filing_no = trim($this->security->xss_clean($this->input->post('fn')));
+				$listing_date = trim($this->security->xss_clean($this->input->post('listing_date')));
+				//$bench_no = trim($this->security->xss_clean($this->input->post('bench_no')));
+				//echo $bench_no;die;
+				//$bench_id = trim($this->security->xss_clean($this->input->post('bench_id')));
+				$complaint_no = trim($this->security->xss_clean($this->input->post('complaint_no')));
+
+				$data['user'] = $this->login_model->getRows($this->con);
+			    $user_id=$data['user']['id'];
+				//$purpose = ;
+				$ts = date('Y-m-d H:i:s', time());
+				$created_at = $ts;
+				//$updated_at = ;
+				$ip = get_ip();
+
+				if($order_type == 4){
+							$next_date = trim($this->security->xss_clean($this->input->post('adj_date')));
+							$next_date = get_entrydate($next_date);			
+					
+					$insert_data = array(
+						        'filing_no' => $filing_no,
+						        'hearing_date' => $listing_date,
+						        //'bench_no' => $bench_no,
+						        //'bench_id' => $bench_id,
+						        //'bench_nature' => $bench_nature,
+						        'user_id' => $user_id,
+						        //'remarks' => $remarks,
+						        //'court_no' => $court_no,
+						        //'order_date' => $order_date,
+						        'order_type_code' => $order_type,
+						        'agency_code' => $conce_agency,
+						        'oth_agency_name' => $other_agn,
+						        'closure_sec' => $closure_sec,
+						        //'order_content' => $order_body,
+						        //'order_upload' => 'cdn/proceeding_order/proc_order_'.$filing_no.'_'.$proceeding_count.'.pdf',
+						        'created_at' => $created_at,
+						        'ip' => $ip,
+						        'proceeding_count' => $proceeding_count,
+						        //'action' => 'f',
+						        'other_action_code' => $other_action,
+						        );
+							//print_r($insert_data);die;
+								$query6 = $this->proceeding_model->mis_status_insert($insert_data);
+
+								if($query6){
+									$next_date = get_displaydate($next_date);								
+									$this->session->set_flashdata('success_msg', 'Successfully adjourned complaint no. '.$complaint_no.' for next hearing dated: '.$next_date.'.');
+									redirect('proceeding/update_backlog_status');								
+								}else{
+									$this->session->set_flashdata('error_msg', 'Some problem updating in allocation model complaint no. '.$complaint_no.'.');
+									redirect('proceeding/update_backlog_status');
+									}
+								die();
+					}
+				
+	         else { 
+
+	         	if(($order_type == 5 || $order_type == 8 || $order_type == 9) && $closure_sec == 'no'){
+					$closure_sec=NULL;
+				}
+
+	         		//$proceeding_count = 1;
+
+		            $data = array('upload_data' => $this->upload->data()); 
+		            //print_r($listing_date);die;
+		            $insert_data = array(
+						        'filing_no' => $filing_no,
+						        'hearing_date' => $listing_date,
+						        //'bench_no' => $bench_no,
+						        //'bench_id' => $bench_id,
+						        //'bench_nature' => $bench_nature,
+						        'user_id' => $user_id,
+						        //'remarks' => $remarks,
+						        //'court_no' => $court_no,
+						        //'order_date' => $order_date,
+						        'order_type_code' => $order_type,
+						        'agency_code' => $conce_agency,
+						        'oth_agency_name' => $other_agn,
+						        'otheres_ordertype' => $others_ordertype,
+						        'closure_sec' => $closure_sec,
+						        //'order_content' => $order_body,
+						        //'order_upload' => 'cdn/proceeding_order/proc_order_'.$filing_no.'_'.$proceeding_count.'.pdf',
+						        'created_at' => $created_at,
+						        'ip' => $ip,
+						        //'proceeding_count' => $proceeding_count,
+						        //'action' => 'f',
+						        'due_date' => $due_date,
+						        'other_action_code' => $other_action,
+						        'additional_documents' => $additional_documents,
+						        'status_report_department' => $status_rep_dept,
+						        );
+							//print_r($insert_data);die;
+								$query = $this->proceeding_model->mis_status_insert($insert_data);
+
+								if($query){
+											if($order_type == 5 || $order_type == 8 || $order_type == 9){
+											$this->session->set_flashdata('success_msg', 'Successfully disposed complaint no. '.$complaint_no.'.');
+											redirect('proceeding/update_backlog_status');
+										}else{
+										$this->session->set_flashdata('success_msg', 'Successfully proceeded complaint no. '.$complaint_no.' and forwarded.');
+										redirect('proceeding/update_backlog_status');
+										}
+								}else{
+									//die('problem inserting in proceeding model');
+									$this->session->set_flashdata('error_msg', 'Some problem inserting in proceeding model complaint no. '.$complaint_no.'.');
+										redirect('proceeding/update_backlog_status');
+								}
+
+
+	         } 
+	     }
+		}
 	}

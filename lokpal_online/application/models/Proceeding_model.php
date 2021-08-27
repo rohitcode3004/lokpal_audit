@@ -427,4 +427,39 @@ LIMIT 1";
 
 
 		/*ysc code end here */
+
+		function get_status_details($fn)
+		{
+			$sql1 = "select * from mis_status_report where filing_no='$fn'";
+			return $this->db->query($sql1)->result();
+		}
+
+		function fetch_all_order_type()
+		{
+			$this->db->select('ordertype_code, ordertype_name');
+			$this->db->from('ordertype_master');
+			$this->db->where('display', 't');
+			$this->db->where('parent_id', null);
+			$this->db->order_by('priority');
+			$query = $this->db->get();
+			return $query->result();
+		}
+
+		function fetch_all_other_action()
+		{
+			$this->db->select('ordertype_code, ordertype_name');
+			$this->db->from('ordertype_master');
+			$this->db->where('display', 't');
+			$this->db->where('parent_id !=', null);
+			$this->db->order_by('priority');
+			$query = $this->db->get();
+			return $query->result();
+		}
+
+		function mis_status_insert($insert_data)
+		{
+			$this->db->insert('mis_status_report',$insert_data);
+			//echo $this->db->last_query();die();
+    		return ($this->db->affected_rows() != 1) ? false : true;
+		}
 }
