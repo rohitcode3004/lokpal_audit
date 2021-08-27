@@ -8,5 +8,10 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/my_assets/css/font-awesome.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/my_assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/my_assets/css/mystyle.css">
+  
+<!-- Avoid Clickjacking Code --> 
+  <?php 
+    header("X-Frame-Options: DENY");
+  ?>
 </head>
 <body>

@@ -40,70 +40,12 @@ $cat=$partc['ps_id'] ?? '';
     
   };
 </script>
+
+
 <script type="text/javascript">
   $(document).ready(function(){
 
-    //   hide section
- $("#otherid").hide();
-    $("#comhide").hide();
-
-    $("#dvdatahide").hide();
-
-      var mod_party=$('#complaint_capacity_id').val(); 
-  //alert(mod_party);
-          if (mod_party == "0") {    
-             $("#comhide").hide();
-          }
-            if (mod_party == "2") {
-               // $("#dvdatahide").show();
-                 $("#comhide").show();
-            }
-             else  if (mod_party == "4") {
-                $("#comhide").show();
-                 $("#otherid").hide();
-
-            }
-
-           else  if (mod_party == "1") {
-                $("#comhide").hide();
-                 $("#otherid").hide();
-            }
-             else  if (mod_party == "3") {
-               $("#comhide").hide();
-                $("#otherid").hide();
-            }
-            else  if (mod_party == "5") {
-                $("#comhide").hide();
-                 $("#otherid").hide();
-            }
-            else  if (mod_party == "6") {
-                $("#comhide").hide();
-                 $("#otherid").hide();
-            }
-             else  if (mod_party == "7") {
-                $("#comhide").hide();
-                 $("#otherid").hide();
-            }
-             else  if (mod_party == "8") {
-                $("#comhide").hide();
-                 $("#otherid").hide();
-            }
-             else  if (mod_party == "9") {
-                $("#comhide").hide();
-                 $("#otherid").hide();
-            }
-             else  if (mod_party == "10") {
-                $("#comhide").hide();
-                 $("#otherid").hide();
-            }
-            else  if (mod_party == "11") {
-                $("#otherid").show();
-                                               
-
-            }
-             else {                
-                 $("#dvdatahide").hide();
-            }
+    //   hide section            
     
       $(function () {        
         $("#complaint_capacity_id").change(function () {
@@ -111,23 +53,54 @@ $cat=$partc['ps_id'] ?? '';
           if ($(this).val() == "0") {    
              $("#comhide").hide();
           }
-            if ($(this).val() == "2") {
-               // $("#dvdatahide").show();
+            if ($(this).val() == "7") {
+               $("#otherid").hide();
                  $("#comhide").show();
             }
-             else  if ($(this).val() == "4") {
+            else  if ($(this).val() == "8") {
                 $("#comhide").show();
                  $("#otherid").hide();
-
+            }
+            else  if ($(this).val() == "9") {
+                $("#comhide").show();
+                 $("#otherid").hide();
+            }
+            else  if ($(this).val() == "10") {
+                $("#comhide").show();
+                 $("#otherid").hide();
+            }
+            else  if ($(this).val() == "11") {
+                $("#comhide").show();
+                 $("#otherid").hide();
+            }
+            else  if ($(this).val() == "12") {
+                $("#comhide").show();
+                 $("#otherid").hide();
+            }
+            else  if ($(this).val() == "13") {
+                $("#comhide").show();
+                 $("#otherid").hide();
+            }
+            else  if ($(this).val() == "14") {
+                $("#comhide").show();
+                 $("#otherid").hide();
             }
 
-           else  if ($(this).val() == "1") {
+            else  if ($(this).val() == "1") {
+                $("#comhide").hide();
+                 $("#otherid").hide();
+            }
+            else  if ($(this).val() == "2") {
                 $("#comhide").hide();
                  $("#otherid").hide();
             }
              else  if ($(this).val() == "3") {
                $("#comhide").hide();
                 $("#otherid").hide();
+            }
+            else  if ($(this).val() == "4") {
+                $("#comhide").hide();
+                 $("#otherid").hide();
             }
             else  if ($(this).val() == "5") {
                 $("#comhide").hide();
@@ -137,30 +110,48 @@ $cat=$partc['ps_id'] ?? '';
                 $("#comhide").hide();
                  $("#otherid").hide();
             }
-             else  if ($(this).val() == "7") {
+            else  if ($(this).val() == "15") {
                 $("#comhide").hide();
                  $("#otherid").hide();
             }
-             else  if ($(this).val() == "8") {
+            else  if ($(this).val() == "16") {
                 $("#comhide").hide();
                  $("#otherid").hide();
             }
-             else  if ($(this).val() == "9") {
+            else  if ($(this).val() == "17") {
                 $("#comhide").hide();
                  $("#otherid").hide();
             }
-             else  if ($(this).val() == "10") {
+            else  if ($(this).val() == "18") {
                 $("#comhide").hide();
                  $("#otherid").hide();
             }
-            else  if ($(this).val() == "11") {
+            else  if ($(this).val() == "19") {
+                $("#comhide").hide();
+                 $("#otherid").hide();
+            }
+            else  if ($(this).val() == "20") {
+                $("#comhide").hide();
+                 $("#otherid").hide();
+            }
+            else  if ($(this).val() == "21") {
+                $("#comhide").hide();
+                 $("#otherid").hide();
+            }
+            else  if ($(this).val() == "22") {
+                $("#comhide").hide();
+                 $("#otherid").hide();
+            }
+            else  if ($(this).val() == "23") {
+                $("#comhide").hide();
+                 $("#otherid").hide();
+            }
+            else  if ($(this).val() == "24") {
                 $("#otherid").show();
                                                
 
             }
-             else {                
-                 $("#dvdatahide").hide();
-            }
+
         });
     });
 });
@@ -271,6 +262,7 @@ $(function () {
 
 <script type="text/javascript">
 
+/*
  function pagecomplain(value)
   {
   var ps_id_selectedd = "<?= $psd; ?>";
@@ -288,7 +280,7 @@ $(function () {
         }
       });
       }
-   
+   */
 
        var idleTime = 0;
     function timerIncrement() {
@@ -333,7 +325,7 @@ $(document).ready(function(){
         
         ps_salutation_id: "required",   
         complaint_capacity_id: "required",
-        ps_id:"required",
+      //  ps_id:"required",
         ps_first_name:"required",
         ps_dsp_lp:"required",        
         periodf_coa:"required",
@@ -523,11 +515,11 @@ $(document).ready(function(){
         <label class="text-orange"><?php print_r($this->label->get_short_name($elements, 130)); ?><span class="text-danger">*</span></label>
         <div class="radio">
           <label>
-            <input type="radio" name="ps_dsp_lp" id="Active" checked="checked" required="required" value="1" <?php  echo set_value('ps_dsp_lp', $dsp) == 1 ? "checked" : ""; ?> />
+            <input type="radio" name="ps_dsp_lp" id="Active" required="required" value="1" <?php  echo set_value('ps_dsp_lp', $dsp) == 1 ? "checked" : ""; ?> />
                               Yes
           </label>
           <label>
-            <input type="radio" name="ps_dsp_lp" required="required" value="2" <?php  echo set_value('ps_dsp_lp', $dsp) == 2 ? "checked" : ""; ?> /> No
+            <input type="radio" name="ps_dsp_lp"  checked="checked" required="required" value="2" <?php  echo set_value('ps_dsp_lp', $dsp) == 2 ? "checked" : ""; ?> /> No
           </label>
         </div>
       </div>
@@ -550,47 +542,30 @@ $(document).ready(function(){
         <div class="error"><?php echo form_error('ps_orgn'); ?></div>    
       </div>
     </div>
-
-    <div class="row">   
-      <?php $camp=$partc['complaint_capacity_id'] ?? ''; ?>
+<div class="row">  
+      <?php $camp=$partc['complaint_capacity_id'] ?? ''; ?>   
       <div class="col-md-6 mb-15">
         <label class="text-orange" for="complaint_capacity_id"><?php print_r($this->label->get_short_name($elements, 133)); ?><span class="text-danger">*</span></label>    
-        <select type="text" class="form-control" class="chosen-single chosen-default" name="complaint_capacity_id" id="complaint_capacity_id" onChange="pagecomplain(this.value);" >
-          <option value="0">Select</option>
-          <?php foreach($complainant_type as $row):?>
-          <?php if (!empty($camp)){             ?>
-          <option value="<?php echo $row->complaint_capacity_id;?>" <?php echo ($camp == $row->complaint_capacity_id) ? 'selected' : '' ?>> <?php echo $row->complaint_capacity_desc; ?> </option>
-          <?php }else{?>
-          <option value="<?php echo $row->complaint_capacity_id; ?>" <?php echo set_select('complaint_capacity_id',  $row->complaint_capacity_id); ?>><?php echo $row->complaint_capacity_desc; ?></option>
-          <?php }?>
-
+        <select type="text" class="form-control" class="chosen-single chosen-default" name="complaint_capacity_id" id="complaint_capacity_id" required="required">
+          <option value="0">--Select--</option>
+            <?php foreach($pscategory as $row):?>
+            <?php if (!empty($camp)){             ?>
+            <option value="<?php echo $row->ps_id;?>" <?php echo ($camp == $row->ps_id) ? 'selected' : '' ?>> <?php echo $row->ps_desc; ?> </option>
+            <?php }else{?>
+            <option value="<?php echo $row->ps_id; ?>" <?php echo set_select('ps_id',  $row->ps_id); ?>><?php echo $row->ps_desc; ?></option>
+            <?php }?>
           </option>
           <?php endforeach;?>
         </select>  
-        <div class="error"><?php echo form_error('complaint_capacity_id'); ?></div>       
-      </div>     
-        
-      <div class="col-md-6 mb-15">
-        <label for="ps_id"><?php print_r($this->label->get_short_name($elements, 134)); ?><span class="text-danger">*</span><br></label>
-        <select type="text" class="form-control" class="chosen-single chosen-default" name="ps_id" id="ps_id">
-        </select>  
-        <div class="error"><?php echo form_error('ps_id'); ?></div>     
+        <div class="error"><?php echo form_error('complaint_capacity_id'); ?></div>  
+
       </div>  
+      <div class="col-md-6 mb-15" id="otherid" style="display: none;">
+        <label class="text-orange" for="ps_othcate"><?php print_r($this->label->get_short_name($elements, 135)); ?><span class="text-danger">*</span></label>
+        <input type="text" class="form-control" name="ps_othcate" id="ps_othcate" value="<?php if(isset($partc)) echo $partc['ps_othcate']; else echo set_value('ps_othcate');?>" maxlength="50" placeholder="" required="required">
+      </div>   
     </div>
-
-    <hr>
-
-    <div class="row">
-      <div class="col-md-12 mb-15">
-        <div id="otherid">
-          <label class="text-orange" for="ps_othcate"><?php print_r($this->label->get_short_name($elements, 135)); ?></label>
-            <input type="text" class="form-control" name="ps_othcate" id="ps_othcate" value="<?php if(isset($partc)) echo $partc['ps_othcate']; else echo set_value('ps_othcate');?>" maxlength="50" placeholder="">
-        </div>
-      </div>
-    </div>
-
-
-    <div id="comhide">
+    <div id="comhide" style="display: none;">
       <label class="text-orange"><?php print_r($this->label->get_short_name($elements, 136)); ?>-</label>
       <div class="row">
         <?php $tas=$partc['tas_fingoi'] ?? ''; ?>
@@ -599,8 +574,7 @@ $(document).ready(function(){
           <div class="radio">
             <label><input type="radio" name="tas_fingoi" required="required" value="1" <?php  echo set_value('tas_fingoi', $tas) == 1 ? "checked" : ""; ?> /> Yes </label>
             <label><input type="radio" name="tas_fingoi" required="required" value="2" <?php  echo set_value('tas_fingoi', $tas) == 2 ? "checked" : ""; ?> /> No </label>
-          </div>
-          <div class="error"><?php echo form_error('ps_id'); ?></div>
+          </div>       
         </div>
       </div>
 

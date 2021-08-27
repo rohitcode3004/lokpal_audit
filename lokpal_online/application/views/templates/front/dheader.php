@@ -33,6 +33,10 @@
   	var baseURL= "<?php echo base_url();?>";
 </script>
 
+<!-- Avoid Clickjacking Code --> 
+  <?php 
+    header("X-Frame-Options: DENY");
+  ?>
 </head>
 <body class="app sidebar-mini">
     <div class="page-main">

@@ -50,7 +50,7 @@ class Applet extends CI_Controller {
     $this->load->helper("date_helper");
     $this->load->library('Menus_lib');
     $this->load->model('login_model');
-
+    $this->load->helper("user_helper");
     $this->load->helper("compno_helper");
     $this->load->helper("parts_status_helper");
     

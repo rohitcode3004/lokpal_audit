@@ -123,13 +123,14 @@ $psectorid =$part_c['complaint_capacity_id'] ?? '';
 if($psectorid !='')
 {
   $pssalution = $this->report_model->getPublicsector($psectorid);
- $ccapacity=$pssalution['complaint_capacity_desc'];
+ $ccapacity=$pssalution['ps_desc'];
 }
 else
 {
  $ccapacity='';
 }
  
+ /*
 $subcat =$part_c['ps_id'] ?? '';
 if($subcat !='')
 {
@@ -140,7 +141,7 @@ else
 {
   $subcat_desc='';
 }
-
+*/
 $salutation_desc =$part_c['salutation_desc'] ?? '';
 $ps_first_name =$part_c['ps_first_name'] ?? '';
 $ps_mid_name =$part_c['ps_mid_name'] ?? '';
@@ -202,7 +203,7 @@ else
 }
 
 $psc_postheld =$part_c['psc_postheld'] ?? '';
-echo $sum_fact_allegation_upload =$part_c['sum_fact_allegation_upload'] ?? '';
+ $sum_fact_allegation_upload =$part_c['sum_fact_allegation_upload'] ?? '';
 $detail_offence_upload =$part_c['detail_offence_upload'] ?? '';
 
  $item91 =$part_c['periodf_coa'] ?? '';
@@ -329,7 +330,7 @@ $detail_offence_upload =$part_c['detail_offence_upload'] ?? '';
                   <strong for="ps_desc"><?php print_r($this->label->get_short_name($elements, 133)); ?></strong>
                 </td>
                 <td>:</td>
-                <td><span><?php echo $subcat_desc;?></span></td>
+                <td><span><?php echo $ccapacity;?></span></td>
               </tr>
               <tr>
                 <td>

@@ -35,6 +35,7 @@ class Respondent extends CI_Controller {
     $this->load->helper('file');
     $this->load->library('label');
     $this->load->helper("compno_helper");
+      $this->load->helper("user_helper");
     $this->load->helper("parts_status_helper");
     $u = $this->session->userdata('userId');
     $ref_no=$this->session->userdata('ref_no');
@@ -81,7 +82,7 @@ class Respondent extends CI_Controller {
       /*first time*/
 
       $data['salution'] = $this->common_model->getSalution();
-      $data['complainant_type'] = $this->common_model->getComplaint();
+     // $data['complainant_type'] = $this->common_model->getComplaint();
       $data['pscategory'] = $this->common_model->getPscategory();
       $data['gender'] = $this->common_model->getGender();
       $data['nationality'] = $this->common_model->getNationality();
@@ -99,7 +100,7 @@ class Respondent extends CI_Controller {
 
      $data['salution'] = $this->common_model->getSalution();
      $data['pscategory'] = $this->common_model->getPscategory();
-     $data['complainant_type'] = $this->common_model->getComplaint();
+    // $data['complainant_type'] = $this->common_model->getComplaint();
      $data['gender'] = $this->common_model->getGender();
      $data['nationality'] = $this->common_model->getNationality();
      $data['identityproof'] = $this->common_model->getIdentityproof();
@@ -399,7 +400,7 @@ public function validate_image($t,$parameter) {
 
 public function save(){	
 
-  //echo "in here first time";die;
+ 
   $this->load->helper("date_helper");
   $this->load->helper("common_helper");
   $data['user'] = $this->login_model->getRows($this->con);
@@ -428,7 +429,7 @@ else
 if (empty($data['partc']))
    {
 
-    //echo "above";die('first');
+  
 
     /*first time*/
         $ip = get_ip();
@@ -534,7 +535,7 @@ if (empty($data['partc']))
         $this->form_validation->set_rules('ps_salutation_id', 'Title', 'required');
         $this->form_validation->set_rules('ps_first_name', 'First Name', 'required');
         $this->form_validation->set_rules('complaint_capacity_id', 'Complaint Category', 'required');
-        $this->form_validation->set_rules('ps_id', 'Complaint Sub Category', 'required');
+      // $this->form_validation->set_rules('ps_id', 'Complaint Sub Category', 'required');
         $this->form_validation->set_rules('periodf_coa', 'Offence From', 'required');
         $this->form_validation->set_rules('periodt_coa', 'Offence To', 'required');
         $this->form_validation->set_rules('ps_pl_stateid', 'State', 'required');
@@ -577,7 +578,7 @@ if (empty($data['partc']))
                         $data['partc'] = $this->report_model->getPartc($ref_no);
                       }
                       $data['salution'] = $this->common_model->getSalution();
-                      $data['complainant_type'] = $this->common_model->getComplaint();
+                     // $data['complainant_type'] = $this->common_model->getComplaint();
                       $data['pscategory'] = $this->common_model->getPscategory();
                       $data['gender'] = $this->common_model->getGender();
                       $data['nationality'] = $this->common_model->getNationality();
@@ -605,7 +606,7 @@ if (empty($data['partc']))
         else
         {   
         
-                //echo "in here first time";
+             
 
          
                 $ref_no=$ref_no;
@@ -622,7 +623,7 @@ if (empty($data['partc']))
                 $ps_desig= trim($this->input->post('ps_desig')); 
                 $ps_orgn= trim($this->input->post('ps_orgn'));
                 $complaint_capacity_id= ($this->input->post('complaint_capacity_id'));
-                $ps_id= ($this->input->post('ps_id'));
+               // $ps_id= ($this->input->post('ps_id'));
                 $ps_othcate= trim($this->input->post('ps_othcate'));
                 $tas_fingoi= ($this->input->post('tas_fingoi'));
                 $anninc_onecr= ($this->input->post('anninc_onecr'));
@@ -660,7 +661,7 @@ if (empty($data['partc']))
                   'ps_desig'=>$ps_desig,    
                   'ps_orgn'=> $ps_orgn,      
                   'complaint_capacity_id'=> $complaint_capacity_id,     
-                  'ps_id'=> $ps_id,
+                 // 'ps_id'=> $ps_id,
                   'ps_othcate'=> $ps_othcate,
                   'tas_fingoi'=> $tas_fingoi,      
                   'anninc_onecr'=> $anninc_onecr,
@@ -695,12 +696,12 @@ if (empty($data['partc']))
        else
          {
 
-        //  echo "here below";die('second');
+      //  echo "here below";die('second');
 
         $this->form_validation->set_rules('ps_salutation_id', 'Title', 'required');
         $this->form_validation->set_rules('ps_first_name', 'First Name', 'required');
         $this->form_validation->set_rules('complaint_capacity_id', 'Complaint Category', 'required');
-        $this->form_validation->set_rules('ps_id', 'Complaint Sub Category', 'required');
+      //  $this->form_validation->set_rules('ps_id', 'Complaint Sub Category', 'required');
         $this->form_validation->set_rules('periodf_coa', 'Offence From', 'required');
         $this->form_validation->set_rules('periodt_coa', 'Offence To', 'required');
         $this->form_validation->set_rules('ps_pl_stateid', 'State', 'required');
@@ -901,7 +902,7 @@ if (empty($data['partc']))
     $ps_desig= trim($this->input->post('ps_desig')); 
     $ps_orgn= trim($this->input->post('ps_orgn'));
     $complaint_capacity_id= ($this->input->post('complaint_capacity_id'));
-    $ps_id= ($this->input->post('ps_id'));
+   // $ps_id= ($this->input->post('ps_id'));
     $ps_othcate= trim($this->input->post('ps_othcate'));
     $tas_fingoi= ($this->input->post('tas_fingoi'));
     $anninc_onecr= ($this->input->post('anninc_onecr'));
@@ -940,7 +941,7 @@ if (empty($data['partc']))
       'ps_desig'=>$ps_desig,    
       'ps_orgn'=> $ps_orgn,      
       'complaint_capacity_id'=> $complaint_capacity_id,     
-      'ps_id'=> $ps_id,
+     // 'ps_id'=> $ps_id,
       'ps_othcate'=> $ps_othcate,
       'tas_fingoi'=> $tas_fingoi,      
       'anninc_onecr'=> $anninc_onecr,
@@ -1051,7 +1052,7 @@ public function getdistrict3()
     $data['identity_document_type'] = $this->common_model->getDocument_type();
     $data['applet'] = $this->common_model->getAppletName();
     $data['state'] = $this->common_model->getStateName();
-    $data['complainant_type'] = $this->common_model->getComplaint();
+   // $data['complainant_type'] = $this->common_model->getComplaint();
     $data['pscategory'] = $this->common_model->getPscategory();
 
     //echo "<pre>";
@@ -1084,7 +1085,7 @@ public function ad_ps_save(){
       $this->form_validation->set_rules('ad_ps_salutation_id', 'Title', 'required');
       $this->form_validation->set_rules('ad_ps_first_name', 'First Name', 'required');
       $this->form_validation->set_rules('ad_complaint_capacity_id', 'Category', 'required');
-      $this->form_validation->set_rules('ad_ps_id', 'Sub Category', 'required');
+    //  $this->form_validation->set_rules('ad_ps_id', 'Sub Category', 'required');
       $this->form_validation->set_rules('ad_periodf_coa', 'From date', 'required');
       $this->form_validation->set_rules('ad_periodt_coa', 'To date', 'required');
       $this->form_validation->set_rules('ad_ps_pl_stateid', 'State', 'required');
@@ -1098,7 +1099,8 @@ public function ad_ps_save(){
           ); 
           $data['user'] = $this->login_model->getRows($con);
           $this->load->helper("date_helper");
-          $data['complainant_type'] = $this->common_model->getComplaint();
+        //  $data['complainant_type'] = $this->common_model->getComplaint();
+            $data['pscategory'] = $this->common_model->getPscategory();
           $data['salution'] = $this->common_model->getSalution();
           $data['gender'] = $this->common_model->getGender();
           $data['nationality'] = $this->common_model->getNationality();         
@@ -1130,7 +1132,7 @@ else
     $ad_ps_desig= ($this->input->post('ad_ps_desig')); 
     $ad_ps_orgn= ($this->input->post('ad_ps_orgn'));
     $ad_complaint_capacity_id= ($this->input->post('ad_complaint_capacity_id'));
-    $ad_ps_id= ($this->input->post('ad_ps_id'));
+   // $ad_ps_id= ($this->input->post('ad_ps_id'));
     $ad_ps_othcate= ($this->input->post('ad_ps_othcate'));
     $ad_tas_fingoi= ($this->input->post('ad_tas_fingoi'));
     $ad_anninc_onecr= ($this->input->post('ad_anninc_onecr'));
@@ -1160,7 +1162,7 @@ else
       'ad_ps_desig'=>$ad_ps_desig,
       'ad_ps_orgn'=>$ad_ps_orgn,    
       'ad_complaint_capacity_id'=> $ad_complaint_capacity_id,      
-      'ad_ps_id'=> $ad_ps_id,     
+      //'ad_ps_id'=> $ad_ps_id,     
       'ad_ps_othcate'=> $ad_ps_othcate,
       'ad_tas_fingoi'=> $ad_tas_fingoi,
       'ad_anninc_onecr'=> $ad_anninc_onecr,      
@@ -1198,7 +1200,7 @@ else
      $this->form_validation->set_rules('ad_ps_salutation_id', 'Title', 'required');
       $this->form_validation->set_rules('ad_ps_first_name', 'First Name', 'required');
       $this->form_validation->set_rules('ad_complaint_capacity_id', 'Category', 'required');
-      $this->form_validation->set_rules('ad_ps_id', 'Sub Category', 'required');
+    //  $this->form_validation->set_rules('ad_ps_id', 'Sub Category', 'required');
       $this->form_validation->set_rules('ad_periodf_coa', 'From date', 'required');
       $this->form_validation->set_rules('ad_periodt_coa', 'To date', 'required');
       $this->form_validation->set_rules('ad_ps_pl_stateid', 'State', 'required');
@@ -1212,7 +1214,8 @@ else
           ); 
           $data['user'] = $this->login_model->getRows($con);
           $this->load->helper("date_helper");
-          $data['complainant_type'] = $this->common_model->getComplaint();
+        //  $data['complainant_type'] = $this->common_model->getComplaint();
+          $data['pscategory'] = $this->common_model->getPscategory();
           $data['salution'] = $this->common_model->getSalution();
           $data['gender'] = $this->common_model->getGender();
           $data['nationality'] = $this->common_model->getNationality();         
@@ -1257,7 +1260,7 @@ else
     $ad_ps_desig= ($this->input->post('ad_ps_desig')); 
     $ad_ps_orgn= ($this->input->post('ad_ps_orgn'));
     $ad_complaint_capacity_id= ($this->input->post('ad_complaint_capacity_id'));
-    $ad_ps_id= ($this->input->post('ad_ps_id'));
+   // $ad_ps_id= ($this->input->post('ad_ps_id'));
     $ad_ps_othcate= ($this->input->post('ad_ps_othcate'));
     $ad_tas_fingoi= ($this->input->post('ad_tas_fingoi'));
     $ad_anninc_onecr= ($this->input->post('ad_anninc_onecr'));
@@ -1287,7 +1290,7 @@ else
       'ad_ps_desig'=>$ad_ps_desig,
       'ad_ps_orgn'=>$ad_ps_orgn,    
       'ad_complaint_capacity_id'=> $ad_complaint_capacity_id,      
-      'ad_ps_id'=> $ad_ps_id,     
+     // 'ad_ps_id'=> $ad_ps_id,     
       'ad_ps_othcate'=> $ad_ps_othcate,
       'ad_tas_fingoi'=> $ad_tas_fingoi,
       'ad_anninc_onecr'=> $ad_anninc_onecr,      

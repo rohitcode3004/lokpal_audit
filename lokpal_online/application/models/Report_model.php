@@ -313,7 +313,7 @@ public function getAddparties_partc($refe_no){
 
  function getPublicsector($psectorid)
  	{ 
-	 $sql = "select * from complaint_capacity where complaint_capacity_id=".$psectorid." ";
+	 $sql = "select * from ps_category where ps_id=".$psectorid." ";
 			$query = $this->db->query($sql);
 			$query1 = $query->row_array();	
 	 return $query1;
@@ -511,8 +511,7 @@ function getCounterFilingdata($ref_no)
 
 		 $sql = "select * from additional_public_servant_partc
 		 	LEFT JOIN salutation ON salutation.salutation_id = additional_public_servant_partc.ad_ps_salutation_id   		
-   			LEFT JOIN complaint_capacity ON complaint_capacity.complaint_capacity_id = additional_public_servant_partc.ad_complaint_capacity_id
-   			LEFT JOIN ps_category ON ps_category.comlaint_capacity_id = additional_public_servant_partc.ad_complaint_capacity_id and ps_category.ps_id = additional_public_servant_partc.ad_ps_id
+   			LEFT JOIN ps_category ON ps_category.ps_id = additional_public_servant_partc.ad_complaint_capacity_id   			  			
    			LEFT JOIN master_address ON master_address.state_code = additional_public_servant_partc.ad_ps_pl_stateid and district_code=0 and sub_dist_code=0 and               village_code=0 and display='TRUE'
    			
    			where ref_no='".$refe_no."'";

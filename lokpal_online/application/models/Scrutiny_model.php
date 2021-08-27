@@ -7,6 +7,7 @@ class Scrutiny_model extends CI_Model{
 
 	function get_scrutiny_pen_complaints($role_id){  
 		$this->db->select('C.ref_no, C.sur_name, C.mid_name, C.first_name, C.dt_of_filing, S.filing_no, S.scrutiny_status,S.defective, S.objections');
+		$this->db->distinct();
 		$this->db->from('scrutiny S');
 		$this->db->join('complainant_details_parta C', 'S.filing_no = C.filing_no');
 		$this->db->join('scrutinyteam_master T', 'S.level = T.level_id');
@@ -14,7 +15,7 @@ class Scrutiny_model extends CI_Model{
 		$this->db->where('S.scrutiny_status', 'f');
 		$this->db->where('S.defective', false);
 		$this->db->order_by('C.dt_of_filing','ASC');
-		//$this->db->order_by('S.filing_no','ASC');
+		$this->db->order_by('S.filing_no','ASC');
 		$query = $this->db->get();
 
 		//echo $this->db->last_query();die();
@@ -165,6 +166,7 @@ class Scrutiny_model extends CI_Model{
 			return $query->num_rows();*/
 
 			$this->db->select('C.ref_no, C.sur_name, C.mid_name, C.first_name, C.dt_of_filing, S.filing_no, S.scrutiny_status,S.defective, S.objections');
+			$this->db->distinct();
 		$this->db->from('scrutiny S');
 		$this->db->join('complainant_details_parta C', 'S.filing_no = C.filing_no');
 		$this->db->join('scrutinyteam_master T', 'S.level = T.level_id');
@@ -197,8 +199,9 @@ class Scrutiny_model extends CI_Model{
 	function get_scrutiny_def_count()
 		{
 			$this->db->select('id');
+			
 			$this->db->where('defective',TRUE);
-			//$this->db->where('objections','Yes');
+			//$this->db->where('scrutiny_status','f');
 
 			$query = $this->db->get('scrutiny');
 
@@ -389,9 +392,10 @@ class Scrutiny_model extends CI_Model{
 
 
 	function get_scrutiny_pdf($role_id){  
-		$this->db->select('C.ref_no, C.sur_name, C.mid_name, C.first_name, C.dt_of_filing, S.filing_no, S.scrutiny_status, S.objections');
+		$this->db->select('C.ref_no, C.sur_name, C.mid_name, C.first_name, C.dt_of_filing,C.gazzette_notification_url, S.filing_no, S.scrutiny_status, S.objections,P.partapdf,P.partbpdf,P.partcpdf');
 		$this->db->from('scrutiny S');
 		$this->db->join('complainant_details_parta C', 'S.filing_no = C.filing_no');
+		$this->db->join('part_pdf_abc P', 'S.filing_no = P.filing_no');
 		$this->db->join('scrutinyteam_master T', 'S.level = T.level_id');
 		$this->db->order_by('C.dt_of_filing','ASC');
 		//$this->db->where('T.roleid', $role_id);
@@ -802,6 +806,8 @@ function get_previous_complaint_remarks($fn)
 			$this->db->select('previous_complaint_description');
 			$this->db->where('filing_no', $fn);
 			$query = $this->db->get('scrutiny');
+
+			//echo $this->db->last_query();die('ooo');
 
 			if ($query->num_rows() > 0){
 		        return $query->result();;

@@ -60,6 +60,9 @@ class Filing extends CI_Controller {
 			$data['user'] = $this->login_model->getRows($con);
 			$data['menus'] = $this->menus_lib->get_menus($data['user']['role']);
 			$data['user_comps'] = $this->filing_model->get_user_complaints($data['user']['id']);
+			$data['user_comps_partcdata'] = $this->filing_model->get_user_complaints_partcdata($data['user']['id']);
+			//echo "<pre>";
+		//	print_r($data['user_comps_partcdata']);die('@@@');
 			$this->load->view('templates/front/CE_Header.php',$data);
 			// ysc change for dashboard $this->load->view('filing/dashboard.php',$data);
 			$this->load->view('filing/dashboard.php',$data);					
@@ -989,7 +992,7 @@ class Filing extends CI_Controller {
 			$data['user_comps'] = $this->filing_model->get_re_entry_complaints($data['user']['id']);
 			$this->load->view('templates/front/CE_Header.php',$data);
 			// ysc change for dashboard $this->load->view('filing/dashboard.php',$data);
-			$this->load->view('filing/dashboard.php',$data);					
+			$this->load->view('filing/dashboard_reopen.php',$data);					
 			$this->load->view('templates/front/CE_Footer.php',$data);
 		}
 		else
