@@ -19,6 +19,7 @@ class Document extends CI_Controller {
     $this->load->helper("parts_status_helper");
     $this->load->library('File_upload');
     $this->load->helper('file');
+    $this->load->helper("user_helper"); 
 
   }
   public function testafidavit() 

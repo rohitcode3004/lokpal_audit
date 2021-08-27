@@ -20,6 +20,7 @@ class Affidavit extends CI_Controller {
     $this->load->model('login_model');
     $this->load->helper("compno_helper");
     $this->load->helper("parts_status_helper");
+    $this->load->helper("user_helper"); 
     if($this->isUserLoggedIn) 
     {
       if(time()-$_SESSION["login_time_stamp"] > 900) 

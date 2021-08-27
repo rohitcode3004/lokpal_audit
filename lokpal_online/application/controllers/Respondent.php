@@ -35,6 +35,7 @@ class Respondent extends CI_Controller {
     $this->load->helper('file');
     $this->load->library('label');
     $this->load->helper("compno_helper");
+      $this->load->helper("user_helper");
     $this->load->helper("parts_status_helper");
     $u = $this->session->userdata('userId');
     $ref_no=$this->session->userdata('ref_no');

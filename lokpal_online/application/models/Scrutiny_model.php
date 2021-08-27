@@ -7,6 +7,7 @@ class Scrutiny_model extends CI_Model{
 
 	function get_scrutiny_pen_complaints($role_id){  
 		$this->db->select('C.ref_no, C.sur_name, C.mid_name, C.first_name, C.dt_of_filing, S.filing_no, S.scrutiny_status,S.defective, S.objections');
+		$this->db->distinct();
 		$this->db->from('scrutiny S');
 		$this->db->join('complainant_details_parta C', 'S.filing_no = C.filing_no');
 		$this->db->join('scrutinyteam_master T', 'S.level = T.level_id');
@@ -14,7 +15,7 @@ class Scrutiny_model extends CI_Model{
 		$this->db->where('S.scrutiny_status', 'f');
 		$this->db->where('S.defective', false);
 		$this->db->order_by('C.dt_of_filing','ASC');
-		//$this->db->order_by('S.filing_no','ASC');
+		$this->db->order_by('S.filing_no','ASC');
 		$query = $this->db->get();
 
 		//echo $this->db->last_query();die();
