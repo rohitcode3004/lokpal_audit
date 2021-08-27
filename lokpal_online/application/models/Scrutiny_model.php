@@ -166,6 +166,7 @@ class Scrutiny_model extends CI_Model{
 			return $query->num_rows();*/
 
 			$this->db->select('C.ref_no, C.sur_name, C.mid_name, C.first_name, C.dt_of_filing, S.filing_no, S.scrutiny_status,S.defective, S.objections');
+			$this->db->distinct();
 		$this->db->from('scrutiny S');
 		$this->db->join('complainant_details_parta C', 'S.filing_no = C.filing_no');
 		$this->db->join('scrutinyteam_master T', 'S.level = T.level_id');
@@ -198,8 +199,9 @@ class Scrutiny_model extends CI_Model{
 	function get_scrutiny_def_count()
 		{
 			$this->db->select('id');
+			
 			$this->db->where('defective',TRUE);
-			//$this->db->where('objections','Yes');
+			//$this->db->where('scrutiny_status','f');
 
 			$query = $this->db->get('scrutiny');
 
