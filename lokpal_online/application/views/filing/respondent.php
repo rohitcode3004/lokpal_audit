@@ -515,11 +515,11 @@ $(document).ready(function(){
         <label class="text-orange"><?php print_r($this->label->get_short_name($elements, 130)); ?><span class="text-danger">*</span></label>
         <div class="radio">
           <label>
-            <input type="radio" name="ps_dsp_lp" id="Active" checked="checked" required="required" value="1" <?php  echo set_value('ps_dsp_lp', $dsp) == 1 ? "checked" : ""; ?> />
+            <input type="radio" name="ps_dsp_lp" id="Active" required="required" value="1" <?php  echo set_value('ps_dsp_lp', $dsp) == 1 ? "checked" : ""; ?> />
                               Yes
           </label>
           <label>
-            <input type="radio" name="ps_dsp_lp" required="required" value="2" <?php  echo set_value('ps_dsp_lp', $dsp) == 2 ? "checked" : ""; ?> /> No
+            <input type="radio" name="ps_dsp_lp"  checked="checked" required="required" value="2" <?php  echo set_value('ps_dsp_lp', $dsp) == 2 ? "checked" : ""; ?> /> No
           </label>
         </div>
       </div>
