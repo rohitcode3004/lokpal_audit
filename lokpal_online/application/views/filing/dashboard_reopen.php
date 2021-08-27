@@ -1,5 +1,6 @@
 <?php
 //$elements = $this->label->view(1);
+$this->load->helper("date_helper"); 
  ?>
 
   
@@ -29,16 +30,16 @@
                                
                 <thead>                
                   <th>S.No.</th>             
-                    <th>Date of Last Entry</th>
-                      <th>Action</th>
-                    <th>Public Servant Name</th>
+                    <th>Date of Filing</th>
+                      <th>Diary No</th>                     
+                    <th>Name of Public Servant</th>
+                     <th>Action</th>
                 
                 </thead>
                 <tbody>
-                    <?php    
-
-                   // echo "<pre>"; 
-                  ///  print_r($user_comps_partcdata) ;             
+                    <?php 
+                   // echo "<pre>";   
+                   // print_r($user_comps)   ;            
                       $u = $user['id'];
                       $c = 1;
                         foreach($user_comps as $row):
@@ -47,7 +48,11 @@
                     <td><?php echo $c++; ?></td>
                    <!-- <td><?php echo $r = $row->ref_no; ?></td>-->
 
-                       <td><?php echo $row->created_at; ?></td>
+                       <td><?php echo get_displaydate($row->dt_of_filing); ?></td>
+                          <td><?php echo $row->filing_no; ?></td>
+
+
+                            <td><?php echo $row->ps_first_name.' '.$row->ps_mid_name.' '.$row->ps_sur_name; ?></td>
                    <!-- <td><?php if($row->filing_no){
                       echo $row->filing_no;
                        } ?></td>-->
@@ -64,15 +69,11 @@
                       if($status == 't'){ ?>
                       <a href="<?php echo base_url().'affidavit/affidavit_detail/'.$r ?>">Go to application</a>
                       <?php }else{ ?>
-                      <a href="<?php echo base_url().'filing/filing/'.$r ?>">Go to application</a>
+                   <a href="<?php echo base_url().'filing/filing/'.$r ?>">Go to application</a>
                       <?php } ?>
                     </td>
                  <?php endforeach; ?>
-                     <?php
-                    foreach($user_comps_partcdata as $row):                        
-                      ?>
-                        <td><?php echo $row->ps_first_name.' '.$row->ps_mid_name.' '.$row->ps_sur_name; ?></td>
-                         <?php endforeach; ?>
+                     
                   </tr>
                   
                 
