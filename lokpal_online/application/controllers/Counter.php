@@ -14,6 +14,7 @@ class Counter extends CI_Controller {
 		$this->load->helper("date_helper");
 		$this->load->library('label');
 		$this->load->library('session');
+		$this->load->helper("user_helper");	
 		$this->isUserLoggedIn = $this->session->userdata('isUserLoggedIn');
 		if($this->isUserLoggedIn) 
 		{

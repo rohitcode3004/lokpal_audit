@@ -34,6 +34,16 @@
         });
     });
   });
+
+  $('body').on('keyup', 'input', function(e){
+    if(e.keyCode > 128){
+    var tttt = this.id;
+    alert('Only english language is allowed');
+    document.getElementById(tttt).value = "";
+    //event.preventDefault();
+    //return false;
+  }
+});
 </script>
 
 </body>
