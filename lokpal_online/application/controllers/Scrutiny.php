@@ -2251,6 +2251,8 @@ public function partapdf($filing_no)
   $myArray[0]->fath_name ?? '';
   $myArray[0]->comp_f_place ?? '';
   $myArray[0]->comp_f_date ?? '';
+  $myArray[0]->p_country_name ?? '';
+  $myArray[0]->c_country_name ?? '';
   $cp=$myArray[0]->complaint_capacity_id ?? '';
   $cm=$myArray[0]->complaintmode_id ?? '';
   $st=$myArray[0]->salutation_id ?? '';
@@ -2259,10 +2261,29 @@ public function partapdf($filing_no)
   $cn=$myArray[0]->c_country_id ?? '';
   $ide=$myArray[0]->identity_proof_id ?? '';
   $rde=$myArray[0]->idres_proof_id ?? '';
-  $pstate=$myArray[0]->p_state_id ?? '';
+   $pstate=$myArray[0]->p_state_id ?? '';
+   if($pstate=='')
+   {
+    $pstate=0;
+   }
   $cstate=$myArray[0]->c_state_id ?? '';
+
+if($cstate=='')
+   {
+    $cstate=0;
+   }
   $pdistrict=$myArray[0]->p_dist_id ?? '';
+
+  if($pdistrict=='')
+  {
+    $pdistrict=0;
+  }
   $cdistrict=$myArray[0]->c_district_id ?? '';
+
+  if($cdistrict=='')
+  {
+    $cdistrict=0;
+  }
   $pc=$myArray[0]->p_country_id ?? ''; 
 
   $affidavit_upload=$myArray[0]->affidavit_upload ?? '';
@@ -2459,7 +2480,7 @@ $getallwidget =
 
 <tr>
 <td style="border: 1px solid black;" align="center"></td>
-<td style="border: 1px solid black;" align"center">Country</td><td style="border: 1px solid black;">'.$pnational_desc.' </td>
+<td style="border: 1px solid black;" align"center">Country</td><td style="border: 1px solid black;">'.$pnational_desc.'.'.$myArray[0]->p_country_name.' </td>
 </tr>
 
 <tr>
@@ -2490,7 +2511,7 @@ $getallwidget =
 
 <tr>
 <td style="border: 1px solid black;" align="center"></td>
-<td style="border: 1px solid black;" align"center">Country</td><td style="border: 1px solid black;">'.$cnational_desc.' </td>
+<td style="border: 1px solid black;" align"center">Country</td><td style="border: 1px solid black;">'.$cnational_desc.'.'.$myArray[0]->c_country_name.' </td>
 </tr>
 
 <tr>

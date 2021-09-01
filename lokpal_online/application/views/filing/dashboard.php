@@ -37,8 +37,8 @@
                 <tbody>
                     <?php    
 
-                   // echo "<pre>"; 
-                  ///  print_r($user_comps_partcdata) ;             
+                    //echo "<pre>"; 
+                   //print_r($user_comps_partcdata) ;             
                       $u = $user['id'];
                       $c = 1;
                         foreach($user_comps as $row):
@@ -67,12 +67,20 @@
                       <a href="<?php echo base_url().'filing/filing/'.$r ?>">Go to application</a>
                       <?php } ?>
                     </td>
-                 <?php endforeach; ?>
-                     <?php
-                    foreach($user_comps_partcdata as $row):                        
-                      ?>
-                        <td><?php echo $row->ps_first_name.' '.$row->ps_mid_name.' '.$row->ps_sur_name; ?></td>
-                         <?php endforeach; ?>
+
+                     <td><?php
+                   $sql = "select ps_sur_name,ps_mid_name,ps_first_name from public_servant_partc where ref_no =".$row->ref_no."";
+             $query  = $this->db->query($sql)->result();
+            
+             $fn=$query[0]->ps_first_name ?? '';
+            $mn=$query[0]->ps_mid_name ?? '';
+            $ls=$query[0]->ps_sur_name ?? ''; 
+                 echo $fn.' '.$mn.' '.$ls;
+
+          ?></td>
+
+                 <?php endforeach;?>
+                    
                   </tr>
                   
                 

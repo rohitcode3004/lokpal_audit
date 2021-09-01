@@ -28,6 +28,8 @@ else
 }
  ?>
 
+
+
  <script language="javascript"> 
  function close_window() {
   if (confirm("Are you sure that you have saved the Additional Public Servant details?")) {
@@ -216,7 +218,7 @@ function PageComplain(value, value2)
         $('#ad_ps_orgn').val(json[0].ad_ps_orgn);
         $('#ad_complaint_capacity_id').val(json[0].ad_complaint_capacity_id);
          $('#ad_ps_id').val(json[0].ad_ps_id); 
-        // alert(json[0].w_state_id);
+        // alert(json[0].ad_complaint_capacity_id);
         $('#ad_ps_othcate').val(json[0].ad_ps_othcate);
         
        
@@ -271,10 +273,25 @@ function PageComplain(value, value2)
         $('#ad_ps_pl_occ').val(json[0].ad_ps_pl_occ);
 
         $('#ad_ps_pl_stateid').val(json[0].ad_ps_pl_stateid);
-        $('#ad_ps_pl_dist_id').val(json[0].ad_ps_pl_dist_id);
-        }      
+        $('#ad_ps_pl_dist_id').val(json[0].ad_ps_pl_dist_id);       
+   if (json[0].ad_complaint_capacity_id == "24") {
+                $("#otherid").show();
+                           
+            } else {
+                $("#otherid").hide();
+                
+            }
+
+        }   
+
+
       });
+
+
+
    }
+
+
 
 
 
@@ -516,21 +533,14 @@ $ref_no=$this->session->userdata('ref_no');
           </select>     
         </div>  -->
 
-        <div class="col-md-6 mb-15">
-          <div id="otherid">
+        <div class="col-md-6 mb-15" id="otherid" style="display: none;">
             <label for="ad_ps_othcate"><?php print_r($this->label->get_short_name($elements, 135)); ?><span class="text-danger">*</span></label>
             <input type="text" class="form-control" name="ad_ps_othcate" id="ad_ps_othcate" maxlength="50" placeholder="">
-          </div>
         </div>
       </div>
 
-      <div id="comhide">
-        <div class="row"> 
-          <div class="col-md-12">
-            <label class="text-orange"><?php print_r($this->label->get_short_name($elements, 136)); ?>-</label>
-          </div>
-        </div>
-
+      <div id="comhide" style="display: none;">
+        <label class="text-orange"><?php print_r($this->label->get_short_name($elements, 136)); ?>-</label>
         <div class="row">
           <?php //$tas=$partc['tas_fingoi'] ?? ''; ?>
           <div class="col-md-6 mb-15">                   
@@ -570,7 +580,7 @@ $ref_no=$this->session->userdata('ref_no');
         <div class="col-md-12 mb-15">
           <label class="text-orange"><?php print_r($this->label->get_short_name($elements, 140)); ?></label>
           <div class="radio">
-            <label><input type="radio" name="ad_pss_sbbca" id="Active" value="1" checked="checked"> Yes</label>
+            <label><input type="radio" name="ad_pss_sbbca" id="Active" value="1"> Yes</label>
             <label><input type="radio" name="ad_pss_sbbca" id="Inactive" value="2"> No</label>
           </div> 
         </div>

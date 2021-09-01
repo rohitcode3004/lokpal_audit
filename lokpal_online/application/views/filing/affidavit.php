@@ -245,6 +245,7 @@ $this->load->helper("date_helper");
             <th>District</th>
             <th>Pin Code</th>
             <th>Country</th>
+             <th>Country Name</th>
              
           </tr>
         </thead>
@@ -254,24 +255,65 @@ $this->load->helper("date_helper");
             
               <td><?php echo  $farma[0]->p_hpnl ?? ''; ?></td>
             <td><?php 
-            $sql = "select name from master_address where state_code =".$farma[0]->p_state_id." and district_code=0 and sub_dist_code=0 and                        village_code=0 and display='TRUE' order by name asc";
+
+             $farma[0]->p_state_id;
+            if($farma[0]->p_state_id =='')
+            {
+
+              $farma[0]->p_state_id=0;
+            }
+           
+            $sql = "select name from master_address where state_code =".$farma[0]->p_state_id." and district_code=0 and sub_dist_code=0 and village_code=0 and display='TRUE' order by name asc";
 
            // $sql = "select * from identity_residence_proof where idres_proof_id =".$farma[0]->idres_proof_id."";
              $query  = $this->db->query($sql)->result();
-           echo $query[0]->name; ?></td> 
+           $ssname= $query[0]->name ?? '';
+       
+           if($ssname !='')
+           {
+            echo $ssname;
+           }
+           else
+           {
+            echo "";
+           }
+
+
+            ?></td> 
            <td><?php 
+           $farma[0]->p_dist_id;
+            if($farma[0]->p_dist_id =='')
+            {
+
+              $farma[0]->p_dist_id=0;
+            }
+
             $sql="select name,district_code from master_address where state_code=".$farma[0]->p_state_id." and
              district_code=".$farma[0]->p_dist_id." and sub_dist_code=0 and village_code=0 and display='TRUE' order by name asc";
 
            // $sql = "select * from identity_residence_proof where idres_proof_id =".$farma[0]->idres_proof_id."";
              $query  = $this->db->query($sql)->result();
-            echo $query[0]->name ?? ''; ?></td>
+
+             $psname=$query[0]->name ?? '';
+             if($psname !='')
+             {
+             echo $psname;
+             }
+             else
+             {
+              echo "";
+             }
+
+             ?>
+                          </td>
             
            <td><?php echo  $farma[0]->p_pin_code ?? ''; ?></td>
              <td><?php 
             $sql = "select * from nationality where nationality_id=".$farma[0]->p_country_id."";
              $query  = $this->db->query($sql)->result();
              echo $query[0]->nationality_desc ?? ''; ?></td>
+
+              <td><?php echo  $farma[0]->p_country_name ?? ''; ?></td>
           </tr>
              
         </tbody>
@@ -288,7 +330,7 @@ $this->load->helper("date_helper");
             <th>District</th>
             <th>Pin Code</th>
             <th>Country</th>
-             
+             <th>Country Name</th>             
           </tr>
         </thead>
         <tbody>
@@ -297,24 +339,61 @@ $this->load->helper("date_helper");
            
               <td><?php echo  $farma[0]->c_hpnl; ?></td>
             <td><?php 
+
+            $farma[0]->c_state_id;
+            if($farma[0]->c_state_id =='')
+            {
+
+              $farma[0]->c_state_id=0;
+            }
+
+
             $sql = "select name from master_address where state_code =".$farma[0]->c_state_id." and district_code=0 and sub_dist_code=0 and                        village_code=0 and display='TRUE' order by name asc";
 
            // $sql = "select * from identity_residence_proof where idres_proof_id =".$farma[0]->idres_proof_id."";
              $query  = $this->db->query($sql)->result();
-           echo $query[0]->name; ?></td> 
+            $csname=$query[0]->name ?? '';
+             if($csname !='')
+             {
+             echo $csname;
+             }
+             else
+             {
+              echo "";
+             }
+
+            ?></td> 
            <td><?php 
+
+           if($farma[0]->c_district_id=='')
+           {
+            $farma[0]->c_district_id=0;
+           }
+
             $sql="select name,district_code from master_address where state_code=".$farma[0]->c_state_id." and
              district_code=".$farma[0]->c_district_id." and sub_dist_code=0 and village_code=0 and display='TRUE' order by name asc";
 
            // $sql = "select * from identity_residence_proof where idres_proof_id =".$farma[0]->idres_proof_id."";
              $query  = $this->db->query($sql)->result();
-            echo $query[0]->name; ?></td>
+             $dsname=$query[0]->name ?? '';
+             if($dsname !='')
+             {
+             echo $dsname;
+             }
+             else
+             {
+              echo "";
+             }
+
+
+             ?></td>
             
            <td><?php echo  $farma[0]->c_pin_code; ?></td>
              <td><?php 
             $sql = "select * from nationality where nationality_id=".$farma[0]->c_country_id."";
              $query  = $this->db->query($sql)->result();
              echo $query[0]->nationality_desc; ?></td>
+             <td><?php echo  $farma[0]->c_country_name ?? ''; ?></td>
           </tr>
              
         </tbody>

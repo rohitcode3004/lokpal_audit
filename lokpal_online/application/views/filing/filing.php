@@ -2,6 +2,7 @@
 <link href="<?php echo base_url();?>assets/admin_material/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
 <script src="<?php echo base_url();?>assets/customjs/password_encryption.js"></script>
 
+
 <?php
 //print_r($user_profile);die;
 //$r = $this->session->userdata('ref_no');
@@ -19,7 +20,10 @@ if(isset($farma))
   $myArray=(array)$farma;
 
   //echo "<pre>";
-  //print_r($myArray);die;
+// print_r($myArray);
+
+ $p_value= $myArray[0]->p_country_name;
+
 
   $myArray[0]->first_name;
   $myArray[0]->age_years;
@@ -30,7 +34,8 @@ if(isset($farma))
   $state3=$myArray[0]->c_state_id ?? '';
   $p_dist_id=$myArray[0]->p_dist_id ?? '';
   $c_dist_id=$myArray[0]->c_district_id ?? '';
-
+ $p_country_id=$myArray[0]->p_country_id ?? '';
+  $c_country_id=$myArray[0]->c_country_id ?? '';
 
 }else{
   $state1= '';
@@ -40,6 +45,28 @@ if(isset($farma))
 }
 ?>
 
+<script>
+$(window).on('load', function() {
+  var $p_countryid = "<?= $p_country_id; ?>"; 
+   var $c_countryid = "<?= $c_country_id; ?>";
+   if ($p_countryid == "2") {
+                $(".p_country_name_show").show();
+                $(".p_state_distic_hide").hide();
+                $(".same_add_checkbox").hide();                
+            } else {
+                $(".p_state_distic_hide").show();
+                $(".same_add_checkbox").show();
+                $(".p_country_name_show").hide();
+            }
+            if ($c_countryid == "2") {
+               $(".c_country_name_show").show();
+                $(".c_state_distic_hide").hide();
+            } else {
+                $(".c_state_distic_hide").show();
+                $(".c_country_name_show").hide();
+            }
+});
+</script>
 
 <?php 
 
@@ -293,45 +320,11 @@ if(isset($farma))
         <hr>
         <div class="row">
           <div class="col-md-12">
+
+
             <label class="text-orange"><?php print_r($this->label->get_short_name($elements, 57)); ?></label>
             <div class="row">
-              <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
-                <label for="p_hpnl"><?php print_r($this->label->get_short_name($elements, 32)); ?><span class="text-danger">*</span></label>
-                <input type="text" class="form-control" name="p_hpnl" value="<?php echo set_value('p_hpnl', @$myArray[0]->p_hpnl); ?>" id="p_hpnl" maxlength="100" placeholder="">
-                <div class="error"><?php echo form_error('p_hpnl'); ?></div>
-              </div>  
-              <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
-                <label for="p_Add1"><?php print_r($this->label->get_short_name($elements, 94)); ?><span class="text-danger">*</span></label>
-                <input type="text" class="form-control" name="p_add1" value="<?php echo set_value('p_add1', @$myArray[0]->p_add1); ?>" id="p_add1" maxlength="100" placeholder="">
-                <div class="error"><?php echo form_error('p_add1'); ?></div>
-              </div> 
-              <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
-                <label for="p_state_id"><?php print_r($this->label->get_short_name($elements, 33)); ?><span class="text-danger">*</span></label>  
-                <select type="text" class="form-control chosen-single chosen-default" name="p_state_id" id="p_state_id" onChange="pageRefesh(this.value);" >
-                <option value="">Select state</option>
-                <?php foreach($state as $row):?>
-                  <?php if (!empty($state1)){ ?>
-                   <option value="<?php echo $row->state_code;?>" <?php echo ($state1 == $row->state_code) ? 'selected' : '' ?>> <?php echo $row->name; ?> </option>
-                 <?php }else{?>
-                <option value="<?php echo $row->state_code; ?>" <?php echo set_select('p_state_id',  $row->state_code); ?>><?php echo $row->name; ?></option>
-                 <?php }?>
-                <?php endforeach;?>
-                </select> 
-                <div class="error"><?php echo form_error('p_state_id'); ?></div>  
-              </div> 
-              <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
-                <label for="p_dist_id"><?php print_r($this->label->get_short_name($elements, 34)); ?><span class="text-danger">*</span></label>
-                <select type="text" class="form-control chosen-single chosen-default" name="p_dist_id" id="p_dist_id">
-                  <option value=""> Please Select District</option>
-                </select>
-                <div class="error"><?php echo form_error('p_dist_id'); ?></div> 
-              </div> 
-              <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
-                <label for="p_pin_code"><?php print_r($this->label->get_short_name($elements, 35)); ?><span class="text-danger">*</span></label>   
-                <input type="text" class="form-control" name="p_pin_code" id="p_pin_code" maxlength="6" value="<?php echo set_value('p_pin_code', @$myArray[0]->p_pin_code); ?>"  onkeypress="return isNumberKey(event)" placeholder="">
-                <div class="error"><?php echo form_error('p_pin_code'); ?></div> 
-              </div> 
-              <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
+               <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
                 <?php $nationalty2=$myArray[0]->p_country_id ?? ''; ?>
                 <label for="p_country_id"><?php print_r($this->label->get_short_name($elements, 36)); ?><span class="text-danger">*</span></label>   
                 <select type="text" class="form-control chosen-single chosen-default" name="p_country_id" id="p_country_id">
@@ -346,12 +339,68 @@ if(isset($farma))
                   <?php endforeach;?>
                 </select>  
                 <div class="error"><?php echo form_error('p_country_id'); ?></div>
+              </div> 
+              <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
+                <label for="p_hpnl"><?php print_r($this->label->get_short_name($elements, 32)); ?><span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="p_hpnl" value="<?php echo set_value('p_hpnl', @$myArray[0]->p_hpnl); ?>" id="p_hpnl" maxlength="100" placeholder="">
+                <div class="error"><?php echo form_error('p_hpnl'); ?></div>
               </div>  
+              <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
+                <label for="p_Add1"><?php print_r($this->label->get_short_name($elements, 94)); ?><span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="p_add1" value="<?php echo set_value('p_add1', @$myArray[0]->p_add1); ?>" id="p_add1" maxlength="100" placeholder="">
+                <div class="error"><?php echo form_error('p_add1'); ?></div>
+              </div> 
+             
+            </div>
+            <div class="row">      
+             
+            
+              <div class="col-md-8 p_state_distic_hide"> 
+                <div class="row">       
+                  <div class="col-lg-6 col-md-6 col-sm-6 mb-15">
+                    <label for="p_state_id"><?php print_r($this->label->get_short_name($elements, 33)); ?><span class="text-danger">*</span></label>  
+                    <select type="text" class="form-control chosen-single chosen-default" name="p_state_id" id="p_state_id" onChange="pageRefesh(this.value);" >
+                    <option value="">Select state</option>
+                    <?php foreach($state as $row):?>
+                      <?php if (!empty($state1)){ ?>
+                       <option value="<?php echo $row->state_code;?>" <?php echo ($state1 == $row->state_code) ? 'selected' : '' ?>> <?php echo $row->name; ?> </option>
+                     <?php }else{?>
+                    <option value="<?php echo $row->state_code; ?>" <?php echo set_select('p_state_id',  $row->state_code); ?>><?php echo $row->name; ?></option>
+                     <?php }?>
+                    <?php endforeach;?>
+                    </select> 
+                    <div class="error"><?php echo form_error('p_state_id'); ?></div>  
+                  </div> 
+                  <div class="col-lg-6 col-md-6 col-sm-6 mb-15">
+                    <label for="p_dist_id"><?php print_r($this->label->get_short_name($elements, 34)); ?><span class="text-danger">*</span></label>
+                    <select type="text" class="form-control chosen-single chosen-default" name="p_dist_id" id="p_dist_id">
+                      <option value=""> Please Select District</option>
+                    </select>
+                    <div class="error"><?php echo form_error('p_dist_id'); ?></div> 
+                  </div> 
+                </div>
+              </div>          
+         
+              <div class="col-md-8 p_country_name_show"> 
+                <div class="row">   
+                  <div class="col-lg-12 col-md-12 mb-15">
+                    <label for="p_state_id">Country Name<span class="text-danger">*</span></label>  
+                    <input type="text" class="form-control" name="p_country_name" id="p_country_name" value="<?php echo set_value('p_country_name', @$myArray[0]->p_country_name); ?>">
+                  </div>
+                </div>
+              </div>
+           
+              <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
+                <label for="p_pin_code"><?php print_r($this->label->get_short_name($elements, 35)); ?><span class="text-danger">*</span></label>   
+                <input type="text" class="form-control" name="p_pin_code" id="p_pin_code" maxlength="6" value="<?php echo set_value('p_pin_code', @$myArray[0]->p_pin_code); ?>"  onkeypress="return isNumberKey(event)" placeholder="">
+                <div class="error"><?php echo form_error('p_pin_code'); ?></div> 
+              </div> 
+               
             </div>
           </div>
         </div>
 
-        <div class="row">
+        <div class="row same_add_checkbox">
           <div class="col-md-12">
             <div class="alert alert-info">
               <input type="checkbox" name="billingtoo" onclick="FillBilling(this.form)" />
@@ -364,47 +413,8 @@ if(isset($farma))
           <div class="col-md-12">
             <label class="text-orange"><?php print_r($this->label->get_short_name($elements, 58)); ?></label>
             <div class="row">
-              <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
-                <label for="c_hpnl"><?php print_r($this->label->get_short_name($elements, 38)); ?><span class="text-danger">*</span></label>
-                <input type="text" class="form-control" name="c_hpnl" id="c_hpnl" value="<?php echo set_value('c_hpnl', @$myArray[0]->c_hpnl); ?>" maxlength="100" placeholder="">
-                <div class="error"><?php echo form_error('c_hpnl'); ?></div>
-              </div>
-              <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
-                <label for="c_add1"><?php print_r($this->label->get_short_name($elements, 94)); ?><span class="text-danger">*</span></label>
-                <input type="text" class="form-control" name="c_add1" id="c_add1" value="<?php echo set_value('c_add1', @$myArray[0]->c_add1); ?>" maxlength="100" placeholder="">
-                <div class="error"><?php echo form_error('c_add1'); ?></div>
-              </div>
-              <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
-                <label for="c_state_id"><?php print_r($this->label->get_short_name($elements, 39)); ?><span class="text-danger">*</span></label>  
-                <select type="text" class="form-control chosen-single chosen-default" name="c_state_id" id="c_state_id" onChange="pageRefesh1(this.value);" >
-                  <option value="">Select state</option>
-                  <?php foreach($state as $row):?> 
 
-                  <?php if (!empty($state1)){ ?>
-                       <option value="<?php echo $row->state_code;?>" <?php echo (@$state3 == $row->state_code) ? 'selected' : '' ?>> <?php echo $row->name; ?> </option>
-                     <?php }else{?>
-                      <option value="<?php echo $row->state_code; ?>" <?php echo set_select('c_state_id',  $row->state_code); ?>><?php echo $row->name; ?></option>
-                     <?php }?>
-                   
-                  <!-- <option value="<?php echo $row->state_code;?>" <?php echo (@$state3 == $row->state_code) ? 'selected' : '' ?>> <?php echo $row->name; ?> </option>-->
-                 <?php endforeach;?>
-                </select> 
-                <div class="error"><?php echo form_error('c_state_id'); ?></div> 
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
-                <label for="c_district_id"><?php print_r($this->label->get_short_name($elements, 40)); ?><span class="text-danger">*</span></label>
-                <select class="form-control chosen-single chosen-default" name="c_district_id" id="c_district_id"> 
-                <option value="">Select district</option>    
-                </select>
-                <div class="error"><?php echo form_error('c_district_id'); ?></div>  
-              </div>
-              <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
-                <label for="c_pin_code"><?php print_r($this->label->get_short_name($elements, 41)); ?><span class="text-danger">*</span></label>   
-                 <input type="text" class="form-control" name="c_pin_code" id="c_pin_code" value="<?php echo set_value('c_pin_code', @$myArray[0]->c_pin_code); ?>" maxlength="6"  onkeypress="return isNumberKey(event)" placeholder="">
-                 <div class="error"><?php echo form_error('c_pin_code'); ?></div> 
-              </div>
+
               <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
                 <?php $nationalty3=$myArray[0]->c_country_id ?? ''; ?>
                 <label for="c_country_id"><?php print_r($this->label->get_short_name($elements, 42)); ?><span class="text-danger">*</span> </label>  
@@ -422,6 +432,70 @@ if(isset($farma))
                 </select>
                 <div class="error"><?php echo form_error('c_country_id'); ?></div>
               </div>
+
+              <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
+                <label for="c_hpnl"><?php print_r($this->label->get_short_name($elements, 38)); ?><span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="c_hpnl" id="c_hpnl" value="<?php echo set_value('c_hpnl', @$myArray[0]->c_hpnl); ?>" maxlength="100" placeholder="">
+                <div class="error"><?php echo form_error('c_hpnl'); ?></div>
+              </div>
+              <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
+                <label for="c_add1"><?php print_r($this->label->get_short_name($elements, 94)); ?><span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="c_add1" id="c_add1" value="<?php echo set_value('c_add1', @$myArray[0]->c_add1); ?>" maxlength="100" placeholder="">
+                <div class="error"><?php echo form_error('c_add1'); ?></div>
+              </div>
+             
+              
+            </div>
+            <div class="row">
+            
+              <div class="col-md-8 c_state_distic_hide">
+                
+                <div class="row">
+                  <div class="col-lg-6 col-md-6 col-sm-6 mb-15">
+                    <label for="c_state_id"><?php print_r($this->label->get_short_name($elements, 39)); ?><span class="text-danger">*</span></label>  
+                    <select type="text" class="form-control chosen-single chosen-default" name="c_state_id" id="c_state_id" onChange="pageRefesh1(this.value);" >
+                      <option value="">Select state</option>
+                      <?php foreach($state as $row):?> 
+
+                      <?php if (!empty($state1)){ ?>
+                           <option value="<?php echo $row->state_code;?>" <?php echo (@$state3 == $row->state_code) ? 'selected' : '' ?>> <?php echo $row->name; ?> </option>
+                         <?php }else{?>
+                          <option value="<?php echo $row->state_code; ?>" <?php echo set_select('c_state_id',  $row->state_code); ?>><?php echo $row->name; ?></option>
+                         <?php }?>
+                       
+                      <!-- <option value="<?php echo $row->state_code;?>" <?php echo (@$state3 == $row->state_code) ? 'selected' : '' ?>> <?php echo $row->name; ?> </option>-->
+                     <?php endforeach;?>
+                    </select> 
+                    <div class="error"><?php echo form_error('c_state_id'); ?></div> 
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-6 mb-15">
+                    <label for="c_district_id"><?php print_r($this->label->get_short_name($elements, 40)); ?><span class="text-danger">*</span></label>
+                    <select class="form-control chosen-single chosen-default" name="c_district_id" id="c_district_id"> 
+                    <option value="">Select district</option>    
+                    </select>
+                    <div class="error"><?php echo form_error('c_district_id'); ?></div>  
+                  </div>
+                </div>
+
+                
+              </div>
+            
+              <div class="col-md-8 c_country_name_show"> 
+                <div class="row">   
+                  <div class="col-lg-12 col-md-12 mb-15">
+                    <label for="p_state_id">Country Name<span class="text-danger">*</span></label>  
+                    <input type="text" class="form-control" name="c_country_name" value="<?php echo set_value('c_country_name', @$myArray[0]->c_country_name); ?>">
+                  </div>
+                </div>
+              </div> 
+
+           
+              <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
+                <label for="c_pin_code"><?php print_r($this->label->get_short_name($elements, 41)); ?><span class="text-danger">*</span></label>   
+                 <input type="text" class="form-control" name="c_pin_code" id="c_pin_code" value="<?php echo set_value('c_pin_code', @$myArray[0]->c_pin_code); ?>" maxlength="6"  onkeypress="return isNumberKey(event)" placeholder="">
+                 <div class="error"><?php echo form_error('c_pin_code'); ?></div> 
+              </div>
+              
             </div>
           </div>
         </div>
@@ -471,7 +545,6 @@ if(isset($farma))
 
           <div class="col-lg-4 col-md-6 col-sm-6 mb-15">                   
             <label class="text-orange" for="complaintmode_id"><?php print_r($this->label->get_short_name($elements, 9)); ?><span class="text-danger">*</span></label>    
-
             <select type="text" class="form-control chosen-single chosen-default" name="complaintmode_id" id="complaintmode_id" onchange="showDiv('hidden_div', this)">
               <?php $cam_mode=$myArray[0]->complaintmode_id ?? ''; ?>
               <option value="">-- Select --</option>
@@ -497,72 +570,70 @@ if(isset($farma))
             <div style="font-size: 12px; color: #0171b5;"><label class="col-md-12"><i>NOTE: A PHYSICAL COPY IS TO BE SUBMITTED TO LOKPAL WITHIN A PERIOD OF FIFTEEN DAYS.</i></label></div> 
 
             <?php } ?> 
-
           </div>  
-      </div>
-
-      <div class="row">
-        <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
-          <?php $notify=$myArray[0]->notory_affi_annex ?? ''; ?>
-          <label class="text-orange" for="notory_affi_annex"><?php print_r($this->label->get_short_name($elements, 47)); ?><span class="text-danger">*</span></label> 
-          <div class="radio">
-            <label><input type="radio" name="notory_affi_annex" id="Active" required="required" checked="checked" value="1" <?php  echo set_value('notory_affi_annex', $notify) == 1 ? "checked" : ""; ?> /> Yes</label>
-            <label><input type="radio" name="notory_affi_annex" required="required" value="2" <?php  echo set_value('notory_affi_annex', $notify) == 2 ? "checked" : ""; ?> /> No</label>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
-          <?php $cmv=$myArray[0]->complainant_victim ?? ''; ?>
-          <label class="text-orange" for="complainant_victim"><?php print_r($this->label->get_short_name($elements, 48)); ?><span class="text-danger">*</span></label>
-          <div class="radio">
-            <label><input type="radio" name="complainant_victim" id="Active" required="required" checked="checked" value="1" <?php  echo set_value('complainant_victim', $cmv) == 1 ? "checked" : ""; ?> /> Yes</label>
-            <label><input type="radio" name="complainant_victim" required="required" value="2" <?php  echo set_value('complainant_victim', $cmv) == 2 ? "checked" : ""; ?> /> No</label>
-          </div>
         </div>
 
-      </div>
+        <div class="row">
+          <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
+            <?php $notify=$myArray[0]->notory_affi_annex ?? ''; ?>
+            <label class="text-orange" for="notory_affi_annex"><?php print_r($this->label->get_short_name($elements, 47)); ?><span class="text-danger">*</span></label> 
+            <div class="radio">
+              <label><input type="radio" name="notory_affi_annex" id="Active" required="required" checked="checked" value="1" <?php  echo set_value('notory_affi_annex', $notify) == 1 ? "checked" : ""; ?> /> Yes</label>
+              <label><input type="radio" name="notory_affi_annex" required="required" value="2" <?php  echo set_value('notory_affi_annex', $notify) == 2 ? "checked" : ""; ?> /> No</label>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
+            <?php $cmv=$myArray[0]->complainant_victim ?? ''; ?>
+            <label class="text-orange" for="complainant_victim"><?php print_r($this->label->get_short_name($elements, 48)); ?><span class="text-danger">*</span></label>
+            <div class="radio">
+              <label><input type="radio" name="complainant_victim" id="Active" required="required" checked="checked" value="1" <?php  echo set_value('complainant_victim', $cmv) == 1 ? "checked" : ""; ?> /> Yes</label>
+              <label><input type="radio" name="complainant_victim" required="required" value="2" <?php  echo set_value('complainant_victim', $cmv) == 2 ? "checked" : ""; ?> /> No</label>
+            </div>
+          </div>
+        </div>
 
 
-      <div class="row">
-        <div class="col-lg-12 mb-15">
-          <ul class="blockquote-remark">
-            <h5>It is certified that to the best of my knowledge, belief and information:</h5>
-          <li> 
-            (i) the alleged offence in respect of which present complaint is being made is within the period of seven years [ <I>limitation as laid down under section 53 of the Lokpal and Lokayuktas Act, 2013];</I>
-          </li>
-          <li>(ii) no matter or proceeding related to allegation of corruption under the Prevention of Corruption Act, 1988 being made under this complaint is pending before any court or committee of either House of Parliament or before any other authority and the complaint is not barred from being made before the Lokpal by section 15 of the Lokpal and Lokayuktas Act, 2013.
+        <div class="row">
+          <div class="col-lg-12 mb-15">
+            <ul class="blockquote-remark">
+              <h5>It is certified that to the best of my knowledge, belief and information:</h5>
+            <li> 
+              (i) the alleged offence in respect of which present complaint is being made is within the period of seven years [ <I>limitation as laid down under section 53 of the Lokpal and Lokayuktas Act, 2013];</I>
             </li>
-          </ul>
+            <li>(ii) no matter or proceeding related to allegation of corruption under the Prevention of Corruption Act, 1988 being made under this complaint is pending before any court or committee of either House of Parliament or before any other authority and the complaint is not barred from being made before the Lokpal by section 15 of the Lokpal and Lokayuktas Act, 2013.
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
 
-      <div class="row">
-        <div class="col-md-6 mb-15">
-          <label for="comp_f_place"><?php print_r($this->label->get_short_name($elements, 49)); ?><span class="text-danger">*</span></label>
-         
-          <input type="text" class="form-control" name="comp_f_place" value="<?php echo set_value('comp_f_place', @$myArray[0]->comp_f_place); ?>" id="comp_f_place" onkeypress="return ValidateAlpha(event)" placeholder="Enter place ...">
-          <div class="error"><?php echo form_error('comp_f_place'); ?></div>
+        <div class="row">
+          <div class="col-md-6 mb-15">
+            <label for="comp_f_place"><?php print_r($this->label->get_short_name($elements, 49)); ?><span class="text-danger">*</span></label>
+           
+            <input type="text" class="form-control" name="comp_f_place" value="<?php echo set_value('comp_f_place', @$myArray[0]->comp_f_place); ?>" id="comp_f_place" onkeypress="return ValidateAlpha(event)" placeholder="Enter place ...">
+            <div class="error"><?php echo form_error('comp_f_place'); ?></div>
+          </div>
+          <?php
+          $curYear = date('Y');
+          $curMonth = date('m');
+          $curDay = date('d');
+          $cur_date = $curDay.'/'.$curMonth.'/'.$curYear;
+          $cur_date12 = $curDay.'/'.$curMonth.'/'.$curYear;
+          //  $comp_f_date="$curYear-$curMonth-$curDay"; 
+          $comp_f_date="$curDay-$curMonth-$curYear";                        
+          ?>
+          <div class="col-lg-4 col-md-6 col-sm-6 mb-15" hidden="true">
+            <label for="comp_f_date"><?php print_r($this->label->get_short_name($elements, 50)); ?></label>
+            <input type="text" class="form-control" name="comp_f_date" id="comp_f_date" value="<?php echo $comp_f_date;?>" readonly="readonly" placeholder="Entet Date ...">
+          </div>
         </div>
-        <?php
-        $curYear = date('Y');
-        $curMonth = date('m');
-        $curDay = date('d');
-        $cur_date = $curDay.'/'.$curMonth.'/'.$curYear;
-        $cur_date12 = $curDay.'/'.$curMonth.'/'.$curYear;
-        //  $comp_f_date="$curYear-$curMonth-$curDay"; 
-        $comp_f_date="$curDay-$curMonth-$curYear";                        
-        ?>
-        <div class="col-lg-4 col-md-6 col-sm-6 mb-15" hidden="true">
-          <label for="comp_f_date"><?php print_r($this->label->get_short_name($elements, 50)); ?></label>
-          <input type="text" class="form-control" name="comp_f_date" id="comp_f_date" value="<?php echo $comp_f_date;?>" readonly="readonly" placeholder="Entet Date ...">
-        </div>
-      </div>
 
-      <div class="row">
-        <div class="col-md-12 text-right">
-          <button type="submit" class="btn btn-success" id="submitbtn" onclick="encode_dl_passport('identity_proof_no', 'idres_proof_no')" >Save as Draft</button> 
-          <button type="submit" class="btn btn-success" id="submitbtn" onclick="encode_dl_passport('identity_proof_no', 'idres_proof_no')">Save & Next</button>    
+        <div class="row">
+          <div class="col-md-12 text-right">
+            <button type="submit" class="btn btn-success" id="submitbtn" onclick="encode_dl_passport('identity_proof_no', 'idres_proof_no')" >Save as Draft</button> 
+            <button type="submit" class="btn btn-success" id="submitbtn" onclick="encode_dl_passport('identity_proof_no', 'idres_proof_no')">Save & Next</button>    
+          </div>
         </div>
-      </div>
                     </form>
 
               </div>
@@ -579,7 +650,10 @@ if(isset($farma))
   <script language="javascript"> 
 function showDiv(divId, element)
 {
+    if(count == 1){
     document.getElementById(divId).style.display = element.value == 3 ? 'block' : 'none';
+    count++;
+  }
 }
 </script>
 
@@ -672,6 +746,7 @@ function showDiv(divId, element)
         f.c_state_id.value=f.p_state_id.value;
         f.c_pin_code.value=f.p_pin_code.value;
         f.c_country_id.value=f.p_country_id.value;
+         
       }else{
         $('#c_state_id').val('');
         $('#c_district_id').html('');
@@ -736,6 +811,8 @@ function showDiv(divId, element)
         nationality_id: "required",
         identity_proof_id:"required",
         idres_proof_id:"required",
+        p_country_name:"required",
+         c_country_name:"required",
         p_state_id:"required",
         p_dist_id:"required",
         c_district_id:"required",
@@ -936,9 +1013,11 @@ function ValidateEmail(mail)
              // for (key in data) {
               //console.log('here');
               document.getElementById("identity_proof_id").selectedIndex = "11"; 
+           
               //$('#identity_proof_id').attr("readonly", true);
               //$('option:not(:selected)').attr('disabled', true);
               $("#identity_proof_id").css("pointer-events","none");
+              
                 //identity_proof_id += "<option value="+data[key]['agency_code']+">" + data[key]['agency_name'] + "</option>";
               //}
               //document.getElementById("conce_agency").innerHTML = agencyOptions;
@@ -948,6 +1027,7 @@ function ValidateEmail(mail)
               //document.getElementById("identity_proof_id").selectedIndex = ""; 
                //$('#identity_proof_id').attr("readonly", false);
                $("#identity_proof_id").css("pointer-events","");
+              
          }
        }
 
@@ -981,5 +1061,34 @@ function ValidateEmail(mail)
 });
     </script>
 
+
+
+<script type="text/javascript">
+    $(function () {
+        $("#p_country_id").change(function () {
+            if ($(this).val() == "2") {
+                $(".p_country_name_show").show();
+                $(".p_state_distic_hide").hide();
+                $(".same_add_checkbox").hide();                
+            } else {
+                $(".p_state_distic_hide").show();
+                $(".same_add_checkbox").show();
+                $(".p_country_name_show").hide();
+            }
+        });
+
+        $("#c_country_id").change(function () {
+            if ($(this).val() == "2") {
+                $(".c_country_name_show").show();
+                $(".c_state_distic_hide").hide();
+            } else {
+                $(".c_state_distic_hide").show();
+                $(".c_country_name_show").hide();
+            }
+        });
+    });
+
+
+</script>
 
 

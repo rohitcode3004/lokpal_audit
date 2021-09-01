@@ -103,7 +103,7 @@ function freshApp(){
                 		<!--<div class="user-img"><img src="<?php echo base_url();?>assets/admin_material/dashboard/images/avatar.jpg" alt="logo"></div>-->
                         <h5>
                             <?php
-                            $prof_data = get_user_profile_data($user['id']);
+                           $prof_data = get_user_profile_data($user['id']);
                             //print_r($prof_data);
                              echo isset($prof_data['0']->first_name) ? $prof_data['0']->first_name : "";
                              echo isset($prof_data['0']->last_name) ? ' '.$prof_data['0']->last_name : "";
