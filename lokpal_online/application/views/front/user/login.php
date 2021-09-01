@@ -4,7 +4,11 @@
 <div class="login-box">
   <div class="login-form">
     <div class="login-main">
-      <h6 class="sec-one">Lodge a Complaint <i class="fa fa-hand-o-down" aria-hidden="true"></i></h6>
+      <?php if($page == 'statuspage') { ?>
+        <h6 class="sec-one">Check the Status of Your Complaint <i class="fa fa-hand-o-down" aria-hidden="true"></i></h6>  
+        <?php } else { ?>    
+        <h6 class="sec-one">Lodge a Complaint <i class="fa fa-hand-o-down" aria-hidden="true"></i></h6>
+      <?php } ?>
       <div class="speci-login first-look">
         <img src="<?php echo base_url(); ?>assets/my_assets/images/user.png" alt="">
       </div>
@@ -37,7 +41,7 @@
         </div>
         <input type="text" class="input-form" name="captcha" value="" placeholder="Enter the captcha code "/>
 
-
+        <input type="hidden" value="<?php echo $page; ?>" name="page">
         <input class="loginhny-btn btn" type="submit" name="userloginSubmit" value="login" onclick="encode(this)" />
 
         

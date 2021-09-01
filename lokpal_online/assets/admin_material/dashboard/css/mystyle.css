@@ -1006,3 +1006,12 @@ ul.more-action > li > a {
     max-width: 600px;
     min-width: 300px;
 }
+
+.p_country_name_show, .c_country_name_show{
+    display: none;
+}
+
+
+#complaintmode_id option[disabled]{
+    display: none;
+}

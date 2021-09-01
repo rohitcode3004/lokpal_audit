@@ -30,12 +30,14 @@
                 <thead>                
                   <th>S.No.</th>
                   <th>Diary no</th>
+                   <th>Public Servant Name</th>
                   <th>Status</th>
                   <!--<th>Application Preview</th>-->
                    <th>Complaint pdf</th>
                 </thead>
                 <tbody>
-                    <?php
+                    <?php    
+                 
                       $u = $user['id'];
                       $c = 1;
                         foreach($user_completed_comps as $row):
@@ -46,28 +48,21 @@
                     <td><?php if($row->filing_no){
                       echo $row->filing_no;
                        } ?></td>
+
+                        <td><?php 
+                      echo $row->ps_first_name.' '.$row->ps_mid_name.' '.$row->ps_sur_name;
+                        ?></td>
+
+
                     <td><?php if($row->filing_status == 't'){
                                 echo "Complaint submitted";
                               }elseif($row->filing_status == 'f'){
                                 echo "Not submitted";
                               }
                         ?></td>
-                   <!-- <td>
-                      <?php
-                      $comp_no=get_filing_no($r, $u);
-                      $status = $comp_no['status'];
-                      if($status == 't'){ ?>
-                      <a href="<?php echo base_url().'affidavit/affidavit_detail/'.$r ?>">Go to application</a>
-                      <?php }else{ ?>
-                      <a href="<?php echo base_url().'filing/filing/'.$r ?>">Go to application</a>
-                      <?php } ?>
-                    </td>-->
-
-
-
-                   
+                                    
                      <?php if($row->gazzette_notification_url ?? '' !=''){?>
-                  <td><a href="<?php echo base_url();?><?php echo $row->gazzette_notification_url ?? ''; ?>.pdf" target="_blank" alt="">Show Complaint pdf </a>
+                  <td><a href="<?php echo base_url();?><?php echo $row->gazzette_notification_url ?? ''; ?>" target="_blank" alt="">Show Complaint pdf </a>
                   </td> 
                     <?php } ?>
 

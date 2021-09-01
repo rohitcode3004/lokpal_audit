@@ -58,11 +58,11 @@
 
 							?>
 						
-							<a href="<?php echo "http://" . $_SERVER['SERVER_NAME'] ."/". $uri_parts2[1]; ?>/lokpal_online/user/login" class="icon-box">
+							<a href="<?php echo "http://" . $_SERVER['SERVER_NAME'] ."/". $uri_parts2[1]; ?>/lokpal_audit/lokpal_online/user/login?page=statuspage" class="icon-box">
 								<div class="user-icon">
 								  <i class="fas fa-file-contract"></i>
 								</div>
-								<div class="user-title">Check Status of Complaint</div>
+								<div class="user-title">Check the Status of Your Complaint</div>
 							</a>
 							
 						</div>

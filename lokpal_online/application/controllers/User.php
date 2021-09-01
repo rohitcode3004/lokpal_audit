@@ -37,7 +37,10 @@ class User extends CI_Controller {
 	
 	public function login(){ 
 		//print_r($this->session->all_userdata('captchaCode'));
-
+		if(isset($_GET['page']))
+			$data['page'] = $_GET['page'];
+		else
+			$data['page'] = 'na';
 		if($this->session->userdata('success_msg')){ 
 			$data['success_msg'] = $this->session->userdata('success_msg'); 
 			$this->session->unset_userdata('success_msg'); 
@@ -61,6 +64,7 @@ class User extends CI_Controller {
 				$password_decrypted = decode($password_encrypted);
 				$data['password'] = md5(strip_tags($password_decrypted));
 
+				$page = trim($this->input->post('page'));
 			    $data['captcha_input'] = trim($this->input->post('captcha'));
 			    $captcha_session = $this->session->all_userdata('captchaCode');
 			   // print_r($data['captcha_input']);
@@ -86,9 +90,12 @@ class User extends CI_Controller {
 					$this->session->set_userdata('login_time_stamp', time());
 					//$parta_status = get_parts_status_onid($checkLogin['id'], 'A');
 					$parta_status = 1;
-					if($parta_status){
-						redirect('/filing/dashboard'); 
-					}else{
+					if($parta_status && $page == 'statuspage'){
+						redirect('/filing/dashboard_completed_complaint'); 
+					}elseif($parta_status){
+						redirect('/filing/dashboard');
+					}
+					else{
 						$user_id=$this->session->userdata('user_id');
 						$ref_no = get_refno_latest($user_id);
 						redirect('/filing/filing/'.$ref_no); 
