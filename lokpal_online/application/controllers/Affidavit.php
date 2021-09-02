@@ -1456,21 +1456,11 @@ years [<i>limitations as laid down under section 53 of the Lokpal and lokayuktas
 1988 being made under this complaint is pending before any court or committee of either House of <br> Parliament or before any other authority and the complaint is not barred from being made before the Lokpal <br>
 by section 15 of the Lokpal and Lokayuktas Act,2013. </div>
 <br><br><br>
-<div align="right"><b>                                              Signature of the complaint/<br>
-authorised signatory    </div></b> 
-<div>   Place :  '.$myArray[0]->comp_f_place.'</div>
-<div>Date  : '.$dt_of_filing.'</div>
-
-
-
-<br></br><br></br><br></br><br></br><br></br><br></br><br></br>
-<br></br><br></br><br></br><br></br><br></br><br></br><br></br>
-
-<br></br><br></br><br></br><br></br><br></br><br></br><br></br>
-<br></br><br></br><br></br><br></br><br></br><br></br><br></br>
-
-</br><br></br><br></br>
-
+<div align="right"><b>Signature of the complaint/<br> authorised signatory    </div></b> 
+<div>   
+  Place :  '.$myArray[0]->comp_f_place.' <br>
+  Date  : '.$dt_of_filing.'
+</div>
 
 ';                                                                          
 
@@ -1478,13 +1468,8 @@ if($cp >1){
 
   $getallwidget .= '
 
-  <div>     </div><br>
-  <div>     </div><br>
-  <div>     </div><br>
-  <div>     </div><br>
-
-  <br></br><br></br><br></br><br></br><br></br>
-  <div align="center"><b>PART B</b><br></div>
+<br></br>
+  <div align="center" style="page-break-before: always;"><b>PART B</b><br></div>
 
   <div>ADDITIONAL DETAILS TO BE FURNISHED BY THE SIGNATORY TO THE COMPLAINT IF THE <br>
   COMPLAINT IS BEING FILED ON BEHALF OF A BODY OR BOARD OR CORPORATION OR <br>
@@ -1787,13 +1772,9 @@ affected by the complaint <br>
 $getallwidget .= '
 
 </table>
-<div>     </div><br>
-  <div>     </div><br>
-  <div>     </div><br>
-  <div>     </div><br>
-  <br><br><br><br><br><br>
 
-<div align="center"><b>PART C</b></div>
+
+<div align="center" style="page-break-before: always;"><b>PART C</b></div>
 
 <div>DETAILS AS REGARDS THE PUBLIC SERVANT AGAINST WHOME THE COMPLAINT IS BEING MADE
 </div><br>
@@ -2027,43 +2008,23 @@ $getallwidget .='
 </table> 
 
 <br><br>
-<div align="right"><b>                                              Signature of the complaint/<br>
-authorised person </div></b> 
-
+<div align="right"><b>Signature of the complaint/<br> authorised person </b></div>
 <br><br>
 
-
-
-
-<table style="width: 100%; border:2px solid; border-collapse: collapse; padding: 0; margin: 0;">            
-
-<tr>
-<td style="border: 1px solid black;"></td>
-<td style="border: 1px solid black;">Place </td><td style="border: 1px solid black;">'.$myArray[0]->comp_f_place.'</td>
-</tr>
-<tr>
-<td style="border: 1px solid black;"></td>
-<td style="border: 1px solid black;">Date </td><td style="border: 1px solid black;">'.$dt_of_filing.'</td>
-</tr>
-
+<table style="width: 100%; border:2px solid; border-collapse: collapse; padding: 0; margin: 0;">  
+  <tbody>          
+    <tr>
+      <td style="border: 1px solid black;"> </td>
+      <td style="border: 1px solid black;">Place </td>
+      <td style="border: 1px solid black;">'.$myArray[0]->comp_f_place.'</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid black;"> </td>
+      <td style="border: 1px solid black;">Date </td>
+      <td style="border: 1px solid black;">'.$dt_of_filing.'</td>
+    </tr>
+  </tbody>
 </table> 
-
-
-
-
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
- <div>     </div><br>
-  <div>     </div><br>
-  <div>     </div><br>
-  <div>     </div><br>
-  <div>     </div><br>
-  <div>     </div><br>
-  <div>     </div><br>
-  <div>     </div><br>
-  <div>     </div><br>
-  <div>     </div><br>
-  <div>     </div><br>
-  <div>     </div><br>
 
 '; 
 
@@ -2071,7 +2032,7 @@ authorised person </div></b>
 
 
 
-$getallwidget .= '<div><div align="center"><b>AFFIDAVIT DETAIL : (PART - D)</b>
+$getallwidget .= '<div><div align="center" style="page-break-before: always;"><b>AFFIDAVIT DETAIL : (PART - D)</b>
 </div><br>
 <br><br>
 
