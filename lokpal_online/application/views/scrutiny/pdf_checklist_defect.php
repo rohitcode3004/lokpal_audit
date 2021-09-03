@@ -58,7 +58,7 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
 					<div class="panel-heading">
-						Scrutiny for the Complaint Diary no. - <i><?php echo $filing_no; ?></i>
+						Open for Edit Diary no. - <i><?php echo $filing_no; ?></i>
 						<span class="pull-right">		
 							<?php if(get_complaintno($filing_no) != 'n/a' ) { ?>
 								Complaint no. - <i><?php echo get_complaintno($filing_no); ?></i>
@@ -67,6 +67,22 @@
 					</div>
 
 					<div class="panel-body">
+						 <?php
+              if($this->session->flashdata('success_msg'))
+              {
+               echo '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">×</button><h4 class="m-0">'.$this->session->flashdata('success_msg').'</h4></div>';
+              }
+              if($this->session->flashdata('error_msg'))
+              {
+               echo '<div class="alert alert-info"><button type="button" class="close" data-dismiss="alert">×</button>
+               <h4 class="m-0">'.$this->session->flashdata('error_msg').'</h4></div>';
+              }
+              if($this->session->flashdata('upload_error'))
+              {
+               echo '<div class="alert alert-info"><button type="button" class="close" data-dismiss="alert">×</button>
+               <h4 class="m-0">'.$this->session->flashdata('upload_error').'</h4></div>';
+              }
+            ?>
 						<div class="panel panel-primary">
 							<div class="panel-heading">
 								<h4 class="panel-title">Preview Complaint</h4>
@@ -81,7 +97,7 @@
 									 if(!empty($previous_gazzatte_reports)) { 
 										foreach ($previous_gazzatte_reports as $key => $value) {
 										?>
-									<li><a target="_blank" href="<?php echo base_url().$value->gazzette_notification_url; ?>"><?php echo $value->filing_no; ?></a></li>
+									<li><a target="_blank" href="<?php echo base_url().$value->gazzette_notification_url; ?>">C-<?php echo $value->filing_no; ?></a></li>
 									<?php } } ?>
 								</ul>
 									</div>
@@ -96,81 +112,17 @@
 
 						<div class="row">
 							<div class="col-md-12">
-									<form id="myForm" class="" action="<?php echo base_url();?>scrutiny/action" method="post" id="">
-									<div class="form-group">
-										<label class="control-label" title="">Any Other Previous Complaint: </label>
-										<input class="form-control" type="text" name="" value="<?php echo (isset($previous_complaint_desc)) ?  $previous_complaint_desc : ''; ?>" readonly>
-									</div>
-						<div class="form-group">
-							<!--<label><font color="#e70000;">Last summarised by : <?php echo (isset($last_remarkedby)) ? $last_remarkedby : ''; ?> on <?php echo (isset($last_date)) ? $last_date : ''; ?> at <?php echo (isset($last_time)) ? $last_time : ''; ?></font></label>-->
-							<label class="control-label" title="Brief summary of the case">Summary of Complaint: </label>
-
-								
-								<textarea class="ckeditor" name="summary" placeholder="Write your summary here" readonly>							
-						<?php echo (isset($summary)) ?  $summary : '';  ?>
-						</textarea>
-
-						</div>
-
-						<div class="form-group">
-							<label class="control-label" title="remarks"><font>Remarks: </font></label>
-
-								<textarea class="ckeditor" name="remarks" placeholder="Write your remarks here"></textarea>
-
-						</div>
-
-
-
-						<?php if(isset($last_remarks)) { ?>
-						<div class="form-group">
-							<label class="control-label text-danger">Last send by : <?php echo (isset($last_remarkedby)) ? $last_remarkedby : ''; ?> on <?php echo (isset($last_date)) ? $last_date : ''; ?> at <?php echo (isset($last_time)) ? $last_time : ''; ?></label>
-
-								<textarea class="ckeditor" name="remarks_latest" placeholder="No remarks given" readonly>
-									<?php echo (isset($last_remarks)) ?  $last_remarks : '';  ?>
-								</textarea>
-
-						</div>
-
-						<?php } if(isset($remark_history)) { ?>
-						<?php foreach($remark_history as $row):
-							if($row->remarks != '') {
-						 ?>
-						<div class="form-group">
-							<label class="control-label">Previously remarks by : <?php echo get_remarkedby_name($row->remarkd_by); ?> on <?php echo get_remarkedby_his_datetime($row->updated_date, 'D'); ?> at <?php echo get_remarkedby_his_datetime($row->updated_date, 'T'); ?></label>
-	
-									<textarea class="ckeditor" name="remarks_history" placeholder="No remarks given" readonly>
-									<?php echo $row->remarks;  ?>
-								</textarea>
-
-						</div>
-						<?php
-							}
-						 endforeach;
-						} 
-						?>
+									<form id="myForm" class="" action="<?php echo base_url();?>scrutiny/openedit_submit" method="post" id="" enctype="multipart/form-data">
+							
 						<br>
-						<?php if($user['role'] == 147) { ?>
+						
 						<div class="form-group" id="" style="">  
 						    <label class="control-label" for="doc_upload">Upload document if any</label>
 
 						    <input type="file" class="form-control order_upload" name="doc_upload" id="doc_upload">
 
 						</div>
-						<?php  } ?>
-
-						<div class="form-group" id="" style="">   
-					      	<label class="control-label" for="torole"><span style="color: red" data-darkreader-inline-color="">*</span>Forward to</label>
-	  
-						      <select class="torole form-control" style="" name="torole" id="torole" aria-invalid="false"><option value="">-- Select one --</option>
-						      	<?php
-						      	foreach($toroles as $row):
-						      	?>
-						      	<option value="<?php echo $row->level_id ?>"><?php echo $row->display_name ?></option>
-						      	<?php endforeach;
-						      	?>
-						      </select> 
-						      <label class="error"></label>
- 						</div>
+						
 
  						<input type="hidden" name="filing_no" value="<?php echo  $filing_no; ?>">
 

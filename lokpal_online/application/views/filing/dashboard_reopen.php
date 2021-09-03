@@ -33,13 +33,12 @@ $this->load->helper("date_helper");
                     <th>Date of Filing</th>
                       <th>Diary No</th>                     
                     <th>Name of Public Servant</th>
+                    <th>Defects Letter</th>
                      <th>Action</th>
                 
                 </thead>
                 <tbody>
-                    <?php 
-                   // echo "<pre>";   
-                   // print_r($user_comps)   ;            
+                    <?php           
                       $u = $user['id'];
                       $c = 1;
                         foreach($user_comps as $row):
@@ -53,15 +52,12 @@ $this->load->helper("date_helper");
 
 
                             <td><?php echo $row->ps_first_name.' '.$row->ps_mid_name.' '.$row->ps_sur_name; ?></td>
-                   <!-- <td><?php if($row->filing_no){
-                      echo $row->filing_no;
-                       } ?></td>-->
-                    <!--<td><?php if($row->filing_status == 't'){
-                                echo "Application submitted";
-                              }elseif($row->filing_status == 'f'){
-                                echo "Not submitted";
-                              }
-                        ?></td>-->
+
+
+                             <?php if($row->defects_pdf_url ?? '' !=''){?>
+                  <td><a href="<?php echo base_url();?><?php echo $row->defects_pdf_url ?? ''; ?>" target="_blank" alt="">Show Defects pdf </a>
+                  </td> 
+                    <?php } ?>
                     <td>
                       <?php
                       $comp_no=get_filing_no($r, $u);

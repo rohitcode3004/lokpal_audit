@@ -224,16 +224,33 @@ class Filing_model extends CI_Model
 
 		function get_user_complaints($user_id){  
 
-			$this->db->select('ref_no, filing_status, filing_no,created_at');
+			/*$this->db->select('ref_no, filing_status, filing_no,created_at');
 			$this->db->from('complainant_details_parta');
 			$this->db->where('filing_status',FALSE);
 			$this->db->where('flag','EF');
 			$this->db->where('ref_no is NOT NULL', NULL, FALSE);
 			$this->db->where('filing_no is NULL', NULL, FALSE);
+			$this->db->where('age_years is NULL', NULL, FALSE);
 			$this->db->where('user_id',$user_id);
 			$this->db->order_by('ref_no');
-			$query = $this->db->get();
-			return $query->result();
+			$query = $this->db->get();	
+
+			echo $this->db->last_query();	die;											
+			return $query->result();*/
+
+
+			$this->db->select('ref_no, filing_status, filing_no,created_at');
+			$this->db->where('user_id',$user_id);
+			$this->db->where('filing_no is NULL', NULL, FALSE);
+			$this->db->where('ref_no is NOT NULL', NULL, FALSE);
+			$this->db->where('age_years is NOT NULL', NULL, FALSE);
+			$this->db->where('filing_status',false);
+			$this->db->order_by('ref_no');
+
+			$query = $this->db->get('complainant_details_parta');
+
+			//echo $this->db->last_query();die();
+				return $query->result();
 
 		} 
 
@@ -547,6 +564,7 @@ function get_pub_pen_count($user_id)
 			$this->db->where('user_id',$user_id);
 			$this->db->where('filing_no is NULL', NULL, FALSE);
 			$this->db->where('ref_no is NOT NULL', NULL, FALSE);
+			$this->db->where('age_years is NOT NULL', NULL, FALSE);
 			$this->db->where('filing_status',false);
 
 			$query = $this->db->get('complainant_details_parta');
@@ -600,7 +618,7 @@ function get_pub_completed_count($user_id)
 		function get_re_entry_complaints($user_id){  
 
 
-			$this->db->select('A.filing_status,A.ref_no, A.filing_no,A.dt_of_filing,C.ps_sur_name,C.ps_first_name,C.ps_mid_name');
+			$this->db->select('A.filing_status,A.ref_no, A.filing_no,A.dt_of_filing,A.defects_pdf_url,C.ps_sur_name,C.ps_first_name,C.ps_mid_name');
 			$this->db->from('complainant_details_parta A');
 			$this->db->join('public_servant_partc C', 'A.filing_no = C.filing_no');
 			$this->db->where('A.filing_status',FALSE);			

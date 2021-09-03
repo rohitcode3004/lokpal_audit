@@ -65,11 +65,12 @@
             }
         }
 
-        $('body').on('keyup', 'input', function(e){
-    if(e.keyCode > 128){
+$('body').on('keyup', 'input', function(e){
+  if(e.keyCode > 128 && (!(e.keyCode > 186 && e.keyCode < 223))){     
     var tttt = this.id;
+      document.getElementById(tttt).value = "";
     alert('Only english language is allowed');
-    document.getElementById(tttt).value = "";
+  
     //event.preventDefault();
     //return false;
   }

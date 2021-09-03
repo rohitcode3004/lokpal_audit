@@ -109,10 +109,10 @@
             dataType: 'json',
             success: function(data) {
                 console.log(data);
-                if(data.is_pending > 3){
+                if(data.is_pending >= 1){
                   alert('Complete existing complaint first to lodge a fresh complaint');
                   // window.location.reload(); 
-                }else if(data.is_pending <= 3){
+                }else if(data.is_pending = 1){
                   //alert('Do filing');
                   window.location='filing'
 

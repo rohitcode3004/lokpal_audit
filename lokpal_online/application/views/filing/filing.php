@@ -457,7 +457,7 @@ $(window).on('load', function() {
                       <option value="">Select state</option>
                       <?php foreach($state as $row):?> 
 
-                      <?php if (!empty($state1)){ ?>
+                      <?php if (!empty($state3)){ ?>
                            <option value="<?php echo $row->state_code;?>" <?php echo (@$state3 == $row->state_code) ? 'selected' : '' ?>> <?php echo $row->name; ?> </option>
                          <?php }else{?>
                           <option value="<?php echo $row->state_code; ?>" <?php echo set_select('c_state_id',  $row->state_code); ?>><?php echo $row->name; ?></option>
