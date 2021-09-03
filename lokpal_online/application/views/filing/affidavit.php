@@ -36,10 +36,6 @@ $this->load->helper("date_helper");
           <div class="panel-body">
             <div class="row">
               <div class="col-md-12">  
-              <!-- Image loader -->
-              <div id='wait' style='display: none'>
-                <img src='<?php echo base_url(); ?>assets/images/loader.gif'>
-              </div>
             
   <form id="affidavitform" class="form-horizontal" role="form" method="post" action='<?= base_url();?>affidavit/exportToPdf'  name="affidavitform" enctype="multipart/form-data">
 

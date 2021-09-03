@@ -112,29 +112,22 @@
 
 						<div class="row">
 							<div class="col-md-12">
-									<form id="myForm" class="" action="<?php echo base_url();?>scrutiny/openedit_submit" method="post" id="" enctype="multipart/form-data">
-							
-						<br>
-						
-						<div class="form-group" id="" style="">  
-						    <label class="control-label" for="doc_upload">Upload document if any</label>
-
-						    <input type="file" class="form-control order_upload" name="doc_upload" id="doc_upload">
-
-						</div>
-						
-
- 						<input type="hidden" name="filing_no" value="<?php echo  $filing_no; ?>">
-
-						<!--<div class="form-group">
-							<div class="col-sm-12">
-								<input id="chbox" type="checkbox"> Check me out </label>
-							</div>
-						</div>-->
-
-								<button class="btn btn-danger" type="submit" value="Submit">Submit</button>
-	
-			</form>
+								<form id="myForm" class="form-horizontal" action="<?php echo base_url();?>scrutiny/openedit_submit" method="post" id="" enctype="multipart/form-data">						
+									<div class="form-group">  
+										<div class="col-md-4 col-sm-8 col-xs-8">
+						    				<label class="control-label " for="doc_upload">Upload document if any</label>
+						    				<input type="file" class="form-control order_upload" name="doc_upload" id="doc_upload">
+						    			</div>
+						    			<div class="col-md-4 col-sm-4 col-xs-4">
+						    				<input type="hidden" name="filing_no" value="<?php echo  $filing_no; ?>">
+											<button class="btn btn-lg btn-danger mt-30" type="submit" value="Submit">Submit</button>
+						    			</div>
+									</div>
+									
+									<div class="form-group">
+ 										
+									</div>
+								</form>
 
 							</div>
 						</div>

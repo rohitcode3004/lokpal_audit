@@ -110,16 +110,13 @@
 			<div class="modal-dialog modal-dialog-centered" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLongTitle">Scrutiny</h5>
+						<h5 class="modal-title" id="exampleModalLongTitle">Submit Scrutiny Report</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<div class="modal-body">
-						
-					</div>
 					<input type="hidden" id="fn" name="fn" value="<?php echo $filing_no ?>">
-					<div class="modal-footer" style="text-align: left;">
+					<div class="modal-footer" style="text-align: center;">
 						<button type="button" class="btn btn-danger submit-scrutiny">Submit scrutiny report<br> without complaint no.</button>
 						<button type="button" class="btn btn-success submit-scrutiny-compno">Submit scrutiny report<br> and generate complaint no.</button>
 					</div>
