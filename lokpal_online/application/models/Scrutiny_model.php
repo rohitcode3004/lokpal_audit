@@ -23,13 +23,14 @@ class Scrutiny_model extends CI_Model{
 	}
 
 	function get_scrutiny_pen_complaints_def(){  
-		$this->db->select('C.ref_no, C.sur_name, C.mid_name, C.gazzette_notification_url, C.first_name, C.dt_of_filing, S.filing_no, S.scrutiny_status,S.defective, S.objections');
+		$this->db->select('C.ref_no, C.sur_name, C.mid_name, C.gazzette_notification_url, C.first_name, C.dt_of_filing, S.filing_no, S.scrutiny_status,S.defective, S.objections, C.openforedit');
 		$this->db->from('scrutiny S');
 		$this->db->join('complainant_details_parta C', 'S.filing_no = C.filing_no');
 		//$this->db->join('scrutinyteam_master T', 'S.level = T.level_id');
 		//$this->db->where('T.roleid', $role_id);
 		$this->db->where('S.scrutiny_status', 'f');
 		$this->db->where('S.defective', true);
+		$this->db->where('C.openforedit', false);
 		$this->db->order_by('C.dt_of_filing','ASC');
 		//$this->db->order_by('S.filing_no','ASC');
 		$query = $this->db->get();
@@ -750,7 +751,7 @@ function status_edit_open_complaint_history($filing_no, $flag){
     }
 
 
-function status_edit_open_complaint($id, $flag)
+function status_edit_open_complaint($id, $flag, $db_path)
 		{ 	
 			$ts = date('Y-m-d H:i:s', time());	
 			$this->db->where('filing_no', $id);
@@ -759,6 +760,7 @@ function status_edit_open_complaint($id, $flag)
 									'filing_status' => 'false',
 									'openforedit' => 'true',
 									'updated_at' => $ts,																			
+									'defects_pdf_url' => $db_path,																			
 								);
 				$this->db->update('complainant_details_parta', $upd_data); 
 			}

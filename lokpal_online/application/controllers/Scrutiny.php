@@ -99,7 +99,7 @@ class Scrutiny extends CI_Controller {
 			//print_r($data['role']);die;
 
 		$data['scrpen_comps'] = $this->scrutiny_model->get_scrutiny_pen_complaints_def();
-		$data['scrdef_comps'] = $this->scrutiny_model->get_scrutiny_def_complaints($data['user']['role']);
+		//$data['scrdef_comps'] = $this->scrutiny_model->get_scrutiny_def_complaints($data['user']['role']);
 
 			//echo "<pre>";
 	  		//print_r($data['scrpen_comps']);die('kk');
@@ -4654,6 +4654,138 @@ public function status_open_for_edit_complaint(){
 }
 
 
+	public function openedit()
+	{	
+		if($this->input->post('filing_no'))
+		{
+				//print_r($this->input->post('complaint_no'));die('here');
+			$data['user'] = $this->login_model->getRows($this->con);
+
+	           // print_r($data['user']['id']);die;
+
+			$data['menus'] = $this->menus_lib->get_menus($data['user']['role']);
+			$filing_no = $this->input->post('filing_no');
+			$data['filing_no'] = $filing_no;
+
+
+		//$data['last_timestamp'] = $last_remarks[0]->updated_date;
+	      	//$this->load->view('templates/front/header2.php',$data);
+
+				$this->load->view('templates/front/SC_Header.php',$data);
+
+				$this->load->view('scrutiny/pdf_checklist_defect.php',$data);
+
+				$this->load->view('templates/front/CE_Footer.php',$data);
+
+		}else
+		{
+			redirect('/scrutiny/dashboard');
+		}
+	}
+
+		public function openedit_submit()
+	{	
+		if($this->input->post('filing_no'))
+		{
+			//print_r($_FILES['doc_upload']);die;
+			if(isset($_FILES['doc_upload'])){
+			//print_r($_FILES);die;
+			$filing_no = $this->input->post('filing_no');
+			$config['upload_path']   = './cdn/defect_letter/'; 
+	        $config['allowed_types'] = 'pdf'; 
+	        //$config['max_size']      = 2000; 
+	       	$config['file_name'] = 'defect_letter_'.$filing_no.'.pdf';
+
+	        $this->upload->initialize($config);
+	        $this->load->library('upload', $config);
+
+	        if ( ! $this->upload->do_upload('doc_upload')) {
+
+	        
+	            $error = array('error' => $this->upload->display_errors()); 
+	            //print_r($error['error']);die;
+	            $this->session->set_flashdata('upload_error', $error['error']);
+	            $data['user'] = $this->login_model->getRows($this->con);
+
+	           // print_r($data['user']['id']);die;
+
+				$data['menus'] = $this->menus_lib->get_menus($data['user']['role']);
+				$filing_no = $this->input->post('filing_no');
+				$data['filing_no'] = $filing_no;
+
+		//$data['last_timestamp'] = $last_remarks[0]->updated_date;
+	      	//$this->load->view('templates/front/header2.php',$data);
+
+				$this->load->view('templates/front/SC_Header.php',$data);
+
+				$this->load->view('scrutiny/pdf_checklist_defect.php',$data);
+
+				$this->load->view('templates/front/CE_Footer.php',$data);
+
+	         }else{
+	         	//die('correct pdf inserteds');
+					//echo $data[0].' : '.$data[1];
+
+			$id=$filing_no;	
+			$db_path = 'cdn/defect_letter/defect_letter_'.$filing_no.'.pdf';			
+					// $listing_date=$data[1];			
+					//echo $id." : ".$listing_date." ::: ";
+					// $listing_date = get_entrydate($listing_date);
+			$query1 = $this->scrutiny_model->status_edit_open_complaint_history($id, '1');	
+			
+			$modifycounter1 = $this->scrutiny_model->status_edit_open_complaint($id, '1', $db_path); 
+
+			$comp_cap = get_parta_comptype_fn($id);
+			 if($comp_cap != 1){
+
+			$query2 = $this->scrutiny_model->status_edit_open_complaint_history($id, '2');	
+			
+			$modifycounter2 = $this->scrutiny_model->status_edit_open_complaint($id, '2', $db_path);
+		}else{
+			$query2 = 1;
+			$modifycounter2 = 1;
+		}
+
+			$query3 = $this->scrutiny_model->status_edit_open_complaint_history($id, '3');	
+			
+			$modifycounter3 = $this->scrutiny_model->status_edit_open_complaint($id, '3', $db_path);
+
+
+	if($query1 && $modifycounter1 && $query2 && $modifycounter2 && $query3 && $modifycounter3){
+			$this->session->set_flashdata('success_msg', 'Successfully Forwarded the Complaint to Complainant for Resubmission');
+			redirect('scrutiny/dashboard_def');
+
+	}else{
+		$this->session->set_flashdata('error_msg', 'Please try again');
+			redirect('scrutiny/dashboard_def');
+	}
+	         }
+
+	     }else{
+
+			$data['user'] = $this->login_model->getRows($this->con);
+
+	           // print_r($data['user']['id']);die;
+
+			$data['menus'] = $this->menus_lib->get_menus($data['user']['role']);
+			$filing_no = $this->input->post('filing_no');
+			$data['filing_no'] = $filing_no;
+
+
+		//$data['last_timestamp'] = $last_remarks[0]->updated_date;
+	      	//$this->load->view('templates/front/header2.php',$data);
+
+				$this->load->view('templates/front/SC_Header.php',$data);
+
+				$this->load->view('scrutiny/pdf_checklist_defect.php',$data);
+
+				$this->load->view('templates/front/CE_Footer.php',$data);
+		}
+		}else
+		{
+			redirect('/scrutiny/dashboard');
+		}
+	}
 
 
 }
