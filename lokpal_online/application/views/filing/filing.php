@@ -93,7 +93,6 @@ $(window).on('load', function() {
           <div class="panel-body">
             <div class="row">
               <div class="col-md-12">
-
           <form id="filingform" class="form-horizontal" role="form" method="post" action='<?= base_url();?>filing/create'  name="filingform" enctype="multipart/form-data">
             <div class="form_error">
               <?php //echo validation_errors(); ?>
@@ -234,7 +233,7 @@ $(window).on('load', function() {
               </div>
               <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
                 <label for="identity_proof_no"><?php print_r($this->label->get_short_name($elements, 19)); ?></label>
-                <input type="text" class="form-control" name="identity_proof_no" value="<?php echo set_value('identity_proof_no', @$myArray[0]->identity_proof_no); ?>" id="identity_proof_no" maxlength="500" placeholder="" hidden="true">
+                <input type="text" class="form-control" name="identity_proof_no" value="<?php echo set_value('identity_proof_no', base64_decode(@$myArray[0]->identity_proof_no)); ?>" id="identity_proof_no" maxlength="500" placeholder="" hidden="true">
               </div>
               <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
                 <label for="identity_proof_doi"><?php print_r($this->label->get_short_name($elements, 20)); ?></label>
@@ -258,6 +257,9 @@ $(window).on('load', function() {
                 <div class="error" id="identity_proof_upload_error"><?php echo form_error('identity_proof_upload'); ?></div>    
                 <label><?php if($identity_upload !='')  {?>
                 <a href="<?php echo base_url();?><?php echo $identity_upload; ?>" target="_blank" alt="">show Uploaded document </a>
+                  <input type='hidden' name='identity_proof_upload_exist' id='identity_proof_upload_exist' value='<?php echo $identity_upload; ?>' />
+                  <?php } else{?>
+                     <input type='hidden' name='identity_proof_upload_exist' id='identity_proof_upload_exist' value='' />                 
                   <?php } ?>
                 </label>
               </div>
@@ -287,7 +289,8 @@ $(window).on('load', function() {
               </div>
               <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
                 <label for="idres_proof_no"><?php print_r($this->label->get_short_name($elements, 25)); ?></label>
-                <input type="text" class="form-control" name="idres_proof_no" id="idres_proof_no" value="<?php echo set_value('idres_proof_no',(@$myArray[0]->idres_proof_no)); ?>" maxlength="500" placeholder="">
+                <input type="text" class="form-control" name="idres_proof_no" id="idres_proof_no" value="<?php echo set_value('idres_proof_no',
+                base64_decode(@$myArray[0]->idres_proof_no)); ?>" maxlength="500" placeholder="">
               </div>
               <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
                 <label for="idres_proof_doi"><?php print_r($this->label->get_short_name($elements, 26)); ?></label> 
@@ -312,6 +315,10 @@ $(window).on('load', function() {
 
                 <label><?php if($residence_upload !='')  {?>
                 <a href="<?php echo base_url();?><?php echo $residence_upload; ?>" target="_blank" alt="">show Uploaded document </a>
+                 <input type='hidden' name='a_affidavit_upload_exist' id='a_affidavit_upload_exist' value='<?php echo $residence_upload; ?>' />
+                  <?php } else{?>
+                     <input type='hidden' name='a_affidavit_upload_exist' id='a_affidavit_upload_exist' value='' />
+                                
                 <?php } ?> </label> 
               </div>
             </div>
@@ -794,7 +801,21 @@ function showDiv(divId, element)
     $().ready(function() {
      
     // validate signup form on keyup and submit
+    var identity_proof_upload_st = true;
+    var identity_proof_upload_exist = $('#identity_proof_upload_exist').val();
 
+    if(identity_proof_upload_exist != '' && identity_proof_upload_exist != 'undefined')
+    {
+      identity_proof_upload_st = false;
+    }
+
+    var a_affidavit_upload_st = true;
+    var a_affidavit_upload_exist = $('#a_affidavit_upload_exist').val();
+
+    if(a_affidavit_upload_exist != '' && a_affidavit_upload_exist != 'undefined')
+    {
+      a_affidavit_upload_st = false;
+    }
 
     $("#filingform").validate({
      
@@ -842,9 +863,8 @@ function showDiv(divId, element)
         email: true,          
       },
       
-
-      identity_proof_upload: {required: true, accept: "application/pdf"},
-      a_affidavit_upload: {required: true, accept: "application/pdf"},
+        identity_proof_upload: {required: identity_proof_upload_st, accept: "application/pdf"},
+       identity_proof_upload: {required: a_affidavit_upload_st, accept: "application/pdf"},
       
       gender: { // <- NAME of every radio in the same group
         required: true

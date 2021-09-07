@@ -353,7 +353,7 @@ $elements = $this->label->view(1);
 
                     <div class="col-md-4 mb-15">
                       <label for="aidentity_proof_no"><?php print_r($this->label->get_short_name($elements, 84)); ?></label>
-                      <input type="text" class="form-control" name="aidentity_proof_no" id="aidentity_proof_no" value="<?php if(isset($partb)) echo $partb['aidentity_proof_no']; else echo set_value('aidentity_proof_no');?>" placeholder="" maxlength="500">
+                      <input type="text" class="form-control" name="aidentity_proof_no" id="aidentity_proof_no" value="<?php if(isset($partb)) echo base64_decode($partb['aidentity_proof_no']); else echo set_value('aidentity_proof_no');?>" placeholder="" maxlength="500">
                     </div>
 
                     <div class="col-md-4 mb-15">
@@ -415,7 +415,8 @@ $elements = $this->label->view(1);
 
                     <div class="col-md-4 mb-15">
                       <label for="aidres_proof_no"><?php print_r($this->label->get_short_name($elements, 114)); ?></label>
-                      <input type="text" class="form-control" name="aidres_proof_no" id="aidres_proof_no" value="<?php   if(isset($partb)) echo $partb['aidres_proof_no']; else echo set_value('aidres_proof_no');?>" placeholder="" maxlength="500">
+                      <input type="text" class="form-control" name="aidres_proof_no" id="aidres_proof_no" value="<?php   if(isset($partb)) 
+                      echo base64_decode($partb['aidres_proof_no']); else echo set_value('aidres_proof_no');?>" placeholder="" maxlength="500">
                     </div>
 
                     <div class="col-md-4 mb-15">
@@ -840,6 +841,27 @@ $("input[name$='orgn_referred_india']").click(function() {
   $().ready(function() {
  
     // validate signup form on keyup and submit
+
+     var identity_proof_upload_st = true;
+    var identity_proof_upload_exist = $('#identity_proof_upload_exist').val();
+    if(identity_proof_upload_exist != '' && identity_proof_upload_exist != 'undefined')
+    {
+      identity_proof_upload_st = false;
+    }
+    var aidres_proof_upload_st = true;
+    var aidres_proof_upload_exist = $('#aidres_proof_upload_exist').val();
+    if(aidres_proof_upload_exist != '' && aidres_proof_upload_exist != 'undefined')
+    {
+     aidres_proof_upload_st = false;
+    }
+    var auth_doc_upload_st = true;
+    var auth_doc_upload_exist = $('#auth_doc_upload_exist').val();
+    if(auth_doc_upload_exist != '' && auth_doc_upload_exist != 'undefined')
+    {
+      auth_doc_upload_st = false;
+    }
+
+
     $("#appletfilingform").validate({
  
       onkeyup: false,
@@ -927,10 +949,10 @@ $("input[name$='orgn_referred_india']").click(function() {
           maxlength:10
 
         },
-
-        identity_proof_upload: {required: true, accept: "application/pdf"},
-        aidres_proof_upload: {required: true, accept: "application/pdf"},
-        auth_doc_upload: {required: true, accept: "application/pdf"},
+       
+        identity_proof_upload: {required: identity_proof_upload_st, accept: "application/pdf"},
+        aidres_proof_upload: {required:  aidres_proof_upload_st, accept: "application/pdf"},
+        auth_doc_upload: {required: auth_doc_upload_st, accept: "application/pdf"},
 
         gender: { // <- NAME of every radio in the same group
             required: true

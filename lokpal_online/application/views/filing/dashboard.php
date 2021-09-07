@@ -25,14 +25,12 @@
 
             <div class="table-responsive">
               <span id="success_message"></span>
-              <table id="mytable" class="table table-bordred table-striped">
-                               
+              <table id="mytable" class="table table-bordred table-striped">                               
                 <thead>                
                   <th>S.No.</th>             
-                    <th>Date of Last Entry</th>
-                      <th>Action</th>
+                    <th>Date of Last Entry</th>                     
                     <th>Public Servant Name</th>
-                
+                     <th>Action</th>                
                 </thead>
                 <tbody>
                     <?php    
@@ -57,16 +55,7 @@
                                 echo "Not submitted";
                               }
                         ?></td>-->
-                    <td>
-                      <?php
-                      $comp_no=get_filing_no($r, $u);
-                      $status = $comp_no['status'];
-                      if($status == 't'){ ?>
-                      <a href="<?php echo base_url().'affidavit/affidavit_detail/'.$r ?>">Go to application</a>
-                      <?php }else{ ?>
-                      <a href="<?php echo base_url().'filing/filing/'.$r ?>">Go to application</a>
-                      <?php } ?>
-                    </td>
+                   
 
                      <td><?php
                    $sql = "select ps_sur_name,ps_mid_name,ps_first_name from public_servant_partc where ref_no =".$row->ref_no."";
@@ -80,6 +69,18 @@
           ?></td>
 
                  <?php endforeach;?>
+
+
+                  <td>
+                      <?php
+                      $comp_no=get_filing_no($r, $u);
+                      $status = $comp_no['status'];
+                      if($status == 't'){ ?>
+                      <a href="<?php echo base_url().'affidavit/affidavit_detail/'.$r ?>">Go to application</a>
+                      <?php }else{ ?>
+                      <a href="<?php echo base_url().'filing/filing/'.$r ?>">Go to application</a>
+                      <?php } ?>
+                    </td>
                     
                   </tr>
                   

@@ -182,7 +182,7 @@ $this->load->helper("date_helper");
             ?>
             
             <td><?php echo  $identitydesc; ?></td>
-            <td><?php echo  $farma[0]->identity_proof_no ?? ''; ?></td>
+            <td><?php echo  base64_decode($farma[0]->identity_proof_no ?? ''); ?></td>
             <td><?php 
               $farma[0]->identity_proof_doi=get_displaydate($farma[0]->identity_proof_doi);
               echo  $farma[0]->identity_proof_doi ?? ''; ?></td>
@@ -225,7 +225,7 @@ $this->load->helper("date_helper");
               } 
             ?>     
             <td><?php echo  $identitydesc; ?></td>
-            <td><?php echo  $farma[0]->idres_proof_no ?? ''; ?></td>
+            <td><?php echo  base64_decode($farma[0]->idres_proof_no ?? ''); ?></td>
             <td><?php echo  get_displaydate($farma[0]->idres_proof_doi ?? ''); ?></td>
             <td><?php echo  $farma[0]->idres_proof_vupto ?? ''; ?></td>       
             <td><?php echo  $farma[0]->idres_proof_iauth ?? ''; ?></td>
@@ -685,7 +685,7 @@ $this->load->helper("date_helper");
             <tr>  
               <td><?php echo  $wcountryname; ?></td>
               <td><?php echo $identitydesc; ?></td>
-              <td><?php echo  $farmb[0]->aidentity_proof_no; ?></td>
+              <td><?php echo  base64_decode($farmb[0]->aidentity_proof_no); ?></td>
               <td><?php
               $farmb[0]->aidentity_proof_doi=get_displaydate($farmb[0]->aidentity_proof_doi);
                  echo $farmb[0]->aidentity_proof_doi ?? ''; ?></td>
@@ -729,7 +729,7 @@ $this->load->helper("date_helper");
           <tbody>
             <tr>  
                <td><?php echo  $wcountryname; ?></td>
-                  <td><?php echo  $farmb[0]->aidres_proof_no; ?></td>
+                  <td><?php echo  base64_decode($farmb[0]->aidres_proof_no); ?></td>
                 <td><?php
                 $farmb[0]->aidres_proof_doi=get_displaydate($farmb[0]->aidres_proof_doi); 
 
@@ -963,7 +963,7 @@ $this->load->helper("date_helper");
         echo "<tr>";
         echo "<td>".$i."</td>";
         echo "<td>".$row->Identity_proof_desc ?? ''."</td>";
-        echo "<td>".$row->ob_identity_proof_no ?? ''."</td>";
+        echo "<td>".base64_decode($row->ob_identity_proof_no ?? '')."</td>";
         echo "<td>".get_displaydate($row->ob_identity_proof_doi ?? '')."</td>";
          echo "<td>".get_displaydate($row->ob_identity_proof_vupto ?? '')."</td>";
         echo "<td>".$row->ob_identity_proof_iauth ?? ''."</td>";
@@ -991,7 +991,7 @@ $this->load->helper("date_helper");
         echo "<tr>";
         echo "<td>".$i."</td>";
         echo "<td>".$row->idres_proof_desc ?? ''."</td>";
-        echo "<td>".$row->ob_idres_proof_no ?? ''."</td>";
+        echo "<td>".base64_decode($row->ob_idres_proof_no ?? '')."</td>";
         echo "<td>".get_displaydate($row->ob_idres_proof_doi ?? '')."</td>";
          echo "<td>".get_displaydate($row->ob_idres_proof_vupto ?? '')."</td>";
         echo "<td>".$row->ob_idres_proof_iauth ?? ''."</td>";
@@ -1565,7 +1565,7 @@ $this->load->helper("date_helper");
             <?php 
             } 
             else { ?>
-              <button type="button" class="btn btn-danger final_submit" id="<?php echo $ref_no; ?>">Final Submit</button>
+              <button type="button" class="btn btn-danger final_submit" id="<?php echo $ref_no; ?>">Submit Application</button>
             <?php } 
           ?>
         </div>
