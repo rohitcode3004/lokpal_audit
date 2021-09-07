@@ -266,6 +266,28 @@ $(document).ready(function(){
 <script type="text/javascript">
 
   $().ready(function() {
+    var sum_fact_allegation_upload_st = true;
+    var sum_fact_allegation_upload_exist = $('#sum_fact_allegation_upload_exist').val();
+    if(sum_fact_allegation_upload_exist != '' && sum_fact_allegation_upload_exist != 'undefined')
+    {
+      sum_fact_allegation_upload_st = false;
+    }
+
+    var detail_offence_upload_st = true;
+    var detail_offence_upload_exist = $('#detail_offence_upload_exist').val();
+    if(detail_offence_upload_exist != '' && detail_offence_upload_exist != 'undefined')
+    {
+      detail_offence_upload_st = false;
+    }
+
+    var relevant_evidence_upload_st = true;
+    var relevant_evidence_upload_exist = $('#relevant_evidence_upload_exist').val();
+    if(relevant_evidence_upload_exist != '' && relevant_evidence_upload_exist != 'undefined')
+    {
+      relevant_evidence_upload_st = false;
+    }
+
+
  
     // validate signup form on keyup and submit
     $("#respondentform").validate({
@@ -314,10 +336,9 @@ $(document).ready(function(){
           maxlength:10
 
         },
-
-        sum_fact_allegation_upload: {required: true, accept: "application/pdf"},
-        detail_offence_upload: {required: true, accept: "application/pdf"},
-        relevant_evidence_upload: {required: true, accept: "application/pdf"},
+        sum_fact_allegation_upload: {required: sum_fact_allegation_upload_st, accept: "application/pdf"},
+        detail_offence_upload: {required: detail_offence_upload_st, accept: "application/pdf"},
+        relevant_evidence_upload: {required: relevant_evidence_upload_st, accept: "application/pdf"},
 
         gender: { // <- NAME of every radio in the same group
             required: true
@@ -650,6 +671,10 @@ $(document).ready(function(){
         <div class="error" id="sum_fact_allegation_upload_error"><?php echo form_error('sum_fact_allegation_upload'); ?></div>
         <?php if($sum_fact_allegation_upload !='')  {?>
         <div><a href="<?php echo base_url().$sum_fact_allegation_upload; ?>" target="_blank" alt="">show uploaded document </a></div>
+         <input type='hidden' name='sum_fact_allegation_upload_exist' id='sum_fact_allegation_upload_exist' value='<?php echo $sum_fact_allegation_upload; ?>' />
+                  <?php } else{?>
+                     <input type='hidden' name='sum_fact_allegation_upload_exist' id='sum_fact_allegation_upload_exist' value='' />             
+                
         <?php } ?>
       </div>
     </div>
@@ -671,6 +696,10 @@ $(document).ready(function(){
         <div class="error" id="detail_offence_upload_error"><?php echo form_error('detail_offence_upload'); ?></div>
         <?php if($detail_offence_upload !='')  {?>
         <div><a href="<?php echo base_url().$detail_offence_upload; ?>" target="_blank" alt="">show uploaded document </a></div>
+
+         <input type='hidden' name='detail_offence_upload_exist' id='detail_offence_upload_exist' value='<?php echo $detail_offence_upload; ?>' />           <?php } else{?>
+                     <input type='hidden' name='detail_offence_upload_exist' id='detail_offence_upload_exist' value='' />    
+
       <?php } ?>
       </div>
     </div>
@@ -712,6 +741,11 @@ $(document).ready(function(){
         <div>
         <?php if($relevant_evidence_upload !='')  {?>
         <a href="<?php echo base_url().$relevant_evidence_upload; ?>" target="_blank" alt="">show uploaded document </a>
+
+         <input type='hidden' name='relevant_evidence_upload_exist' id='relevant_evidence_upload_exist' value='<?php echo 
+         $relevant_evidence_upload; ?>' />  
+                  <?php } else{?>
+                     <input type='hidden' name='relevant_evidence_upload_exist' id='relevant_evidence_upload_exist' value='' /> 
         <?php } ?>
         </div>
       </div>

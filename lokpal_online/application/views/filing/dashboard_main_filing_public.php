@@ -40,7 +40,7 @@
 							  					<?php echo $pen_comps; ?>
 							  				</span>
 							  			</div>
-							  			<div class="widgets-content">Complete the Draft Complaints</div>
+							  			<div class="widgets-content">Complete the Draft Complaint</div>
 							  			<i class="fa fa-sitemap transparent_icon" aria-hidden="true"></i>
 							  		</a>
 							  	</div>
@@ -110,7 +110,7 @@
             success: function(data) {
                 console.log(data);
                 if(data.is_pending >= 1){
-                  alert('Complete existing complaint first to lodge a fresh complaint');
+                  alert('Please Complete the draft Complaint');
                   // window.location.reload(); 
                 }else if(data.is_pending = 1){
                   //alert('Do filing');

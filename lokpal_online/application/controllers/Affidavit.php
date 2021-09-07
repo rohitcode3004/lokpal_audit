@@ -1333,7 +1333,7 @@ $getallwidget =
 
 <tr>
 <td style="border: 1px solid black;" align="center"></td>
-<td style="border: 1px solid black;" align"center">(a) Number</td><td style="border: 1px solid black;">'.$myArray[0]->identity_proof_no.' </td>
+<td style="border: 1px solid black;" align"center">(a) Number</td><td style="border: 1px solid black;">'.base64_decode($myArray[0]->identity_proof_no).' </td>
 </tr>
 
 <tr>
@@ -1636,7 +1636,7 @@ enclosed?
   <tr>
   <td style="border: 1px solid black;"></td>
   <td style="border: 1px solid black;">(a)Number<br>                 
-  </td><td style="border: 1px solid black;">'.$aidentity_proof_no.'</td>
+  </td><td style="border: 1px solid black;">'.base64_decode($aidentity_proof_no).'</td>
   </tr>
 
   <tr>

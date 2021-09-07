@@ -33,7 +33,7 @@ $this->load->helper("date_helper");
                     <th>Date of Filing</th>
                       <th>Diary No</th>                     
                     <th>Name of Public Servant</th>
-                    <th>Defects Letter</th>
+                    <th>Defect Description</th>
                      <th>Action</th>
                 
                 </thead>
@@ -55,7 +55,7 @@ $this->load->helper("date_helper");
 
 
                              <?php if($row->defects_pdf_url ?? '' !=''){?>
-                  <td><a href="<?php echo base_url();?><?php echo $row->defects_pdf_url ?? ''; ?>" target="_blank" alt="">Show Defects pdf </a>
+                  <td><a href="<?php echo base_url();?><?php echo $row->defects_pdf_url ?? ''; ?>" target="_blank" alt="">Show Letter </a>
                   </td> 
                     <?php } ?>
                     <td>

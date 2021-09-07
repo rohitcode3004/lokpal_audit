@@ -1,6 +1,7 @@
 <?php //include(APPPATH.'views/templates/front/header2.php');
 $elements = $this->label->view(1);
 ?>
+
 <!-- Bootstrap Datepicker  Css -->
 <link href="<?php echo base_url();?>assets/admin_material/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
   <script src="<?php echo base_url();?>assets/bootstrap/js/bootstrap-datepicker.js"></script>
@@ -80,14 +81,27 @@ $elements = $this->label->view(1);
         $('#ob_nationality_id').val(json[0].ob_nationality_id);
        // $('#affect_dist_id').val(json[0].affect_dist_id);
          $('#affect_state_id').val(json[0].affect_state_id); 
-        $('#ob_identity_proof_id').val(json[0].ob_identity_proof_id);
-        $('#ob_identity_proof_no').val(json[0].ob_identity_proof_no);
+        $('#ob_identity_proof_id').val(json[0].ob_identity_proof_id);      
+       // $('#ob_identity_proof_no').val(json[0].ob_identity_proof_no);
+
+      var ob_identity_proof_no=json[0].ob_identity_proof_no;
+      var ob_identity_proof_no = atob(ob_identity_proof_no);
+      $('#ob_identity_proof_no').val(ob_identity_proof_no);
+        
+     // alert(ob_identity_proof_no);      
+
         $('#ob_identity_proof_doi').val(json[0].ob_identity_proof_doi);
         $('#ob_identity_proof_vupto').val(json[0].ob_identity_proof_vupto);
         $('#ob_identity_proof_iauth').val(json[0].ob_identity_proof_iauth);
         $('#ob_idres_proof_id').val(json[0].ob_idres_proof_id);
 
-         $('#ob_idres_proof_no').val(json[0].ob_idres_proof_no); 
+        // $('#ob_idres_proof_no').val(json[0].ob_idres_proof_no); 
+
+        var ob_idres_proof_no=json[0].ob_idres_proof_no;
+      var ob_idres_proof_no = atob(ob_idres_proof_no);
+      $('#ob_idres_proof_no').val(ob_idres_proof_no);
+
+
         $('#ob_idres_proof_doi').val(json[0].ob_idres_proof_doi);
         $('#ob_idres_proof_vupto').val(json[0].ob_idres_proof_vupto);
         $('#ob_idres_proof_iauth').val(json[0].ob_idres_proof_iauth);
@@ -214,6 +228,24 @@ function FillBilling(f) {
   $().ready(function() {
  
     // validate signup form on keyup and submit
+
+     var ob_identity_proof_upload_st = true;
+    var ob_identity_proof_upload_exist = $('#ob_identity_proof_upload_exist').val();
+
+    if(ob_identity_proof_upload_exist != '' && ob_identity_proof_upload_exist != 'undefined')
+    {
+      ob_identity_proof_upload_st = false;
+    }
+
+    var ob_idres_proof_upload_st = true;
+    var ob_idres_proof_upload_exist = $('#ob_idres_proof_upload_exist').val();
+
+    if(ob_idres_proof_upload_exist != '' && ob_idres_proof_upload_exist != 'undefined')
+    {
+      ob_idres_proof_upload_st = false;
+    }
+
+
     $("#officebeared").validate({
  
       onkeyup: false,
@@ -286,8 +318,8 @@ function FillBilling(f) {
 
       },
 
-      ob_identity_proof_upload: {required: true, accept: "application/pdf"},
-      ob_idres_proof_upload: {required: true, accept: "application/pdf"},
+      ob_identity_proof_upload: {ob_identity_proof_upload_st, accept: "application/pdf"},
+      ob_idres_proof_upload: {ob_idres_proof_upload_st, accept: "application/pdf"},
 
        gender: { // <- NAME of every radio in the same group
             required: true
@@ -529,7 +561,7 @@ $ref_no=$this->session->userdata('ref_no');
       </div>
       <div class="col-md-6 mb-15">
         <label for="ob_identity_proof_no">(a). Number</label>
-        <input type="text" class="form-control" name="ob_identity_proof_no" id="ob_identity_proof_no" placeholder="" maxlength="50" value="<?php echo set_value('ob_identity_proof_no') ?>">
+        <input type="text" class="form-control" name="ob_identity_proof_no" id="ob_identity_proof_no" placeholder="" maxlength="500" value="<?php echo set_value('ob_identity_proof_no') ?>">
       </div>
     </div>
 
@@ -555,6 +587,9 @@ $ref_no=$this->session->userdata('ref_no');
          <span class="text-danger">The File should not greater than 20 MB (Only pdf file allowed)</span>
          <div class="error" id="identity_proof_upload_error"><?php echo form_error('ob_identity_proof_upload'); ?></div> 
         <div><label><a href="#" id="imgURL" target="_blank" alt="" >show uploaded document </a></label></div>
+
+       
+
       </div>   
     </div>
 
