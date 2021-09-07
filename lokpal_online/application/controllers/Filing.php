@@ -502,14 +502,14 @@ class Filing extends CI_Controller {
 			else
 			{
 				
-				 $identity_proof_no_encrypted=$this->input->post('identity_proof_no');
+				 $identity_proof_no_encrypted=trim($this->input->post('identity_proof_no'));
 				 $identity_proof_no_decrypted = decode($identity_proof_no_encrypted);
-				 $idres_proof_no_encrypted=$this->input->post('idres_proof_no'); 
+				 $idres_proof_no_encrypted=trim($this->input->post('idres_proof_no')); 
 				 $idres_proof_no_decrypted = decode($idres_proof_no_encrypted);
 
 
 
-					     	//echo "here"; die;
+					     	//echo "here"; die;``
 				$curYear = date('Y');
 				$cur_year=$curYear;			
 				$ref_no=$ref_no;
@@ -836,10 +836,10 @@ class Filing extends CI_Controller {
 
 						//echo $nationality_id=($this->input->post('nationality_id'));die;
 
-					     $identity_proof_no_encrypted=$this->input->post('identity_proof_no');
+					     $identity_proof_no_encrypted=trim($this->input->post('identity_proof_no'));
 						 $identity_proof_no_decrypted = decode($identity_proof_no_encrypted);
 
-						 $idres_proof_no_encrypted=$this->input->post('idres_proof_no');
+						 $idres_proof_no_encrypted=trim($this->input->post('idres_proof_no'));
 						 $idres_proof_no_decrypted = decode($idres_proof_no_encrypted);
 
 					     $curYear = date('Y');
