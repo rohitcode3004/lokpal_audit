@@ -46,10 +46,12 @@ if(isset($farma))
 ?>
 
 <script>
-$(window).on('load', function() {
-  var $p_countryid = "<?= $p_country_id; ?>"; 
-   var $c_countryid = "<?= $c_country_id; ?>";
-   if ($p_countryid == "2") {
+ $(document).ready(function(){
+  var p_countryid = "<?= $p_country_id; ?>"; 
+   var c_countryid = "<?= $c_country_id; ?>";
+
+
+   if (p_countryid == "2") {
                 $(".p_country_name_show").show();
                 $(".p_state_distic_hide").hide();
                 $(".same_add_checkbox").hide();                
@@ -58,9 +60,9 @@ $(window).on('load', function() {
                 $(".same_add_checkbox").show();
                 $(".p_country_name_show").hide();
             }
-            if ($c_countryid == "2") {
+            if (c_countryid == "2") {           
                $(".c_country_name_show").show();
-                $(".c_state_distic_hide").hide();
+               $(".c_state_distic_hide").css('display', 'none');
             } else {
                 $(".c_state_distic_hide").show();
                 $(".c_country_name_show").hide();
@@ -1098,6 +1100,7 @@ function ValidateEmail(mail)
         });
 
         $("#c_country_id").change(function () {
+
             if ($(this).val() == "2") {
                 $(".c_country_name_show").show();
                 $(".c_state_distic_hide").hide();
