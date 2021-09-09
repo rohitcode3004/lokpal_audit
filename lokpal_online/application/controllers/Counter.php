@@ -13,6 +13,7 @@ class Counter extends CI_Controller {
 		$this->load->library('html2pdf');
 		$this->load->helper("date_helper");
 		$this->load->library('label');
+		$this->load->helper("user_helper");	
 		$this->load->library('session');
 		$this->load->helper("user_helper");	
 		$this->load->helper("common_helper");	

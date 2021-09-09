@@ -6,6 +6,29 @@
     <script src="<?php echo base_url(); ?>assets/my_assets/js/jquery.waypoints.js"></script>
     <script src="<?php echo base_url(); ?>assets/my_assets/js/jquery.rcounterup.js"></script>
 
+    <script type="text/javascript">
+    // preloader
+      function loader() {
+          $('#ctn-preloader').addClass('loaded');
+          $("#loading").fadeOut(500);
+          // Una vez haya terminado el preloader aparezca el scroll
+      
+          if ($('#ctn-preloader').hasClass('loaded')) {
+              // Es para que una vez que se haya ido el preloader se elimine toda la seccion preloader
+              $('#preloader').delay(900).queue(function () {
+                  $(this).remove();
+              });
+          }
+      }
+      
+      $(window).on('load', function () {
+          loader();
+          wowanimation();
+        mainSlider();
+        counterOn()
+      });
+    </script>
+
     <script>
       jQuery(document).ready(function(){
          jQuery('.refreshCaptcha').on('click', function(){
@@ -65,11 +88,12 @@
             }
         }
 
-        $('body').on('keyup', 'input', function(e){
-    if(e.keyCode > 128){
+$('body').on('keyup', 'input', function(e){
+  if(e.keyCode > 128 && (!(e.keyCode > 186 && e.keyCode < 223))){     
     var tttt = this.id;
+      document.getElementById(tttt).value = "";
     alert('Only english language is allowed');
-    document.getElementById(tttt).value = "";
+  
     //event.preventDefault();
     //return false;
   }

@@ -36,10 +36,6 @@ $this->load->helper("date_helper");
           <div class="panel-body">
             <div class="row">
               <div class="col-md-12">  
-              <!-- Image loader -->
-              <div id='wait' style='display: none'>
-                <img src='<?php echo base_url(); ?>assets/images/loader.gif'>
-              </div>
             
   <form id="affidavitform" class="form-horizontal" role="form" method="post" action='<?= base_url();?>affidavit/exportToPdf'  name="affidavitform" enctype="multipart/form-data">
 
@@ -182,7 +178,7 @@ $this->load->helper("date_helper");
             ?>
             
             <td><?php echo  $identitydesc; ?></td>
-            <td><?php echo  $farma[0]->identity_proof_no ?? ''; ?></td>
+            <td><?php echo  base64_decode($farma[0]->identity_proof_no ?? ''); ?></td>
             <td><?php 
               $farma[0]->identity_proof_doi=get_displaydate($farma[0]->identity_proof_doi);
               echo  $farma[0]->identity_proof_doi ?? ''; ?></td>
@@ -225,7 +221,7 @@ $this->load->helper("date_helper");
               } 
             ?>     
             <td><?php echo  $identitydesc; ?></td>
-            <td><?php echo  $farma[0]->idres_proof_no ?? ''; ?></td>
+            <td><?php echo  base64_decode($farma[0]->idres_proof_no ?? ''); ?></td>
             <td><?php echo  get_displaydate($farma[0]->idres_proof_doi ?? ''); ?></td>
             <td><?php echo  $farma[0]->idres_proof_vupto ?? ''; ?></td>       
             <td><?php echo  $farma[0]->idres_proof_iauth ?? ''; ?></td>
@@ -245,6 +241,7 @@ $this->load->helper("date_helper");
             <th>District</th>
             <th>Pin Code</th>
             <th>Country</th>
+             <th>Country Name</th>
              
           </tr>
         </thead>
@@ -254,24 +251,65 @@ $this->load->helper("date_helper");
             
               <td><?php echo  $farma[0]->p_hpnl ?? ''; ?></td>
             <td><?php 
-            $sql = "select name from master_address where state_code =".$farma[0]->p_state_id." and district_code=0 and sub_dist_code=0 and                        village_code=0 and display='TRUE' order by name asc";
+
+             $farma[0]->p_state_id;
+            if($farma[0]->p_state_id =='')
+            {
+
+              $farma[0]->p_state_id=0;
+            }
+           
+            $sql = "select name from master_address where state_code =".$farma[0]->p_state_id." and district_code=0 and sub_dist_code=0 and village_code=0 and display='TRUE' order by name asc";
 
            // $sql = "select * from identity_residence_proof where idres_proof_id =".$farma[0]->idres_proof_id."";
              $query  = $this->db->query($sql)->result();
-           echo $query[0]->name; ?></td> 
+           $ssname= $query[0]->name ?? '';
+       
+           if($ssname !='')
+           {
+            echo $ssname;
+           }
+           else
+           {
+            echo "";
+           }
+
+
+            ?></td> 
            <td><?php 
+           $farma[0]->p_dist_id;
+            if($farma[0]->p_dist_id =='')
+            {
+
+              $farma[0]->p_dist_id=0;
+            }
+
             $sql="select name,district_code from master_address where state_code=".$farma[0]->p_state_id." and
              district_code=".$farma[0]->p_dist_id." and sub_dist_code=0 and village_code=0 and display='TRUE' order by name asc";
 
            // $sql = "select * from identity_residence_proof where idres_proof_id =".$farma[0]->idres_proof_id."";
              $query  = $this->db->query($sql)->result();
-            echo $query[0]->name ?? ''; ?></td>
+
+             $psname=$query[0]->name ?? '';
+             if($psname !='')
+             {
+             echo $psname;
+             }
+             else
+             {
+              echo "";
+             }
+
+             ?>
+                          </td>
             
            <td><?php echo  $farma[0]->p_pin_code ?? ''; ?></td>
              <td><?php 
             $sql = "select * from nationality where nationality_id=".$farma[0]->p_country_id."";
              $query  = $this->db->query($sql)->result();
              echo $query[0]->nationality_desc ?? ''; ?></td>
+
+              <td><?php echo  $farma[0]->p_country_name ?? ''; ?></td>
           </tr>
              
         </tbody>
@@ -288,7 +326,7 @@ $this->load->helper("date_helper");
             <th>District</th>
             <th>Pin Code</th>
             <th>Country</th>
-             
+             <th>Country Name</th>             
           </tr>
         </thead>
         <tbody>
@@ -297,24 +335,61 @@ $this->load->helper("date_helper");
            
               <td><?php echo  $farma[0]->c_hpnl; ?></td>
             <td><?php 
+
+            $farma[0]->c_state_id;
+            if($farma[0]->c_state_id =='')
+            {
+
+              $farma[0]->c_state_id=0;
+            }
+
+
             $sql = "select name from master_address where state_code =".$farma[0]->c_state_id." and district_code=0 and sub_dist_code=0 and                        village_code=0 and display='TRUE' order by name asc";
 
            // $sql = "select * from identity_residence_proof where idres_proof_id =".$farma[0]->idres_proof_id."";
              $query  = $this->db->query($sql)->result();
-           echo $query[0]->name; ?></td> 
+            $csname=$query[0]->name ?? '';
+             if($csname !='')
+             {
+             echo $csname;
+             }
+             else
+             {
+              echo "";
+             }
+
+            ?></td> 
            <td><?php 
+
+           if($farma[0]->c_district_id=='')
+           {
+            $farma[0]->c_district_id=0;
+           }
+
             $sql="select name,district_code from master_address where state_code=".$farma[0]->c_state_id." and
              district_code=".$farma[0]->c_district_id." and sub_dist_code=0 and village_code=0 and display='TRUE' order by name asc";
 
            // $sql = "select * from identity_residence_proof where idres_proof_id =".$farma[0]->idres_proof_id."";
              $query  = $this->db->query($sql)->result();
-            echo $query[0]->name; ?></td>
+             $dsname=$query[0]->name ?? '';
+             if($dsname !='')
+             {
+             echo $dsname;
+             }
+             else
+             {
+              echo "";
+             }
+
+
+             ?></td>
             
            <td><?php echo  $farma[0]->c_pin_code; ?></td>
              <td><?php 
             $sql = "select * from nationality where nationality_id=".$farma[0]->c_country_id."";
              $query  = $this->db->query($sql)->result();
              echo $query[0]->nationality_desc; ?></td>
+             <td><?php echo  $farma[0]->c_country_name ?? ''; ?></td>
           </tr>
              
         </tbody>
@@ -606,7 +681,7 @@ $this->load->helper("date_helper");
             <tr>  
               <td><?php echo  $wcountryname; ?></td>
               <td><?php echo $identitydesc; ?></td>
-              <td><?php echo  $farmb[0]->aidentity_proof_no; ?></td>
+              <td><?php echo  base64_decode($farmb[0]->aidentity_proof_no); ?></td>
               <td><?php
               $farmb[0]->aidentity_proof_doi=get_displaydate($farmb[0]->aidentity_proof_doi);
                  echo $farmb[0]->aidentity_proof_doi ?? ''; ?></td>
@@ -650,7 +725,7 @@ $this->load->helper("date_helper");
           <tbody>
             <tr>  
                <td><?php echo  $wcountryname; ?></td>
-                  <td><?php echo  $farmb[0]->aidres_proof_no; ?></td>
+                  <td><?php echo  base64_decode($farmb[0]->aidres_proof_no); ?></td>
                 <td><?php
                 $farmb[0]->aidres_proof_doi=get_displaydate($farmb[0]->aidres_proof_doi); 
 
@@ -884,7 +959,7 @@ $this->load->helper("date_helper");
         echo "<tr>";
         echo "<td>".$i."</td>";
         echo "<td>".$row->Identity_proof_desc ?? ''."</td>";
-        echo "<td>".$row->ob_identity_proof_no ?? ''."</td>";
+        echo "<td>".base64_decode($row->ob_identity_proof_no ?? '')."</td>";
         echo "<td>".get_displaydate($row->ob_identity_proof_doi ?? '')."</td>";
          echo "<td>".get_displaydate($row->ob_identity_proof_vupto ?? '')."</td>";
         echo "<td>".$row->ob_identity_proof_iauth ?? ''."</td>";
@@ -912,7 +987,7 @@ $this->load->helper("date_helper");
         echo "<tr>";
         echo "<td>".$i."</td>";
         echo "<td>".$row->idres_proof_desc ?? ''."</td>";
-        echo "<td>".$row->ob_idres_proof_no ?? ''."</td>";
+        echo "<td>".base64_decode($row->ob_idres_proof_no ?? '')."</td>";
         echo "<td>".get_displaydate($row->ob_idres_proof_doi ?? '')."</td>";
          echo "<td>".get_displaydate($row->ob_idres_proof_vupto ?? '')."</td>";
         echo "<td>".$row->ob_idres_proof_iauth ?? ''."</td>";
@@ -1486,7 +1561,7 @@ $this->load->helper("date_helper");
             <?php 
             } 
             else { ?>
-              <button type="button" class="btn btn-danger final_submit" id="<?php echo $ref_no; ?>">Final Submit</button>
+              <button type="button" class="btn btn-danger final_submit" id="<?php echo $ref_no; ?>">Submit Application</button>
             <?php } 
           ?>
         </div>

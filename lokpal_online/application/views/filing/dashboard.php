@@ -25,20 +25,18 @@
 
             <div class="table-responsive">
               <span id="success_message"></span>
-              <table id="mytable" class="table table-bordred table-striped">
-                               
+              <table id="mytable" class="table table-bordred table-striped">                               
                 <thead>                
                   <th>S.No.</th>             
-                    <th>Date of Last Entry</th>
-                      <th>Action</th>
+                    <th>Date of Last Entry</th>                     
                     <th>Public Servant Name</th>
-                
+                     <th>Action</th>                
                 </thead>
                 <tbody>
                     <?php    
 
-                   // echo "<pre>"; 
-                  ///  print_r($user_comps_partcdata) ;             
+                    //echo "<pre>"; 
+                   //print_r($user_comps_partcdata) ;             
                       $u = $user['id'];
                       $c = 1;
                         foreach($user_comps as $row):
@@ -57,7 +55,23 @@
                                 echo "Not submitted";
                               }
                         ?></td>-->
-                    <td>
+                   
+
+                     <td><?php
+                   $sql = "select ps_sur_name,ps_mid_name,ps_first_name from public_servant_partc where ref_no =".$row->ref_no."";
+             $query  = $this->db->query($sql)->result();
+            
+             $fn=$query[0]->ps_first_name ?? '';
+            $mn=$query[0]->ps_mid_name ?? '';
+            $ls=$query[0]->ps_sur_name ?? ''; 
+                 echo $fn.' '.$mn.' '.$ls;
+
+          ?></td>
+
+                 <?php endforeach;?>
+
+
+                  <td>
                       <?php
                       $comp_no=get_filing_no($r, $u);
                       $status = $comp_no['status'];
@@ -67,12 +81,7 @@
                       <a href="<?php echo base_url().'filing/filing/'.$r ?>">Go to application</a>
                       <?php } ?>
                     </td>
-                 <?php endforeach; ?>
-                     <?php
-                    foreach($user_comps_partcdata as $row):                        
-                      ?>
-                        <td><?php echo $row->ps_first_name.' '.$row->ps_mid_name.' '.$row->ps_sur_name; ?></td>
-                         <?php endforeach; ?>
+                    
                   </tr>
                   
                 

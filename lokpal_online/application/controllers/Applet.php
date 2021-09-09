@@ -675,13 +675,13 @@ $ob_age_years= ($this->input->post('ob_age_years'));
 $ob_nationality_id= ($this->input->post('ob_nationality_id'));          
 $ob_identity_proof_id= ($this->input->post('ob_identity_proof_id'));        
 //$ob_identity_proof_no= ($this->input->post('ob_identity_proof_no'));
-$ob_identity_proof_no=md5($ob_identity_proof_no_decrypted);
+$ob_identity_proof_no=base64_encode($ob_identity_proof_no_decrypted);
 $ob_identity_proof_doi=$ob_identity_proof_doi;
 $ob_identity_proof_vupto=$ob_identity_proof_vupto;
 $ob_identity_proof_iauth= ($this->input->post('ob_identity_proof_iauth'));
 $ob_idres_proof_id= ($this->input->post('ob_idres_proof_id'));
 //$ob_idres_proof_no= ($this->input->post('ob_idres_proof_no'));
-$ob_idres_proof_no=md5($ob_idres_proof_no_decrypted);
+$ob_idres_proof_no=base64_encode($ob_idres_proof_no_decrypted);
 $ob_idres_proof_doi=$ob_idres_proof_doi;
 $ob_idres_proof_vupto=$ob_idres_proof_vupto;
 $ob_idres_proof_iauth= ($this->input->post('ob_idres_proof_iauth'));
@@ -998,9 +998,9 @@ else
 
 
 $ob_identity_proof_no_encrypted=$this->input->post('ob_identity_proof_no');
-$ob_identity_proof_no_decrypted = decode($ob_identity_proof_no_encrypted);
+$ob_identity_proof_no_decrypted = json_encode($ob_identity_proof_no_encrypted);
 $ob_idres_proof_no_encrypted=$this->input->post('ob_idres_proof_no');
-$ob_idres_proof_no_decrypted = decode($ob_idres_proof_no_encrypted);
+$ob_idres_proof_no_decrypted = json_encode($ob_idres_proof_no_encrypted);
 
 
 
@@ -1027,8 +1027,8 @@ $ob_gender_id= ($this->input->post('ob_gender_id'));
 $ob_age_years= ($this->input->post('ob_age_years'));      
 $ob_nationality_id= ($this->input->post('ob_nationality_id'));      
 $ob_identity_proof_id= ($this->input->post('ob_identity_proof_id'));      
-$ob_identity_proof_no= ($this->input->post('ob_identity_proof_no')); 
-$ob_identity_proof_no=md5($ob_identity_proof_no_decrypted);
+//$ob_identity_proof_no= ($this->input->post('ob_identity_proof_no')); 
+$ob_identity_proof_no=base64_encode($ob_identity_proof_no_decrypted);
 /*
 $ob_identity_proof_doi= ($this->input->post('ob_identity_proof_doi'));
 $ob_identity_proof_doi= get_entrydate($ob_identity_proof_doi);
@@ -1041,9 +1041,9 @@ $ob_identity_proof_vupto=$ob_identity_proof_vupto;
 
 $ob_identity_proof_iauth= ($this->input->post('ob_identity_proof_iauth'));
 $ob_idres_proof_id= ($this->input->post('ob_idres_proof_id'));
-//$ob_idres_proof_no= ($this->input->post('ob_idres_proof_no')); 
+$ob_idres_proof_no= ($this->input->post('ob_idres_proof_no')); 
 
-$ob_idres_proof_no=md5($ob_idres_proof_no_decrypted);
+$ob_idres_proof_no=base64_encode($ob_idres_proof_no_decrypted);
 /*      
 $ob_idres_proof_doi= ($this->input->post('ob_idres_proof_doi'));
 $ob_idres_proof_doi= get_entrydate($ob_idres_proof_doi);      
@@ -1426,13 +1426,13 @@ else
  $a_nationality_id= ($this->input->post('a_nationality_id'));
  $aidentity_proof_id= ($this->input->post('aidentity_proof_id'));
  //$aidentity_proof_no= ($this->input->post('aidentity_proof_no'));
- $aidentity_proof_no= md5($aidentity_proof_no_decrypted);
+ $aidentity_proof_no= base64_encode($aidentity_proof_no_decrypted);
  $aidentity_proof_doi=$aidentity_proof_doi;
  $aidentity_proof_vupto=$aidentity_proof_vupto;
  $aidentity_proof_iauth= ($this->input->post('aidentity_proof_iauth'));
  $aidres_proof_id= ($this->input->post('aidres_proof_id'));
  //$aidres_proof_no= ($this->input->post('aidres_proof_no'));
- $aidres_proof_no=md5($aidres_proof_no_decrypted);
+ $aidres_proof_no=base64_encode($aidres_proof_no_decrypted);
  $aidres_proof_doi=$aidres_proof_doi;
  $aidres_proof_vupto=$aidres_proof_vupto;
  $aidres_proof_iauth= ($this->input->post('aidres_proof_iauth'));
@@ -1776,7 +1776,14 @@ else
 
 }
 else
-{          // $array['user_id'];
+{     
+
+  $aidentity_proof_no_encrypted=$this->input->post('aidentity_proof_no');
+   $aidentity_proof_no_decrypted = decode($aidentity_proof_no_encrypted);
+   $aidres_proof_no_encrypted=$this->input->post('aidres_proof_no'); 
+   $aidres_proof_no_decrypted = decode($aidres_proof_no_encrypted);
+
+        // $array['user_id'];
 $ref_no=$ref_no;
 $curYear = date('Y');
 $complaint_year =$curYear;
@@ -1812,14 +1819,14 @@ $a_gender_id= ($this->input->post('a_gender_id'));
 $a_age_years= ($this->input->post('a_age_years'));
 $a_nationality_id= ($this->input->post('a_nationality_id'));
 $aidentity_proof_id= ($this->input->post('aidentity_proof_id'));
-$aidentity_proof_no= ($this->input->post('aidentity_proof_no'));
+ $aidentity_proof_no= base64_encode($aidentity_proof_no_decrypted);
 
 $aidentity_proof_doi=$aidentity_proof_doi;
 $aidentity_proof_vupto=$aidentity_proof_vupto;
 
 $aidentity_proof_iauth= ($this->input->post('aidentity_proof_iauth'));
 $aidres_proof_id= ($this->input->post('aidres_proof_id'));
-$aidres_proof_no= ($this->input->post('aidres_proof_no'));
+ $aidres_proof_no=base64_encode($aidres_proof_no_decrypted);
 
 $aidres_proof_doi=$aidres_proof_doi;
 $aidres_proof_vupto=$aidres_proof_vupto;

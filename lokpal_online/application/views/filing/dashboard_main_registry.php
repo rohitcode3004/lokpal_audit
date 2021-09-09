@@ -3,17 +3,10 @@
 ?>
 <div class="app-content">
     <div class="main-content-app">
-        <div class="page-header">
-            <h4 class="page-title">Dashboard for Complaint Entry</h4>
-            <ol class="breadcrumb"> 
-                <li class="breadcrumb-item"><a href="<?php echo base_url('counter/dashboard_main_registry'); ?>">Dashboad</a></li> 
-                <li class="breadcrumb-item active" aria-current="page">Dashboard for Complaint Entry</li> 
-            </ol>
-        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-					<div class="panel-heading"></div>
+					<div class="panel-heading">Dashboard for Complaint Entry</div>
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-md-4">

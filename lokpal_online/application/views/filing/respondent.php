@@ -159,13 +159,14 @@ $cat=$partc['ps_id'] ?? '';
   </script>
 
   <?php 
-   //echo ''
+ //  echo "<pre>";
+  // print_r($partc);die;
  if(isset($partc))
  {
  $ps=$partc['ps_pl_stateid'] ?? '';
  $ds=$partc['ps_pl_dist_id'] ?? ''; 
  $camp=$partc['complaint_capacity_id'] ?? '';  
- $psd=$partc['ps_id'] ?? '';
+  $psd=$partc['ps_id'] ?? '';
 //echo '<pre>'; print_r($partc); exit; 
 }
 else
@@ -175,6 +176,22 @@ else
   $psd='';
 }
  ?>
+<script type="text/javascript">
+ $(window).on('load', function() {
+   $("#otherid").hide();
+  var $cat = "<?= $camp; ?>"; 
+  
+   if ($cat == "24") {
+                $("#otherid").show();
+                           
+            } else {
+                $("#otherid").hide();
+                
+            }
+            
+});
+</script>
+
  <script type="text/javascript">
  window.onload = function() {  
 
@@ -191,52 +208,6 @@ else
 };
 
 </script>
-
-<!--
-   <script type="text/javascript">
-$(function () {
-        $("#affect_3rdparty").change(function () {
-
-            if ($(this).val() == "0") {
-                $("#dvPassport").hide();
-            } else {                
-                 window.open('<?php echo base_url(); ?>respondent/additionalparty','_blank')
-                 // window.location.href="<?php echo base_url(); ?>applet/additionalparty";
-            }
-        });
-    });
-
-</script>
-
-
-
-<script type="text/javascript">
-$(function () {
-        $("#ps_affect_3rdparty").change(function () {
-
-            if ($(this).val() == "0") {
-                $("#dvPassport").hide();
-            } else {                
-                 window.open('<?php echo base_url(); ?>respondent/witnessdetail','_blank')
-                 // window.location.href="<?php echo base_url(); ?>applet/additionalparty";
-            }
-        });
-    });
-
-
-$(function () {
-        $("#ad_multiple_ps").change(function () {
-
-            if ($(this).val() == "0") {
-                $("#dvPassport").hide();
-            } else {                
-                 window.open('<?php echo base_url(); ?>respondent/ad_public_servant','_blank')
-                 // window.location.href="<?php echo base_url(); ?>applet/additionalparty";
-            }
-        });
-    });
-
-</script>-->
 
 
 
@@ -261,26 +232,6 @@ $(function () {
 </script>
 
 <script type="text/javascript">
-
-/*
- function pagecomplain(value)
-  {
-  var ps_id_selectedd = "<?= $psd; ?>";
-  var post_url= '<?php echo base_url('user/getComplain')?>';
-  var request_method= 'POST';
-  //$("#ps_id").html('');  
-  //alert(value + ':: '+ ps_id_selectedd);
-      $.ajax({
-        url : post_url,
-        type: request_method,
-        data : 'stateid='+value,
-      success: function(response){ //
-         $("#ps_id").html(response); 
-         $("#ps_id").val(ps_id_selectedd); 
-        }
-      });
-      }
-   */
 
        var idleTime = 0;
     function timerIncrement() {
@@ -315,6 +266,28 @@ $(document).ready(function(){
 <script type="text/javascript">
 
   $().ready(function() {
+    var sum_fact_allegation_upload_st = true;
+    var sum_fact_allegation_upload_exist = $('#sum_fact_allegation_upload_exist').val();
+    if(sum_fact_allegation_upload_exist != '' && sum_fact_allegation_upload_exist != 'undefined')
+    {
+      sum_fact_allegation_upload_st = false;
+    }
+
+    var detail_offence_upload_st = true;
+    var detail_offence_upload_exist = $('#detail_offence_upload_exist').val();
+    if(detail_offence_upload_exist != '' && detail_offence_upload_exist != 'undefined')
+    {
+      detail_offence_upload_st = false;
+    }
+
+    var relevant_evidence_upload_st = true;
+    var relevant_evidence_upload_exist = $('#relevant_evidence_upload_exist').val();
+    if(relevant_evidence_upload_exist != '' && relevant_evidence_upload_exist != 'undefined')
+    {
+      relevant_evidence_upload_st = false;
+    }
+
+
  
     // validate signup form on keyup and submit
     $("#respondentform").validate({
@@ -363,10 +336,9 @@ $(document).ready(function(){
           maxlength:10
 
         },
-
-        sum_fact_allegation_upload: {required: true, accept: "application/pdf"},
-        detail_offence_upload: {required: true, accept: "application/pdf"},
-        relevant_evidence_upload: {required: true, accept: "application/pdf"},
+        sum_fact_allegation_upload: {required: sum_fact_allegation_upload_st, accept: "application/pdf"},
+        detail_offence_upload: {required: detail_offence_upload_st, accept: "application/pdf"},
+        relevant_evidence_upload: {required: relevant_evidence_upload_st, accept: "application/pdf"},
 
         gender: { // <- NAME of every radio in the same group
             required: true
@@ -560,7 +532,7 @@ $(document).ready(function(){
         <div class="error"><?php echo form_error('complaint_capacity_id'); ?></div>  
 
       </div>  
-      <div class="col-md-6 mb-15" id="otherid" style="display: none;">
+      <div class="col-md-6 mb-15" id="otherid">
         <label class="text-orange" for="ps_othcate"><?php print_r($this->label->get_short_name($elements, 135)); ?><span class="text-danger">*</span></label>
         <input type="text" class="form-control" name="ps_othcate" id="ps_othcate" value="<?php if(isset($partc)) echo $partc['ps_othcate']; else echo set_value('ps_othcate');?>" maxlength="50" placeholder="" required="required">
       </div>   
@@ -606,7 +578,7 @@ $(document).ready(function(){
       <div class="col-md-12 mb-15">
         <label class="text-orange"><?php print_r($this->label->get_short_name($elements, 140)); ?></label>
         <div class="radio">
-          <label><input type="radio" name="pss_sbbca" id="Active" checked="checked" value="1" <?php  echo set_value('pss_sbbca', $pss) == 1 ? "checked" : ""; ?> /> Yes </label>
+          <label><input type="radio" name="pss_sbbca" id="Active" value="1" <?php  echo set_value('pss_sbbca', $pss) == 1 ? "checked" : ""; ?> /> Yes </label>
           <label><input type="radio" name="pss_sbbca" value="2" <?php  echo set_value('pss_sbbca', $pss) == 2 ? "checked" : ""; ?> /> No </label>
         </div> 
       </div>
@@ -699,6 +671,10 @@ $(document).ready(function(){
         <div class="error" id="sum_fact_allegation_upload_error"><?php echo form_error('sum_fact_allegation_upload'); ?></div>
         <?php if($sum_fact_allegation_upload !='')  {?>
         <div><a href="<?php echo base_url().$sum_fact_allegation_upload; ?>" target="_blank" alt="">show uploaded document </a></div>
+         <input type='hidden' name='sum_fact_allegation_upload_exist' id='sum_fact_allegation_upload_exist' value='<?php echo $sum_fact_allegation_upload; ?>' />
+                  <?php } else{?>
+                     <input type='hidden' name='sum_fact_allegation_upload_exist' id='sum_fact_allegation_upload_exist' value='' />             
+                
         <?php } ?>
       </div>
     </div>
@@ -720,6 +696,10 @@ $(document).ready(function(){
         <div class="error" id="detail_offence_upload_error"><?php echo form_error('detail_offence_upload'); ?></div>
         <?php if($detail_offence_upload !='')  {?>
         <div><a href="<?php echo base_url().$detail_offence_upload; ?>" target="_blank" alt="">show uploaded document </a></div>
+
+         <input type='hidden' name='detail_offence_upload_exist' id='detail_offence_upload_exist' value='<?php echo $detail_offence_upload; ?>' />           <?php } else{?>
+                     <input type='hidden' name='detail_offence_upload_exist' id='detail_offence_upload_exist' value='' />    
+
       <?php } ?>
       </div>
     </div>
@@ -761,6 +741,11 @@ $(document).ready(function(){
         <div>
         <?php if($relevant_evidence_upload !='')  {?>
         <a href="<?php echo base_url().$relevant_evidence_upload; ?>" target="_blank" alt="">show uploaded document </a>
+
+         <input type='hidden' name='relevant_evidence_upload_exist' id='relevant_evidence_upload_exist' value='<?php echo 
+         $relevant_evidence_upload; ?>' />  
+                  <?php } else{?>
+                     <input type='hidden' name='relevant_evidence_upload_exist' id='relevant_evidence_upload_exist' value='' /> 
         <?php } ?>
         </div>
       </div>

@@ -207,7 +207,7 @@ $elements = $this->label->view(1);
                     <?php // echo validation_errors(); ?>
                   </div>
 
-                  <div class="alert alert-info"><strong>NOTE:</strong> cghfThis form can be filled multiple times if the number of third party EXCEEDS one</div>
+                  <div class="alert alert-info"><strong>NOTE:</strong>This form can be filled multiple times if the number of third party EXCEEDS one</div>
 
                   <div class="row">       
                     <?php if (isset($ref_no)) {?>

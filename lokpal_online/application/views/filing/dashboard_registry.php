@@ -6,17 +6,21 @@
 
 <div class="app-content">
   <div class="main-content-app">
-    <div class="page-header">
+    <!--<div class="page-header">
       <h4 class="page-title">Complaints pending for filing in software.</h4>
       <ol class="breadcrumb"> 
         <li class="breadcrumb-item"><a href="<?php echo base_url('counter/dashboard_main_registry'); ?>">Dashboad</a></li> 
         <li class="breadcrumb-item active" aria-current="page">Acknowledgements received and pending for filing</li> 
       </ol>
-    </div>
+    </div>-->
     <div class="row">
       <div class="col-md-12">
         <div class="panel panel-default">
-          <div class="panel-heading"></div>
+          <div class="panel-heading">Acknowledgements received and pending for filing 
+            <ul class="more-action">
+              <li><a href="<?php echo base_url(); ?>counter/dashboard_main_registry" class="previous">&laquo; Back</a></li>
+            </ul>
+          </div>
           <div class="panel-body">
             <div class="row">
               <div class="col-md-12">

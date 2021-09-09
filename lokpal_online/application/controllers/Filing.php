@@ -429,7 +429,20 @@ class Filing extends CI_Controller {
 			{
 				$idres_proof_doi = null;
 			}
+				$p_country_id= ($this->input->post('p_country_id'));
+				$c_country_id= ($this->input->post('c_country_id'));
 
+				if($p_country_id=='2')
+				{
+				$this->form_validation->set_rules('p_country_name', 'Permanent Country Name', 'required');
+				}
+				if($c_country_id=='2')
+				{
+				$this->form_validation->set_rules('c_country_name', 'Correspondance Country Name', 'required');
+				}
+
+			$this->form_validation->set_rules('p_country_id', 'Country Name', 'required');			
+			$this->form_validation->set_rules('c_country_id', 'Country Name', 'required');
 			$this->form_validation->set_rules('first_name', 'First Name', 'required|callback_validate_lang');
 			$this->form_validation->set_rules('age_years', 'Age Years', 'required');
 			$this->form_validation->set_rules('complaint_capacity_id', 'Complaint Type', 'required');
@@ -437,12 +450,15 @@ class Filing extends CI_Controller {
 			$this->form_validation->set_rules('gender_id', 'Gender', 'required');
 			$this->form_validation->set_rules('nationality_id', 'Nationality', 'required');
 			$this->form_validation->set_rules('identity_proof_id', 'Identity Proof', 'required');
+			if($p_country_id !='2'){
 			$this->form_validation->set_rules('p_state_id', 'Permanent State', 'required');
 			$this->form_validation->set_rules('p_dist_id', 'Permanent District', 'required');
-			$this->form_validation->set_rules('p_country_id', 'Permanent Country Name', 'required');
+			}
+			if($c_country_id !='2'){
 			$this->form_validation->set_rules('c_state_id', 'Correspondance State', 'required');
 			$this->form_validation->set_rules('c_district_id', 'Correspondance District', 'required');
-			$this->form_validation->set_rules('c_country_id', 'Correspondance Country Name', 'required');
+				}
+		
 			$this->form_validation->set_rules('idres_proof_id', 'Address Proof', 'required');
 			$this->form_validation->set_rules('mob_no', 'Mobile No', 'required');
 			//$this->form_validation->set_rules('salutation_id', 'Mobile No', 'required');
@@ -501,14 +517,14 @@ class Filing extends CI_Controller {
 			else
 			{
 				
-				 $identity_proof_no_encrypted=$this->input->post('identity_proof_no');
+				 $identity_proof_no_encrypted=trim($this->input->post('identity_proof_no'));
 				 $identity_proof_no_decrypted = decode($identity_proof_no_encrypted);
-				 $idres_proof_no_encrypted=$this->input->post('idres_proof_no'); 
+				 $idres_proof_no_encrypted=trim($this->input->post('idres_proof_no')); 
 				 $idres_proof_no_decrypted = decode($idres_proof_no_encrypted);
 
 
 
-					     	//echo "here"; die;
+					     	//echo "here"; die;``
 				$curYear = date('Y');
 				$cur_year=$curYear;			
 				$ref_no=$ref_no;
@@ -527,13 +543,13 @@ class Filing extends CI_Controller {
 				$age_years= trim($this->input->post('age_years'));
 				$identity_proof_id= ($this->input->post('identity_proof_id'));
 				//$identity_proof_no= trim($this->input->post('identity_proof_no'));
-				$identity_proof_no=md5($identity_proof_no_decrypted);
+				$identity_proof_no=base64_encode($identity_proof_no_decrypted);
 				$identity_proof_doi=$identity_proof_doi;
 				$identity_proof_vupto= trim($this->input->post('identity_proof_vupto'));	
 				$identity_proof_iauth= trim($this->input->post('identity_proof_iauth'));
 				$idres_proof_id= ($this->input->post('idres_proof_id'));
 				//$idres_proof_no= trim($this->input->post('idres_proof_no'));
-				 $idres_proof_no=md5($idres_proof_no_decrypted);
+				 $idres_proof_no=base64_encode($idres_proof_no_decrypted);
 				$idres_proof_doi=$idres_proof_doi;
 				$idres_proof_vupto= trim($this->input->post('idres_proof_vupto'));
 				$idres_proof_iauth= trim($this->input->post('idres_proof_iauth'));
@@ -541,12 +557,21 @@ class Filing extends CI_Controller {
 				$p_hpnl= trim($this->input->post('p_hpnl'));
 				$p_state_id= ($this->input->post('p_state_id'));
 				$p_dist_id= ($this->input->post('p_dist_id'));
+				$c_state_id= ($this->input->post('c_state_id'));
+				$c_district_id= ($this->input->post('c_district_id'));
+				if($p_country_id=='2')
+				{
+					$p_state_id=null;
+				}
+				if($c_country_id=='2')
+				{
+					$c_state_id=null;
+				}
 				$p_pin_code= trim($this->input->post('p_pin_code'));
 				$p_country_id= ($this->input->post('p_country_id'));
 				$c_add1= trim($this->input->post('c_add1'));
 				$c_hpnl= trim($this->input->post('c_hpnl'));
-				$c_state_id= ($this->input->post('c_state_id'));
-				$c_district_id= ($this->input->post('c_district_id'));
+				
 				$c_pin_code= trim($this->input->post('c_pin_code'));
 				$c_country_id= ($this->input->post('c_country_id'));
 				$occu_desig_avo= trim($this->input->post('occu_desig_avo'));
@@ -559,6 +584,9 @@ class Filing extends CI_Controller {
 				$comp_f_date= ($this->input->post('comp_f_date'));
 				$comp_f_date=get_entrydate($comp_f_date);
 				$sys_date = date('Y-m-d');
+				$p_country_name= trim($this->input->post('p_country_name'));
+				$c_country_name= trim($this->input->post('c_country_name'));
+				$comp_f_place= trim($this->input->post('comp_f_place'));
 			//if($comp_f_date!=$sys_date){
 			//	die('date mismatch!');
 			//}
@@ -614,6 +642,8 @@ class Filing extends CI_Controller {
 					'ip'=>$ip,
 					'updated_at'=>$updated_at,
 					'user_id'=>$userid,
+					'p_country_name'=>$p_country_name,
+					'c_country_name'=>$c_country_name,
 				); 
 				$data = $this->filing_model->insert_partA_his($ref_no);
 				$data = $this->filing_model->modify_form_A_filing($form_A_modify, $user_id);
@@ -635,19 +665,33 @@ class Filing extends CI_Controller {
 
 		
 			/* code for first time entry */
+
+			//echo "@@@@";die;
+		  $p_country_id= ($this->input->post('p_country_id'));
+		    $c_country_id= ($this->input->post('c_country_id'));
+		  if($p_country_id=='2')
+		  {
+		  		$this->form_validation->set_rules('p_country_name', 'Permanent Country Name', 'required');
+		  }
+		  if($c_country_id=='2')
+		  {
+		  		$this->form_validation->set_rules('c_country_name', 'Correspondance Country Name', 'required');
+		  }		  
 			$this->form_validation->set_rules('first_name', 'First Name', 'required');
 			$this->form_validation->set_rules('age_years', 'Age Years', 'required');
 			$this->form_validation->set_rules('complaint_capacity_id', 'Complaint Type', 'required');
 			$this->form_validation->set_rules('complaintmode_id', 'Complaint Mode', 'required');
 			$this->form_validation->set_rules('gender_id', 'Gender', 'required');
 			$this->form_validation->set_rules('nationality_id', 'Nationality', 'required');
-			$this->form_validation->set_rules('identity_proof_id', 'Identity Proof', 'required');
+			$this->form_validation->set_rules('identity_proof_id', 'Identity Proof', 'required');		
+			if($p_country_id !='2'){			 	
 			$this->form_validation->set_rules('p_state_id', 'Permanent State', 'required');
 			$this->form_validation->set_rules('p_dist_id', 'Permanent District', 'required');
-			$this->form_validation->set_rules('p_country_id', 'Permanent Country Name', 'required');
-			$this->form_validation->set_rules('c_state_id', 'Correspondance State', 'required');
+			}
+			if($c_country_id !='2'){
+			$this->form_validation->set_rules('p_state_id', 'Permanent State', 'required');
 			$this->form_validation->set_rules('c_district_id', 'Correspondance District', 'required');
-			$this->form_validation->set_rules('c_country_id', 'Correspondance Country Name', 'required');
+			}		
 			$this->form_validation->set_rules('idres_proof_id', 'Address Proof', 'required');
 			$this->form_validation->set_rules('mob_no', 'Mobile No', 'required');
 			//$this->form_validation->set_rules('salutation_id', 'Title', 'required');
@@ -681,9 +725,8 @@ class Filing extends CI_Controller {
 					$data['identityproof'] = $this->common_model->getIdentityproof();
 					$data['residenceproof'] = $this->common_model->getResidence();
 					$data['getcountry'] = $this->common_model->getCountry();
-					$data['complaintmode'] = $this->common_model->getComplaintmode();
+					$data['complaintmode'] = $this->common_model->getComplaintmode();					
 					$data['state'] = $this->common_model->getStateName();
-
 					if($data['user']['role'] == 18)
 					{
 						$data['mobilenopublic'] = $data['user']['mobile'];
@@ -808,10 +851,10 @@ class Filing extends CI_Controller {
 
 						//echo $nationality_id=($this->input->post('nationality_id'));die;
 
-					     $identity_proof_no_encrypted=$this->input->post('identity_proof_no');
+					     $identity_proof_no_encrypted=trim($this->input->post('identity_proof_no'));
 						 $identity_proof_no_decrypted = decode($identity_proof_no_encrypted);
 
-						 $idres_proof_no_encrypted=$this->input->post('idres_proof_no');
+						 $idres_proof_no_encrypted=trim($this->input->post('idres_proof_no'));
 						 $idres_proof_no_decrypted = decode($idres_proof_no_encrypted);
 
 					     $curYear = date('Y');
@@ -832,12 +875,12 @@ class Filing extends CI_Controller {
 					     $age_years= trim($this->input->post('age_years'));
 					     $identity_proof_id= ($this->input->post('identity_proof_id'));
 					    // $identity_proof_no= trim($this->input->post('identity_proof_no'));
-					      $identity_proof_no=md5($identity_proof_no_decrypted);
+					      $identity_proof_no=base64_encode($identity_proof_no_decrypted);
 					     $identity_proof_doi=$identity_proof_doi;
 					     $identity_proof_vupto= trim($this->input->post('identity_proof_vupto'));	
 					     $identity_proof_iauth= trim($this->input->post('identity_proof_iauth'));
 					     $idres_proof_id= ($this->input->post('idres_proof_id'));
-					     $idres_proof_no=md5($idres_proof_no_decrypted);
+					     $idres_proof_no=base64_encode($idres_proof_no_decrypted);
 					    // $idres_proof_no= trim($this->input->post('idres_proof_no'));			
 					     $idres_proof_doi=$idres_proof_doi;
 					     $idres_proof_vupto= trim($this->input->post('idres_proof_vupto'));	
@@ -846,12 +889,20 @@ class Filing extends CI_Controller {
 					     $p_hpnl= trim($this->input->post('p_hpnl'));
 					     $p_state_id= ($this->input->post('p_state_id'));
 					     $p_dist_id= ($this->input->post('p_dist_id'));
-					     $p_pin_code= trim($this->input->post('p_pin_code'));
-					     $p_country_id= ($this->input->post('p_country_id'));
-					     $c_add1= trim($this->input->post('c_add1'));
-					     $c_hpnl= trim($this->input->post('c_hpnl'));
 					     $c_state_id= ($this->input->post('c_state_id'));
 					     $c_district_id= ($this->input->post('c_district_id'));
+						if($p_country_id=='2')
+						{
+						$p_state_id=null;
+						}
+						if($c_country_id=='2')
+						{
+						$c_state_id=null;
+						}
+  					   $p_pin_code= trim($this->input->post('p_pin_code'));
+					     $p_country_id= ($this->input->post('p_country_id'));
+					     $c_add1= trim($this->input->post('c_add1'));
+					     $c_hpnl= trim($this->input->post('c_hpnl'));					     
 					     $c_pin_code= trim($this->input->post('c_pin_code'));
 					     $c_country_id= ($this->input->post('c_country_id'));
 					     $occu_desig_avo= trim($this->input->post('occu_desig_avo'));
@@ -863,6 +914,8 @@ class Filing extends CI_Controller {
 					     $comp_f_place= trim($this->input->post('comp_f_place')); 
 					     $comp_f_date= ($this->input->post('comp_f_date'));
 					     $comp_f_date=get_entrydate($comp_f_date);
+					     $p_country_name= trim($this->input->post('p_country_name'));
+						$c_country_name= trim($this->input->post('c_country_name'));
 					     $sys_date = date('Y-m-d');
 						//if($comp_f_date!=$sys_date){
 							//die('date mismatch!');
@@ -920,7 +973,9 @@ class Filing extends CI_Controller {
 					     	'user_id'=>$userid,
 					     	'flag'=>'EF',
 					     	'ip'=>$ip,
-					     	'created_at'=>$created_at,						
+					     	'created_at'=>$created_at,
+					     	'p_country_name'=>$p_country_name,	
+					     	'c_country_name'=>$c_country_name,					
 					     );
 					     $data = $this->filing_model->add_form_A_filing($form_A_filing);
 

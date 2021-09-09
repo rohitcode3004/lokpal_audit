@@ -268,6 +268,8 @@ public function exportToPdf(){
   $affidavit= $myArray[0]->affidavit_upload ?? '';
   $myArray[0]->age_years ?? '';
   $myArray[0]->fath_name ?? '';
+  $myArray[0]->p_country_name ?? '';
+  $myArray[0]->c_country_name ?? '';
   $myArray[0]->comp_f_place ?? '';
   $myArray[0]->comp_f_date ?? '';
   $cp=$myArray[0]->complaint_capacity_id ?? '';
@@ -278,10 +280,29 @@ public function exportToPdf(){
   $cn=$myArray[0]->c_country_id ?? '';
   $ide=$myArray[0]->identity_proof_id ?? '';
   $rde=$myArray[0]->idres_proof_id ?? '';
-  $pstate=$myArray[0]->p_state_id ?? '';
+   $pstate=$myArray[0]->p_state_id ?? '';
+   if($pstate=='')
+   {
+    $pstate=0;
+   }
   $cstate=$myArray[0]->c_state_id ?? '';
+
+if($cstate=='')
+   {
+    $cstate=0;
+   }
   $pdistrict=$myArray[0]->p_dist_id ?? '';
+
+  if($pdistrict=='')
+  {
+    $pdistrict=0;
+  }
   $cdistrict=$myArray[0]->c_district_id ?? '';
+
+  if($cdistrict=='')
+  {
+    $cdistrict=0;
+  }
   $pc=$myArray[0]->p_country_id ?? ''; 
 
   $dt_of_filing=$myArray[0]->dt_of_filing ?? '';
@@ -1300,6 +1321,7 @@ $getallwidget =
 <td style="border: 1px solid black;" align="center">5.</td>
 <td style="border: 1px solid black;" align"center">Nationality</td><td style="border: 1px solid black;">'.$national_desc.' </td>
 </tr> 
+
 <tr>
 <td style="border: 1px solid black;" align="center">6.</td>
 <td style="border: 1px solid black;" align"center">Detail identity/residence proof to be enclosed with the complaint</td><td hide="true"></td>
@@ -1311,7 +1333,7 @@ $getallwidget =
 
 <tr>
 <td style="border: 1px solid black;" align="center"></td>
-<td style="border: 1px solid black;" align"center">(a) Number</td><td style="border: 1px solid black;">'.$myArray[0]->identity_proof_no.' </td>
+<td style="border: 1px solid black;" align"center">(a) Number</td><td style="border: 1px solid black;">'.base64_decode($myArray[0]->identity_proof_no).' </td>
 </tr>
 
 <tr>
@@ -1351,7 +1373,7 @@ $getallwidget =
 
 <tr>
 <td style="border: 1px solid black;" align="center"></td>
-<td style="border: 1px solid black;" align"center">Country</td><td style="border: 1px solid black;">'.$pnational_desc.' </td>
+<td style="border: 1px solid black;" align"center">Country</td><td style="border: 1px solid black;">'.$pnational_desc.'.'.$myArray[0]->p_country_name.' </td>
 </tr>
 
 <tr>
@@ -1382,7 +1404,7 @@ $getallwidget =
 
 <tr>
 <td style="border: 1px solid black;" align="center"></td>
-<td style="border: 1px solid black;" align"center">Country</td><td style="border: 1px solid black;">'.$cnational_desc.' </td>
+<td style="border: 1px solid black;" align"center">Country</td><td style="border: 1px solid black;">'.$cnational_desc.'.'.$myArray[0]->c_country_name.' </td>
 </tr>
 
 <tr>
@@ -1434,21 +1456,11 @@ years [<i>limitations as laid down under section 53 of the Lokpal and lokayuktas
 1988 being made under this complaint is pending before any court or committee of either House of <br> Parliament or before any other authority and the complaint is not barred from being made before the Lokpal <br>
 by section 15 of the Lokpal and Lokayuktas Act,2013. </div>
 <br><br><br>
-<div align="right"><b>                                              Signature of the complaint/<br>
-authorised signatory    </div></b> 
-<div>   Place :  '.$myArray[0]->comp_f_place.'</div>
-<div>Date  : '.$dt_of_filing.'</div>
-
-
-
-<br></br><br></br><br></br><br></br><br></br><br></br><br></br>
-<br></br><br></br><br></br><br></br><br></br><br></br><br></br>
-
-<br></br><br></br><br></br><br></br><br></br><br></br><br></br>
-<br></br><br></br><br></br><br></br><br></br><br></br><br></br>
-
-</br><br></br><br></br>
-
+<div align="right"><b>Signature of the complaint/<br> authorised signatory    </div></b> 
+<div>   
+  Place :  '.$myArray[0]->comp_f_place.' <br>
+  Date  : '.$dt_of_filing.'
+</div>
 
 ';                                                                          
 
@@ -1456,13 +1468,8 @@ if($cp >1){
 
   $getallwidget .= '
 
-  <div>     </div><br>
-  <div>     </div><br>
-  <div>     </div><br>
-  <div>     </div><br>
-
-  <br></br><br></br><br></br><br></br><br></br>
-  <div align="center"><b>PART B</b><br></div>
+<br></br>
+  <div align="center" style="page-break-before: always;"><b>PART B</b><br></div>
 
   <div>ADDITIONAL DETAILS TO BE FURNISHED BY THE SIGNATORY TO THE COMPLAINT IF THE <br>
   COMPLAINT IS BEING FILED ON BEHALF OF A BODY OR BOARD OR CORPORATION OR <br>
@@ -1629,7 +1636,7 @@ enclosed?
   <tr>
   <td style="border: 1px solid black;"></td>
   <td style="border: 1px solid black;">(a)Number<br>                 
-  </td><td style="border: 1px solid black;">'.$aidentity_proof_no.'</td>
+  </td><td style="border: 1px solid black;">'.base64_decode($aidentity_proof_no).'</td>
   </tr>
 
   <tr>
@@ -1765,13 +1772,9 @@ affected by the complaint <br>
 $getallwidget .= '
 
 </table>
-<div>     </div><br>
-  <div>     </div><br>
-  <div>     </div><br>
-  <div>     </div><br>
-  <br><br><br><br><br><br>
 
-<div align="center"><b>PART C</b></div>
+
+<div align="center" style="page-break-before: always;"><b>PART C</b></div>
 
 <div>DETAILS AS REGARDS THE PUBLIC SERVANT AGAINST WHOME THE COMPLAINT IS BEING MADE
 </div><br>
@@ -2005,43 +2008,23 @@ $getallwidget .='
 </table> 
 
 <br><br>
-<div align="right"><b>                                              Signature of the complaint/<br>
-authorised person </div></b> 
-
+<div align="right"><b>Signature of the complaint/<br> authorised person </b></div>
 <br><br>
 
-
-
-
-<table style="width: 100%; border:2px solid; border-collapse: collapse; padding: 0; margin: 0;">            
-
-<tr>
-<td style="border: 1px solid black;"></td>
-<td style="border: 1px solid black;">Place </td><td style="border: 1px solid black;">'.$myArray[0]->comp_f_place.'</td>
-</tr>
-<tr>
-<td style="border: 1px solid black;"></td>
-<td style="border: 1px solid black;">Date </td><td style="border: 1px solid black;">'.$dt_of_filing.'</td>
-</tr>
-
+<table style="width: 100%; border:2px solid; border-collapse: collapse; padding: 0; margin: 0;">  
+  <tbody>          
+    <tr>
+      <td style="border: 1px solid black;"> </td>
+      <td style="border: 1px solid black;">Place </td>
+      <td style="border: 1px solid black;">'.$myArray[0]->comp_f_place.'</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid black;"> </td>
+      <td style="border: 1px solid black;">Date </td>
+      <td style="border: 1px solid black;">'.$dt_of_filing.'</td>
+    </tr>
+  </tbody>
 </table> 
-
-
-
-
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
- <div>     </div><br>
-  <div>     </div><br>
-  <div>     </div><br>
-  <div>     </div><br>
-  <div>     </div><br>
-  <div>     </div><br>
-  <div>     </div><br>
-  <div>     </div><br>
-  <div>     </div><br>
-  <div>     </div><br>
-  <div>     </div><br>
-  <div>     </div><br>
 
 '; 
 
@@ -2049,7 +2032,7 @@ authorised person </div></b>
 
 
 
-$getallwidget .= '<div><div align="center"><b>AFFIDAVIT DETAIL : (PART - D)</b>
+$getallwidget .= '<div><div align="center" style="page-break-before: always;"><b>AFFIDAVIT DETAIL : (PART - D)</b>
 </div><br>
 <br><br>
 

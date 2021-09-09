@@ -75,7 +75,7 @@
 								<div class="row">
 									<div class="col-md-12">
 									<ul class="form_list">
-									<li><a target="_blank" href="<?php echo base_url().get_gadjet_report($filing_no);?>"><?php echo $filing_no; ?></a></li>
+									<li><a target="_blank" href="<?php echo base_url().get_gadjet_report($filing_no);?>">C-<?php echo $filing_no;?></a></li>
 									<?php
 										$previous_gazzatte_reports = get_previous_gadjet_report(get_refno($filing_no));
 									 if(!empty($previous_gazzatte_reports)) { 
