@@ -50,6 +50,22 @@ class Filing extends CI_Controller {
 	}
 
 
+	function validate_lang($str)
+{
+   $field_value = $str; //this is redundant, but it's to show you how
+   //the content of the fields gets automatically passed to the method
+
+                if (preg_match('#^[ -~£±§]*$#', $str))
+                {
+                        return TRUE;
+                }
+                else
+                {
+                        $this->form_validation->set_message('validate_lang', 'Only english is allowed');
+                        return FALSE;
+                }
+}
+
 	public function dashboard_new()
 	{
 		if($this->isUserLoggedIn) 
@@ -413,7 +429,6 @@ class Filing extends CI_Controller {
 			{
 				$idres_proof_doi = null;
 			}
-
 				$p_country_id= ($this->input->post('p_country_id'));
 				$c_country_id= ($this->input->post('c_country_id'));
 
@@ -428,7 +443,7 @@ class Filing extends CI_Controller {
 
 			$this->form_validation->set_rules('p_country_id', 'Country Name', 'required');			
 			$this->form_validation->set_rules('c_country_id', 'Country Name', 'required');
-			$this->form_validation->set_rules('first_name', 'First Name', 'required');
+			$this->form_validation->set_rules('first_name', 'First Name', 'required|callback_validate_lang');
 			$this->form_validation->set_rules('age_years', 'Age Years', 'required');
 			$this->form_validation->set_rules('complaint_capacity_id', 'Complaint Type', 'required');
 			$this->form_validation->set_rules('complaintmode_id', 'Complaint Mode', 'required');

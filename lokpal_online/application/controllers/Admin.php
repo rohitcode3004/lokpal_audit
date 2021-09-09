@@ -28,8 +28,7 @@ class Admin extends CI_Controller {
 			$this->load->view('admin/user/login', $data); 
 		} 
 	}
-	
-	
+		
 	public function authenticate(){				
 		$data = array(); 
         // Get messages from the session 
@@ -96,6 +95,8 @@ class Admin extends CI_Controller {
 					'failed' => $current_failed_upd, 
 					'ip' => get_ip(),
 					'datetime' => date('Y-m-d H:i:s', time()),
+					'action_performed' => 'Login Page-Valid credentials',
+					'status' => 'Login Success',
 				); 
 					$insert_log = $this->login_model->loginlog_ins($log_data); 
 					if($insert_log){
@@ -107,7 +108,7 @@ class Admin extends CI_Controller {
 					}else{
 					die('Unable to maintain your log.Go back and try again.');
 					}
-					//print_r($current_failed);die;
+					}else{
 					if(!empty($current_failed) && $current_failed[0]->failed >= 5){
 						//print_r($current_failed[0]->failed);die('hassomething');
 						$current_failed_upd = $current_failed[0]->failed;
@@ -119,6 +120,8 @@ class Admin extends CI_Controller {
 							'failed' => $current_failed_upd,
 							'ip' => get_ip(),
 							'datetime' => date('Y-m-d H:i:s', time()),
+							'action_performed' => 'Login Page-InValid credentials',
+							'status' => 'Login Failure',
 							); 
 							$is_locked = 1;
 					}elseif(!empty($current_failed) && $current_failed[0]->failed < 5){
@@ -132,6 +135,8 @@ class Admin extends CI_Controller {
 							'failed' => $current_failed_upd,
 							'ip' => get_ip(),
 							'datetime' => date('Y-m-d H:i:s', time()),
+							'action_performed' => 'Login Page-InValid credentials',
+							'status' => 'Login Failure',
 							); 
 					}elseif(empty($current_failed)){
 							//print_r($current_failed);die('nothing');
@@ -145,13 +150,14 @@ class Admin extends CI_Controller {
 					}else{
 							die('no condition exception');
 					}
-							$insert_log = $this->login_model->loginlog_ins($log_data);
-							if(isset($is_locked)){
+					$insert_log = $this->login_model->loginlog_ins($log_data);
+				if(isset($is_locked)){
 								$data['error_msg'] = '<div class="alert alert-info"><h4 class="m-0">Your account is locked due to multiple entry of wrong credentials. Contact Admin to unlock.</h4></div>';
-							}
-					}else{
+								$data['captcha'] =  $this->captcha();
+							}else{
 								$data['error_msg'] = '<div class="alert alert-info"><h4 class="m-0">Wrong email, password  or captcha, please try again.</h4></div>'; 
                 $data['captcha'] =  $this->captcha();  
+            }
 							} 
 			}else{ 
 				$data['error_msg'] = '<div class="alert alert-danger"><h4 class="m-0">Please fill all the mandatory fields.</h4>'; 

@@ -17,7 +17,6 @@ class Login_model extends CI_Model {
 		echo $data['password'];
 		die;
 */
-
 		$query = $this->db->get_where('users', array( 'username' => $data['username'],'password'=>($data['password'])))->row_array();
 
 	//die('@@');
@@ -28,21 +27,14 @@ class Login_model extends CI_Model {
 
 		Public function check_lock($username)
 	{
-		/*echo "<pre>";
-		print_r($data);
+		$sql = "select max(id) from login_log where username='".$username."'";
+		$query = $this->db->query($sql);
+		$query1 = $query->row_array();
+		$last_id = $query1['max'];
 
-		echo $data['username'];
-
-		echo $data['password'];
-		die;
-*/
-
-		$query = $this->db->get_where('login_log', array( 'username' => $username))->row_array();
-
-	//die('@@');
-		// $query = $this->db->get_where('users', array( 'username' => $data['username']))->row_array();
+		$query3 = $this->db->get_where('login_log', array( 'id' => $last_id))->row_array();
 		
-		return $query;				
+		return $query3;				
 	}
 
 	function chkstf($data)
