@@ -15,6 +15,7 @@ class Counter extends CI_Controller {
 		$this->load->library('label');
 		$this->load->library('session');
 		$this->load->helper("user_helper");	
+		$this->load->helper("common_helper");	
 		$this->isUserLoggedIn = $this->session->userdata('isUserLoggedIn');
 		if($this->isUserLoggedIn) 
 		{
@@ -294,7 +295,28 @@ class Counter extends CI_Controller {
 		$this->session->set_userdata('counter_ref_no',$ref_no);
 		if($counter_filing && $add_compdet_parta)
 		{ 
+			$log_data = array( 
+					'user_id' => $userid, 
+					'username' => $data['user']['username'],
+					'form_type' => 'A',  
+					'ip' => get_ip(),
+					'datetime' => date('Y-m-d H:i:s', time()),
+					'action_performed' => 'Ack Form Submitted',
+					'status' => 'Ack Form Submitted Successfully',
+				); 
+					$insert_log = $this->login_model->loginlog_ins($log_data); 
 			$this->session->set_flashdata('success_msg', 'Acknowledgement no generated successfully.'); 
+		}else{
+			$log_data = array( 
+					'user_id' => $userid, 
+					'username' => $data['user']['username'],
+					'form_type' => 'A',  
+					'ip' => get_ip(),
+					'datetime' => date('Y-m-d H:i:s', time()),
+					'action_performed' => 'Ack Form Submitted',
+					'status' => 'Ack Form Submition Failed',
+				); 
+					$insert_log = $this->login_model->loginlog_ins($log_data); 
 		}          
 		redirect('/counter/counterfiling'); 
 	}
