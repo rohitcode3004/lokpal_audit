@@ -430,7 +430,6 @@ class Filing extends CI_Controller {
 				$idres_proof_doi = null;
 			}
 
-
 			$this->form_validation->set_rules('first_name', 'First Name', 'required|callback_validate_lang');
 			$this->form_validation->set_rules('age_years', 'Age Years', 'required');
 			$this->form_validation->set_rules('complaint_capacity_id', 'Complaint Type', 'required');

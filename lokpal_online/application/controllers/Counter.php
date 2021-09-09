@@ -381,10 +381,6 @@ class Counter extends CI_Controller {
 
 	}
 
-
-
-
-
 	public function counterfilingreport(){	
 
 		$data['user'] = $this->login_model->getRows($this->con);

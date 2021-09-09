@@ -28,8 +28,7 @@ class Admin extends CI_Controller {
 			$this->load->view('admin/user/login', $data); 
 		} 
 	}
-	
-	
+		
 	public function authenticate(){				
 		$data = array(); 
         // Get messages from the session 

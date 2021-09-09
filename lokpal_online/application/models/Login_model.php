@@ -17,7 +17,6 @@ class Login_model extends CI_Model {
 		echo $data['password'];
 		die;
 */
-
 		$query = $this->db->get_where('users', array( 'username' => $data['username'],'password'=>($data['password'])))->row_array();
 
 	//die('@@');
