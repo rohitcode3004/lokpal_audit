@@ -85,7 +85,7 @@ class Admin extends CI_Controller {
                 //die;			
 
 				if(!empty($checkLogin) && $checkLogin['is_staff'] == 't' && $checkcaptch == 't' && $checkLock['lock'] == 'N'){
-          			$current_failed_upd = $current_failed[0]->failed;
+          			$current_failed_upd = 0;
 					$current_lock_upd = $checkLock['lock'];
 					$log_data = array( 
 					'user_id' => $checkLogin['id'], 
