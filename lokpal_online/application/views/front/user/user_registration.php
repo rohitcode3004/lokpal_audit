@@ -26,7 +26,7 @@
               echo '<div>'.$this->session->flashdata('success_msg').'</div>';
 
             ?>
-            <form method="POST" action="<?php echo base_url('user/new_user_save') ?>" autocomplete="off">
+            <form method="POST" action="<?php echo FCPATH('user/new_user_save') ?>" autocomplete="off">
               <div class="row">
                 <div class="col-md-3">
                   <div class="form-group">

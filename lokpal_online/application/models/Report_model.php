@@ -313,9 +313,12 @@ public function getAddparties_partc($refe_no){
 
  function getPublicsector($psectorid)
  	{ 
+ 		if($psectorid !='')
+ 		{
 	 $sql = "select * from ps_category where ps_id=".$psectorid." ";
 			$query = $this->db->query($sql);
 			$query1 = $query->row_array();	
+		}
 	 return $query1;
 	    
  }
