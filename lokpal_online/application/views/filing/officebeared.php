@@ -56,7 +56,7 @@ $elements = $this->label->view(1);
       // alert(response.status);
      // alert(jsonstri)
      var json=$.parseJSON(response);
-     console.log(json);
+    // console.log(json);
      pageRefesh(json[0].ob_p_state_id, json[0].ob_p_dist_id);
       pageRefesh1(json[0].ob_c_state_id, json[0].ob_c_dist_id);
      //console.log(JSON.stringify(response));
@@ -82,11 +82,17 @@ $elements = $this->label->view(1);
        // $('#affect_dist_id').val(json[0].affect_dist_id);
          $('#affect_state_id').val(json[0].affect_state_id); 
         $('#ob_identity_proof_id').val(json[0].ob_identity_proof_id);      
-       // $('#ob_identity_proof_no').val(json[0].ob_identity_proof_no);
+        $('#ob_identity_proof_no').val(json[0].ob_identity_proof_no);
 
-      var ob_identity_proof_no=json[0].ob_identity_proof_no;
-      var ob_identity_proof_no = atob(ob_identity_proof_no);
-      $('#ob_identity_proof_no').val(ob_identity_proof_no);
+      var ob_identity_proof_no_one=json[0].ob_identity_proof_no;
+
+
+     // alert(ob_identity_proof_no_one);
+     // var ob_identity_proof_no = atob(ob_identity_proof_no_one);
+
+
+     // alert(ob_identity_proof_no);
+    //  $('#ob_identity_proof_no').val(ob_identity_proof_no);
         
      // alert(ob_identity_proof_no);      
 
@@ -95,11 +101,11 @@ $elements = $this->label->view(1);
         $('#ob_identity_proof_iauth').val(json[0].ob_identity_proof_iauth);
         $('#ob_idres_proof_id').val(json[0].ob_idres_proof_id);
 
-        // $('#ob_idres_proof_no').val(json[0].ob_idres_proof_no); 
+         $('#ob_idres_proof_no').val(json[0].ob_idres_proof_no); 
 
-        var ob_idres_proof_no=json[0].ob_idres_proof_no;
-      var ob_idres_proof_no = atob(ob_idres_proof_no);
-      $('#ob_idres_proof_no').val(ob_idres_proof_no);
+      //  var ob_idres_proof_no=json[0].ob_idres_proof_no;
+     // var ob_idres_proof_no = atob(ob_idres_proof_no);
+     // $('#ob_idres_proof_no').val(ob_idres_proof_no);
 
 
         $('#ob_idres_proof_doi').val(json[0].ob_idres_proof_doi);
@@ -800,7 +806,9 @@ $ref_no=$this->session->userdata('ref_no');
       </div>
 
       <div class="col-md-6 text-right mb-15">
-        <button type="submit" class="btn btn-success" id="submitbtn" onclick="encode_dl_passport('ob_identity_proof_no', 'ob_idres_proof_no')">Save details</button>
+       <!-- <button type="submit" class="btn btn-success" id="submitbtn" onclick="encode_dl_passport('ob_identity_proof_no', 'ob_idres_proof_no')">Save details</button>-->
+
+          <button type="submit" class="btn btn-success" id="submitbtn">Save details</button>
         <a class="btn btn-danger" href="javascript:close_window();">Close this windows</a>
       </div>
     </div>

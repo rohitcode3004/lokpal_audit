@@ -177,7 +177,7 @@ else
 }
  ?>
 <script type="text/javascript">
- $(window).on('load', function() {
+ $(document).ready(function(){
    $("#otherid").hide();
   var $cat = "<?= $camp; ?>"; 
   

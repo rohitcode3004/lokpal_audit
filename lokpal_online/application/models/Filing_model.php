@@ -187,9 +187,10 @@ class Filing_model extends CI_Model
 
 		}
 
-
 		function officesavedata($formbdata=NULL){	
 			$this->db->insert('complainant_addl_partb2', $formbdata);
+
+			//echo $this->db->last_query();die('@@@');
 			return true;
 
 		}

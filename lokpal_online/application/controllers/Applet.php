@@ -650,12 +650,12 @@ else
 else
 {
 
-
+/*
 $ob_identity_proof_no_encrypted=$this->input->post('ob_identity_proof_no');
-$ob_identity_proof_no_decrypted = decode($ob_identity_proof_no_encrypted);
+$ob_identity_proof_no_decrypted = json_encode($ob_identity_proof_no_encrypted);
 $ob_idres_proof_no_encrypted=$this->input->post('ob_idres_proof_no');
-$ob_idres_proof_no_decrypted = decode($ob_idres_proof_no_encrypted);
-
+$ob_idres_proof_no_decrypted = json_encode($ob_idres_proof_no_encrypted);
+*/
 
 $ip = get_ip();
 $ip = $ip;
@@ -674,14 +674,14 @@ $ob_gender_id= ($this->input->post('ob_gender_id'));
 $ob_age_years= ($this->input->post('ob_age_years'));        
 $ob_nationality_id= ($this->input->post('ob_nationality_id'));          
 $ob_identity_proof_id= ($this->input->post('ob_identity_proof_id'));        
-//$ob_identity_proof_no= ($this->input->post('ob_identity_proof_no'));
-$ob_identity_proof_no=base64_encode($ob_identity_proof_no_decrypted);
+$ob_identity_proof_no= ($this->input->post('ob_identity_proof_no'));
+//$ob_identity_proof_no=base64_encode($ob_identity_proof_no_decrypted);
 $ob_identity_proof_doi=$ob_identity_proof_doi;
 $ob_identity_proof_vupto=$ob_identity_proof_vupto;
 $ob_identity_proof_iauth= ($this->input->post('ob_identity_proof_iauth'));
 $ob_idres_proof_id= ($this->input->post('ob_idres_proof_id'));
-//$ob_idres_proof_no= ($this->input->post('ob_idres_proof_no'));
-$ob_idres_proof_no=base64_encode($ob_idres_proof_no_decrypted);
+$ob_idres_proof_no= ($this->input->post('ob_idres_proof_no'));
+//$ob_idres_proof_no=base64_encode($ob_idres_proof_no_decrypted);
 $ob_idres_proof_doi=$ob_idres_proof_doi;
 $ob_idres_proof_vupto=$ob_idres_proof_vupto;
 $ob_idres_proof_iauth= ($this->input->post('ob_idres_proof_iauth'));
@@ -996,12 +996,12 @@ else
 {
 
 
-
+/*
 $ob_identity_proof_no_encrypted=$this->input->post('ob_identity_proof_no');
 $ob_identity_proof_no_decrypted = json_encode($ob_identity_proof_no_encrypted);
 $ob_idres_proof_no_encrypted=$this->input->post('ob_idres_proof_no');
 $ob_idres_proof_no_decrypted = json_encode($ob_idres_proof_no_encrypted);
-
+*/
 
 
 $ip = get_ip();
@@ -1027,8 +1027,8 @@ $ob_gender_id= ($this->input->post('ob_gender_id'));
 $ob_age_years= ($this->input->post('ob_age_years'));      
 $ob_nationality_id= ($this->input->post('ob_nationality_id'));      
 $ob_identity_proof_id= ($this->input->post('ob_identity_proof_id'));      
-//$ob_identity_proof_no= ($this->input->post('ob_identity_proof_no')); 
-$ob_identity_proof_no=base64_encode($ob_identity_proof_no_decrypted);
+$ob_identity_proof_no= ($this->input->post('ob_identity_proof_no')); 
+//$ob_identity_proof_no=base64_encode($ob_identity_proof_no_decrypted);
 /*
 $ob_identity_proof_doi= ($this->input->post('ob_identity_proof_doi'));
 $ob_identity_proof_doi= get_entrydate($ob_identity_proof_doi);
@@ -1043,7 +1043,7 @@ $ob_identity_proof_iauth= ($this->input->post('ob_identity_proof_iauth'));
 $ob_idres_proof_id= ($this->input->post('ob_idres_proof_id'));
 $ob_idres_proof_no= ($this->input->post('ob_idres_proof_no')); 
 
-$ob_idres_proof_no=base64_encode($ob_idres_proof_no_decrypted);
+//$ob_idres_proof_no=base64_encode($ob_idres_proof_no_decrypted);
 /*      
 $ob_idres_proof_doi= ($this->input->post('ob_idres_proof_doi'));
 $ob_idres_proof_doi= get_entrydate($ob_idres_proof_doi);      

@@ -477,7 +477,7 @@ class Reports_model extends CI_Model
     {
 		$sql1=" select count(*) FROM public_servant_partc psc
 		LEFT JOIN scrutiny sc ON sc.filing_no = psc.filing_no
-		WHERE (psc.complaint_capacity_id='1' and  psc.ps_id='1' or psc.ps_id='2' or psc.ps_id='3' or psc.ps_id='4') and sc.scrutiny_status=TRUE";
+		WHERE (psc.complaint_capacity_id='1' or complaint_capacity_id='2' or complaint_capacity_id='3' or complaint_capacity_id='4') and sc.scrutiny_status=TRUE";
 		$query1 = $this->db->query($sql1);
 		$query1 = $query1->row_array();
 		return $query1 = $query1['count'];
@@ -489,7 +489,7 @@ class Reports_model extends CI_Model
       	
 		$sql1="select count(*) FROM public_servant_partc psc
 		LEFT JOIN scrutiny sc ON sc.filing_no = psc.filing_no
-		WHERE (psc.complaint_capacity_id='1' and  psc.ps_id='5') and sc.scrutiny_status=TRUE";
+		WHERE (psc.complaint_capacity_id='5') and sc.scrutiny_status=TRUE";
 		$query1 = $this->db->query($sql1);
 		$query1 = $query1->row_array();
 		return $query1 = $query1['count'];
@@ -499,7 +499,7 @@ class Reports_model extends CI_Model
     {     
 		$sql1=" select count(*) FROM public_servant_partc psc
 		LEFT JOIN scrutiny sc ON sc.filing_no = psc.filing_no
-		WHERE (psc.complaint_capacity_id='1' and  psc.ps_id='1' or psc.ps_id='6') and sc.scrutiny_status=TRUE";
+		WHERE (psc.complaint_capacity_id='6') and sc.scrutiny_status=TRUE";
 		$query1 = $this->db->query($sql1);
 		$query1 = $query1->row_array();
 		return $query1 = $query1['count'];
@@ -509,7 +509,7 @@ class Reports_model extends CI_Model
     {      	
 		$sql1=" select count(*) FROM public_servant_partc psc
 		LEFT JOIN scrutiny sc ON sc.filing_no = psc.filing_no
-		WHERE (psc.complaint_capacity_id='11' and  psc.ps_id='52') and sc.scrutiny_status=TRUE";
+		WHERE (psc.complaint_capacity_id='24') and sc.scrutiny_status=TRUE";
 		$query1 = $this->db->query($sql1);
 		$query1 = $query1->row_array();
 		return $query1 = $query1['count'];
@@ -519,7 +519,8 @@ class Reports_model extends CI_Model
     {
 		$sql1 = "select count(*) FROM public_servant_partc psc
 		LEFT JOIN scrutiny sc ON sc.filing_no = psc.filing_no
-		WHERE ( psc.complaint_capacity_id='2' or psc.complaint_capacity_id='3' or psc.complaint_capacity_id='4' or psc.complaint_capacity_id='5' or psc.complaint_capacity_id='6' or psc.complaint_capacity_id='7' or psc.complaint_capacity_id='8' or psc.complaint_capacity_id='9' or psc.complaint_capacity_id='10' or complaint_capacity_id='1' and ps_id='54' or ps_id='53') and sc.scrutiny_status=TRUE";
+		WHERE ( psc.complaint_capacity_id='7' or psc.complaint_capacity_id='8' or psc.complaint_capacity_id='9' or psc.complaint_capacity_id='10' or psc.complaint_capacity_id='11' or psc.complaint_capacity_id='12' or psc.complaint_capacity_id='13' or psc.complaint_capacity_id='14' or psc.complaint_capacity_id='15' or psc.complaint_capacity_id='16' or psc.complaint_capacity_id='17' or psc.complaint_capacity_id='18' or psc.complaint_capacity_id='19' or psc.complaint_capacity_id='20'
+		or psc.complaint_capacity_id='21' or psc.complaint_capacity_id='22' or psc.complaint_capacity_id='23' ) and sc.scrutiny_status=TRUE";
 		$query1 = $this->db->query($sql1);
 		$query1 = $query1->row_array();
 		return $query1 = $query1['count'];
@@ -533,7 +534,7 @@ p.remarks, p.ordertype_code, p.action as cp_action,p.bench_id, p.due_date,g.flag
          INNER JOIN case_detail d on d.filing_no=psc.filing_no
          LEFT JOIN case_proceeding p ON p.filing_no = psc.filing_no
          LEFT JOIN agency_data g ON g.filing_no = psc.filing_no
-         WHERE (psc.complaint_capacity_id='1' and  psc.ps_id='1' or psc.ps_id='2' or psc.ps_id='3' or psc.ps_id='4') and s.scrutiny_status=true";
+         WHERE (psc.complaint_capacity_id='1' or psc.complaint_capacity_id='2' or psc.complaint_capacity_id='3' or psc.complaint_capacity_id='4') and s.scrutiny_status=true";
 
          		}elseif($flag=='A'){		
          $sql1="SELECT psc.complaint_capacity_id,psc.ps_id,psc.filing_no,s.scrutiny_status,p.listing_date, p.agency_code,
@@ -542,7 +543,7 @@ p.remarks, p.ordertype_code, p.action as cp_action,p.bench_id, p.due_date,g.flag
          INNER JOIN case_detail d on d.filing_no=psc.filing_no
          LEFT JOIN case_proceeding p ON p.filing_no = psc.filing_no
          LEFT JOIN agency_data g ON g.filing_no = psc.filing_no
-         WHERE (psc.complaint_capacity_id='1' and  psc.ps_id='1' or psc.ps_id='5') and s.scrutiny_status=true";
+         WHERE (psc.complaint_capacity_id='5') and s.scrutiny_status=true";
 
 		}elseif($flag=='E'){			
 
@@ -552,7 +553,7 @@ p.remarks, p.ordertype_code, p.action as cp_action,p.bench_id, p.due_date,g.flag
          INNER JOIN case_detail d on d.filing_no=psc.filing_no
          LEFT JOIN case_proceeding p ON p.filing_no = psc.filing_no
          LEFT JOIN agency_data g ON g.filing_no = psc.filing_no
-         WHERE (psc.complaint_capacity_id='1' and  psc.ps_id='1' or psc.ps_id='6') and s.scrutiny_status=true";
+         WHERE (psc.complaint_capacity_id='6') and s.scrutiny_status=true";
 
 		}elseif($flag=='C'){			
 
@@ -562,7 +563,8 @@ p.remarks, p.ordertype_code, p.action as cp_action,p.bench_id,p.due_date,g.flag 
          INNER JOIN case_detail d on d.filing_no=psc.filing_no
          LEFT JOIN case_proceeding p ON p.filing_no = psc.filing_no
          LEFT JOIN agency_data g ON g.filing_no = psc.filing_no
-         WHERE ( psc.complaint_capacity_id='2' or psc.complaint_capacity_id='3' or psc.complaint_capacity_id='4' or psc.complaint_capacity_id='5' or psc.complaint_capacity_id='6' or psc.complaint_capacity_id='7' or psc.complaint_capacity_id='8' or psc.complaint_capacity_id='9' or psc.complaint_capacity_id='10' or complaint_capacity_id='1' and ps_id='54' or ps_id='53') and s.scrutiny_status=true";
+         WHERE ( psc.complaint_capacity_id='7' or psc.complaint_capacity_id='8' or psc.complaint_capacity_id='9' or psc.complaint_capacity_id='10' or psc.complaint_capacity_id='11' or psc.complaint_capacity_id='12' or psc.complaint_capacity_id='13' or psc.complaint_capacity_id='14' or psc.complaint_capacity_id='15' or psc.complaint_capacity_id='16' or psc.complaint_capacity_id='17' or psc.complaint_capacity_id='18' or psc.complaint_capacity_id='19' or psc.complaint_capacity_id='20'
+		or psc.complaint_capacity_id='21' or psc.complaint_capacity_id='22' or psc.complaint_capacity_id='23') and s.scrutiny_status=true";
 
 		}
 		elseif($flag=='O'){	
@@ -572,7 +574,7 @@ p.remarks, p.ordertype_code, p.action as cp_action,p.bench_id, p.due_date,g.flag
          INNER JOIN case_detail d on d.filing_no=psc.filing_no
          LEFT JOIN case_proceeding p ON p.filing_no = psc.filing_no
          LEFT JOIN agency_data g ON g.filing_no = psc.filing_no
-         WHERE ( psc.complaint_capacity_id='11' and  psc.ps_id='52') and s.scrutiny_status=true";
+         WHERE ( psc.complaint_capacity_id='24') and s.scrutiny_status=true";
 		}
 		$query 	= $this->db->query($sql1)->result();
 		return $query;
