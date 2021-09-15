@@ -20,6 +20,7 @@ class User extends CI_Controller {
 		$this->isUserLoggedIn = $this->session->userdata('isUserLoggedIn'); 
 		$this->load->library('Menus_lib');
 		$this->load->helper('captcha');
+		$this->load->helper('email_helper');
 	}
 
 	function index()
@@ -381,11 +382,12 @@ class User extends CI_Controller {
 
 	public function service_validation_new()
 	{
+		$this->load->helper('email_helper');
 		$service_name = $this->input->post('service_name');
 		$service_id = $this->input->post('service_id');
-		//die($service_name);
+		//die($service_id);
 		if($service_name == 'email')
-			$this->form_validation->set_rules('service_id', 'Email-id', 'required|trim|is_unique[users.email]', array('is_unique' => 'Your Email id. is already registered. Please login through email and password.'));
+			$this->form_validation->set_rules('service_id', 'Email-id', 'required|trim|is_unique[users.email]|valid_email', array('is_unique' => 'Your Email id. is already registered. Please login through email and password.'));
 		elseif($service_name == 'mobile')
 			$this->form_validation->set_rules('service_id', 'Mobile no', 'required|trim|numeric|is_unique[users.mobile]', array('is_unique' => 'Your mobile no. is already registered. Please login through mobile no.'));
 
@@ -474,6 +476,8 @@ class User extends CI_Controller {
 			elseif($data_exists == 1)
 				$result = $this->login_model->update_otp_new($service_name, $service_id, $otp);
 			if($result){
+
+				//common code for email start
 				$subject = "OTP for login";
 				$html = "
 				Hi <p>Visitor</p>
@@ -481,10 +485,11 @@ class User extends CI_Controller {
 				</p>
 				<p>Thanks,</p>
 				";
-				//$sended = $this->send_mail($email,$subject,$html);
-				$sended = 1;
+				$sended = sendMail($service_id, $subject, $html);
+				//common code for email end
 
-				if($sended){
+
+				if($sended == 1){
 					$return_arr[] = array("val" => 'true', "service_name" => $service_name);
 
 					echo json_encode($return_arr);
@@ -574,7 +579,7 @@ class User extends CI_Controller {
 		#$email = $_SESSION['email'];
 		#$service_name = $_SESSION['service_name'];
 		$session_service_id = $_SESSION['session_service_id'];
-		
+		//echo $session_service_id;die;
 		$data = $this->login_model->varifyOtp_new($session_service_id, $otp, $service_name);
 		if($data == 1){
 			//print_r('matched');die;
@@ -776,7 +781,7 @@ public function user_register(){
 				$this->form_validation->set_rules('first_name', 'First Name', 'required'); 	
 							
 				$this->form_validation->set_rules('mobile', 'Mobile Number ', 'is_unique[users.mobile]|regex_match[/^[0-9]{10}$/]');
-				$this->form_validation->set_rules('email', 'Email', 'valid_email|is_unique[users.email]|required'); 
+				$this->form_validation->set_rules('service_id', 'Email', 'valid_email|is_unique[users.email]|required'); 
 				
 				$this->form_validation->set_rules('password2', 'Confirm Password', 'required'); 
 				$this->form_validation->set_rules('password', 'password', 'trim|required'); 
@@ -788,7 +793,7 @@ public function user_register(){
 
 				$captcha_session = $this->session->all_userdata('captchaCode');
 
-				//echo $captcha_session['captchaCode'];
+				//print_r($captcha_session['captchaCode']);die;
 				//echo $data['captcha']['word'];
 				
 				$ts = date('Y-m-d H:i:s', time());
@@ -889,6 +894,8 @@ public function user_register(){
 					}
 			}else{
 				$data['captcha'] =  $this->captcha(); 
+				$captcha_session = $this->session->all_userdata('captchaCode');
+				echo $captcha_session['captchaCode'];
 			}
 				
 			$this->load->view('front/user/user_registration', $data);
@@ -1035,5 +1042,6 @@ public function user_register(){
 		$this->load->view('front/user/forget_password.php', $data); 			
 	} 
 }
+
 }
 
