@@ -1,5 +1,14 @@
-
 <?php include(APPPATH.'views/templates/front/fheader.php'); ?>
+
+//ajax script
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+<style type="text/css">
+    .second-box{
+      display:none;
+    }
+</style>
+
   <script type="text/javascript">
     var baseURL= "<?php echo base_url();?>";
   </script>
@@ -25,11 +34,12 @@
               } 
               echo '<div>'.$this->session->flashdata('success_msg').'</div>';
 
-            ?>
-          
+            ?>       
 
 
             <form method="POST" action='<?= base_url();?>user/new_user_save' autocomplete="off">
+
+
               <div class="row">
                 <div class="col-md-3">
                   <div class="form-group">
@@ -75,54 +85,17 @@
                 </div>
               </div>
 
-              <!--
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <div class="input-group mb-3">
-                      <input type="text" id="mob_no" class="form-control" placeholder="Enter Mobile no" name="mobile" onkeypress="return isNumberKey(event)" maxlength="10" value="<?php echo set_value('mobile'); ?>">
-                      <div class="input-group-btn">
-                        <button class="btn btn-primary" type="button" onclick="send_otp_new('mobile')">Send OTP</button>
-                      </div>
-                    </div>
-                    <div class="text-info" id="otp-reminder_mob" role="alert"></div>
-                    <span id="mobile-error" class="field-error"></span>
-                    <?php echo form_error('mobile','<div class="text-danger">','</div>'); ?>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label>Enter Your Mobile OTP</label>     
-                    <div class="input-group mb-3">               
-                      <input type="text" id="otp-mobile" class="form-control" placeholder="Enter OTP Here" name="otp-mobile">
-                      <div class="input-group-btn">
-                        <button class="btn btn-primary" type="button" onclick="submit_otp_new('mobile')">Submit OTP</button>
-                      </div>
-                    </div>
-                      <span id="otp-error-mobile" class="field-error"></span>
-                      
-                  </div>
-                </div>
-              </div>
-
-              <div class="row" id="mob-verified" style="display: none">
-                <div class="col-md-12">
-                  <div class="alert alert-success">Your Mobile no. is Verifyed Successfully! now submit your details to complete registeration.</div>
-                </div>
-              </div>
-            -->
-
 
 
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 first-box">
                   <div class="form-group">
                     <label>Email<span class="text-danger">*</span></label>
                     <div class="input-group mb-3">
-                      <input type="text" id="emailid" class="form-control" placeholder="Enter Email" name="email" value="<?php echo set_value('email'); ?>">
+                      <input type="text" id="emailid" class="form-control" placeholder="Enter Email" name="service_id" value="<?php echo set_value('email'); ?>">
                        
                       <div class="input-group-btn">
-                        <button class="btn btn-primary" type="button" onclick="send_otp_new('email')">Send OTP</button>
+                        <button class="btn btn-primary" id="send-email-otp" type="button">Send OTP</button>
                       </div>
                     </div>
                     <?php echo form_error('email','<div class="text-danger">','</div>'); ?>
@@ -131,25 +104,28 @@
                    
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 second-box">
                   <div class="form-group">
                     <label>Enter Your Email OTP<span class="text-danger">*</span></label>
                     <div class="input-group mb-3">                     
-                    <input type="text" class="form-control password_Strength" id="otp-email" placeholder="Enter OTP Here" name="OTP">
+                    <input type="text" class="form-control password_Strength" id="otp-email" placeholder="Enter OTP Here" name="otp">
                     <div class="input-group-btn">
-                        <button class="btn btn-primary" type="button" onclick="submit_otp_new('email')">Submit OTP</button>
+                        <button class="btn btn-primary" id="submit-email-otp" type="button">Submit OTP</button>
                     </div>
                   </div>
-                  <p id="otp-reminder_email" class="text-info" role="alert"></p>
+                  <!--<p id="otp-reminder_email" class="text-info" role="alert"></p>-->
+                  <div class="text-danger" id="email-otp-error"></div>
+                  <div class="text-danger" id="email-otp-time"></div>
                   </div>
+                </div>
+                <div class="col-md-6 mt-30" id="email-verified" style="display: none">
+                  <div class="alert alert-success"><i class="fa fa-check-square-o" aria-hidden="true"></i> Your Email id is <strong>Verifyed Successfully!</strong></div>
                 </div>
               </div>
 
-              <div class="row" id="email-verified" style="display: none">
-                <div class="col-md-12">
-                  <div class="alert alert-success">Your Email id is Verifyed Successfully! now submit your details to complete registeration.</div>
-                </div>
-              </div>
+              
+                
+        
 
               <div class="row">
                 <div class="col-md-6">                  
@@ -210,4 +186,70 @@
   </div>
 
 <!-- End of Features Section-->
+
+<script type="text/javascript">
+  $("#send-email-otp").click(function(e) {
+    e.preventDefault();
+    var emailid = jQuery('#emailid').val();
+   $.ajax({
+     url : '<?php echo base_url(); ?>user/service_validation_new',
+     type : 'POST',
+     data: {
+      service_name: 'email',
+      service_id: emailid
+     },
+     success : function (result) {
+        var result = jQuery.parseJSON(result);
+        console.log (result[0].val); // Here, you need to use response by PHP file.
+        if (result[0].val == 'true') {
+        $('#email-error').html('');
+        $('.second-box').show();
+      }
+      if (result[0].val == 'false') {
+        jQuery('#email-error').html(result[0].error);
+        //jQuery('.first-box').hide();
+      }
+     },
+     error : function () {
+        console.log ('error');
+     }
+   });
+  });
+
+  $("#submit-email-otp").click(function(e) {
+    e.preventDefault();
+    var otp = jQuery('#otp-email').val();
+   $.ajax({
+     url : '<?php echo base_url(); ?>user/otp_validation_new',
+     type : 'POST',
+     data: {
+      service_name: 'email',
+      otp: otp
+     },
+     success : function (result) {
+        var result = jQuery.parseJSON(result);
+        console.log (result); // Here, you need to use response by PHP file.
+        if (result[0].val == 'true' && result[0].msg == 'success') {
+        jQuery('#email-otp-error').html(''); 
+        $('.second-box').hide();  
+        $('#email-verified').show();
+        document.getElementById('emailid').readOnly = true;
+        document.getElementById('send-email-otp').disabled = true;
+        }
+        if (result[0].val == 'true' && result[0].msg == 'fail') {
+        //window.location = 'dashboard.php';
+        jQuery('#email-otp-error').html('<i class="fa fa-exclamation-circle" aria-hidden="true"></i> <strong>Invalid Otp Entered!</strong>');
+        console.log('WRONG OTP');
+        }
+
+        if (result[0].val == 'false') {
+        jQuery('#email-otp-error').html(result[0].error);
+        }
+     },
+     error : function () {
+        console.log ('error');
+     }
+   });
+  });
+</script>
 <?php include(APPPATH.'views/templates/front/ffooter.php'); ?>

@@ -494,7 +494,7 @@ $elements = $this->label->view(1);
                     </div>  
            
                     <div class="col-md-4 mb-15">
-                     <label for="ap_pin_code"><?php print_r($this->label->get_short_name($elements, 95)); ?></label>   
+                     <label for="ap_pin_code"><?php print_r($this->label->get_short_name($elements, 95)); ?><span class="text-danger">*</span></label>   
                      <input type="text" class="form-control" name="ap_pin_code" id="ap_pin_code"  value="<?php if(isset($partb)) echo $partb['ap_pin_code']; else echo set_value('ap_pin_code');?>" maxlength="6"  onkeypress="return isNumberKey(event)" placeholder=""> 
                     </div>
                     <div class="col-md-4 mb-15">

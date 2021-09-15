@@ -62,10 +62,10 @@
                                             <td><a href="<?php echo base_url();?>report/list_of_categories/O"><?php echo $others; ?></a></td>
                                         </tr>    
                                         <tr>
-                                            <td hidden="true">6</td>
-                                            <td></td>
                                             <td>Total</td>
-                                            <td><?php echo ($member_of_parliyament+$officials_groupa_groupb+$cons_rest+$others+$ex_group)?></td>
+                                            <td></td>
+                                            <?php $t = $member_of_parliyament+$officials_groupa_groupb+$cons_rest+$others+$ex_group; ?>
+                                            <td><?php echo $t; ?></td>
                                         </tr>       
                                        
                                     </tbody>
