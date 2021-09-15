@@ -79,14 +79,18 @@ $elements = $this->label->view(1);
       onkeyup: false,
 
       rules: {  
-        party_cate: "required",
-        //affect_name:"required",   
-        //affect_gender_id: "required",
-        //affect_ageyears:"required",
-        //affect_state_id:"required",
-        //affect_country_id:"required",
-       // affect_mob_no: "required",
-          affect_email_id: {
+        affect_name: "required", 
+        affect_gender_id: "required",
+        affect_ageyears:"required",
+        affect_hpnl:"required",
+        affect_vill_city:"required",
+        affect_state_id:"required",
+        affect_dist_id:"required",
+        affect_pin_code:"required",
+        affect_ccu_desig_avo:"required",
+        affect_country_id:"required",
+        affect_mob_no: "required",
+        affect_email_id: {
                 email: true,          
       },
            
@@ -226,13 +230,13 @@ if(isset($addparty))
 
       <div class="row">
         <div class="col-md-4 mb-15">
-          <label for="affect_name"><?php print_r($this->label->get_short_name($elements, 127)); ?></label>     
+          <label for="affect_name"><?php print_r($this->label->get_short_name($elements, 127)); ?> <span class="text-danger">*</span></label>     
           <input type="text" class="form-control" name="affect_name" id="affect_name" maxlength="50" onkeypress="return ValidateAlpha(event)" placeholder="" oninput="this.value = this.value.toUpperCase()" value="<?php echo set_value('affect_name') ?>"> 
            <!--<div class="error"><?php echo form_error('affect_name'); ?></div> -->       
         </div>
         
         <div class="col-md-4 mb-15">                   
-          <label for="affect_gender_id">(b) Gender</label> 
+          <label for="affect_gender_id">(b) Gender <span class="text-danger">*</span></label> 
           <select type="text" class="form-control chosen-single chosen-default" name="affect_gender_id" 
                id="affect_gender_id">
           <option value="">Select</option>
@@ -244,7 +248,7 @@ if(isset($addparty))
         </div>
 
         <div class="col-md-4 mb-15">
-          <label for="affect_ageyears">(c) Age</label>
+          <label for="affect_ageyears">(c) Age <span class="text-danger">*</span></label>
           <input type="text" class="form-control" name="affect_ageyears" maxlength="3" id="affect_ageyears"
              onkeypress="return isNumberKey(event)" placeholder="" value="<?php echo set_value('affect_ageyears') ?>"> 
           <!--<div class="error"><?php echo form_error('affect_ageyears'); ?></div>    -->   
@@ -258,41 +262,41 @@ if(isset($addparty))
           <label>(d) Full Address:</label>
         </div>
         <div class="col-md-4">
-          <label for="affect_hpnl"><?php print_r($this->label->get_short_name($elements, 91)); ?></label>
+          <label for="affect_hpnl"><?php print_r($this->label->get_short_name($elements, 91)); ?> <span class="text-danger">*</span></label>
           <input type="text" class="form-control" name="affect_hpnl" id="affect_hpnl" placeholder="" maxlength="50" value="<?php echo set_value('affect_hpnl') ?>">
         </div>
 
         <div class="col-md-4 mb-15">
-          <label for="affect_vill_city"><?php print_r($this->label->get_short_name($elements, 94)); ?></label>      
+          <label for="affect_vill_city"><?php print_r($this->label->get_short_name($elements, 94)); ?> <span class="text-danger">*</span></label>      
           <input type="text" class="form-control" name="affect_vill_city" id="affect_vill_city" maxlength="50" onkeypress="return ValidateAlpha(event)" placeholder="" value="<?php echo set_value('affect_vill_city') ?>">        
         </div>
 
         <div class="col-md-4 mb-15">
           <label for="affect_state_id">State</label>  
           <select type="text" class="form-control chosen-single chosen-default" name="affect_state_id" id="affect_state_id" onChange="pageRefesh(this.value);" >
-            <option value="">Select state</option>
+            <option value="">Select state <span class="text-danger">*</span></option>
             <?php foreach($state as $row):?>
            <option value="<?php echo $row->state_code; ?>" <?php echo set_select('affect_state_id',  $row->state_code); ?>><?php echo $row->name; ?></option>
             <?php endforeach;?>
           </select>  
-          <!--<div class="error"><?php echo form_error('affect_state_id'); ?></div>-->    
+          <div class="error"><?php echo form_error('affect_state_id'); ?></div> 
         </div> 
       </div> 
    
       <div class="row">
         <div class="col-md-4 mb-15">
-          <label for="affect_dist_id">District</label>
+          <label for="affect_dist_id">District <span class="text-danger">*</span></label>
           <select type="text" class="form-control chosen-single chosen-default" name="affect_dist_id" id="affect_dist_id">  
           </select>
           <!--<div class="error"><?php echo form_error('affect_dist_id'); ?></div>   -->
         </div> 
         <div class="col-md-4 mb-15">
-          <label for="affect_pin_code"><?php print_r($this->label->get_short_name($elements, 95)); ?></label>
+          <label for="affect_pin_code"><?php print_r($this->label->get_short_name($elements, 95)); ?> <span class="text-danger">*</span></label>
           <input type="text" class="form-control" name="affect_pin_code" id="affect_pin_code" maxlength="6"  onkeypress="return isNumberKey(event)" placeholder="" value="<?php echo set_value('affect_pin_code') ?>"> 
         </div>
 
         <div class="col-md-4 mb-15">
-          <label for="affect_ccu_desig_avo">Occupation/Designation/Avocation</label>
+          <label for="affect_ccu_desig_avo">Occupation/Designation/Avocation <span class="text-danger">*</span></label>
           <input type="text" class="form-control" name="affect_ccu_desig_avo" id="affect_ccu_desig_avo" onkeypress="return ValidateAlpha(event)" placeholder="" maxlength="50" value="<?php echo set_value('affect_ccu_desig_avo') ?>">
         </div>
       </div>
@@ -301,28 +305,28 @@ if(isset($addparty))
         <div class="col-md-4 mb-15">
           <label for="affect_country_id"><?php print_r($this->label->get_short_name($elements, 119)); ?></label>  
           <select type="text" class="form-control chosen-single chosen-default" name="affect_country_id" id="affect_country_id">
-            <option value=""class="chosen-single">Select Country</option>
+            <option value=""class="chosen-single">Select Country <span class="text-danger">*</span></option>
             <?php foreach($getcountry as $row):?>
             <option value="<?php echo $row->country_id; ?>" <?php echo set_select('affect_country_id',  $row->country_id); ?>><?php echo $row->country_desc; ?></option>
             <?php endforeach;?>
           </select>  
-          <!--<div class="error"><?php echo form_error('affect_country_id'); ?></div> -->      
+          <div class="error"><?php echo form_error('affect_country_id'); ?></div>    
         </div>
         <div class="col-md-4 mb-15">
           <label for="affect_tel_no">(e) Telephone Number ( with std codes)</label>
              <input type="text" class="form-control" name="affect_tel_no" id="affect_tel_no" maxlength="15"  onkeypress="return isNumberKey(event)" placeholder="" value="<?php echo set_value('affect_tel_no') ?>">
         </div>
         <div class="col-md-4 mb-15">
-          <label for="affect_mob_no"><?php print_r($this->label->get_short_name($elements, 101)); ?></label>
+          <label for="affect_mob_no"><?php print_r($this->label->get_short_name($elements, 101)); ?> <span class="text-danger">*</span></label>
           <input type="text" class="form-control" name="affect_mob_no" id="affect_mob_no" maxlength="10"  onkeypress="return isNumberKey(event)" placeholder="" value="<?php echo set_value('affect_mob_no') ?>">
-          <!--<div class="error"><?php echo form_error('affect_mob_no'); ?></div> -->
+          <div class="error"><?php echo form_error('affect_mob_no'); ?></div> 
         </div>
         
       </div>
 
       <div class="row">
         <div class="col-md-4 mb-15">
-          <label for="affect_email_id">(g) e-mail id</label>
+          <label for="affect_email_id">(g) e-mail id </label>
           <input type="text" class="form-control" name="affect_email_id" id="affect_email_id" placeholder="" maxlength="50" value="<?php echo set_value('affect_email_id') ?>">
         </div>
       </div>

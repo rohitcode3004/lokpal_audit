@@ -98,15 +98,19 @@ $elements = $this->label->view(1);
       onkeyup: false,
 
       rules: {  
-        //w_salutation_id: "required",   
-        //w_salutation_id: "required",
-        //w_first_name: "required",
-        //w_gender_id:"required",
-        //w_age_years:"required",
-        //w_state_id:"required",
-        //w_dist_id: "required",
-        //w_country_id: "required",
-        // w_mob_no:"required",
+        w_salutation_id: "required",   
+        w_salutation_id: "required",
+        w_first_name: "required",
+        w_gender_id:"required",
+        w_age_years:"required",
+        w_state_id:"required",
+        w_dist_id: "required",
+        w_country_id: "required",
+        w_mob_no:"required",
+        w_hpnl:"required",
+        w_vill_city:"required",
+        w_dist_id:"required",
+        w_pin_code:"required",
        
 
          w_email_id: {
@@ -259,7 +263,7 @@ $ref_no=$this->session->userdata('ref_no');
         </div>
 
         <div class="col-md-4 mb-15">                   
-          <label for="w_salutation_id" ><?php print_r($this->label->get_short_name($elements, 75)); ?></label>    
+          <label for="w_salutation_id" ><?php print_r($this->label->get_short_name($elements, 75)); ?> <span class="text-danger">*</span></label>    
           <select type="text" class="form-control chosen-single chosen-default" name="w_salutation_id" id="w_salutation_id">
             <option value="">Select Title</option>
             <?php foreach($salution as $row):?>
@@ -282,13 +286,13 @@ $ref_no=$this->session->userdata('ref_no');
       
       <div class="row">
         <div class="col-md-4 mb-15">
-          <label for="w_first_name"><?php print_r($this->label->get_short_name($elements, 78)); ?></label>      
+          <label for="w_first_name"><?php print_r($this->label->get_short_name($elements, 78)); ?> <span class="text-danger">*</span></label>      
           <input type="text" class="form-control" name="w_first_name" id="w_first_name" maxlength="50" onkeypress="return ValidateAlpha(event)" maxlength="50" placeholder="" oninput="this.value = this.value.toUpperCase()" value="<?php echo set_value('w_first_name') ?>"> 
           <!--<div class="error"><?php echo form_error('w_first_name'); ?></div>       -->   
         </div> 
 
         <div class="col-md-4 mb-15">                   
-          <label for="w_gender_id">(c) Gender:</label>    
+          <label for="w_gender_id">(c) Gender: <span class="text-danger">*</span></label>    
           <select type="text" class="form-control chosen-single chosen-default" name="w_gender_id" id="w_gender_id">
             <option value="">Select</option>
             <?php foreach($gender as $row):?>
@@ -299,7 +303,7 @@ $ref_no=$this->session->userdata('ref_no');
         </div>
 
         <div class="col-md-4 mb-15">
-          <label for="w_age_years">(d) Age:</label>
+          <label for="w_age_years">(d) Age: <span class="text-danger">*</span></label>
           <input type="text" class="form-control" name="w_age_years" maxlength="3" id="w_age_years" onkeypress="return isNumberKey(event)" placeholder="" value="<?php echo set_value('w_age_years') ?>">        
         </div>
         <!--<div class="error"><?php echo form_error('w_age_years'); ?></div> -->
@@ -313,19 +317,19 @@ $ref_no=$this->session->userdata('ref_no');
         </div>
 
         <div class="col-md-4 mb-15">
-          <label for="w_hpnl"><?php print_r($this->label->get_short_name($elements, 91)); ?></label>
+          <label for="w_hpnl"><?php print_r($this->label->get_short_name($elements, 91)); ?> <span class="text-danger">*</span></label>
           <input type="text" class="form-control" name="w_hpnl" id="w_hpnl" maxlength="50" placeholder="" value="<?php echo set_value('w_hpnl') ?>">
         </div>
 
         <div class="col-md-4 mb-15">
-          <label for="w_vill_city"> <?php print_r($this->label->get_short_name($elements, 94)); ?></label>
+          <label for="w_vill_city"> <?php print_r($this->label->get_short_name($elements, 94)); ?> <span class="text-danger">*</span></label>
           <input type="text" class="form-control" name="w_vill_city" id="w_vill_city" maxlength="50" onkeypress="return ValidateAlpha(event)" placeholder="" value="<?php echo set_value('w_vill_city') ?>">      
         </div> 
 
         <div class="col-md-4 mb-15">
           <label for="w_state_id">State</label>  
           <select class="form-control chosen-single chosen-default" name="w_state_id" id="w_state_id" onChange="pageRefesh(this.value);" >
-            <option value="">Select state</option>
+            <option value="">Select state <span class="text-danger">*</span></option>
             <?php foreach($state as $row):?>
             <option value="<?php echo $row->state_code; ?>" <?php echo set_select('w_state_id',  $row->state_code); ?>><?php echo $row->name; ?></option>
             <?php endforeach;?>
@@ -336,19 +340,19 @@ $ref_no=$this->session->userdata('ref_no');
 
       <div class="row">
         <div class="col-md-4 mb-15">
-          <label for="w_dist_id">District</label>
+          <label for="w_dist_id">District <span class="text-danger">*</span></label>
           <select class="form-control chosen-single chosen-default" name="w_dist_id" id="w_dist_id">              
           </select>
           <!--<div class="error"><?php echo form_error('w_dist_id'); ?></div> -->
         </div> 
 
         <div class="col-md-4 mb-15">
-           <label for="w_pin_code"><?php print_r($this->label->get_short_name($elements, 95)); ?></label>   
+           <label for="w_pin_code"><?php print_r($this->label->get_short_name($elements, 95)); ?> <span class="text-danger">*</span></label>   
             <input type="text" class="form-control" name="w_pin_code" id="w_pin_code" maxlength="6"  onkeypress="return isNumberKey(event)" placeholder="" value="<?php echo set_value('w_pin_code') ?>"> 
         </div>
 
         <div class="col-md-4 mb-15">
-          <label for="w_country_id"> <?php print_r($this->label->get_short_name($elements, 119)); ?></label>  
+          <label for="w_country_id"> <?php print_r($this->label->get_short_name($elements, 119)); ?> <span class="text-danger">*</span></label>  
           <select class="form-control chosen-single chosen-default" name="w_country_id" id="w_country_id">
             <option value=""class="chosen-single">Select Country</option>
             <?php foreach($getcountry as $row):?>              
@@ -366,7 +370,7 @@ $ref_no=$this->session->userdata('ref_no');
         </div>
 
         <div class="col-md-4 mb-15">
-          <label for="w_mob_no">(f) Mobile No:</label>
+          <label for="w_mob_no">(f) Mobile No: <span class="text-danger">*</span></label>
              <input type="text" class="form-control" name="w_mob_no" id="w_mob_no" maxlength="10"  onkeypress="return isNumberKey(event)" placeholder="" value="<?php echo set_value('w_mob_no') ?>">
               <div class="error"><?php echo form_error('w_mob_no'); ?></div> 
         </div>
@@ -383,13 +387,15 @@ $ref_no=$this->session->userdata('ref_no');
 
 
 
-          <?php if(!empty($addparty)){ ?>  
+          
 
           <div class="col-md-6">
+            <?php if(!empty($addparty)){ ?>  
             <button type="button" class="btn btn-primary" id="mySubmit" onclick="window.open('<?php echo site_url("respondent/witnessdetail");?>')">Do you want to add more click here</button>
+            <?php  }?>
           </div>
 
-    <?php  }?>
+    
 
 
         <div class="col-md-6 text-right">
