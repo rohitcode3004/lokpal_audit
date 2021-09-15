@@ -247,5 +247,4 @@
    });
   });
 </script>
-
 <?php include(APPPATH.'views/templates/front/ffooter.php'); ?>

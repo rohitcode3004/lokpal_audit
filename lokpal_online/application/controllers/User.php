@@ -1042,5 +1042,6 @@ public function user_register(){
 		$this->load->view('front/user/forget_password.php', $data); 			
 	} 
 }
+
 }
 
