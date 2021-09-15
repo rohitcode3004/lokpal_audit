@@ -258,11 +258,32 @@ public function witnessave(){
       $additionalinfo = $this->filing_model->witnessModify($formwitnessDataModify,$modify_party);
       if($additionalinfo){ 
         $this->session->set_flashdata('success_msg', '<div class="alert alert-success"><h4 class="m-0">witness detail data has been successfully modified.</h4></div>'); 
+
+         $log_data = array( 
+              'user_id' => $userid, 
+              'username' => $data['user']['username'],
+              'form_type' => 'Witness Detail Form-C',  
+              'ip' => get_ip(),
+              'datetime' => date('Y-m-d H:i:s', time()),
+              'action_performed' => 'Witness Detail Form-C Modified',
+              'status' => 'Witness Detail Form-C Modified Successfully',
+              ); 
+              $insert_log = $this->login_model->loginlog_ins($log_data); 
+
          redirect('/respondent/witnessdetail',$data);
       } 
       else
       {
-        echo "chk data";
+         $log_data = array( 
+          'user_id' => $userid, 
+          'username' => $data['user']['username'],
+          'form_type' => 'Third Party Form-B',  
+          'ip' => get_ip(),
+          'datetime' => date('Y-m-d H:i:s', time()),
+          'action_performed' => 'Witness Detail Form-C Modified',
+          'status' => 'Witness Detail Form-C Modification Failed',
+        ); 
+          $insert_log = $this->login_model->loginlog_ins($log_data);
       } 
     }
   }
@@ -378,12 +399,34 @@ $this->load->view('templates/front/CE_Footer.php',$data);
 
         $employeeId = $this->filing_model->addWitnessdata($formwitnessdata);
         if($employeeId){ 
+
+           $log_data = array( 
+              'user_id' => $userid, 
+              'username' => $data['user']['username'],
+              'form_type' => 'Witness Detail Form-C',  
+              'ip' => get_ip(),
+              'datetime' => date('Y-m-d H:i:s', time()),
+              'action_performed' => 'Witness Detail Form-C Submitted',
+              'status' => 'Witness Detail Form-C Submitted Successfully',
+              ); 
+              $insert_log = $this->login_model->loginlog_ins($log_data);
+
           $this->session->set_flashdata('success_msg', '<div class="alert alert-success"><h4 class="m-0">Witness detail data has been successfully added.</h4></div>'); 
+          
            redirect('/respondent/witnessdetail',$data); 
         }
         else
         {
-            echo "chk data";
+            $log_data = array( 
+          'user_id' => $userid, 
+          'username' => $data['user']['username'],
+          'form_type' => 'Witness Detail Form-C',  
+          'ip' => get_ip(),
+          'datetime' => date('Y-m-d H:i:s', time()),
+          'action_performed' => 'Witness Detail Form-C Submitted',
+          'status' => 'Witness Detail Form-C Submition Failed',
+        ); 
+          $insert_log = $this->login_model->loginlog_ins($log_data);
         }
       }
 
@@ -688,9 +731,36 @@ if (empty($data['partc']))
                   'detail_offence_upload' =>$detail_offence_upload,                 
                 );    
                 $employeeId = $this->filing_model->addRespondent($formrespondentdata);
+
+                if($employeeId)
+                {
+                   $log_data = array( 
+              'user_id' => $userid, 
+              'username' => $data['user']['username'],
+              'form_type' => 'Part-C',  
+              'ip' => get_ip(),
+              'datetime' => date('Y-m-d H:i:s', time()),
+              'action_performed' => 'Form C Part Submitted',
+              'status' => 'Form-C Part Submitted Successfully',
+              ); 
+              $insert_log = $this->login_model->loginlog_ins($log_data);
                 redirect('/document/testafidavit');
-                die();
-           }       
+                 
+              }
+              else{
+                 $log_data = array( 
+          'user_id' => $userid, 
+          'username' => $data['user']['username'],
+          'form_type' => 'Part-C',  
+          'ip' => get_ip(),
+          'datetime' => date('Y-m-d H:i:s', time()),
+          'action_performed' => 'Form-C Form Submitted',
+          'status' => 'Form-C Form Submition Failed',
+        ); 
+          $insert_log = $this->login_model->loginlog_ins($log_data);                
+           }    
+           die();
+              }
        
      }
        else
@@ -968,8 +1038,34 @@ if (empty($data['partc']))
        'detail_offence_upload' =>$detail_offence_upload,
     ); 
     $data = $this->filing_model->insert_partC_his($ref_no);
-    $employeeId = $this->filing_model->modify_form_C_filing($formrespondentdata);       
+    $employeeId = $this->filing_model->modify_form_C_filing($formrespondentdata);   
+    if($employeeId) 
+    {   
+       $log_data = array( 
+              'user_id' => $userid, 
+              'username' => $data['user']['username'],
+              'form_type' => 'Part-C',  
+              'ip' => get_ip(),
+              'datetime' => date('Y-m-d H:i:s', time()),
+              'action_performed' => 'Part C Form Modified',
+              'status' => 'Part C Form Modified Successfully',
+              ); 
+              $insert_log = $this->login_model->loginlog_ins($log_data); 
     redirect('/document/testafidavit');
+  }
+  else
+  {
+    $log_data = array( 
+          'user_id' => $userid, 
+          'username' => $data['user']['username'],
+          'form_type' => 'Part C',  
+          'ip' => get_ip(),
+          'datetime' => date('Y-m-d H:i:s', time()),
+          'action_performed' => 'Part C Form Modified',
+          'status' => 'Part C Form Modification Failed',
+        ); 
+          $insert_log = $this->login_model->loginlog_ins($log_data); 
+  }
     
    } 
   } 
@@ -1179,17 +1275,35 @@ else
       'ip'=>$ip,
       'updated_at'=>$updated_at,
     );    
-
-
     $data = $this->report_model->insert_partC_ps_his($ref_no,$modify_party);
     $additionalinfo = $this->report_model->PsModify($formPsDataModify,$modify_party);
     if($additionalinfo){ 
       $this->session->set_flashdata('success_msg', '<div class="alert alert-success"><h4 class="m-0">Public Servant detail data has been successfully modified.</h4></div>'); 
+       $log_data = array( 
+              'user_id' => $userid, 
+              'username' => $data['user']['username'],
+              'form_type' => 'Additional Public Servant Form-C',  
+              'ip' => get_ip(),
+              'datetime' => date('Y-m-d H:i:s', time()),
+              'action_performed' => 'Additional Public Servant Form-C Modified',
+              'status' => 'Additional Public Servant Form-C Modified Successfully',
+              ); 
+              $insert_log = $this->login_model->loginlog_ins($log_data); 
+
        redirect('/respondent/ad_public_servant',$data);  
     }  
     else
     {
-      echo "check data";
+       $log_data = array( 
+          'user_id' => $userid, 
+          'username' => $data['user']['username'],
+          'form_type' => 'Additional Public Servant Form-C',  
+          'ip' => get_ip(),
+          'datetime' => date('Y-m-d H:i:s', time()),
+          'action_performed' => 'Additional Public Servant Form-C Modified',
+          'status' => 'Additional Public Servant Form-C Modification Failed',
+        ); 
+          $insert_log = $this->login_model->loginlog_ins($log_data); 
     }
   }
 }
@@ -1312,12 +1426,33 @@ else
     
     $employeeId = $this->report_model->addPsdata($form_ad_ps_detail);
     if($employeeId){ 
+
+      $log_data = array( 
+              'user_id' => $userid, 
+              'username' => $data['user']['username'],
+              'form_type' => 'Additional Public Servant',  
+              'ip' => get_ip(),
+              'datetime' => date('Y-m-d H:i:s', time()),
+              'action_performed' => 'Additional Public Servant Form-C Submitted',
+              'status' => 'Additional Public Servant Form-c Submitted Successfully',
+              ); 
+              $insert_log = $this->login_model->loginlog_ins($log_data); 
+
       $this->session->set_flashdata('success_msg', '<div class="alert alert-success"><h4 class="m-0">Public Servant detail data has been successfully added.</h4></div>');
        redirect('/respondent/ad_public_servant',$data);  
     }
     else
     {
-      echo "check data";
+       $log_data = array( 
+          'user_id' => $userid, 
+          'username' => $data['user']['username'],
+          'form_type' => 'Additional Public Servant',  
+          'ip' => get_ip(),
+          'datetime' => date('Y-m-d H:i:s', time()),
+          'action_performed' => 'Additional Public Servant Form-C Modified',
+          'status' => 'Additional Public Servant Form-C Modification Failed',
+        ); 
+          $insert_log = $this->login_model->loginlog_ins($log_data); 
     }
 
   }  
@@ -1462,11 +1597,31 @@ else
 
     if($additionalinfo){ 
       $this->session->set_flashdata('success_msg', '<div class="alert alert-success"><h4 class="m-0">Third party detail has been successfully Modified.</h4></div>'); 
+      $log_data = array( 
+              'user_id' => $userid, 
+              'username' => $data['user']['username'],
+              'form_type' => 'Third Party Form-C',  
+              'ip' => get_ip(),
+              'datetime' => date('Y-m-d H:i:s', time()),
+              'action_performed' => 'Third Party Form-C Modified',
+              'status' => 'Third Party Form-C Modified Successfully',
+              ); 
+              $insert_log = $this->login_model->loginlog_ins($log_data); 
+
       redirect('/respondent/additionalparty',$data);
     } 
     else
     {
-      echo "check data";
+      $log_data = array( 
+          'user_id' => $userid, 
+          'username' => $data['user']['username'],
+          'form_type' => 'Third Party Form-C',  
+          'ip' => get_ip(),
+          'datetime' => date('Y-m-d H:i:s', time()),
+          'action_performed' => 'Third Party Form-C Modified',
+          'status' => 'Third Party Form-C Modification Failed',
+        ); 
+          $insert_log = $this->login_model->loginlog_ins($log_data);
     }
 }
   }
@@ -1577,11 +1732,31 @@ else
     $additionalinfo = $this->filing_model->additionalparty($formbdata); 
     if($additionalinfo){ 
       $this->session->set_flashdata('success_msg', '<div class="alert alert-success"><h4 class="m-0">Third party detail has been successfully added.</h4></div>'); 
+       $log_data = array( 
+              'user_id' => $userid, 
+              'username' => $data['user']['username'],
+              'form_type' => 'Third Party Form-C',  
+              'ip' => get_ip(),
+              'datetime' => date('Y-m-d H:i:s', time()),
+              'action_performed' => 'Third Party Form-C Submition',
+              'status' => 'Third Party Form-C Submitted Successfully',
+              ); 
+              $insert_log = $this->login_model->loginlog_ins($log_data); 
+
       redirect('/respondent/additionalparty',$data);
     } 
     else
     {
-      echo "check data";
+     $log_data = array( 
+          'user_id' => $userid, 
+          'username' => $data['user']['username'],
+          'form_type' => 'Third Party Form-B',  
+          'ip' => get_ip(),
+          'datetime' => date('Y-m-d H:i:s', time()),
+          'action_performed' => 'Third Party Form-C Submition',
+          'status' => 'Third Party Form-C Submition Failed',
+        ); 
+          $insert_log = $this->login_model->loginlog_ins($log_data);
     }
   }
   }

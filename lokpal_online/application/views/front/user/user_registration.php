@@ -34,8 +34,12 @@
               } 
               echo '<div>'.$this->session->flashdata('success_msg').'</div>';
 
-            ?>
-            <form method="POST" action="<?php echo base_url(); ?>user/new_user_save" autocomplete="off">
+            ?>       
+
+
+            <form method="POST" action='<?= base_url();?>user/new_user_save' autocomplete="off">
+
+
               <div class="row">
                 <div class="col-md-3">
                   <div class="form-group">
@@ -128,7 +132,8 @@
                   <div class="form-group">
                     <label>Password<span class="text-danger">*</span></label>
                     <!--<input type="password" name="password" class="form-control" id="pwd" placeholder="New Password" onKeyUp="checkPasswordStrength();" data-toggle="popover" title="Password Must include" data-content="Minimum 6 characters, At least one capital letter, At least one number" data-placement="bottom">-->
-                    <input id="pwd" type="password" class="form-control" placeholder="Enter Password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&\*]).{6,}" onKeyUp="checkPasswordStrength();" data-toggle="popover" title="Password must use a combination of these" data-content="Minimum 6 characters, At least one capital letter, one small letter, one number and one spcial character" data-placement="bottom">
+                    <input id="pwd" type="password" class="form-control" placeholder="Enter Password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&\*]).{6,}" onKeyUp="checkPasswordStrength();" data-toggle="tooltip" data-placement="bottom" title="Password must contain minimum of 6 characters, At least one capital letter, one small letter, one number, and one special character!">
+
                     <div id="password-strength-status"></div>
                     <?php echo form_error('password','<div class="text-danger">','</div>'); ?>
                   </div>

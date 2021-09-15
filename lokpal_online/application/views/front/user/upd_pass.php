@@ -41,19 +41,19 @@
         </div>
 
         <div class="box-group">
-          <label for="exampleInputPassword1">Old Password</label>
+          <label for="exampleInputPassword1">Old Password <span class="text-danger">*</span></label>
           <input type="password" name="password_old" class="input-form" id="pwd_old" placeholder="Old Password">
         </div>
 
         <div class="box-group">
-          <label for="exampleInputPassword1">New Password</label>
+          <label for="exampleInputPassword1">New Password <span class="text-danger">*</span></label>
           <!--<input type="password" name="password" class="input-form password_Strength" id="pwd" placeholder="New Password" onKeyUp="checkPasswordStrength();" data-toggle="popover" title="Password Must include" data-content="Minimum 6 characters, At least one capital letter, At least one number" data-placement="bottom">-->
-          <input id="pwd" type="password" class="input-form password_Strength" placeholder="Enter Password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&\*]).{6,}" onKeyUp="checkPasswordStrength();" data-toggle="popover" title="Password must use a combination of these" data-content="Minimum 6 characters, At least one capital letter, one small letter, one number and one spcial character" data-placement="bottom">
+          <input id="pwd" type="password" class="input-form password_Strength" placeholder="Enter Password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&\*]).{6,}" onKeyUp="checkPasswordStrength();" data-toggle="tooltip" data-placement="bottom" title="Password must contain minimum of 6 characters, At least one capital letter, one small letter, one number, and one special character!">
           <div id="password-strength-status"></div>
         </div>
 
         <div class="box-group">
-          <label for="exampleInputPassword1">Confirm Password</label>
+          <label for="exampleInputPassword1">Confirm Password <span class="text-danger">*</span></label>
           <input type="password" name="password2" class="input-form" id="pwd2" placeholder="Confirm Password">
         </div>
         <button type="submit" class="loginhny-btn btn" name="upd-pass-form" value="upd" onclick="encode_upd_pass('pwd_old', 'pwd', 'pwd2')">Submit</button>

@@ -106,6 +106,7 @@ class Affidavit extends CI_Controller {
 
 public function update_form_status(){ 
   //print_r($_POST);die();
+  $this->load->helper("common_helper");
  if($this->isUserLoggedIn) 
  {
   $con = array( 
@@ -202,28 +203,45 @@ public function update_form_status(){
 
         $gazzette_notification_url='cdn/complainpdf/'.$comp_data['comp_no'].'.pdf';
 
-       // echo $gazzette_notification_url;die;
-
-       // exportToPdf('1', $comp_data['comp_no']);
-
-         
-
-          //  $parta = $this->partapdf($filing_no);
-
         $gazzette_notification_data = array(
             'gazzette_notification_url' =>$gazzette_notification_url,
                 );
         $gazzette_notification_update = $this->report_model->update_complaint_gazzette_notification($comp_data['comp_no'] ,$gazzette_notification_data);
+        if($gazzette_notification_update)
+        {
+          $log_data = array( 
+                  'user_id' => $user_id, 
+                  'username' => $data['user']['username'],
+                  'form_type' => 'Submit Application Form',  
+                  'ip' => get_ip(),
+                  'datetime' => date('Y-m-d H:i:s', time()),
+                  'action_performed' => 'Final Submition of Application',
+                  'status' => 'Submition of Application Submitted Successfully',
+                  ); 
+                  $insert_log = $this->login_model->loginlog_ins($log_data); 
+        
         
         $this->session->set_flashdata('success_msg', 'Complainant submitted successfully'); 
         $array = array(
           'success' => true,
           'fn' => $comp_data['comp_no'],
         );
-   
-          
+   }
+       
         //redirect('affidavit/affidavit_detail'); 
       }else{ 
+
+        $log_data = array( 
+                  'user_id' => $user_id, 
+                  'username' => $data['user']['username'],
+                  'form_type' => 'Submit Application Form',  
+                  'ip' => get_ip(),
+                  'datetime' => date('Y-m-d H:i:s', time()),
+                  'action_performed' => 'Final Submition of Application',
+                  'status' => 'Submition of Application failed',
+                  ); 
+                  $insert_log = $this->login_model->loginlog_ins($log_data); 
+
         $this->session->set_flashdata('error_msg', 'Some problems occured, please try again.');
         $array = array(
           'error' => true,

@@ -271,12 +271,32 @@ public function addsave(){
       $data = $this->filing_model->insert_partB_additional_party_his($ref_no,$modify_party);
       $additionalinfo = $this->filing_model->additionalpartyModify($formmodify,$modify_party,$party_cate);
       if($additionalinfo){ 
+        $log_data = array( 
+              'user_id' => $userid, 
+              'username' => $data['user']['username'],
+              'form_type' => 'Third Party Form-B',  
+              'ip' => get_ip(),
+              'datetime' => date('Y-m-d H:i:s', time()),
+              'action_performed' => 'Third Party Form-B Modified',
+              'status' => 'Third Party Form-B Modified Successfully',
+              ); 
+              $insert_log = $this->login_model->loginlog_ins($log_data); 
+
         $this->session->set_flashdata('success_msg', '<div class="alert alert-success"><h4 class="m-0"> Third party detail has been successfully Modified.</h4></div>'); 
         redirect('/applet/additionalparty',$data); 
       } 
       else
       {
-        echo "check data";
+        $log_data = array( 
+          'user_id' => $userid, 
+          'username' => $data['user']['username'],
+          'form_type' => 'Third Party Form-B',  
+          'ip' => get_ip(),
+          'datetime' => date('Y-m-d H:i:s', time()),
+          'action_performed' => 'Third Party Form-B Form Modified',
+          'status' => 'Third Party Form-B Form Modification Failed',
+        ); 
+          $insert_log = $this->login_model->loginlog_ins($log_data); 
       }
     }
   }
@@ -376,12 +396,31 @@ public function addsave(){
       $additionalinfo = $this->filing_model->additionalparty($formbdata); 
 
       if($additionalinfo){ 
+         $log_data = array( 
+              'user_id' => $userid, 
+              'username' => $data['user']['username'],
+              'form_type' => 'Third Party Form-B',  
+              'ip' => get_ip(),
+              'datetime' => date('Y-m-d H:i:s', time()),
+              'action_performed' => 'Third Party Form-B Submitted',
+              'status' => 'Third Party Form-B Submitted Successfully',
+              ); 
+              $insert_log = $this->login_model->loginlog_ins($log_data); 
         $this->session->set_flashdata('success_msg', '<div class="alert alert-success"><h4 class="m-0">Third party detail has been successfully added.</h4></div>');
         redirect('/applet/additionalparty',$data); 
       } 
       else
       {
-        echo "check data";
+        $log_data = array( 
+          'user_id' => $userid, 
+          'username' => $data['user']['username'],
+          'form_type' => 'Third Party Form-B',  
+          'ip' => get_ip(),
+          'datetime' => date('Y-m-d H:i:s', time()),
+          'action_performed' => 'Third Party Form-B Modified',
+          'status' => 'Third Party Form-B Modification Failed',
+        ); 
+          $insert_log = $this->login_model->loginlog_ins($log_data); 
       }
     }
   }
@@ -761,11 +800,30 @@ $data = $this->filing_model->insert_partB2_officebearer_his($ref_no,$modify_part
 $officesavedata = $this->filing_model->officeModifiData($formbdata,$modify_party); 
 if($officesavedata){  
   $this->session->set_flashdata('success_msg', ' <div class="alert alert-success"><h4 class="m-0">Data modified successfully.</h4></div>'); 
+   $log_data = array( 
+              'user_id' => $userid, 
+              'username' => $data['user']['username'],
+              'form_type' => 'Office Bearer',  
+              'ip' => get_ip(),
+              'datetime' => date('Y-m-d H:i:s', time()),
+              'action_performed' => 'Office Bearer Form Modified',
+              'status' => 'Office Bearer Form Modified Successfully',
+              ); 
+              $insert_log = $this->login_model->loginlog_ins($log_data); 
     redirect('/applet/officebeared',$data); 
 }
 else
 {
-  echo "check data";
+   $log_data = array( 
+          'user_id' => $userid, 
+          'username' => $data['user']['username'],
+          'form_type' => 'Office Bearer',  
+          'ip' => get_ip(),
+          'datetime' => date('Y-m-d H:i:s', time()),
+          'action_performed' => 'Office Bearer Form Modified',
+          'status' => 'Office Bearer Form Modification Failed',
+        ); 
+          $insert_log = $this->login_model->loginlog_ins($log_data); 
 }  
 
 }
@@ -1129,13 +1187,33 @@ $formbdata = array(
 $officesavedata = $this->filing_model->officesavedata($formbdata); 
 
 if($officesavedata){ 
+  $log_data = array( 
+              'user_id' => $userid, 
+              'username' => $data['user']['username'],
+              'form_type' => 'Office Beared',  
+              'ip' => get_ip(),
+              'datetime' => date('Y-m-d H:i:s', time()),
+              'action_performed' => 'Office Beared Part Submitted',
+              'status' => 'Office Beared Part Submitted Successfully',
+              ); 
+              $insert_log = $this->login_model->loginlog_ins($log_data);
   $this->session->set_flashdata('success_msg', '<div class="alert alert-success"><h4 class="m-0">Data successfully added.</h4></div>'); 
   redirect('/applet/officebeared',$data); 
 
 } 
 else
 {
-  echo "check data";
+
+   $log_data = array( 
+          'user_id' => $userid, 
+          'username' => $data['user']['username'],
+          'form_type' => 'Office Beared',  
+          'ip' => get_ip(),
+          'datetime' => date('Y-m-d H:i:s', time()),
+          'action_performed' => 'Office Beared Form Submitted',
+          'status' => 'Office Beared Form Submition Failed',
+        ); 
+          $insert_log = $this->login_model->loginlog_ins($log_data); 
 }
 }
 } 
@@ -1533,11 +1611,31 @@ else
 
                 if($employeeId){ 
       //$this->session->set_flashdata('success_msg', 'Public Servant detail data has been successfully modified.'); 
+                  $log_data = array( 
+              'user_id' => $userid, 
+              'username' => $data['user']['username'],
+              'form_type' => 'Part-B',  
+              'ip' => get_ip(),
+              'datetime' => date('Y-m-d H:i:s', time()),
+              'action_performed' => 'Form B Part Submitted',
+              'status' => 'Form-B Part Submitted Successfully',
+              ); 
+              $insert_log = $this->login_model->loginlog_ins($log_data);
        redirect('/respondent/respondentfiling');
     }  
     else
     {
-      echo "check data";
+       $log_data = array( 
+          'user_id' => $userid, 
+          'username' => $data['user']['username'],
+          'form_type' => 'Part-B',  
+          'ip' => get_ip(),
+          'datetime' => date('Y-m-d H:i:s', time()),
+          'action_performed' => 'Form-B Form Submitted',
+          'status' => 'Form-B Form Submition Failed',
+        ); 
+          $insert_log = $this->login_model->loginlog_ins($log_data); 
+      
     }
 
  //redirect('/respondent/respondentfiling');
@@ -1928,12 +2026,31 @@ $employeeId = $this->filing_model->modifyFormbFiling($formbdata_modify);
 
 
                 if($employeeId){ 
-      //$this->session->set_flashdata('success_msg', 'Public Servant detail data has been successfully modified.'); 
+      //$this->session->set_flashdata('success_msg', 'Public Servant detail data has been successfully modified.');
+      $log_data = array( 
+              'user_id' => $userid, 
+              'username' => $data['user']['username'],
+              'form_type' => 'Part-B',  
+              'ip' => get_ip(),
+              'datetime' => date('Y-m-d H:i:s', time()),
+              'action_performed' => 'Part B Form Modified',
+              'status' => 'Part B Form Modified Successfully',
+              ); 
+              $insert_log = $this->login_model->loginlog_ins($log_data);   
        redirect('/respondent/respondentfiling');
     }  
     else
     {
-      echo "check data";
+     $log_data = array( 
+          'user_id' => $userid, 
+          'username' => $data['user']['username'],
+          'form_type' => 'Part B',  
+          'ip' => get_ip(),
+          'datetime' => date('Y-m-d H:i:s', time()),
+          'action_performed' => 'Part B Form Modified',
+          'status' => 'Part B Form Modification Failed',
+        ); 
+          $insert_log = $this->login_model->loginlog_ins($log_data); 
     }
 }
 }

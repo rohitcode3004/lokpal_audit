@@ -149,7 +149,7 @@ public function validate_image($t,$parameter) {
 
 public function affidavitupload()
 {
-
+$this->load->helper("common_helper");
   if($this->isUserLoggedIn) 
  {
   $con = array( 
@@ -157,7 +157,7 @@ public function affidavitupload()
   ); 
       $data['user'] = $this->login_model->getRows($con);
       $data['menus'] = $this->menus_lib->get_menus($data['user']['role']);
-      $user_id = $data['user']['id'];
+       $user_id = $data['user']['id'];
       $ref_no=$this->session->userdata('ref_no');  
       $tsnew=date('Y-m-d');               
       $new_name = time().'_'.$ref_no.'_'.$tsnew;
@@ -170,84 +170,104 @@ public function affidavitupload()
     if(!empty($_FILES['affidavit_upload']['name']))
       {     
         // $config['encrypt_name'] = TRUE;  
-        $config['upload_path']   = './cdn/affidavit/'; 
-        $config['allowed_types'] = 'gif|jpg|pdf';      
-       // $config['max_size']      = 15000;
-         $config['file_name'] = $new_name.$filename;
-        $this->upload->initialize($config);
-        $this->load->library('upload', $config);
-        if ( ! $this->upload->do_upload('affidavit_upload'))
-        {
-          $error = array('error' => $this->upload->display_errors()); 
-          redirect('document/testafidavit'); 
-          
-        }else
-        { 
-          $uploadedImage = $this->upload->data();      
-        } 
-         $affidavit_upload='cdn/affidavit/'.$new_name.$filename.$ext;
+            $config['upload_path']   = './cdn/affidavit/'; 
+            $config['allowed_types'] = 'gif|jpg|pdf';      
+           // $config['max_size']      = 15000;
+             $config['file_name'] = $new_name.$filename;
+            $this->upload->initialize($config);
+            $this->load->library('upload', $config);
+            if ( ! $this->upload->do_upload('affidavit_upload'))
+            {
+              $error = array('error' => $this->upload->display_errors()); 
+              redirect('document/testafidavit'); 
+              
+            }else
+            { 
+              $uploadedImage = $this->upload->data();      
+            } 
+             $affidavit_upload='cdn/affidavit/'.$new_name.$filename.$ext;
       }      
       else
       {
-        $affidavit_upload='';
+             $affidavit_upload='';
       } 
-    $affidavit_upload =$affidavit_upload;
 
-    if(!empty($_FILES['affidavit_upload']['name']))
-        {   
-          //echo "here";die;
-          $parameters = $_FILES['affidavit_upload']['name']."||".$_FILES['affidavit_upload']['size']."||".$_FILES['affidavit_upload']['tmp_name'];      
-          $this->form_validation->set_rules('affidavit_upload', '', 'callback_validate_image['.$parameters.']');
-        }
-
-        if ($this->form_validation->run() == FALSE)
-       {
-                if($this->isUserLoggedIn) 
-              { 
-                        $con = array( 
-                          'id' => $this->session->userdata('userId') 
-                        );                      
-                      $this->load->library('label');
-                      $this->load->helper("date_helper");
-                      $ref_no=$this->session->userdata('ref_no');   
-                          if(isset($ref_no))
-                          {
-                          $data['farma'] = $this->common_model->getFormadata($ref_no);
-                          }
-                          $data['form_part'] = 'Af';                          
-                      $this->load->view('filing/affidavit_form', $data);
-              }
-                  else
-                  {
-                    redirect('admin/login'); 
-                  }
+      $affidavit_upload =$affidavit_upload;
+      if(!empty($_FILES['affidavit_upload']['name']))
+          {   
+            //echo "here";die;
+            $parameters = $_FILES['affidavit_upload']['name']."||".$_FILES['affidavit_upload']['size']."||".$_FILES['affidavit_upload']['tmp_name'];      
+            $this->form_validation->set_rules('affidavit_upload', '', 'callback_validate_image['.$parameters.']');
           }
+
+          if ($this->form_validation->run() == FALSE)
+         {
+                    if($this->isUserLoggedIn) 
+                    { 
+                    $con = array( 
+                    'id' => $this->session->userdata('userId') 
+                    );                      
+                    $this->load->library('label');
+                    $this->load->helper("date_helper");
+                    $ref_no=$this->session->userdata('ref_no');   
+                    if(isset($ref_no))
+                    {
+                    $data['farma'] = $this->common_model->getFormadata($ref_no);
+                    }
+                    $data['form_part'] = 'Af';                          
+                    $this->load->view('filing/affidavit_form', $data);
+                    }
+                    else
+                    {
+                    redirect('admin/login'); 
+                    }
+            }
           else
           {
-
-
-          //  echo "here";die;
-                $affidavit_data = array(
-                'affidavit_upload' =>$affidavit_upload,
-                );
-                $affi_update = $this->report_model->update_complaint_affidavit($ref_no,$affidavit_data);
-                if($affi_update){ 
-                   $this->session->set_flashdata('success_msg', '<div class="alert alert-success"><h4 class="m-0">Affidavit successfully uploaded.</h4></div>'); 
-
-                //$this->session->set_flashdata('success_msg', 'Affidavit successfully uploaded.'); 
-                 $data['form_part'] = 'Af';
-                // $this->load->view('templates/front/header2.php',$data);
-              //  $data['menus'] = $this->menus_lib->get_menus($data['user']['role']);
-                redirect('/document/testafidavit',$data);
-                }
+              //  echo "here";die;
                
+                 $user_id = $data['user']['id'];
+                    $affidavit_data = array(
+                    'affidavit_upload' =>$affidavit_upload,
+                    );
+                    $affi_update = $this->report_model->update_complaint_affidavit($ref_no,$affidavit_data);
+                    if($affi_update){ 
+                       $this->session->set_flashdata('success_msg', '<div class="alert alert-success"><h4 class="m-0">Affidavit successfully uploaded.</h4></div>');                
+                     $data['form_part'] = 'Af';    
+
+                    $log_data = array( 
+                  'user_id' => $user_id, 
+                  'username' => $data['user']['username'],
+                  'form_type' => 'Affidavit Upload Form',  
+                  'ip' => get_ip(),
+                  'datetime' => date('Y-m-d H:i:s', time()),
+                  'action_performed' => 'Affidavit Upload Submittion',
+                  'status' => 'Affidavit Uploaded Successfully',
+                  ); 
+                  $insert_log = $this->login_model->loginlog_ins($log_data);
+                    redirect('/document/testafidavit',$data);
+                    }
+                    else
+                    {
+                  $log_data = array( 
+                  'user_id' => $user_id, 
+                  'username' => $data['user']['username'],
+                  'form_type' => 'Affidavit Upload Form',  
+                  'ip' => get_ip(),
+                  'datetime' => date('Y-m-d H:i:s', time()),
+                  'action_performed' => 'Affidavit Upload Submittion',
+                  'status' => 'Affidavit Uploaded Failed',
+                  ); 
+                  $insert_log = $this->login_model->loginlog_ins($log_data);
+                    }
+                   
           }
 
   }     
-  else
-  {    
-     redirect('admin/login'); 
-  }
+          else
+          {    
+             redirect('admin/login'); 
+          }
 
 
 }

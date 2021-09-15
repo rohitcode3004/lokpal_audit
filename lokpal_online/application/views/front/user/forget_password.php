@@ -31,7 +31,7 @@
         </div>
 
         <div class="box-group">
-          <input id="pwd" type="password" class="input-form password_Strength" placeholder="Enter Password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&\*]).{6,}" onKeyUp="checkPasswordStrength();" data-toggle="popover" title="Password must use a combination of these" data-content="Minimum 6 characters, At least one capital letter, one small letter, one number and one spcial character" data-placement="bottom">
+          <input id="pwd" type="password" class="input-form password_Strength" placeholder="Enter Password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&\*]).{6,}" onKeyUp="checkPasswordStrength();" data-toggle="tooltip" data-placement="bottom" title="Password must contain minimum of 6 characters, At least one capital letter, one small letter, one number, and one special character!">
           <div id="password-strength-status"></div>
         </div>
         <div class="box-group">

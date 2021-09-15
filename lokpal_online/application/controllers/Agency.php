@@ -320,9 +320,34 @@ class Agency extends CI_Controller {
 								//$query3 = $this->bench_model->complaint_listing($listing_data);
 
 								if($query2){
+
+									$log_data = array( 
+						              'user_id' => $user_id, 
+						              'username' => $data['user']['username'],
+						              'form_type' => 'Agency Submission Form',  
+						              'ip' => get_ip(),
+						              'datetime' => date('Y-m-d H:i:s', time()),
+						              'action_performed' => 'Agency Submission',
+						              'status' => 'Agency Submission Successfully Done',
+						              ); 
+				             		 $insert_log = $this->login_model->loginlog_ins($log_data); 
+
 									$this->session->set_flashdata('success_msg', 'Agency data has been successfully added.');
 									redirect('agency/dashboard');
 								}else{
+
+									$log_data = array( 
+										'user_id' => $this->con['id'], 
+										'username' => $data['user']['username'],
+										'form_type' => 'Agency Submission Form',  
+										'ip' => get_ip(),
+										'datetime' => date('Y-m-d H:i:s', time()),
+										'action_performed' => 'Agency Submission',
+										'status' => 'Agency Submission Failed',
+										); 
+										$insert_log = $this->login_model->loginlog_ins($log_data); 
+
+
 									$this->session->set_flashdata('error_msg', 'Some problem updating in proceeding model');
 									redirect('agency/dashboard');
 								}
@@ -508,9 +533,32 @@ class Agency extends CI_Controller {
 
 
 								if($query2){
+
+									$log_data = array( 
+						              'user_id' => $user_id, 
+						              'username' => $data['user']['username'],
+						              'form_type' => 'Agency Submission Form',  
+						              'ip' => get_ip(),
+						              'datetime' => date('Y-m-d H:i:s', time()),
+						              'action_performed' => 'Agency Submission',
+						              'status' => 'Agency Submission Successfully Done',
+						              ); 
+				             		 $insert_log = $this->login_model->loginlog_ins($log_data); 
+
 									$this->session->set_flashdata('success_msg', 'Agency data has been successfully added.');
 									redirect('agency/dashboard');
 								}else{
+									$log_data = array( 
+										'user_id' => $this->con['id'], 
+										'username' => $data['user']['username'],
+										'form_type' => 'Agency Submission Form',  
+										'ip' => get_ip(),
+										'datetime' => date('Y-m-d H:i:s', time()),
+										'action_performed' => 'Agency Submission',
+										'status' => 'Agency Submission Failed',
+										); 
+										$insert_log = $this->login_model->loginlog_ins($log_data); 
+
 									$this->session->set_flashdata('error_msg', 'Some problem updating in proceeding model');
 									redirect('agency/dashboard');
 								}
