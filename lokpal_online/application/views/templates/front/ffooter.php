@@ -98,6 +98,14 @@ $('body').on('keyup', 'input', function(e){
     //return false;
   }
 });
-</script>    
+</script> 
+
+<!-- Tooltip Js -->
+<script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();   
+});
+</script>
+   
 </body>
 </html>

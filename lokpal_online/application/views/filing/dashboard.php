@@ -36,10 +36,13 @@
                     <?php    
 
                     //echo "<pre>"; 
-                   //print_r($user_comps_partcdata) ;             
+                   //print_r($user_comps_partcdata) ; 
+
+
                       $u = $user['id'];
                       $c = 1;
                         foreach($user_comps as $row):
+                          $r = $row->ref_no ?? '';
                   ?>
                   <tr>
                     <td><?php echo $c++; ?></td>
@@ -68,7 +71,7 @@
 
           ?></td>
 
-                 <?php endforeach;?>
+              
 
 
                   <td>
@@ -81,7 +84,7 @@
                       <a href="<?php echo base_url().'filing/filing/'.$r ?>">Go to application</a>
                       <?php } ?>
                     </td>
-                    
+                       <?php endforeach;?>
                   </tr>
                   
                 

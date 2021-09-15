@@ -323,6 +323,7 @@
 
 		function action()
 		{
+
 			$this->form_validation->set_rules('order_date', 'Order Date', 'required');
 	        $this->form_validation->set_rules('order_type', 'Order Type', 'required',
 	                        array('required' => 'You must provide a %s.')
@@ -649,13 +650,47 @@
 
 									if($query2){
 										if($order_type == 5 || $order_type == 8 || $order_type == 9){
+
+											$log_data = array( 
+						              'user_id' => $user_id, 
+						              'username' => $data['user']['username'],
+						              'form_type' => 'Complaint Recording Form',  
+						              'ip' => get_ip(),
+						              'datetime' => date('Y-m-d H:i:s', time()),
+						              'action_performed' => 'Complaint Recording',
+						              'status' => 'Complaint Recording Successfully Done',
+						              ); 
+				             		 $insert_log = $this->login_model->loginlog_ins($log_data); 
+
 											$this->session->set_flashdata('success_msg', 'Successfully disposed complaint no. '.$complaint_no.'.');
 											redirect('proceeding/dashboard/'.$bench_no.'/'.$flag);
 										}else{
+											$log_data = array( 
+						              'user_id' => $user_id, 
+						              'username' => $data['user']['username'],
+						              'form_type' => 'Complaint Recording Form',  
+						              'ip' => get_ip(),
+						              'datetime' => date('Y-m-d H:i:s', time()),
+						              'action_performed' => 'Complaint Recording',
+						              'status' => 'Complaint Recording Successfully Done',
+						              ); 
+				             		 $insert_log = $this->login_model->loginlog_ins($log_data); 
+
 										$this->session->set_flashdata('success_msg', 'Successfully proceeded complaint no. '.$complaint_no.' and forwarded.');
 										redirect('proceeding/dashboard/'.$bench_no.'/'.$flag);
 										}
 									}else{
+										$log_data = array( 
+										'user_id' => $this->con['id'], 
+										'username' => $data['user']['username'],
+										'form_type' => 'Complaint Recording Form',  
+										'ip' => get_ip(),
+										'datetime' => date('Y-m-d H:i:s', time()),
+										'action_performed' => 'Complaint Recording',
+										'status' => 'Complaint Recording Failed',
+										); 
+										$insert_log = $this->login_model->loginlog_ins($log_data); 
+
 										$this->session->set_flashdata('error_msg', 'Some problem updating in allocation model complaint no. '.$complaint_no.'.');
 										redirect('proceeding/dashboard/'.$bench_no.'/'.$flag);
 									}
@@ -665,11 +700,33 @@
 								}
 								}else{
 									//die('problem inserting in proceeding model');
+									$log_data = array( 
+										'user_id' => $this->con['id'], 
+										'username' => $data['user']['username'],
+										'form_type' => 'Complaint Recording Form',  
+										'ip' => get_ip(),
+										'datetime' => date('Y-m-d H:i:s', time()),
+										'action_performed' => 'Complaint Recording',
+										'status' => 'Complaint Recording Failed',
+										); 
+										$insert_log = $this->login_model->loginlog_ins($log_data); 
+
 									$this->session->set_flashdata('error_msg', 'Some problem inserting in proceeding model complaint no. '.$complaint_no.'.');
 										redirect('proceeding/dashboard/'.$bench_no.'/'.$flag);
 								}
 
 									}else{
+										$log_data = array( 
+										'user_id' => $this->con['id'], 
+										'username' => $data['user']['username'],
+										'form_type' => 'Complaint Recording Form',  
+										'ip' => get_ip(),
+										'datetime' => date('Y-m-d H:i:s', time()),
+										'action_performed' => 'Complaint Recording',
+										'status' => 'Complaint Recording Failed',
+										); 
+										$insert_log = $this->login_model->loginlog_ins($log_data); 
+
 										$this->session->set_flashdata('error_msg', 'Some problem deleting in proceeding model complaint no. '.$complaint_no.'.');
 										redirect('proceeding/dashboard/'.$bench_no.'/'.$flag);
 									}
@@ -724,13 +781,46 @@
 
 									if($query2){
 											if($order_type == 5 || $order_type == 8 || $order_type == 9){
+												$log_data = array( 
+						              'user_id' => $user_id, 
+						              'username' => $data['user']['username'],
+						              'form_type' => 'Complaint Recording Form',  
+						              'ip' => get_ip(),
+						              'datetime' => date('Y-m-d H:i:s', time()),
+						              'action_performed' => 'Complaint Recording',
+						              'status' => 'Complaint Recording Successfully Done',
+						              ); 
+				             		 $insert_log = $this->login_model->loginlog_ins($log_data); 
+
 											$this->session->set_flashdata('success_msg', 'Successfully disposed complaint no. '.$complaint_no.'.');
 											redirect('proceeding/dashboard/'.$bench_no.'/'.$flag);
 										}else{
+											$log_data = array( 
+						              'user_id' => $user_id, 
+						              'username' => $data['user']['username'],
+						              'form_type' => 'Complaint Recording Form',  
+						              'ip' => get_ip(),
+						              'datetime' => date('Y-m-d H:i:s', time()),
+						              'action_performed' => 'Complaint Recording',
+						              'status' => 'Complaint Recording Successfully Done',
+						              ); 
+				             		 $insert_log = $this->login_model->loginlog_ins($log_data); 
 										$this->session->set_flashdata('success_msg', 'Successfully proceeded complaint no. '.$complaint_no.' and forwarded.');
 										redirect('proceeding/dashboard/'.$bench_no.'/'.$flag);
 										}
 									}else{
+
+										$log_data = array( 
+										'user_id' => $this->con['id'], 
+										'username' => $data['user']['username'],
+										'form_type' => 'Complaint Recording Form',  
+										'ip' => get_ip(),
+										'datetime' => date('Y-m-d H:i:s', time()),
+										'action_performed' => 'Complaint Recording',
+										'status' => 'Complaint Recording Failed',
+										); 
+										$insert_log = $this->login_model->loginlog_ins($log_data); 
+
 										$this->session->set_flashdata('error_msg', 'Some problem updating in allocation model complaint no. '.$complaint_no.'.');
 										redirect('proceeding/dashboard/'.$bench_no.'/'.$flag);
 									}
@@ -740,6 +830,17 @@
 								}
 								}else{
 									//die('problem inserting in proceeding model');
+									$log_data = array( 
+										'user_id' => $this->con['id'], 
+										'username' => $data['user']['username'],
+										'form_type' => 'Complaint Recording Form',  
+										'ip' => get_ip(),
+										'datetime' => date('Y-m-d H:i:s', time()),
+										'action_performed' => 'Complaint Recording',
+										'status' => 'Complaint Recording Failed',
+										); 
+										$insert_log = $this->login_model->loginlog_ins($log_data); 
+
 									$this->session->set_flashdata('error_msg', 'Some problem inserting in proceeding model complaint no. '.$complaint_no.'.');
 										redirect('proceeding/dashboard/'.$bench_no.'/'.$flag);
 								}
@@ -753,6 +854,8 @@
 		{
 			//print_r($_FILES);die;
 			//print_r($_POST);die;
+
+
 			$this->form_validation->set_rules('select_an_option', 'Select an option', 'required');
 			//$this->form_validation->set_rules('order_upload', 'Order Upload', 'required');
 			$select_an_option = trim($this->security->xss_clean($this->input->post('select_an_option')));
@@ -1035,16 +1138,53 @@
 										//'updated_at' => $ts,
 									//);
 									//$query2 = $this->proceeding_model->upd_alloc($filing_no, $listing_date, $bench_no, $upd_data);
+
+									
+
 										if($order_type == 5){
+											$log_data = array( 
+						              'user_id' => $user_id, 
+						              'username' => $data['user']['username'],
+						              'form_type' => 'Complaint Recording Form',  
+						              'ip' => get_ip(),
+						              'datetime' => date('Y-m-d H:i:s', time()),
+						              'action_performed' => 'Complaint Recording',
+						              'status' => 'Complaint Recording Successfully Done',
+						              ); 
+				             		 $insert_log = $this->login_model->loginlog_ins($log_data); 
 											$this->session->set_flashdata('success_msg', 'Successfully disposed complaint no. '.$complaint_no.'.');
 											redirect('proceeding/dashboard/'.$bench_no.'/'.$flag);
 										}else{
+
+											
+											$log_data = array( 
+						              'user_id' => $user_id, 
+						              'username' => $data['user']['username'],
+						              'form_type' => 'Complaint Recording Form',  
+						              'ip' => get_ip(),
+						              'datetime' => date('Y-m-d H:i:s', time()),
+						              'action_performed' => 'Complaint Recording',
+						              'status' => 'Complaint Recording Successfully Done',
+						              ); 
+				             		 $insert_log = $this->login_model->loginlog_ins($log_data); 
 										$this->session->set_flashdata('success_msg', 'Successfully proceeded complaint no. '.$complaint_no.' and forwarded.');
 										redirect('proceeding/dashboard/'.$bench_no.'/'.$flag);
 										}
 
 								}else{
 									//die('problem inserting in proceeding model');
+
+													$log_data = array( 
+										'user_id' => $this->con['id'], 
+										'username' => $data['user']['username'],
+										'form_type' => 'Complaint Recording Form',  
+										'ip' => get_ip(),
+										'datetime' => date('Y-m-d H:i:s', time()),
+										'action_performed' => 'Complaint Recording',
+										'status' => 'Complaint Recording Failed',
+										); 
+										$insert_log = $this->login_model->loginlog_ins($log_data); 
+
 									$this->session->set_flashdata('error_msg', 'Some problem inserting in proceeding model complaint no. '.$complaint_no.'.');
 										redirect('proceeding/dashboard/'.$bench_no.'/'.$flag);
 								}
@@ -1240,6 +1380,10 @@
 		//echo "yummy";die;
 		//echo '<pre>';
 	//print_r($_POST);die;
+			$data['user'] = $this->login_model->getRows($this->con);
+			    $user_id=$data['user']['id'];
+				//$purpose = ;
+
 		$value  = json_decode($_POST['allids']);
 		$venue_code = $_POST['venue_code'];
 		//echo '<pre>';print_r($purpose_code);die;
@@ -1283,8 +1427,31 @@
 	}
 	if($flag == 1){
 		//echo 'success';
+
+			$log_data = array( 
+			'user_id' => $user_id, 
+			'username' => $data['user']['username'],
+			'form_type' => 'Court Master Form',  
+			'ip' => get_ip(),
+			'datetime' => date('Y-m-d H:i:s', time()),
+			'action_performed' => 'Complaints Hearing Updation ',
+			'status' => 'Complaints Hearing Date Successfully Done',
+			); 
+			$insert_log = $this->login_model->loginlog_ins($log_data); 
+
 		echo json_encode(array('success' => 'success'));
 	}else{
+		$log_data = array( 
+						'user_id' => $user_id, 
+						'username' => $data['user']['username'],
+						'form_type' => 'Court Master Form',  
+						'ip' => get_ip(),
+						'datetime' => date('Y-m-d H:i:s', time()),
+						'action_performed' => 'Complaints Hearing Updation',
+						'status' => 'Complaints Hearing Date Successfully Done',
+						); 
+						$insert_log = $this->login_model->loginlog_ins($log_data); 
+
 		echo json_encode(array('data'=>'fail'));
 	}
 	

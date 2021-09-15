@@ -76,6 +76,10 @@ class Filing extends CI_Controller {
 			$data['user'] = $this->login_model->getRows($con);
 			$data['menus'] = $this->menus_lib->get_menus($data['user']['role']);
 			$data['user_comps'] = $this->filing_model->get_user_complaints($data['user']['id']);
+
+			//echo "<pre>";
+			//print_r($data['user_comps']);die('@@@');
+
 			$data['user_comps_partcdata'] = $this->filing_model->get_user_complaints_partcdata($data['user']['id']);
 			//echo "<pre>";
 		//	print_r($data['user_comps_partcdata']);die('@@@');
@@ -524,7 +528,7 @@ class Filing extends CI_Controller {
 
 
 
-					     	//echo "here"; die;``
+					     	
 				$curYear = date('Y');
 				$cur_year=$curYear;			
 				$ref_no=$ref_no;
@@ -646,16 +650,49 @@ class Filing extends CI_Controller {
 					'c_country_name'=>$c_country_name,
 				); 
 				$data = $this->filing_model->insert_partA_his($ref_no);
-				$data = $this->filing_model->modify_form_A_filing($form_A_modify, $user_id);
-				if($complaint_capacity_id =='1')
-				{
-					redirect('/respondent/respondentfiling',$data);
+				$data_m = $this->filing_model->modify_form_A_filing($form_A_modify, $user_id);
 
-				}
-				else
+				if($data_m)
 				{
-					redirect('/applet/appletfiling',$data);
-				} 
+										
+
+							$log_data = array( 
+							'user_id' => $userid, 
+							'username' => $data['user']['username'],
+							'form_type' => 'Part-A',  
+							'ip' => get_ip(),
+							'datetime' => date('Y-m-d H:i:s', time()),
+							'action_performed' => 'Part A Form Modified',
+							'status' => 'Part A Form Modified Successfully',
+							); 
+							$insert_log = $this->login_model->loginlog_ins($log_data);						
+				
+							if($complaint_capacity_id =='1')
+							{
+								redirect('/respondent/respondentfiling',$data);
+
+							}
+							else
+							{
+								redirect('/applet/appletfiling',$data);
+							} 
+
+
+			}
+			else
+			{
+				$log_data = array( 
+					'user_id' => $userid, 
+					'username' => $data['user']['username'],
+					'form_type' => 'Part A',  
+					'ip' => get_ip(),
+					'datetime' => date('Y-m-d H:i:s', time()),
+					'action_performed' => 'Part A Form Modified',
+					'status' => 'Part A Form Modification Failed',
+				); 
+					$insert_log = $this->login_model->loginlog_ins($log_data); 
+			}
+			
 			}
 					     //die('modend');
 
@@ -978,8 +1015,19 @@ class Filing extends CI_Controller {
 					     	'c_country_name'=>$c_country_name,					
 					     );
 					     $data = $this->filing_model->add_form_A_filing($form_A_filing);
-
-//$datacomplaint= $this->filing_model->getComplaintno($ref_no);   //why
+					     if($data)
+					     {
+							$log_data = array( 
+							'user_id' => $userid, 
+							'username' => $data['user']['username'],
+							'form_type' => 'Part-A',  
+							'ip' => get_ip(),
+							'datetime' => date('Y-m-d H:i:s', time()),
+							'action_performed' => 'Form A Part Submitted',
+							'status' => 'Form A Part Submitted Successfully',
+							); 
+							$insert_log = $this->login_model->loginlog_ins($log_data);
+					     
 					     $this->session->set_userdata('ref_no',$ref_no);
 					     $this->load->view('filing/filing');
 					     if($complaint_capacity_id =='1')
@@ -991,6 +1039,20 @@ class Filing extends CI_Controller {
 					     {
 					     	redirect('/applet/appletfiling',$data);
 					     } 
+					 }
+					 else
+					 {
+					 $log_data = array( 
+					'user_id' => $userid, 
+					'username' => $data['user']['username'],
+					'form_type' => 'Part-A',  
+					'ip' => get_ip(),
+					'datetime' => date('Y-m-d H:i:s', time()),
+					'action_performed' => 'Part-A Form Submitted',
+					'status' => 'Part-A Form Submition Failed',
+				); 
+					$insert_log = $this->login_model->loginlog_ins($log_data); 
+					 }
 
 					 }
 					}

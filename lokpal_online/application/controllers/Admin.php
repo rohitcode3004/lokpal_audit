@@ -339,10 +339,43 @@ class Admin extends CI_Controller {
 	}
 
 	public function logout(){ 
+		$con = array( 
+    			'id' => $this->session->userdata('userId') 
+    		); 
+    	$data['user'] = $this->login_model->getRows($con);
+
 		$this->session->unset_userdata('isUserLoggedIn'); 
 		$this->session->unset_userdata('userId'); 
 		$this->session->sess_destroy(); 
-		redirect('admin/login/'); 
+
+		$log_data = array( 
+          'user_id' => $data['user']['id'], 
+          'username' => $data['user']['username'],
+          'form_type' => 'Logout Form',  
+          'ip' => get_ip(),
+          'datetime' => date('Y-m-d H:i:s', time()),
+          'action_performed' => 'Logout Performed',
+          'status' => 'Logout Performed Successfully',
+        ); 
+          $insert_log = $this->login_model->loginlog_ins($log_data); 
+          if($insert_log)
+          {
+			redirect('admin/login/'); 
+	    	}
+		else{
+			$log_data = array( 
+          'user_id' => $data['user']['id'], 
+          'username' => $data['user']['username'],
+          'form_type' => 'Logout Form',  
+          'ip' => get_ip(),
+          'datetime' => date('Y-m-d H:i:s', time()),
+          'action_performed' => 'Logout Performed',
+          'status' => 'Logout Performed Failed',
+        ); 
+          $insert_log = $this->login_model->loginlog_ins($log_data); 
+
+		}
+		
 	}
 
 	public function view_menus(){	
