@@ -1,5 +1,5 @@
 <?php //include(APPPATH.'views/templates/front/header2.php');
-$this->load->helper("date_helper"); 
+$this->load->helper("date_helper");
  ?>
 
   <script src="<?php echo base_url();?>assets/bootstrap/js/bootstrap.min.js"></script>
@@ -178,7 +178,9 @@ $this->load->helper("date_helper");
             ?>
             
             <td><?php echo  $identitydesc; ?></td>
-            <td><?php echo  base64_decode($farma[0]->identity_proof_no ?? ''); ?></td>
+            <td><?php  $idno=base64_decode($farma[0]->identity_proof_no ?? '');
+            echo 'XXXX-XXXX-XXXX-'.substr($idno,-4);
+             ?></td>
             <td><?php 
               $farma[0]->identity_proof_doi=get_displaydate($farma[0]->identity_proof_doi);
               echo  $farma[0]->identity_proof_doi ?? ''; ?></td>
@@ -221,7 +223,12 @@ $this->load->helper("date_helper");
               } 
             ?>     
             <td><?php echo  $identitydesc; ?></td>
-            <td><?php echo  base64_decode($farma[0]->idres_proof_no ?? ''); ?></td>
+            <td><?php  $idres_no= base64_decode($farma[0]->idres_proof_no ?? '');
+
+             echo 'XXXX-XXXX-XXXX-'.substr($idres_no,-4);
+
+
+             ?></td>
             <td><?php echo  get_displaydate($farma[0]->idres_proof_doi ?? ''); ?></td>
             <td><?php echo  $farma[0]->idres_proof_vupto ?? ''; ?></td>       
             <td><?php echo  $farma[0]->idres_proof_iauth ?? ''; ?></td>

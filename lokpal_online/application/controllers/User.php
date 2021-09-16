@@ -61,6 +61,9 @@ class User extends CI_Controller {
 			if($this->form_validation->run() == true){
 				$data['username'] = $this->input->post('username');
 
+				$current_failed = $this->login_model->current_failed(strip_tags($this->input->post('username')), date('Y-m-d'));
+				$current_lock = $this->login_model->current_lock(strip_tags($this->input->post('username')), date('Y-m-d'));
+
 			    $password_encrypted = $this->input->post('password');
 				$password_decrypted = decode($password_encrypted);
 				$data['password'] = md5(strip_tags($password_decrypted));
@@ -81,10 +84,28 @@ class User extends CI_Controller {
 				//$data['password'] = $this->input->post('password');
 
 				$checkLogin = $this->login_model->authenticate($data);
+				$checkLock = $this->login_model->check_lock($data['username']);
                 //$checkStaff = $this->login_model->chkstf($data);
                 //if($checkStaff){die('nn');}else{die('mm');}
                 //print_r($checkLogin);die();
 				if($checkLogin && $checkLogin['role'] == 18 && $checkLogin['display'] == 't' && $checkcaptch == 't'){
+
+					$current_failed_upd = 0;
+					$current_lock_upd = $checkLock['lock'];
+					$log_data = array( 
+					'user_id' => $checkLogin['id'], 
+					'username' => strip_tags($this->input->post('username')),
+					'form_type' => 'A',  
+					'lock' => $current_lock_upd, 
+					'failed' => $current_failed_upd, 
+					'ip' => get_ip(),
+					'datetime' => date('Y-m-d H:i:s', time()),
+					'action_performed' => 'Login Page-Valid credentials',
+					'status' => 'Login Success',
+				); 
+					$insert_log = $this->login_model->loginlog_ins($log_data); 
+					if($insert_log){
+
 					$this->session->set_userdata('isUserLoggedIn', TRUE); 
 					$this->session->set_userdata('userId', $checkLogin['id']);
 					$this->session->set_userdata('is_staff', $checkLogin['is_staff']);
@@ -101,11 +122,73 @@ class User extends CI_Controller {
 						$ref_no = get_refno_latest($user_id);
 						redirect('/filing/filing/'.$ref_no); 
 					}
+				}
+
+				else{
+					die('Unable to maintain your log.Go back and try again.');
+				}
+
 				}else{
+
+					if(!empty($current_failed) && $current_failed[0]->failed >= 5){
+						//print_r($current_failed[0]->failed);die('hassomething');
+						$current_failed_upd = $current_failed[0]->failed;
+						$log_data = array( 
+							//'user_id' => $checkLogin['id'], 
+							'username' => strip_tags($this->input->post('username')),
+							'form_type' => 'A',  
+							'lock' => 'Y',
+							'failed' => $current_failed_upd,
+							'ip' => get_ip(),
+							'datetime' => date('Y-m-d H:i:s', time()),
+							'action_performed' => 'Login Page-InValid credentials',
+							'status' => 'Login Failure',
+							); 
+							$is_locked = 1;
+					}elseif(!empty($current_failed) && $current_failed[0]->failed < 5){
+							$current_failed_upd = $current_failed[0]->failed+1;
+							//$current_lock_upd = $checkLock[0]->lock;
+							$log_data = array( 
+							//'user_id' => $checkLogin['id'], 
+							'username' => strip_tags($this->input->post('username')),
+							'form_type' => 'A',  
+							//'lock' => $current_lock_upd,
+							'failed' => $current_failed_upd,
+							'ip' => get_ip(),
+							'datetime' => date('Y-m-d H:i:s', time()),
+							'action_performed' => 'Login Page-InValid credentials',
+							'status' => 'Login Failure',
+							); 
+					}elseif(empty($current_failed)){
+							//print_r($current_failed);die('nothing');
+							$log_data = array( 
+							//'user_id' => $checkLogin['id'], 
+							'username' => strip_tags($this->input->post('username')),
+							'form_type' => 'A',
+							'ip' => get_ip(),
+							'datetime' => date('Y-m-d H:i:s', time()),
+							); 
+					}else{
+							die('no condition exception');
+					}
+
+					$insert_log = $this->login_model->loginlog_ins($log_data);
+
+						if(isset($is_locked)){
+								$data['error_msg'] = '<div class="alert alert-info"><h4 class="m-0">Your account is locked due to multiple entry of wrong credentials. Contact Admin to unlock.</h4></div>';
+								$data['captcha'] =  $this->captcha();
+							}else{
+								$data['error_msg'] = '<div class="alert alert-info"><h4 class="m-0">Wrong email, password  or captcha, please try again.</h4></div>'; 
+                $data['captcha'] =  $this->captcha();  
+            }
+				
+				}
+
+				/*else{
 				//die('here2'); 
 					$data['error_msg'] = '<div class="alert alert-info"><h4 class="m-0">Wrong email, password  or captcha, please try again.</h4></div>';
 					$data['captcha'] =  $this->captcha();  
-				} 
+				} */
 			}else{ 
 				//die('here');
 				$data['captcha'] =  $this->captcha();
@@ -641,7 +724,11 @@ class User extends CI_Controller {
 
     	if($this->isUserLoggedIn) 
     	{
-
+    		$con = array( 
+    			'id' => $this->session->userdata('userId') 
+    		); 
+    		$data['user'] = $this->login_model->getRows($con);
+    		
         // If registration request is submitted 
     		if($this->input->post('upd-pass-form')){ 
 				//die('k');
@@ -670,15 +757,43 @@ class User extends CI_Controller {
     				$check_old_password = $this->login_model->check_old_password($old_password, $id);
     				if($check_old_password == 1){
     				$update = $this->login_model->upd_pass($userData, $id); 
-    				if($update){ 
+    				if($update){
+
+    						 $log_data = array( 
+				              'user_id' => $data['user']['id'], 
+				              'username' => $data['user']['username'],
+				              'form_type' => 'Update password form',  
+				              'ip' => get_ip(),
+				              'datetime' => date('Y-m-d H:i:s', time()),
+				              'action_performed' => 'Change password',
+				              'status' => 'Password Changed Successfully',
+				              ); 
+				              $insert_log = $this->login_model->loginlog_ins($log_data);   
+
+
     					$this->session->set_flashdata('success_msg', '<div class="alert alert-success text-center"><h4 class="m-0">Username and password successfully updated.</h4></div>'); 
     					redirect('user/update_user_pass'); 
-    				}else{
+    				}else{ 					
+    					
     					$this->session->set_flashdata('error_msg', '<div class="alert alert-danger text-center"><h4 class="m-0">Some problems occured, please try again.</h4></div>');
 						redirect('user/submit_user_pass/'); 
+						
     				}
     				} else{
-    					$this->session->set_flashdata('error_msg', '<div class="alert alert-danger text-center"><h4 class="m-0">Please enter old password correctly.</h4></div>');
+
+    					//echo " at esle";die('@@@');
+
+    						$log_data = array( 
+				              'user_id' => $data['user']['id'], 
+				              'username' => $data['user']['username'],
+				              'form_type' => 'Update password form',  
+				              'ip' => get_ip(),
+				              'datetime' => date('Y-m-d H:i:s', time()),
+				              'action_performed' => 'Change password',
+				              'status' => 'Password Changed Failed',
+				              ); 
+				              $insert_log = $this->login_model->loginlog_ins($log_data); 
+    					$this->session->set_flashdata('error_msg', '<div class="alert alert-danger text-center"><h4 class="m-0">Please enter all the mandatory fields.</h4></div>');
 						redirect('user/submit_user_pass/');
     				}
     			}else{ 
@@ -715,11 +830,44 @@ class User extends CI_Controller {
     	}
     }
 
-    public function logout(){ 
+    public function logout(){     	
+    		$con = array( 
+    			'id' => $this->session->userdata('userId') 
+    		); 
+    		$data['user'] = $this->login_model->getRows($con);
+            //print_r($data['user']['id']);die;
 		$this->session->unset_userdata('isUserLoggedIn'); 
 		$this->session->unset_userdata('userId'); 
-		$this->session->sess_destroy(); 
-		redirect('user/login/'); 
+		$status=$this->session->sess_destroy();	
+		$log_data = array( 
+          'user_id' => $data['user']['id'], 
+          'username' => $data['user']['username'],
+          'form_type' => 'Logout Form',  
+          'ip' => get_ip(),
+          'datetime' => date('Y-m-d H:i:s', time()),
+          'action_performed' => 'Logout Performed',
+          'status' => 'Logout Performed Successfully',
+        ); 
+          $insert_log = $this->login_model->loginlog_ins($log_data); 
+          if($insert_log)
+          {
+			redirect('user/login/'); 
+	    	}
+		else{
+			$log_data = array( 
+          'user_id' => $data['user']['id'], 
+          'username' => $data['user']['username'],
+          'form_type' => 'Logout Form',  
+          'ip' => get_ip(),
+          'datetime' => date('Y-m-d H:i:s', time()),
+          'action_performed' => 'Logout Performed',
+          'status' => 'Logout Performed Failed',
+        ); 
+          $insert_log = $this->login_model->loginlog_ins($log_data); 
+
+		}
+
+		
 	}
 
 	//-----------------------------------------------------------------//
@@ -771,6 +919,8 @@ public function user_register(){
 	public function new_user_save(){
 		$data['salution'] = $this->common_model->getSalution();
 		$ref_no=mt_rand();
+
+
 
 		//if($this->isUserLoggedIn) 
 		//{
@@ -856,6 +1006,8 @@ public function user_register(){
 									'created_at' => $ts,
 									'ip' => $ip,
 									); 
+
+							
 								$partaData = $this->users_model->user_parta_data_insert($partaData); 
 
 								if($partaData){

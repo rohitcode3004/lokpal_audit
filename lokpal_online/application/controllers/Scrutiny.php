@@ -274,7 +274,7 @@ class Scrutiny extends CI_Controller {
 			//print_r($this->input->post());die();
 			$data['user'] = $this->login_model->getRows($this->con);
 
-	            //print_r($data['user']['id']);die;
+	           // print_r($data['user']['id']);die;
 			$remarks_by = $this->scrutiny_model->get_remarksby($data['user']['role']);
 			$remarks_by = $remarks_by[0]->id;
 
@@ -460,6 +460,8 @@ class Scrutiny extends CI_Controller {
 			    }
 
 					//echo "yogendra";die;
+
+
 				if($res){
 					if($torole == 1 || $torole == 2 || $torole == 3 || $torole == 5 || $torole == 6){
 						if(trim($this->security->xss_clean($this->input->post('par1'))) == 1){
@@ -470,12 +472,30 @@ class Scrutiny extends CI_Controller {
 						echo  json_encode($array);
 
 						}else{
+						 $userid=$this->con['id'];
+							
+							$log_data = array( 
+				              'user_id' => $userid, 
+				              'username' => $data['user']['username'],
+				              'form_type' => 'Scrutiny of Complaint Form',  
+				              'ip' => get_ip(),
+				              'datetime' => date('Y-m-d H:i:s', time()),
+				              'action_performed' => 'Scrutiny of Complaint ',
+				              'status' => 'Scrutiny of Complaint Successfully Completed',
+				              ); 
+				              $insert_log = $this->login_model->loginlog_ins($log_data); 
+
+
 						$this->session->set_flashdata('error_msg', 'Scrutiny processed for Diary no. '.$filing_no.' and forwarded to '.$torole_name);
 						redirect('scrutiny/dashboard');
 					}
 					}elseif($torole == 4){
 						if($comp_data['chk_cou'] && $comp_data['comp_no'] && $comp_data['year'])
 						{
+
+							//echo  " in here";die('@@@'); 
+
+
 							if(!$chk_exist_case_det){
 							$case_det_insdata = array(
 								'filing_no' => $filing_no,
@@ -491,22 +511,50 @@ class Scrutiny extends CI_Controller {
 								'complaint_counter' => $comp_data['counter']
 							);
 							$this->scrutiny_model->update_year_initialisation($comp_data['year'], $upd_data);
-
+							 $userid=$this->con['id'];
 							$ts = date('Y-m-d H:i:s', time());
 							$insert_data = array(
 								'ref_no' => get_refno($filing_no),
-								'user_id' => $this->con['id'],
+								'user_id' => $userid,
 								'filing_no' => $filing_no,
 								'complaint_no' => $comp_data['comp_no'],
 								'created_at' => $ts,
 								'ip' => get_ip(),
 							);
 							$this->scrutiny_model->update_comp_his($insert_data);
+
+
+							
 						}
+							//echo "in hireeeee";die('@@@@');
+						 $userid=$this->con['id'];
+							
+							$log_data = array( 
+				              'user_id' => $userid, 
+				              'username' => $data['user']['username'],
+				              'form_type' => 'Scrutiny of Complaint Form',  
+				              'ip' => get_ip(),
+				              'datetime' => date('Y-m-d H:i:s', time()),
+				              'action_performed' => 'Scrutiny of Complaint ',
+				              'status' => 'Scrutiny of Complaint Successfully Completed',
+				              ); 
+				              $insert_log = $this->login_model->loginlog_ins($log_data); 
+
 
 							$this->session->set_flashdata('success_msg', 'Scrutiny successfully completed for Diary no. '.$filing_no.' without defects and forwarded to chairperson .');
 							redirect('scrutiny/dashboard');
 						}else{
+
+						$log_data = array( 
+						'user_id' => $this->con['id'], 
+						'username' => $data['user']['username'],
+						'form_type' => 'Scrutiny of Complaint',  
+						'ip' => get_ip(),
+						'datetime' => date('Y-m-d H:i:s', time()),
+						'action_performed' => 'Scrutiny of Complaint Form',
+						'status' => 'Scrutiny of Complaint Failed',
+						); 
+						$insert_log = $this->login_model->loginlog_ins($log_data); 
 							die('Unable to generate complaint no. Contact Admin');
 						}
 
@@ -3485,6 +3533,8 @@ function updatecategory(){
 
 
 		public function reg_proceeding_form(){	
+
+			//echo "here";die;
 			//print_r($_POST);die;
 			$details = (explode("||",$this->input->post('filing_no')));	
 
@@ -3715,7 +3765,7 @@ function updatecategory(){
 
 
 		function ops_proceeding_action()
-		{	//echo "hello";
+		{	
 			//print_r($_FILES);die;
 			//print_r($_POST);die;
 			$this->form_validation->set_rules('dt_submission', 'Date of Submission', 'required');			
@@ -3897,9 +3947,33 @@ function updatecategory(){
 						//echo $flag;die;
 					if($query6){
 
+						$log_data = array( 
+				              'user_id' => $user_id, 
+				              'username' => $data['user']['username'],
+				              'form_type' => 'Report Submission OPS Form',  
+				              'ip' => get_ip(),
+				              'datetime' => date('Y-m-d H:i:s', time()),
+				              'action_performed' => 'Report Submission OPS',
+				              'status' => 'Report Submission OPS Successfully Done',
+				              ); 
+				              $insert_log = $this->login_model->loginlog_ins($log_data); 
+
+
 						$this->session->set_flashdata('success_msg', 'Complaint no '.get_complaintno($filing_no).' forwarded to HCP');
 						redirect('scrutiny/ps_report_chk/'.$flag);
 					}else{
+
+						$log_data = array( 
+						'user_id' => $this->con['id'], 
+						'username' => $data['user']['username'],
+						'form_type' => 'Report Submission OPS Form',  
+						'ip' => get_ip(),
+						'datetime' => date('Y-m-d H:i:s', time()),
+						'action_performed' => 'Report Submission OPS',
+						'status' => 'Report Submission OPS Failed',
+						); 
+						$insert_log = $this->login_model->loginlog_ins($log_data); 
+
 						$this->session->set_flashdata('error_msg', 'Some problem inserting in orders_agency_report model');
 						redirect('scrutiny/dashboard/'.$flag);
 					}
@@ -4069,7 +4143,7 @@ function updatecategory(){
 
 		function any_other_action_proceeding()
 		{	
-			
+			//echo  "in here";die;
 			//print_r($_FILES);die;
 			//print_r($_POST);die;
 			$this->form_validation->set_rules('dt_submission', 'Date of Submission', 'required');			
@@ -4142,6 +4216,8 @@ function updatecategory(){
 			else
 				
 			{
+
+
 		 	    $ordertype_code = trim($this->security->xss_clean($this->input->post('ordertype_code')));
 				$flag = trim($this->security->xss_clean($this->input->post('flag')));
 				$dt_submission = trim($this->security->xss_clean($this->input->post('dt_submission')));
@@ -4276,9 +4352,32 @@ function updatecategory(){
 						//echo $flag;die;
 					if($query6){
 
+						$log_data = array( 
+				              'user_id' => $user_id, 
+				              'username' => $data['user']['username'],
+				              'form_type' => 'Report Submission AOA Form',  
+				              'ip' => get_ip(),
+				              'datetime' => date('Y-m-d H:i:s', time()),
+				              'action_performed' => 'Report Submission AOA',
+				              'status' => 'Report Submission AOA Successfully Done',
+				              ); 
+				              $insert_log = $this->login_model->loginlog_ins($log_data); 
+
 						$this->session->set_flashdata('success_msg', 'Complaint no '.get_complaintno($filing_no).' forwarded to HCP');
 						redirect('scrutiny/ps_report_chk/'.$flag);
 					}else{
+						$log_data = array( 
+						'user_id' => $this->con['id'], 
+						'username' => $data['user']['username'],
+						'form_type' => 'Report Submission AOA Form',  
+						'ip' => get_ip(),
+						'datetime' => date('Y-m-d H:i:s', time()),
+						'action_performed' => 'Report Submission AOA',
+						'status' => 'Report Submission AOA Failed',
+						); 
+						$insert_log = $this->login_model->loginlog_ins($log_data); 
+
+
 						$this->session->set_flashdata('error_msg', 'Some problem inserting in orders_agency_report model');
 						redirect('scrutiny/dashboard/'.$flag);
 					}
@@ -4447,10 +4546,30 @@ function updatecategory(){
 							);
 					$query6 = $this->agency_model->ins_orders_agency_report($ins_data4);
 					if($query6){
+						$log_data = array( 
+				              'user_id' => $user_id, 
+				              'username' => $data['user']['username'],
+				              'form_type' => 'Report submisson Form',  
+				              'ip' => get_ip(),
+				              'datetime' => date('Y-m-d H:i:s', time()),
+				              'action_performed' => 'Report Submisson',
+				              'status' => 'Report Submisson Successfully Done',
+				              ); 
+				              $insert_log = $this->login_model->loginlog_ins($log_data); 
 
 						$this->session->set_flashdata('success_msg', 'Complaint no '.get_complaintno($filing_no).' forwarded to HCP');
 						redirect('scrutiny/dashboard/'.$bench_no.'/'.$flag);
 					}else{
+						$log_data = array( 
+				              'user_id' => $user_id, 
+				              'username' => $data['user']['username'],
+				              'form_type' => 'Report submisson Form',  
+				              'ip' => get_ip(),
+				              'datetime' => date('Y-m-d H:i:s', time()),
+				              'action_performed' => 'Report submisson',
+				              'status' => 'Report Submisson Failed',
+				              ); 
+				              $insert_log = $this->login_model->loginlog_ins($log_data); 
 						$this->session->set_flashdata('error_msg', 'Some problem inserting in orders_agency_report model');
 						redirect('scrutiny/dashboard/'.$bench_no.'/'.$flag);
 					}

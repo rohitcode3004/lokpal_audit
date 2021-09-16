@@ -104,7 +104,19 @@ $('body').on('keyup', 'input', function(e){
     //return false;
   }
 });
+<<<<<<< HEAD
 
 </script>    
+=======
+</script> 
+
+<!-- Tooltip Js -->
+<script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();   
+});
+</script>
+   
+>>>>>>> ac015936a62ecd150c82a3b25b8f130c336e567c
 </body>
 </html>

@@ -203,7 +203,7 @@ class Bench extends CI_Controller {
 	{
 		//print_r($_POST);die;
 		$data['user'] = $this->login_model->getRows($this->con);
-		$user_id=$data['user']['id'];
+		 $user_id=$data['user']['id'];
 
 		if($this->input->post('filing_no') && $this->input->post('bench_choice'))
 		{	
@@ -344,9 +344,31 @@ class Bench extends CI_Controller {
 				);
 				$count4 = $this->bench_model->casedet_upd($upd_data, $filing_no);
 				if ($count  && $count3 && $count4) {
+					$log_data = array( 
+				              'user_id' => $user_id, 
+				              'username' => $data['user']['username'],
+				              'form_type' => 'Complaint Allocaiton Form',  
+				              'ip' => get_ip(),
+				              'datetime' => date('Y-m-d H:i:s', time()),
+				              'action_performed' => 'Complaint Allocaiton ',
+				              'status' => 'Complaint Allocaiton Successfully Done',
+				              ); 
+				              $insert_log = $this->login_model->loginlog_ins($log_data); 
+
 					$this->session->set_flashdata('success_msg', 'Bench composition successfully done for complaint no. '.get_complaintno($filing_no));
 					redirect('bench/dashboard_main');
 				}else{
+					$log_data = array( 
+						'user_id' => $this->con['id'], 
+						'username' => $data['user']['username'],
+						'form_type' => 'Complaint Allocaiton Form',  
+						'ip' => get_ip(),
+						'datetime' => date('Y-m-d H:i:s', time()),
+						'action_performed' => 'Complaint Allocaiton',
+						'status' => 'Complaint Allocaiton Failed',
+						); 
+						$insert_log = $this->login_model->loginlog_ins($log_data); 
+
 					die('model error');
 				}
 			}elseif($radio == 'old'){
@@ -474,9 +496,31 @@ class Bench extends CI_Controller {
 				);
 				$count4 = $this->bench_model->casedet_upd($upd_data, $filing_no);
 				if ($count  && $count3 && $count4) {
+
+					$log_data = array( 
+				              'user_id' => $user_id, 
+				              'username' => $data['user']['username'],
+				              'form_type' => 'Complaint Allocaiton Form',  
+				              'ip' => get_ip(),
+				              'datetime' => date('Y-m-d H:i:s', time()),
+				              'action_performed' => 'Complaint Allocaiton',
+				              'status' => 'Complaint Allocaiton Successfully Done',
+				              ); 
+				              $insert_log = $this->login_model->loginlog_ins($log_data); 
+
 					$this->session->set_flashdata('success_msg', 'Bench composition successfully done for complaint no. '.get_complaintno($filing_no));
 					redirect('bench/dashboard_main');
 				}else{
+					$log_data = array( 
+						'user_id' => $this->con['id'], 
+						'username' => $data['user']['username'],
+						'form_type' => 'Complaint Allocaiton Form',  
+						'ip' => get_ip(),
+						'datetime' => date('Y-m-d H:i:s', time()),
+						'action_performed' => 'Complaint Allocaiton',
+						'status' => 'Complaint Allocaiton Failed',
+						); 
+						$insert_log = $this->login_model->loginlog_ins($log_data); 
 					die('model error');
 				}
 			}else{
@@ -577,9 +621,32 @@ class Bench extends CI_Controller {
 					die('Already exists');
 				}
 				if ($count  && $count2) {
+
+					$log_data = array( 
+				              'user_id' => $user_id, 
+				              'username' => $data['user']['username'],
+				              'form_type' => 'Bench composition Form',  
+				              'ip' => get_ip(),
+				              'datetime' => date('Y-m-d H:i:s', time()),
+				              'action_performed' => 'Bench composition ',
+				              'status' => 'Bench composition Successfully Completed',
+				              ); 
+				              $insert_log = $this->login_model->loginlog_ins($log_data); 
+
 					$this->session->set_flashdata('success_msg', 'Bench constitution successfully done');
 					redirect('bench/benchcomposition_separate');
 				}else{
+
+					$log_data = array( 
+						'user_id' => $this->con['id'], 
+						'username' => $data['user']['username'],
+						'form_type' => 'Bench composition Form',  
+						'ip' => get_ip(),
+						'datetime' => date('Y-m-d H:i:s', time()),
+						'action_performed' => 'Bench composition',
+						'status' => 'Bench composition Failed',
+						); 
+						$insert_log = $this->login_model->loginlog_ins($log_data); 
 					die('model error');
 				}
 
