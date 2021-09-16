@@ -949,8 +949,8 @@ public function user_register(){
 				$ts = date('Y-m-d H:i:s', time());
 				$ip = $this->get_ip();
 				$userData = array( 
-					'username' => strip_tags($this->input->post('email')), 
-					'email' => strip_tags($this->input->post('email')), 
+					'username' => strip_tags($this->input->post('service_id')), 
+					'email' => strip_tags($this->input->post('service_id')), 
 					'password' => md5($this->input->post('password')),  
 					'mobile' => strip_tags($this->input->post('mobile')), 
 					'role'=>18,					
@@ -998,7 +998,7 @@ public function user_register(){
 									'first_name' => strip_tags($this->input->post('first_name')), 
 									'mid_name' => strip_tags($this->input->post('mid_name')), 
 									'sur_name' => strip_tags($this->input->post('sur_name')), 
-									'email_id' => strip_tags($this->input->post('email')),
+									'email_id' => strip_tags($this->input->post('service_id')),
 									'mob_no' => strip_tags($this->input->post('mobile')),
 									'user_id' => $user_id,
 					 				'filing_status' => 'false',
