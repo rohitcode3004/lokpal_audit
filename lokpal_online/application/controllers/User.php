@@ -698,6 +698,12 @@ class User extends CI_Controller {
         }
     }
 
+     public function otp_session_destroy()
+    {	
+    	$_SESSION['session_service_id'] = '';
+    	return true;
+    }
+
     public function update_user_pass()
     {					
     	if($this->isUserLoggedIn){ 

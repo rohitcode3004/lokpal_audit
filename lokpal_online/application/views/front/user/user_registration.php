@@ -111,7 +111,8 @@
                           <button class="btn btn-primary" id="submit-email-otp" type="button">Submit OTP</button>
                       </div>
                     </div>
-                    <div class="text-orange">Your OTP will expire in : <span id="timer"></span></div>
+                    <div id="count_timer" class="text-orange">Your OTP will expire in : <span id="timer"></span></div>
+                    <div id="resend_otp" class="text-primary" style="display: none;">OTP expired. Please send new otp again.</div>
                   <!--<p id="otp-reminder_email" class="text-info" role="alert"></p>-->
                   <div class="text-danger" id="email-otp-error"></div>
                   <div class="text-danger" id="email-otp-time"></div>
@@ -269,33 +270,64 @@
 
 
 // ================== OTP Timer ===============
-let timerOn = true;
 
-function timer(remaining) {
-  var m = Math.floor(remaining / 60);
-  var s = remaining % 60;
-  
-  m = m < 10 ? '0' + m : m;
-  s = s < 10 ? '0' + s : s;
-  document.getElementById('timer').innerHTML = m + ':' + s;
-  remaining -= 1;
-  
-  if(remaining >= 0 && timerOn) {
-    setTimeout(function() {
-        timer(remaining);
-    }, 1000);
-    return;
+$('#send-email-otp').click(function(){
+
+  let timerOn = true;
+  $("#send-email-otp").prop('disabled', true);
+  $("#resend_otp").hide();
+  $("#count_timer").show();
+
+  function timer(remaining) {
+    
+    var m = Math.floor(remaining / 60);
+    var s = remaining % 60;
+    
+    m = m < 10 ? '0' + m : m;
+    s = s < 10 ? '0' + s : s;
+    document.getElementById('timer').innerHTML = m + ':' + s;
+    remaining -= 1;
+    
+    if(remaining >= 0 && timerOn) {
+      setTimeout(function() {
+          timer(remaining);
+      }, 1000);
+      return;
+    }
+
+    if(!timerOn) {
+
+      // Do validate stuff here
+      return;
+    }
+    
+    
+
+    // Do timeout stuff here
+    //alert('Timeout for otp');
+    $("#send-email-otp").prop('disabled', false);
+    $("#count_timer").hide();
+    $("#resend_otp").show();
+    $("#email-otp-error").hide();
+    $.ajax({
+     url : '<?php echo base_url(); ?>user/otp_session_destroy',
+     type : 'GET',
+     success : function (result) {
+        var result = jQuery.parseJSON(result);
+        console.log (result); // Here, you need to use response by PHP file.
+     },
+     error : function () {
+        console.log ('error');
+     }
+   });
   }
 
-  if(!timerOn) {
-    // Do validate stuff here
-    return;
-  }
-  
-  // Do timeout stuff here
-  alert('Timeout for otp');
-}
+  timer(60);
 
-timer(60);
+});
+
+
+
+
 </script>
 <?php include(APPPATH.'views/templates/front/ffooter.php'); ?>
