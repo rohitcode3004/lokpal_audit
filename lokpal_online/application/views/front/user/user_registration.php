@@ -35,6 +35,8 @@
               echo '<div>'.$this->session->flashdata('success_msg').'</div>';
 
             ?>
+            <!-- Image loader -->
+
             <form method="POST" action="<?php echo base_url(); ?>user/new_user_save" autocomplete="off">
               <div class="row">
                 <div class="col-md-3">
@@ -104,11 +106,12 @@
                   <div class="form-group">
                     <label>Enter Your Email OTP<span class="text-danger">*</span></label>
                     <div class="input-group mb-3">                     
-                    <input type="text" class="form-control password_Strength" id="otp-email" placeholder="Enter OTP Here" name="otp">
-                    <div class="input-group-btn">
-                        <button class="btn btn-primary" id="submit-email-otp" type="button">Submit OTP</button>
+                      <input type="text" class="form-control password_Strength" id="otp-email" placeholder="Enter OTP Here" name="otp">
+                      <div class="input-group-btn">
+                          <button class="btn btn-primary" id="submit-email-otp" type="button">Submit OTP</button>
+                      </div>
                     </div>
-                  </div>
+                    <div class="text-orange">Your OTP will expire in : <span id="timer"></span></div>
                   <!--<p id="otp-reminder_email" class="text-info" role="alert"></p>-->
                   <div class="text-danger" id="email-otp-error"></div>
                   <div class="text-danger" id="email-otp-time"></div>
@@ -193,6 +196,10 @@
       service_name: 'email',
       service_id: emailid
      },
+     beforeSend: function(){
+    // Show image container
+        $("#loader").show();
+   },
      success : function (result) {
         var result = jQuery.parseJSON(result);
         console.log (result[0].val); // Here, you need to use response by PHP file.
@@ -205,6 +212,10 @@
         //jQuery('.first-box').hide();
       }
      },
+             complete:function(data){
+    // Hide image container
+    $("#loader").hide();
+   },
      error : function () {
         console.log ('error');
      }
@@ -221,6 +232,10 @@
       service_name: 'email',
       otp: otp
      },
+      beforeSend: function(){
+    // Show image container
+        $("#loader").show();
+   },
      success : function (result) {
         var result = jQuery.parseJSON(result);
         console.log (result); // Here, you need to use response by PHP file.
@@ -241,10 +256,46 @@
         jQuery('#email-otp-error').html(result[0].error);
         }
      },
+        complete:function(data){
+    // Hide image container
+    $("#loader").hide();
+   },
      error : function () {
         console.log ('error');
      }
    });
   });
+
+
+
+// ================== OTP Timer ===============
+let timerOn = true;
+
+function timer(remaining) {
+  var m = Math.floor(remaining / 60);
+  var s = remaining % 60;
+  
+  m = m < 10 ? '0' + m : m;
+  s = s < 10 ? '0' + s : s;
+  document.getElementById('timer').innerHTML = m + ':' + s;
+  remaining -= 1;
+  
+  if(remaining >= 0 && timerOn) {
+    setTimeout(function() {
+        timer(remaining);
+    }, 1000);
+    return;
+  }
+
+  if(!timerOn) {
+    // Do validate stuff here
+    return;
+  }
+  
+  // Do timeout stuff here
+  alert('Timeout for otp');
+}
+
+timer(60);
 </script>
 <?php include(APPPATH.'views/templates/front/ffooter.php'); ?>

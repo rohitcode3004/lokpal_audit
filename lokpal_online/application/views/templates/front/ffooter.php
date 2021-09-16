@@ -1,4 +1,9 @@
 
+    <div id='loader' style="display:none;">
+      <div class="ajex_spinner"></div>
+      <img width="100" src="<?php echo base_url();?>assets/my_assets/images/logo_lokpal.png" alt="logo lodar" />
+    </div>
+    <!-- Image loader -->
 
     <script src="<?php echo base_url(); ?>assets/my_assets/js/jquery.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/my_assets/js/bootstrap.min.js"></script>
@@ -27,6 +32,7 @@
         mainSlider();
         counterOn()
       });
+
     </script>
 
     <script>
@@ -98,6 +104,7 @@ $('body').on('keyup', 'input', function(e){
     //return false;
   }
 });
+
 </script>    
 </body>
 </html>
