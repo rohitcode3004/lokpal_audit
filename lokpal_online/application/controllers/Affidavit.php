@@ -2194,4 +2194,29 @@ if($cp==1){
       return $ip=$_SERVER['REMOTE_ADDR'];
     }
   }
+
+
+    public function application_submit()
+  { 
+
+    
+   if($this->isUserLoggedIn) 
+   {
+    $con = array( 
+      'id' => $this->session->userdata('userId') 
+    ); 
+    $data['user'] = $this->login_model->getRows($con);
+    $data['menus'] = $this->menus_lib->get_menus($data['user']['role']);
+  }
+   
+
+    $this->load->view('templates/front/CE_Header.php',$data);
+
+    $this->load->view('filing/application_submit.php',$data);
+
+    $this->load->view('templates/front/CE_Footer.php',$data);
+    
+  }
+
+
 }

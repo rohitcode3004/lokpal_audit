@@ -1,6 +1,5 @@
 <?php include(APPPATH.'views/templates/front/fheader.php'); ?>
 
-//ajax script
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
 <style type="text/css">
@@ -321,6 +320,9 @@ $('#send-email-otp').click(function(){
      }
    });
   }
+
+}
+
 
   timer(60);
 

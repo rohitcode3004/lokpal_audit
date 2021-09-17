@@ -173,6 +173,11 @@ hr {
     margin-right: 5px !important;
 }
 
+
+.ptb-100{
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
 .panel-title{
     margin: 0;
 }
@@ -629,7 +634,65 @@ hr {
 
 /* ----------------------- End  Style of Preloader --------------------*/
 
+/* ----------------------- start Style of Ajex Loader --------------------*/
+#loader{
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    background-color: rgb(255 255 255 / 90%);
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+#loader img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -79%);
+}
 
+#loader .ajex_spinner {
+    -webkit-animation: spinner 1s infinite linear;
+    animation: spinner 1s infinite linear;
+    border-radius: 50%;
+    border: 3px solid rgba(0, 0, 0, 0.2);
+    border-top-color: #FF5B5B;
+    height: 150px;
+    margin: 0 auto 3.5em auto;
+    width: 150px;
+  }
+
+  @-webkit-keyframes ajex_spinner {
+    to {
+      -webkit-transform: rotateZ(360deg);
+      transform: rotateZ(360deg);
+    }
+  }
+  
+  @keyframes ajex_spinner {
+    to {
+      -webkit-transform: rotateZ(360deg);
+      transform: rotateZ(360deg);
+    }
+  }
+  @media screen and (max-width: 767px) {
+    .ctn-preloader .animation-preloader .ajex_spinner {
+      height: 8em;
+      width: 8em;
+    }
+  }
+  
+  @media screen and (max-width: 500px) {
+    .ctn-preloader .animation-preloader .ajex_spinner {
+      height: 7em;
+      width: 7em;
+    }
+  }
 
 /* ----------------------- Style of Top Header bar --------------------*/
 .navbar{
@@ -1262,4 +1325,16 @@ ul.more-action > li > a {
 
 #complaintmode_id option[disabled]{
     display: none;
+}
+
+
+.app-success-title{
+  margin: 20px 0 30px 0;
+  font-weight: 700;
+  color: #164160;
+}
+.app-success-msg{
+  margin: 0 0 30px 0;
+  font-weight: 600;
+  color: #04a718;
 }
