@@ -1564,7 +1564,7 @@ $this->load->helper("date_helper");
           <button type="submit" class="btn btn-success" id="submitbtn">Generate Pdf</button>
 
           <?php if($status == 't') { ?>
-            <button type="button" class="btn btn-success final_submit" disabled> ✓ Application submitted </button>
+            <button type="button" class="btn btn-success final_submit" disabled> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Application submitted </button>
             <?php 
             } 
             else { ?>
@@ -1590,9 +1590,7 @@ $this->load->helper("date_helper");
       <?php if($status == 't') { ?>
       <div class="alert alert-success msg-box">
         <h3 class="text-center"  id="success_msg">Complaint submitted successfully</h3>
-        <h4 class="text-center" id="filing_no">Please note the 
-                <span><b>Dairy no. </b><?php echo $filing_no; ?></span>
-             </h4> 
+        <h4 class="text-center" id="filing_no">Please note the <span><b>Dairy no. </b><?php echo $filing_no; ?></span></h4> 
         <h4 class="text-center" id="quote_msg">Please quote the above diary no in all future communications.</h4>
       </div>
        <?php } ?>
@@ -1611,22 +1609,21 @@ $this->load->helper("date_helper");
 
 <script type="text/javascript">
   $(document).ready(function(){
-      $(document).ajaxStart(function(){
-    $("#wait").css("display", "block");
-  });
-  $(document).ajaxComplete(function(){
-    $("#wait").css("display", "none");
-  });
         $(document).on('click', '.final_submit', function(){
           if(confirm("Are you sure you want to submit application? No changes can be done after final submit."))
         {
         var reference_no = $(this).attr('id');
 
-          $.ajax({
+        $.ajax({
         url: '<?php echo site_url('affidavit/update_form_status'); ?>',
         type: 'POST',
         data:{reference_no:reference_no, data_action:'update_form'},
         dataType: 'json',
+         beforeSend: function(){
+            // Show image container
+            $("#loader").show();
+          },
+
         success: function(data) {
            if(data.success){
             $.ajax({
@@ -1637,24 +1634,36 @@ $this->load->helper("date_helper");
                             save_in_server: 1,
                             filename: data.fn,  
                         },
+         beforeSend: function(){
+            // Show image container
+            $("#loader").show();
+          },
+                       
                         success: function (response) {
                             //$("#success_msg").html("Complainant submitted successfully");
                             //$("#divMessages").html(response);
-                            window.location.reload();
-                            $(".msg-box").show();
-                        }
+                            //window.location.reload();
+                            window.location = "<?php echo site_url('affidavit/application_submit');?>";
+                            //$(".msg-box").show();
+                        },
+                                  complete:function(data){
+            // Hide image container
+            $("#loader").hide();
+          },
+                        
                     });
-}
- if(data.error){
+            }
+
+            if(data.error){
               $('#error_message').html('<div class="alert alert-error"><h4>Some problem occured on submitting application.</h4></div>');
             }
-        }
-    });
+          },
+          complete:function(data){
+            // Hide image container
+            $("#loader").hide();
+          },
+      });
         }
       });
          });
 </script>
-
-
-
-
