@@ -18,7 +18,7 @@
         <div class="panel panel-default">
           <div class="panel-heading">Acknowledgements received and pending for filing 
             <ul class="more-action">
-              <li><a href="<?php echo base_url(); ?>counter/dashboard_main_registry" class="previous">&laquo; Back</a></li>
+              <li><a href="<?php echo base_url(); ?>internal-filing" class="previous">&laquo; Back</a></li>
             </ul>
           </div>
           <div class="panel-body">
@@ -78,9 +78,9 @@
                           $comp_no=get_filing_no($r, $u);
                           $status = $comp_no['status'];
                           if($status == 't' and $row->phisical_copy_received==''){ ?>
-                          <a href="<?php echo base_url().'affidavit/affidavit_detail/'.$r ?>" target="_blank">Go to application</a>
+                          <a href="<?php echo base_url().'complaint/preview/'.$r ?>" target="_blank">Go to application</a>
                           <?php }elseif($row->phisical_copy_received=='t'){ ?>
-                          <a href="<?php echo base_url().'filing/filing/'.$r ?>" target="_blank">Go to application for filing process</a>
+                          <a href="<?php echo base_url().'e-filing/form/'.$r ?>" target="_blank">Go to application for filing process</a>
                           <?php } ?>
                         </td>
                           

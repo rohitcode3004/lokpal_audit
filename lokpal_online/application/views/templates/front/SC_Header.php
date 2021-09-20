@@ -227,7 +227,7 @@ function freshApp(){
                             </li>
                             <?php if($user['role'] == 161 || $user['role'] == 162) { ?>
                 			<li>
-                				<a href="<?php echo base_url('counter/counterfiling'); ?>">
+                				<a href="<?php echo base_url('c-filing'); ?>">
                                     <i class="fa fa-address-card-o side-menu_icon" aria-hidden="true"></i>
                 				<span>Generate Acknowedgement for complaint received on Email</span> 
                 				</a>

@@ -179,7 +179,7 @@ $chkdate= date("l jS \of F Y");
           <button type="button" class="btn btn-success" onclick="window.location='<?php echo site_url("document/toPdf");?>'">Sample Affidavit</button>
 
             <?php if($user['role'] == '18'){ ?>
-          <button type="button" class="btn btn-success" onclick="window.location='<?php echo site_url("affidavit/affidavit_detail");?>'">Save &amp; Next</button>
+          <button type="button" class="btn btn-success" onclick="window.location='<?php echo site_url("complaint/preview");?>'">Save &amp; Next</button>
         <?php } ?>
 
         

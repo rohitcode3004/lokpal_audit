@@ -18,7 +18,7 @@
         <div class="panel panel-default">
           <div class="panel-heading">List of your complaints
             <ul class="more-action">
-              <li><a href="<?php echo base_url(); ?>filing/dashboard" class="previous">&laquo; Back</a></li>
+              <li><a href="<?php echo base_url(); ?>e-filing" class="previous">&laquo; Back</a></li>
             </ul>
           </div>
           <div class="panel-body">
@@ -79,9 +79,9 @@
                       $comp_no=get_filing_no($r, $u);
                       $status = $comp_no['status'];
                       if($status == 't'){ ?>
-                      <a href="<?php echo base_url().'affidavit/affidavit_detail/'.$r ?>">Go to application</a>
+                      <a href="<?php echo base_url().'complaint/preview/'.$r ?>">Go to application</a>
                       <?php }else{ ?>
-                      <a href="<?php echo base_url().'filing/filing/'.$r ?>">Go to application</a>
+                      <a href="<?php echo base_url().'e-filing/form/'.$r ?>">Go to application</a>
                       <?php } ?>
                     </td>
                        <?php endforeach;?>

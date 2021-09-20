@@ -445,7 +445,7 @@ Complaint Management System Lokpal of India <span></a>	</h1>
                     </li> 
                     <?php } elseif($user['role'] == 143){ ?>
             <li class="menu__item is-leaf first leaf menu-mlid-4455">
-                        <a href="<?php echo base_url('counter/dashboard_main_registry'); ?>" class="menu__link">Your dashboard</a>
+                        <a href="<?php echo base_url('internal-filing'); ?>" class="menu__link">Your dashboard</a>
                     </li>
                     <?php } elseif($user['role'] == 126){ ?>
             <li class="menu__item is-leaf first leaf menu-mlid-4455">
@@ -465,7 +465,7 @@ Complaint Management System Lokpal of India <span></a>	</h1>
                     </li>
                   <?php } else { ?>
                     <li class="menu__item is-leaf first leaf menu-mlid-4455">
-                        <a href="<?php echo base_url('filing/filing'); ?>" class="menu__link">Your dashboard</a>
+                        <a href="<?php echo base_url('e-filing/form'); ?>" class="menu__link">Your dashboard</a>
                     </li>
                   <?php } ?>
 

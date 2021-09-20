@@ -140,14 +140,14 @@ $(document).ready(function(){
   <div class="container-fluid">
     
     <ul class="nav navbar-nav">
-      <li class="active"><a href="<?php echo base_url(); ?>filing/filing">Form:(Part - A)</a></li>
+      <li class="active"><a href="<?php echo base_url(); ?>e-filing/filing">Form:(Part - A)</a></li>
 
       <?php if ($this->session->userdata('a_complainant_id') !='1') { ?>
-      <li><a href="<?php echo base_url(); ?>applet/appletfiling">Part- B</a></li>
+      <li><a href="<?php echo base_url(); ?>company/filing">Part- B</a></li>
 
 
     <?php }?>
-      <li><a href="<?php echo base_url(); ?>respondent/respondentfiling">Part -C</a></li>
+      <li><a href="<?php echo base_url(); ?>respondent-filing">Part -C</a></li>
       <li><a href="<?php echo base_url(); ?>declaration/declarationstmt">Declaration</a></li>
 	 <!-- <li><a href="<?php echo base_url(); ?>document/documentfiling">Document</a></li>
 	   <li><a href="<?php echo base_url(); ?>document/payment">Payment</a></li>-->

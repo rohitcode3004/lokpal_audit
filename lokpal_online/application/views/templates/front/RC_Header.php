@@ -208,7 +208,7 @@ function freshApp(){
                 	<div class="side-menu">
                 		<ul class="sidebar-menu">
                 			<li>
-                				<a href="<?php echo base_url('counter/counterfiling'); ?>">
+                				<a href="<?php echo base_url('c-filing'); ?>">
                 					<i class="fa fa-dashboard side-menu_icon"></i> 
                 					<span>Dashboard</span>
                 				</a>

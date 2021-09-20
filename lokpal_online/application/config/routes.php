@@ -52,3 +52,44 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'home/index';
 $route['404_override'] = 'Error_controller';
 $route['translate_uri_dashes'] = FALSE;
+
+#Counter filing
+
+$route['c-filing'] = 'counter/counterfiling';
+
+//public user
+$route['e-filing'] = 'filing/dashboard';
+$route['e-filing/form'] = 'filing/filing';
+$route['e-filing/form/(:num)'] = 'filing/filing/$1';
+$route['e-filing/list-of-complaints'] = 'filing/dashboard_new';
+$route['e-filing/list-completed'] = 'filing/dashboard_completed_complaint';
+$route['e-filing/list-of-reopen-complaints'] = 'filing/dashboard_re_entry_complaint';
+
+//$route['e-filing/list-of-reopen-complaints/(:num)'] = 'filing/dashboard_re_entry_complaint/$1';
+
+//Complaint Entry
+
+
+
+$route['internal-filing'] = 'counter/dashboard_main_registry';
+$route['internal-filing/ack-rec-for-phisical-filing'] = 'counter/dashboard_registry';
+
+
+$route['respondent-filing'] = 'respondent/respondentfiling';
+$route['affidavit-upload'] = 'document/testafidavit';
+$route['phisical-file-upload'] = 'document/phisical';
+$route['complaint/preview'] = 'affidavit/affidavit_detail';
+$route['company/filing'] = 'applet/appletfiling';
+
+
+
+
+
+
+/*
+$route['e-filing/upd-pass'] = 'user/update_user_pass';
+
+$route['e-filing/(:num)'] = 'filing/filing/$1';
+*/
+
+#scrut

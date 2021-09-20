@@ -18,7 +18,7 @@
         <div class="panel panel-default">
           <div class="panel-heading">List of your Completed Complaints
             <ul class="more-action">
-              <li><a href="<?php echo base_url(); ?>filing/dashboard" class="previous">&laquo; Back</a></li>
+              <li><a href="<?php echo base_url(); ?>e-filing" class="previous">&laquo; Back</a></li>
             </ul>
           </div>
           <div class="panel-body">

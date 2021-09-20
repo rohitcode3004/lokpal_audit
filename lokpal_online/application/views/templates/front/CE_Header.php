@@ -228,13 +228,13 @@ function freshApp(){
 
                             <?php if($user['role']=='143') {?>
                 			<li>
-                				<a href="<?php echo base_url('counter/dashboard_main_registry'); ?>">
+                				<a href="<?php echo base_url('internal-filing'); ?>">
                 					<i class="fa fa-dashboard side-menu_icon"></i> 
                 					<span>Dashboard</span>
                 				</a>
                 			</li>
                 			<li>
-                				<a href="<?php echo base_url('counter/dashboard_registry'); ?>">
+                				<a href="<?php echo base_url('internal-filing/ack-rec-for-phisical-filing'); ?>">
                                     <i class="fa fa-address-card-o side-menu_icon" aria-hidden="true"></i>
                 					<span>Acknowledgement issued from reception counter</span> 
                 				</a>
@@ -247,7 +247,7 @@ function freshApp(){
 
 
                             <li>
-                                <a href="<?php echo base_url('filing/dashboard'); ?>">
+                                <a href="<?php echo base_url('e-filing'); ?>">
                                     <i class="fa fa-address-card-o side-menu_icon" aria-hidden="true"></i>
                                     <span>Dashboard</span> 
                                 </a>

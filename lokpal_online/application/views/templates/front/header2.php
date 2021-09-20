@@ -262,7 +262,7 @@ jQuery(document).ready(function(){
 											<li class="menu__item is-expanded expanded menu-mlid-2728">
 												<a href="<?php echo base_url(); 
 															echo $url = $this->menus_lib->get_submenu_url($submenu->submenu_id);
-												?>" <?php if($url == 'filing/filing') { ?> onClick = "freshApp();"<?php } ?> title="Go to filing part" class="menu__link ab"><?php echo $this->menus_lib->get_submenu_name($submenu->submenu_id); ?></a>
+												?>" <?php if($url == 'e-filing/form') { ?> onClick = "freshApp();"<?php } ?> title="Go to filing part" class="menu__link ab"><?php echo $this->menus_lib->get_submenu_name($submenu->submenu_id); ?></a>
 											</li>
 											<?php endforeach; ?>
 										</ul>

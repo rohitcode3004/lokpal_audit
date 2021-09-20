@@ -13,7 +13,7 @@ $this->load->helper("date_helper");
     <div class="page-header">
       <h4 class="page-title">Filing Entry</h4>
       <ol class="breadcrumb"> 
-        <li class="breadcrumb-item"><a href="<?php echo base_url('counter/dashboard_main_registry'); ?>">Dashboad</a></li> 
+        <li class="breadcrumb-item"><a href="<?php echo base_url('internal-filing'); ?>">Dashboad</a></li> 
         <li class="breadcrumb-item active" aria-current="page">Filing Entry</li> 
       </ol>
     </div>
@@ -1476,7 +1476,7 @@ $this->load->helper("date_helper");
       <div class="row">
         <div class="col-md-6">
           <?php if($status == 'f') { ?>
-            <button type="button" class="btn btn-primary"  onclick="window.open('<?php echo site_url("filing/filing");?>')">Edit application</button>     
+            <button type="button" class="btn btn-primary"  onclick="window.open('<?php echo site_url("e-filing/form");?>')">Edit application</button>     
           <?php } ?>
         </div>
         <div class="col-md-6 text-right">
