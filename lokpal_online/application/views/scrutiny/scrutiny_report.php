@@ -19,7 +19,7 @@
         <div class="panel panel-default">
           <div class="panel-heading">Details of Scrutiny Report- 
             <ul class="more-action">
-              <li><a href="<?php echo base_url('scrutiny/dashboard_main'); ?>" class="previous">&laquo; Back</a></li>
+              <li><a href="<?php echo base_url('scrutiny'); ?>" class="previous">&laquo; Back</a></li>
             </ul>
           </div>
           <div class="panel-body">
@@ -69,7 +69,7 @@
               $c = 1;
               foreach($scrpen_comps as $row):
               ?>
-              <form action="<?php echo base_url();?>scrutiny/checklist" method="post" id="">
+              <form action="<?php echo base_url();?>checklist" method="post" id="">
                 <tr>
                   <td><?php echo $c++; ?></td>
                     <td><?php echo get_complaintno($row->filing_no);?></td>

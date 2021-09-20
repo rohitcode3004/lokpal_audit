@@ -58,7 +58,7 @@
                   
                 ?>
                 <ul class="more-action">
-                  <li><a href="<?php echo base_url(); ?>scrutiny/dashboard_main" class="previous">&laquo; Back</a></li>
+                  <li><a href="<?php echo base_url(); ?>scrutiny" class="previous">&laquo; Back</a></li>
                 </ul>
                 
               </div>
@@ -82,7 +82,7 @@
                 ?>
 
       
-                <form action="<?php echo base_url();?>scrutiny/aoa_proceeding_form" method="post" id="myForm">  </form>
+                <form action="<?php echo base_url();?>report/submission-any-other-action" method="post" id="myForm">  </form>
                 <div class="table-responsive">                          
                   <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                     <thead>
@@ -145,7 +145,7 @@
                           </td> 
                                         
                           <td>
-                            <a href="<?php echo base_url().'affidavit/affidavit_detail/'.$row->ref_no ?>" target="_blank">Application preview</a>
+                            <a href="<?php echo base_url().'complaint/preview/'.$row->ref_no ?>" target="_blank">Application preview</a>
                           </td>
                           <td>
                             <input type="hidden" name="filing_no" value="<?php echo $row->filing_no; ?>">

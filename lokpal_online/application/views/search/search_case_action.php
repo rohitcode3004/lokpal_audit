@@ -40,7 +40,7 @@
         <div class="panel panel-default">
           <div class="panel-heading">Search Case Report 
             <ul class="more-action">
-              <li><a href="<?php echo base_url(); ?>search/search_case" class="previous">&laquo; Back</a></li>
+              <li><a href="<?php echo base_url(); ?>case-search" class="previous">&laquo; Back</a></li>
             </ul>
           </div>
           <div class="panel-body">

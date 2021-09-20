@@ -17,7 +17,7 @@
         <div class="panel panel-default">
           <div class="panel-heading">Details of complaints pending for scrutiny
             <ul class="more-action">
-              <li><a href="<?php echo base_url('scrutiny/dashboard_main'); ?>" class="previous">&laquo; Back</a></li>
+              <li><a href="<?php echo base_url('scrutiny'); ?>" class="previous">&laquo; Back</a></li>
             </ul>
           </div>
           <div class="panel-body">
@@ -58,7 +58,7 @@
                         if(!empty($remarks_history))
                           $key = array_search(6, array_column($remarks_history, 'remarkd_by'));
                         ?>
-                      <form action="<?php echo base_url();?>scrutiny/checklist" method="post" id="">
+                      <form action="<?php echo base_url();?>checklist" method="post" id="">
                         <tr <?php if($last_remarked_by == 6 || $last_remarked_by == 7 || $key == 'remarkd_by') { ?> class="secylce" <?php } ?>>
                           <td><?php echo $c++; ?></td>
                           <td> <input type="checkbox" name="mycheck_[]" value="<?php echo $row->filing_no;?>"></td>

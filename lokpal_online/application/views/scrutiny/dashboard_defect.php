@@ -18,7 +18,7 @@
         <div class="panel panel-default">
           <div class="panel-heading">Defective Complaints for scrutiny bench
             <ul class="more-action">
-              <li><a href="<?php echo base_url('scrutiny/dashboard_main'); ?>" class="previous">&laquo; Back</a></li>
+              <li><a href="<?php echo base_url('scrutiny'); ?>" class="previous">&laquo; Back</a></li>
             </ul>
           </div>
           <div class="panel-body">
@@ -54,7 +54,7 @@
                       $c = 1;
                       foreach($scrpen_comps as $row):                       
                         ?>                       
-                     <form action="<?php echo base_url();?>scrutiny/openedit" method="post" id="">
+                     <form action="<?php echo base_url();?>re-entry" method="post" id="">
                         <tr>
                           <td><?php echo $c++; ?></td>
                          <td> <input type="checkbox" name="mycheck_[]" value="<?php echo $row->filing_no;?>"></td>

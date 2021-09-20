@@ -21,7 +21,7 @@
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-lg-6 col-sm-6 mb-15" id="divFY">
-							  		<a href="<?php echo base_url('scrutiny/dashboard'); ?>" class="widgets-card gd-blueviolet">
+							  		<a href="<?php echo base_url('scrutiny/dash'); ?>" class="widgets-card gd-blueviolet">
 							  			<div class="widgets-icon">
 							  				<span id="ContentPlaceHolder1_lblTotalPending">
 							  					<?php echo $scrpen_comps; ?>
@@ -32,7 +32,7 @@
 							  		</a>
 							  	</div>
 							  <div class="col-lg-6 col-sm-6 mb-15">
-							  		<a href="<?php echo base_url('scrutiny/dashboard_def'); ?>" class="widgets-card gd-hotpink">
+							  		<a href="<?php echo base_url('scrutiny/dash/def'); ?>" class="widgets-card gd-hotpink">
 							  			<div class="widgets-icon"><span id="ContentPlaceHolder1_lblTotlaDistposed"> <?php echo $scrdef_comps;  ?></span></div>
 							  			<div class="widgets-content">List of Defective Complaints</div>
 							  			<i class="fa fa-files-o transparent_icon" aria-hidden="true"></i>
@@ -57,7 +57,7 @@
 							  	<div class="row">
 							  		<div class="col-md-6 mb-15">
 							  			<a href="<?php //echo base_url("proceeding/dashboard/$bench_no/RI");
-							  				echo base_url("scrutiny/agency_report_chk/RI");
+							  				echo base_url("report/external-agency-inquiry");
 
 							  			 ?>" class="widgets-card gd-cyanblue" data-toggle="tooltip" data-placement="bottom">
 							  				<div class="widgets-icon"><span><?php echo $inq_report_count;  ?></span></div>
@@ -67,7 +67,7 @@
 							  		</div>
 							  		<div class="col-md-6 mb-15">
 							  			<a href="<?php  //echo base_url("proceeding/dashboard/$bench_no/RV");
-							  			echo base_url("scrutiny/agency_report_chk/RV");
+							  			echo base_url("report/external-agency-investigation");
 
 
 
@@ -103,7 +103,7 @@
 							  	<div class="row">
 							  		<div class="col-md-6 mb-15">
 							  			<a href="<?php  //echo base_url("proceeding/dashboard/$bench_no/RV");
-							  			echo base_url("scrutiny/ps_report_chk/OPI");
+							  			echo base_url("opportunity/list-of-public-servant-inquiry");
 
 
 
@@ -116,7 +116,7 @@
 
 							  		<div class="col-md-6 mb-15">
 							  			<a href="<?php  //echo base_url("proceeding/dashboard/$bench_no/RV");
-							  			echo base_url("scrutiny/ps_report_chk/OIR");
+							  			echo base_url("opportunity/list-of-public-servant-investigation");
 
 							  			 ?>" class="widgets-card gd-fuchsia" data-toggle="tooltip" data-placement="bottom">
 							  				<div class="widgets-icon"><span><?php echo  $oppertunity_ps_after_IR_count; ?></span></div>
@@ -137,7 +137,7 @@
 							  	<div class="row">
 							  		<div class="col-md-6 mb-15">
 							  			<a href="<?php  //echo base_url("proceeding/dashboard/$bench_no/RV");
-							  			echo base_url("scrutiny/ps_report_chk/AOA");
+							  			echo base_url("any-other-action/list-of-report");
 
 							  			 ?>" class="widgets-card gd-peru" data-toggle="tooltip" data-placement="bottom" >
 							  				<div class="widgets-icon"><span><?php echo  $any_other_action; ?></span></div>

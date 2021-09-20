@@ -208,19 +208,19 @@ function freshApp(){
                 	<div class="side-menu">
                 		<ul class="sidebar-menu">
                 			<li>
-                				<a href="<?php echo base_url('scrutiny/dashboard_main'); ?>">
+                				<a href="<?php echo base_url('scrutiny'); ?>">
                 					<i class="fa fa-dashboard side-menu_icon"></i> 
                 					<span>Dashboard</span>
                 				</a>
                 			</li>
                             <li>
-                                <a href="<?php echo base_url('scrutiny/dashboard'); ?>">
+                                <a href="<?php echo base_url('scrutiny/dash'); ?>">
                                     <i class="fa fa-dashboard side-menu_icon"></i> 
                                     <span>New Complaints for Scrutiny</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="<?php echo base_url('scrutiny/dashboard_def'); ?>">
+                                <a href="<?php echo base_url('scrutiny/dash/def'); ?>">
                                     <i class="fa fa-dashboard side-menu_icon"></i> 
                                     <span>List of Defective Complaints</span>
                                 </a>
@@ -234,14 +234,14 @@ function freshApp(){
                 			</li>
                             <?php } ?>
                             <li>
-                                <a href="<?php echo base_url('scrutiny/scrutiny_report'); ?>">
+                                <a href="<?php echo base_url('scrutiny/list'); ?>">
                                     <i class="fa fa-hourglass-end side-menu_icon" aria-hidden="true"></i>
                                     <span>Scrutiny Report of complaints</span> 
                                 </a>
                             </li>
                 			
                             <li>
-                				<a href="<?php echo base_url('search/search_case'); ?>">
+                				<a href="<?php echo base_url('case-search'); ?>">
                                     <i class="fa fa-hourglass-end side-menu_icon" aria-hidden="true"></i>
                 					<span>Search legacy/New complaint</span> 
                 				</a>

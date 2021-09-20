@@ -231,7 +231,7 @@ $elements = $this->label->view(1);
                     
                       <div class="alert alert-info">
                         * furnish details in respect of each Office Bearer and Head of Organisation in the format as contained in Part A of this form.                   
-                        <button type="button" class="btn btn-primary"  onclick="window.open('<?php echo site_url("applet/officebeared");?>')">Click here</button> 
+                        <button type="button" class="btn btn-primary"  onclick="window.open('<?php echo site_url("officebeared/filing");?>')">Click here</button> 
                       </div>
                     </div>
                   </div>
@@ -648,7 +648,7 @@ $elements = $this->label->view(1);
                       <label class="text-orange">15. Details of third party, if any, likely to be affected by the complaint -</label>
                       <div class="alert alert-info">
                         <strong>Note:</strong> Details of third party/ parties, if aware, whose interests are likely to be prejudicially affected by the said complaint as contemplated under Section 21 of the Act may also be separately furnished.
-                        <button type="button" class="btn btn-primary" onclick="window.open('<?php echo site_url("applet/additionalparty");?>')">Click here</button>
+                        <button type="button" class="btn btn-primary" onclick="window.open('<?php echo site_url("compnay/additionalparty-add");?>')">Click here</button>
                       </div>
                     </div>
                   </div>

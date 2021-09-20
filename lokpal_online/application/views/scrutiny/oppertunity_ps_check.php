@@ -63,7 +63,7 @@
                     echo 'List of complaints';
                 ?>
                 <ul class="more-action">
-                  <li><a href="<?php echo base_url(); ?>scrutiny/dashboard_main/" class="previous">&laquo; Back</a></li>
+                  <li><a href="<?php echo base_url(); ?>scrutiny/" class="previous">&laquo; Back</a></li>
                 </ul>
                 
               </div>
@@ -87,7 +87,7 @@
                 ?>
 
       
-                <form action="<?php echo base_url();?>scrutiny/ops_proceeding_form" method="post" id="myForm">  </form>
+                <form action="<?php echo base_url();?>report/opportunity-after-inquiry-investigation" method="post" id="myForm">  </form>
                 <div class="table-responsive">                          
                   <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                     <thead>

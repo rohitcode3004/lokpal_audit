@@ -174,7 +174,7 @@
         <div class="panel panel-default">
           <div class="panel-heading">Search Critaria
             <ul class="more-action">
-              <li><a href="<?php echo base_url('scrutiny/dashboard_main'); ?>" class="previous">&laquo; Back</a></li>
+              <li><a href="<?php echo base_url('scrutiny'); ?>" class="previous">&laquo; Back</a></li>
             </ul>
           </div>
           <div class="panel-body">
