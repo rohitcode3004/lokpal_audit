@@ -194,7 +194,7 @@ $elements = $this->label->view(1);
     <!--<div class="page-header">
       <h4 class="page-title">Filing Entry</h4>
       <ol class="breadcrumb"> 
-        <li class="breadcrumb-item"><a href="<?php echo base_url('counter/dashboard_main_registry'); ?>">Dashboad</a></li> 
+        <li class="breadcrumb-item"><a href="<?php echo base_url('internal-filing'); ?>">Dashboad</a></li> 
         <li class="breadcrumb-item active" aria-current="page">Filing Entry</li> 
       </ol>
     </div>-->

@@ -142,7 +142,7 @@
                             } ?>
                           </td>                        
                           <td>
-                            <a href="<?php echo base_url().'affidavit/affidavit_detail/'.$row->ref_no ?>" target="_blank">Application preview</a>
+                            <a href="<?php echo base_url().'complaint/preview/'.$row->ref_no ?>" target="_blank">Application preview</a>
                           </td>
                           <td>
                             <input type="hidden" name="filing_no" value="<?php echo $row->filing_no; ?>">

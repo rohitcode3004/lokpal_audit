@@ -405,7 +405,7 @@ $(document).ready(function(){
     <div class="page-header">
       <h4 class="page-title">Entry of Complaint (Part Wise)</h4>
       <ol class="breadcrumb"> 
-        <li class="breadcrumb-item"><a href="<?php echo base_url('counter/dashboard_main_registry'); ?>">Dashboad</a></li> 
+        <li class="breadcrumb-item"><a href="<?php echo base_url('internal-filing'); ?>">Dashboad</a></li> 
         <li class="breadcrumb-item active" aria-current="page">Filing Entry</li> 
       </ol>
     </div>

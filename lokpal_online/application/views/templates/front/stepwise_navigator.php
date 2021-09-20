@@ -20,11 +20,11 @@ $ref_no_b2=get_refno_b($ref_no);
 <nav class="wizard-navigation">
   <div class="wizard-navigation">    
     <ul class="nav nav-tabs">
-      <li <?php if($status == 't') { ?> class="disabled" <?php } if($form_part == 'A') { ?> class="selected" <?php } ?>><a href="<?php echo base_url(); ?>filing/filing">Part - A</a></li>
+      <li <?php if($status == 't') { ?> class="disabled" <?php } if($form_part == 'A') { ?> class="selected" <?php } ?>><a href="<?php echo base_url(); ?>e-filing/form">Part - A</a></li>
 
-      <li <?php if($status == 't' || $comp_cap == 1 || $ref_no == null) { ?> class="disabled" <?php } if($form_part == 'B') { ?> class="selected" <?php }?>><a href="<?php echo base_url(); ?>applet/appletfiling">Part - B</a></li> 
+      <li <?php if($status == 't' || $comp_cap == 1 || $ref_no == null) { ?> class="disabled" <?php } if($form_part == 'B') { ?> class="selected" <?php }?>><a href="<?php echo base_url(); ?>company/filing">Part - B</a></li> 
            
-      <li <?php if($status == 't' || ($ref_no_b2 == null && $comp_cap != 1)) { ?> class="disabled" <?php } if($form_part == 'C') { ?> class="selected" <?php }?>><a href="<?php echo base_url(); ?>respondent/respondentfiling">Part - C</a></li>
+      <li <?php if($status == 't' || ($ref_no_b2 == null && $comp_cap != 1)) { ?> class="disabled" <?php } if($form_part == 'C') { ?> class="selected" <?php }?>><a href="<?php echo base_url(); ?>respondent-filing">Part - C</a></li>
 
       
 <?php 
@@ -34,12 +34,12 @@ $ref_no_b2=get_refno_b($ref_no);
 
      ?>
       <?php if($parta_status && $partc_status) { ?>
-      <li <?php if($form_part == 'Af') { ?> class="selected" <?php } ?>><a href="<?php echo base_url(); ?>document/testafidavit">Affidavit(Part - D)</a></li>
+      <li <?php if($form_part == 'Af') { ?> class="selected" <?php } ?>><a href="<?php echo base_url(); ?>affidavit-upload">Affidavit(Part - D)</a></li>
      <?php if($u == '1306'){ ?>
-     <li <?php if($form_part == 'PH') { ?> class="selected" <?php } ?>><a href="<?php echo base_url(); ?>document/phisical">Physical Copy Upload</a></li>
+     <li <?php if($form_part == 'PH') { ?> class="selected" <?php } ?>><a href="<?php echo base_url(); ?>phisical-file-upload">Physical Copy Upload</a></li>
    <?php }?>
      
-      <li <?php if($form_part == 'R') { ?> class="selected" <?php } ?>><a href="<?php echo base_url(); ?>affidavit/affidavit_detail">Preview Complaint</a></li>
+      <li <?php if($form_part == 'R') { ?> class="selected" <?php } ?>><a href="<?php echo base_url(); ?>complaint/preview">Preview Complaint</a></li>
 
 
        

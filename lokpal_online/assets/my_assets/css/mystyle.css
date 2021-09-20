@@ -1094,7 +1094,6 @@ input[type="checkbox"]::before {
     top: 0;
     background: #fff;
 }
-
 .password_form_upd #password-strength-status {
     height: 62px;
     margin-bottom: 15px;

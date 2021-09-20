@@ -41,7 +41,7 @@
 
 									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 										<div class="dashboard-box orange hvr-glow">
-											<a href="<?php echo base_url('filing/dashboard'); ?>"><div class="padd">
+											<a href="<?php echo base_url('e-filing'); ?>"><div class="padd">
 												<div class="icon orange1 hvr-pulse">
 													<img src="<?php echo base_url();?>assets/rohp/icon/icon11.png" title="icon">
 												</div>
@@ -63,7 +63,7 @@
 
 								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 									<div class="dashboard-box officers_bg hvr-glow">
-										<a href="<?php echo base_url('filing/dashboard'); ?>">
+										<a href="<?php echo base_url('e-filing'); ?>">
 										<div class="padd">
 											<div class="icon officers_bg1 hvr-pulse">
 												<img src="<?php echo base_url();?>assets/rohp/icon/icon11.png" title="icon">

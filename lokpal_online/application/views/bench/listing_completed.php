@@ -134,7 +134,7 @@ a:hover {
                   <?php echo get_displaydate($row->scrutiny_date); ?>
                 </td>
                 <td>
-                  <a href="<?php echo base_url().'affidavit/affidavit_detail/'.$row->ref_no ?>" target="_blank">Application preview</a>
+                  <a href="<?php echo base_url().'complaint/preview/'.$row->ref_no ?>" target="_blank">Application preview</a>
                 </td>
                 <td>
                   <?php echo get_realtime_status($row->filing_no); ?>

@@ -56,11 +56,28 @@
           <label for="exampleInputPassword1">Confirm Password <span class="text-danger">*</span></label>
           <input type="password" name="password2" class="input-form" id="pwd2" placeholder="Confirm Password">
         </div>
+
+        <div class="box-group">
+          <label for="captcha_code">Captcha<span class="text-danger">*</span></label>
+          <div class="captcha-box">
+            
+            <div id="captImg" style="float: left; margin-right: 15px;"><?php echo $captcha['image'];?></div>
+            <div style="font-size: 18px;">Can't read the image?  
+              <a href="javascript:void(0);" class="refreshCaptcha"><strong>click here</strong></a> to refresh.
+            </div>
+          </div>
+          <input type="text" class="form-control" id="captcha" name="captcha" value="" placeholder="Enter the captcha code : " autocomplete="off"/>
+          <?php echo form_error('captcha','<div class="text-danger">','</div>'); ?>
+        </div>
+
+
+
+              
         <button type="submit" class="loginhny-btn btn" name="upd-pass-form" value="upd" onclick="encode_upd_pass('pwd_old', 'pwd', 'pwd2')">Submit</button>
         
         <div class="login-divider"><span><i class="fa fa-hand-o-down" aria-hidden="true"></i></span></div>
         
-        <p class="text-orange">If you want to go back? <a href="<?php echo base_url(); ?>filing/dashboard">Please click here!</a></a></p>
+        <p class="text-orange">If you want to go back? <a href="<?php echo base_url(); ?>e-filing">Please click here!</a></a></p>
       </form>
     </div>
   </div>

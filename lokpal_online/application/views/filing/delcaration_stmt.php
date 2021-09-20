@@ -46,12 +46,12 @@ $chkdate= date("l jS \of F Y");
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">    
     <ul class="nav navbar-nav">
-      <li><a href="<?php echo base_url(); ?>filing/filing">Form:(Part - A)</a></li>
-      <li><a href="<?php echo base_url(); ?>applet/appletfiling">Part- B</a></li>      
-      <li><a href="<?php echo base_url(); ?>respondent/respondentfiling">Part -C</a></li>
+      <li><a href="<?php echo base_url(); ?>e-filing/pf">Form:(Part - A)</a></li>
+      <li><a href="<?php echo base_url(); ?>company/filing">Part- B</a></li>      
+      <li><a href="<?php echo base_url(); ?>respondent-filing">Part -C</a></li>
       <!-- <li><a href="<?php echo base_url(); ?>affidavit/affidavit_detail">Affidavit</a></li>-->
-      <li><a href="<?php echo base_url(); ?>document/testafidavit">Affidavit(Form - D)</a></li>
-   <li><a href="<?php echo base_url(); ?>affidavit/affidavit_detail">Report</a></li>
+      <li><a href="<?php echo base_url(); ?>affidavit-upload">Affidavit(Form - D)</a></li>
+   <li><a href="<?php echo base_url(); ?>complaint/preview">Report</a></li>
     </ul>
   </div>
 </nav>

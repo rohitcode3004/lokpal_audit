@@ -34,7 +34,7 @@
 
 
 								<div class="col-lg-4 col-sm-4 mb-15" id="divFY">
-							  		<a href="<?php echo base_url('filing/dashboard_new'); ?>" class="widgets-card gd-blueviolet">
+							  		<a href="<?php echo base_url('e-filing/list-of-complaints'); ?>" class="widgets-card gd-blueviolet">
 							  			<div class="widgets-icon">
 							  				<span id="ContentPlaceHolder1_lblTotalPending">
 							  					<?php echo $pen_comps; ?>
@@ -47,7 +47,7 @@
 
 
 							  <div class="col-lg-4 col-sm-4 mb-15">
-							  		<a href="<?php echo base_url('filing/dashboard_completed_complaint'); ?>" class="widgets-card gd-hotpink">
+							  		<a href="<?php echo base_url('e-filing/list-completed'); ?>" class="widgets-card gd-hotpink">
 							  			<div class="widgets-icon"><span id="ContentPlaceHolder1_lblTotlaDistposed"> <?php echo $completed_comps;  ?></span></div>
 							  			<div class="widgets-content">Check the status of  Complaints</div>
 							  			<i class="fa fa-files-o transparent_icon" aria-hidden="true"></i>
@@ -57,7 +57,7 @@
 
 
 							  	<div class="col-lg-4 col-sm-4 mb-15" id="divFY">
-							  		<a href="<?php echo base_url('filing/dashboard_re_entry_complaint'); ?>" class="widgets-card gd-blueviolet">
+							  		<a href="<?php echo base_url('e-filing/list-of-reopen-complaints'); ?>" class="widgets-card gd-blueviolet">
 							  			<div class="widgets-icon">
 							  				<span id="ContentPlaceHolder1_lblTotalPending">
 							  					<?php echo $re_edit_comp; ?>
@@ -71,7 +71,7 @@
 
 
 							 <!--	<div class="col-lg-4 col-sm-4 mb-15">
-								<a href="<?php //echo base_url('Filing/dashboard_re_entry_complaint'); 
+								<a href="<?php //echo base_url('e-filing/list-of-reopen-complaints'); 
 
 									echo "<pre>";
 									print_r($re_edit_comp);
@@ -114,7 +114,7 @@
                   // window.location.reload(); 
                 }else if(data.is_pending = 1){
                   //alert('Do filing');
-                  window.location='filing'
+                  window.location="<?php echo site_url('e-filing/form');?>";
 
                   
                 }

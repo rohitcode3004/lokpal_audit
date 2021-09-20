@@ -698,14 +698,10 @@ class User extends CI_Controller {
         }
     }
 
-     public function otp_session_destroy()
-    {	
-    	$_SESSION['session_service_id'] = '';
-    	return true;
-    }
-
     public function update_user_pass()
-    {					
+    {	
+    $data['captcha'] =  $this->captcha();
+
     	if($this->isUserLoggedIn){ 
     		$con = array( 
     			'id' => $this->session->userdata('userId') 
@@ -741,7 +737,8 @@ class User extends CI_Controller {
     			$this->form_validation->set_rules('username', 'Username', 'required');
     			$this->form_validation->set_rules('password_old', 'old password', 'required'); 
     			$this->form_validation->set_rules('password', 'password', 'required'); 
-    			$this->form_validation->set_rules('password2', 'confirm password', 'required|matches[password]'); 
+    			$this->form_validation->set_rules('password2', 'confirm password', 'required|matches[password]');
+    			$this->form_validation->set_rules('captcha', 'captcha', 'required');  
 
     			$ts = date('Y-m-d H:i:s', time());
     			$ip = $this->get_ip();
@@ -756,8 +753,25 @@ class User extends CI_Controller {
     			$old_password_encrypted = strip_tags($this->input->post('password_old'));
 				$old_password_decrypted = decode($old_password_encrypted);
     			$old_password = md5($old_password_decrypted);
-    			//echo $old_password;die;
-    			if($this->form_validation->run() == true){ 
+    						//echo $old_password;die;
+
+    			 $data['captcha_input'] = trim($this->input->post('captcha'));
+			    $captcha_session = $this->session->all_userdata('captchaCode');
+			   // print_r($data['captcha_input']);
+			  
+			    if($data['captcha_input'] == $captcha_session['captchaCode'])
+			    {
+			    	
+			    	$checkcaptch='t';
+			    }
+			    else
+			    {
+			    	
+				$checkcaptch='f';
+			    }
+
+
+    			if($this->form_validation->run() == true && $checkcaptch == 't'){ 
     				$id = $this->session->userdata('userId');
     				//print_r($this->session->userdata());die;
     				$check_old_password = $this->login_model->check_old_password($old_password, $id);
@@ -776,13 +790,29 @@ class User extends CI_Controller {
 				              ); 
 				              $insert_log = $this->login_model->loginlog_ins($log_data);   
 
+				        $subject = "Changed Password Notification";
+				$html = "
+				Hello, 
+				<p>Your Password has been changed.</p>
+				<p>Regards,</p>				
+				<p>Lokpal Of India</p>			
+				<p>New Delhi</p>
+				";
+
+				$service_id= strip_tags($this->input->post('username'));
+				
+				$sended = sendMail($service_id, $subject, $html);
+
+
 
     					$this->session->set_flashdata('success_msg', '<div class="alert alert-success text-center"><h4 class="m-0">Username and password successfully updated.</h4></div>'); 
-    					redirect('user/update_user_pass'); 
+    					$data['captcha'] =  $this->captcha();
+    					redirect('user/update_user_pass',$data); 
     				}else{ 					
     					
     					$this->session->set_flashdata('error_msg', '<div class="alert alert-danger text-center"><h4 class="m-0">Some problems occured, please try again.</h4></div>');
-						redirect('user/submit_user_pass/'); 
+    					$data['captcha'] =  $this->captcha();
+						redirect('user/submit_user_pass/',$data); 
 						
     				}
     				} else{
@@ -800,12 +830,14 @@ class User extends CI_Controller {
 				              ); 
 				              $insert_log = $this->login_model->loginlog_ins($log_data); 
     					$this->session->set_flashdata('error_msg', '<div class="alert alert-danger text-center"><h4 class="m-0">Please enter all the mandatory fields.</h4></div>');
-						redirect('user/submit_user_pass/');
+    					$data['captcha'] =  $this->captcha();
+						redirect('user/submit_user_pass/',$data);
     				}
     			}else{ 
             	//echo validation_errors();
     				$this->session->set_flashdata('error_msg', '<div class="alert alert-danger text-center"><h4 class="m-0">Please fill all the mandatory fields.</h4></div>');
-					redirect('user/submit_user_pass/');
+    				$data['captcha'] =  $this->captcha();
+					redirect('user/submit_user_pass/',$data);
     			} 
     		} 
 
@@ -815,6 +847,7 @@ class User extends CI_Controller {
     		$data['user'] = $this->login_model->getRows($con);
 
     		$data['menus'] = $this->menus_lib->get_menus($data['user']['role']);
+    		$data['captcha'] =  $this->captcha();
     		$this->load->view('templates/front/fheader.php',$data);
     		$this->load->view('front/user/upd_pass', $data); 
     		$this->load->view('templates/front/ffooter.php',$data);
@@ -1094,7 +1127,8 @@ public function user_register(){
         echo $captcha['image'];
     }
 
-    public function forget_password(){
+
+     public function forget_password(){
 	$data['salution'] = $this->common_model->getSalution();
 	$data['captcha'] =  $this->captcha();
 
@@ -1128,7 +1162,6 @@ public function user_register(){
 
         // If login request submitted 
 		if($this->input->post('userloginSubmit')){ 
-
 			$this->form_validation->set_rules('username', 'Username', 'required'); 
 			$this->form_validation->set_rules('password2', 'Confirm Password', 'required'); 
 				$this->form_validation->set_rules('password', 'password', 'trim|required');  
