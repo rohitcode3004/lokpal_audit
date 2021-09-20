@@ -918,7 +918,7 @@ fetch_data();
 	        		//async: false,
 	        		success: function(data) {
 	        			console.log(data);
-	        			window.location.href= "<?php echo site_url('scrutiny/dashboard'); ?>";
+	        			window.location.href= "<?php echo site_url('scrutiny/dash'); ?>";
 	        			
 	      }
 	  });

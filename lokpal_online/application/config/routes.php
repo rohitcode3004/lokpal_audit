@@ -54,7 +54,6 @@ $route['404_override'] = 'Error_controller';
 $route['translate_uri_dashes'] = FALSE;
 
 #Counter filing
-
 $route['c-filing'] = 'counter/counterfiling';
 
 //public user
@@ -65,21 +64,85 @@ $route['e-filing/list-of-complaints'] = 'filing/dashboard_new';
 $route['e-filing/list-completed'] = 'filing/dashboard_completed_complaint';
 $route['e-filing/list-of-reopen-complaints'] = 'filing/dashboard_re_entry_complaint';
 
+
+$route['officebeared/filing'] = 'applet/officebeared';
+$route['compnay/additionalparty-add'] = 'applet/additionalparty';
+$route['additional-public-servant/add'] = 'respondent/ad_public_servant';
+$route['public-servant-additionalparty/add'] = 'applet/additionalparty';
+
+$route['public-servant-witness/add'] = 'respondent/witnessdetail';
+
+
+
+
+
+
+
+
+
+
 //$route['e-filing/list-of-reopen-complaints/(:num)'] = 'filing/dashboard_re_entry_complaint/$1';
 
 //Complaint Entry
-
-
-
 $route['internal-filing'] = 'counter/dashboard_main_registry';
 $route['internal-filing/ack-rec-for-phisical-filing'] = 'counter/dashboard_registry';
-
-
 $route['respondent-filing'] = 'respondent/respondentfiling';
 $route['affidavit-upload'] = 'document/testafidavit';
 $route['phisical-file-upload'] = 'document/phisical';
 $route['complaint/preview'] = 'affidavit/affidavit_detail';
 $route['company/filing'] = 'applet/appletfiling';
+
+
+//scrutiny
+
+$route['scrutiny'] = 'scrutiny/dashboard_main';
+$route['scrutiny/dash'] = 'scrutiny/dashboard';
+$route['scrutiny/dash/def'] = 'scrutiny/dashboard_def';
+$route['scrutiny/list'] = 'scrutiny/scrutiny_report';
+$route['case-search'] = 'search/search_case';
+$route['checklist'] = 'scrutiny/checklist';
+$route['re-entry'] = 'scrutiny/openedit';
+
+$route['report/external-agency-inquiry'] = 'scrutiny/agency_report_chk/RI';
+$route['report/external-agency-investigation'] = 'scrutiny/agency_report_chk/RV';
+$route['report/submission-external-agency'] = 'scrutiny/reg_proceeding_form';
+
+$route['opportunity/list-of-public-servant-inquiry'] = 'scrutiny/ps_report_chk/OPI';
+
+$route['opportunity/list-of-public-servant-investigation'] = 'scrutiny/ps_report_chk/OIR';
+
+$route['any-other-action/list-of-report'] = 'scrutiny/ps_report_chk/AOA';
+
+$route['report/submission-any-other-action'] = 'scrutiny/aoa_proceeding_form';
+
+
+
+
+
+
+$route['report/opportunity-after-inquiry-investigation'] = 'scrutiny/ops_proceeding_form';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

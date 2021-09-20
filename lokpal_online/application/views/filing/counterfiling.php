@@ -165,7 +165,7 @@ $ref_no=$this->session->userdata('counter_ref_no');
     <div class="row">
     <div class="panel-heading text-center">      
       <ul class="more-action">
-        <li><a href="<?php echo base_url('scrutiny/dashboard_main'); ?>" class="previous">&laquo; Back</a></li>
+        <li><a href="<?php echo base_url('scrutiny'); ?>" class="previous">&laquo; Back</a></li>
       </ul>
     </div>
     </div>

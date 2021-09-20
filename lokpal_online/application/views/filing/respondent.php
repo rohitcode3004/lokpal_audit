@@ -465,10 +465,10 @@ $(document).ready(function(){
     </div>
 
     <div class="alert alert-info">
-      * attach a separate sheet in respect of each public servant against whom a complaint is being made. <button type="button" class="btn btn-success"  onclick="window.open('<?php echo site_url("respondent/ad_public_servant");?>')">Click here</button>
+      * attach a separate sheet in respect of each public servant against whom a complaint is being made. <button type="button" class="btn btn-success"  onclick="window.open('<?php echo site_url("additional-public-servant/add");?>')">Click here</button>
     </div>
     <div class="alert alert-info">
-      Note: Details of third party/ parties, if aware, whose interests are likely to be prejudicially affected by the said complaint as contemplated under Section 21 of the Act may also be separately furnished. <button type="button" class="btn btn-success" onclick="window.open('<?php echo site_url("respondent/additionalparty");?>')">Click here</button>
+      Note: Details of third party/ parties, if aware, whose interests are likely to be prejudicially affected by the said complaint as contemplated under Section 21 of the Act may also be separately furnished. <button type="button" class="btn btn-success" onclick="window.open('<?php echo site_url("public-servant-additionalparty/add");?>')">Click here</button>
     </div>
 
     <hr>
@@ -718,7 +718,7 @@ $(document).ready(function(){
         <label class="text-orange">11. Names of Witnesses in support of the allegations, if any -</label>
         <div class="alert alert-info">
           * furnish details in respect of each Witnesses in support of the allegations.
-          <button type="button" class="btn btn-success" onclick="window.open('<?php echo site_url("respondent/witnessdetail");?>')">Click here</button>
+          <button type="button" class="btn btn-success" onclick="window.open('<?php echo site_url("public-servant-witness/add");?>')">Click here</button>
         </div>
       </div>
     </div>
