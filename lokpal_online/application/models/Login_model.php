@@ -134,7 +134,7 @@ class Login_model extends CI_Model {
 		}
 	}
 
-	function check_otp_requests($service_name, $service_id){
+	function check_otp_requests($service_name, $service_id, $tag){
 		if($service_name == 'email')
 			$this->db->where('service_name', 'E');
 		elseif($service_name == 'mobile')
@@ -142,7 +142,9 @@ class Login_model extends CI_Model {
 		else
 			die('invalid service');
 		$this->db->where('service_id', $service_id);
+		$this->db->where('tag', $tag);
 		$query = $this->db->get('otp_validator');
+//$this->db->where('is_staff ', 'f');
 		if($query->num_rows() > 0){
 			return 1;
 		}else{
@@ -156,7 +158,7 @@ class Login_model extends CI_Model {
 		return $this->db->update('users', $data);
 	}
 
-	function update_otp_validator($session_service_id, $otp, $service_name){
+	function update_otp_validator($session_service_id, $otp, $service_name, $tag){
 		if($service_name == 'email')
 			$s_n = 'E';
 		elseif($service_name == 'mobile')
@@ -167,6 +169,7 @@ class Login_model extends CI_Model {
 		$this->db->where('service_name', $s_n);
 		$this->db->where('service_id', $session_service_id);
 		$this->db->where('otp_generated', $otp);
+		$this->db->where('tag', $tag);
 		return $this->db->update('otp_validator', $data);
 	}
 
@@ -182,7 +185,7 @@ class Login_model extends CI_Model {
 		return $this->db->insert('users', $data);
 	}
 
-	function insert_otp_new($service_name, $service_id, $otp){
+	function insert_otp_new($service_name, $service_id, $tag, $otp){
 		if($service_name == 'email')
 			$s_n = 'E';
 		elseif($service_name == 'mobile')
@@ -190,11 +193,11 @@ class Login_model extends CI_Model {
 		else
 			die('invalid service');
 		$data = array('service_name' => $s_n, 'service_id' => $service_id, 'otp_attempts' => 1,
-			'otp_generated' => $otp, 'ip' => get_ip(), 'create_date' => date('Y-m-d H:i:s', time()));
+			'otp_generated' => $otp, 'tag' => $tag, 'ip' => get_ip(), 'create_date' => date('Y-m-d H:i:s', time()));
 		return $this->db->insert('otp_validator', $data);
 	}
 
-	function update_otp_new($service_name, $service_id, $otp){
+	function update_otp_new($service_name, $service_id, $tag, $otp){
 		if($service_name == 'email')
 			$s_n = 'E';
 		elseif($service_name == 'mobile')
@@ -204,6 +207,7 @@ class Login_model extends CI_Model {
 		$data = array('otp_generated' => $otp, 'ip' => get_ip(), 'update_date' => date('Y-m-d H:i:s', time()));
 		$this->db->where('service_id', $service_id);
 		$this->db->where('service_name', $s_n);
+		$this->db->where('tag', $tag);
 		return $this->db->update('otp_validator', $data);
 	}
 
@@ -218,7 +222,7 @@ class Login_model extends CI_Model {
 		}
 	}
 
-	function varifyOtp_new($session_service_id, $otp, $service_name){
+	function varifyOtp_new($session_service_id, $otp, $service_name, $tag){
 		if($service_name == 'email')
 			$s_n = 'E';
 		elseif($service_name == 'mobile')
@@ -228,6 +232,7 @@ class Login_model extends CI_Model {
 		$this->db->where('service_id', $session_service_id);
 		$this->db->where('service_name', $s_n);
 		$this->db->where('otp_generated', $otp);
+		$this->db->where('tag', $tag);
 		$query = $this->db->get('otp_validator');
 		//echo $this->db->last_query();die;
 		if($query->num_rows() > 0){
@@ -306,17 +311,17 @@ class Login_model extends CI_Model {
 		return $query->result();
 	}
 
-			function checkUserName($username_exist){
+	function checkUserName($username_exist){
 		$this->db->where('username', $username_exist);
+		$this->db->where('is_staff ', 'f');
 		$query = $this->db->get('users');
-
 		//echo $this->db->last_query();die;
 		return $query->result();
 	}
 
 
 function forget_pass_his_ins($id){
-    	$this->db->where('id', $id);
+    	$this->db->where('username', $id);
     	$query = $this->db->get('users');
     	foreach ($query->result() as $row) {
           $this->db->insert('users_history',$row);
@@ -327,7 +332,7 @@ function forget_pass_his_ins($id){
     }
 
 	function forget_pass_change($user_data,$id){
-    		$this->db->where('id', $id);	
+    		$this->db->where('username', $id);	
       		$this->db->update('users', $user_data); 
 			$this->db->last_query();			//die;
       		return ($this->db->affected_rows() != 1) ? false : true;   
