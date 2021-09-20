@@ -553,11 +553,12 @@ class User extends CI_Controller {
 			#$_SESSION['service_name'] = $service_name;
 			$_SESSION['session_service_id'] = $service_id;
 			//print_r($service_name);die;
-			$data_exists = $this->login_model->check_otp_requests($service_name, $service_id);
+			$tag = 'R';
+			$data_exists = $this->login_model->check_otp_requests($service_name, $service_id, $tag);
 			if($data_exists == 0)
-				$result = $this->login_model->insert_otp_new($service_name, $service_id, $otp);
+				$result = $this->login_model->insert_otp_new($service_name, $service_id, $tag, $otp);
 			elseif($data_exists == 1)
-				$result = $this->login_model->update_otp_new($service_name, $service_id, $otp);
+				$result = $this->login_model->update_otp_new($service_name, $service_id, $tag, $otp);
 			if($result){
 
 				//common code for email start
@@ -611,7 +612,8 @@ class User extends CI_Controller {
 			$this->form_validation->set_rules('otp', 'OTP', 'required|trim');
 
 		if($this->form_validation->run()){
-			$this->check_otp_new($service_name, $otp);
+			$tag = 'R';
+			$this->check_otp_new($service_name, $otp, $tag);
 		}else{
 			$return_arr[] = array("val" => 'false',
 				"error" => form_error('otp'), "service_name" => $service_name);
@@ -656,14 +658,14 @@ class User extends CI_Controller {
         }
     }
 
-    public function check_otp_new($service_name, $otp)
+    public function check_otp_new($service_name, $otp, $tag)
 	{
 		#$otp = $this->input->post('otp');
 		#$email = $_SESSION['email'];
 		#$service_name = $_SESSION['service_name'];
 		$session_service_id = $_SESSION['session_service_id'];
 		//echo $session_service_id;die;
-		$data = $this->login_model->varifyOtp_new($session_service_id, $otp, $service_name);
+		$data = $this->login_model->varifyOtp_new($session_service_id, $otp, $service_name, $tag);
 		if($data == 1){
 			//print_r('matched');die;
 			//$_SESSION['is_login'] = $email;
@@ -675,7 +677,8 @@ class User extends CI_Controller {
 			//redirect('admin/dashboard/'); 
 
         	//$otp = '';  //successfully varified so empty otp
-        	$result = $this->login_model->update_otp_validator($session_service_id, $otp, $service_name);
+        	$result = $this->login_model->update_otp_validator($session_service_id, $otp, $service_name, $tag
+        	);
         	$this->session->unset_userdata('session_service_id');
         	if($result){
         		$return_arr[] = array("val" => 'true',
@@ -1127,9 +1130,7 @@ public function user_register(){
         echo $captcha['image'];
     }
 
-
-     public function forget_password(){
-	$data['salution'] = $this->common_model->getSalution();
+    public function forget_password(){
 	$data['captcha'] =  $this->captcha();
 
 	if($this->session->userdata('success_msg')){ 
@@ -1144,8 +1145,8 @@ public function user_register(){
 	$this->load->view('front/user/forget_password.php',$data);
 }
 
-
     public function forget_password_action(){ 
+    	//print_r($_POST);die;
 
     	//echo "forget";die('forget_password_action');
 		//print_r($this->session->all_userdata('captchaCode'));
@@ -1162,23 +1163,17 @@ public function user_register(){
 
         // If login request submitted 
 		if($this->input->post('userloginSubmit')){ 
-			$this->form_validation->set_rules('username', 'Username', 'required'); 
-			$this->form_validation->set_rules('password2', 'Confirm Password', 'required'); 
-				$this->form_validation->set_rules('password', 'password', 'trim|required');  
-			$this->form_validation->set_rules('captcha', 'captcha', 'required'); 
-			if($this->input->post('password')){
-					$this->form_validation->set_rules('password2', 'confirm password', 'trim|matches[password]'); 			
-				}
 
+			//print_r($_POST);die;
+			$this->form_validation->set_rules('username', 'Username', 'trim|required|valid_email'); 
+
+			$this->form_validation->set_rules('captcha', 'captcha', 'required'); 
 
 			if($this->form_validation->run() == true){
+				//print_r($_POST);die;
 				$data['username'] = $this->input->post('username');
-			    $password_encrypted = $this->input->post('password');
-				$password_decrypted = decode($password_encrypted);
-			    $data['password'] = md5(strip_tags($password_decrypted));
-			   $password_md5=$data['password'];
 			    $data['captcha_input'] = trim($this->input->post('captcha'));
-			   $captcha_session = $this->session->all_userdata('captchaCode');
+			    $captcha_session = $this->session->all_userdata('captchaCode');
 			   // print_r($data['captcha_input']);		  
 			    if($data['captcha_input'] == $captcha_session['captchaCode'])
 			    {
@@ -1192,22 +1187,40 @@ public function user_register(){
 				//$data['password'] = $this->input->post('password');
 		
 			 	$username_exist=$data['username'];
+			 	//print_r($username_exist);die;
 				$checkUserNameExistance = $this->login_model->checkUserName($username_exist);			
 				 $myArray=(array)$checkUserNameExistance;
   				 $id= $myArray[0]->id ?? '';
-  				$username= $myArray[0]->username ?? '';					
+  				$username= $myArray[0]->username ?? '';	
+
+  				$service_name = 'email';
+  				$service_id = $username;
+  				$tag = 'FP';
+  				$otp = rand(11111,99999);
+  				$data_exists = $this->login_model->check_otp_requests($service_name, $service_id, $tag);
+					if($data_exists == 0)
+				$result = $this->login_model->insert_otp_new($service_name, $service_id, $tag, $otp);
+					elseif($data_exists == 1)
+				$result = $this->login_model->update_otp_new($service_name, $service_id, $tag, $otp);
 				if (!empty($id) && $checkcaptch == 't')
 				{
-					$user_data = array( 									
-								 'password'	=>$password_md5,														
-								'updated_at' => $ts,
-								'ip' => $ip,
-								);
-			$query1 = $this->login_model->forget_pass_his_ins($id);				
-			$update = $this->login_model->forget_pass_change($user_data,$id); 
-			if($update){
-			$this->session->set_flashdata('success_msg', '<div class="alert alert-success text-center"><h4 class="m-0">Password successfully updated.</h4></div>');  
-			redirect('user/login'); 
+					//email code
+					//common code for email start
+					$_SESSION['session_service_id'] = $username;
+					$subject = "OTP for forget password";
+					$html = "
+					Hi <p>Visitor</p>
+					<p>Your system generated otp for one time password change is".$otp."
+					</p>
+					<p>Thanks,</p>
+					";
+					$sended = sendMail($username, $subject, $html);
+					//echo $sended;die;
+					//common code for email end
+			if($sended == 1){
+				//die('ff');
+			$this->session->set_flashdata('success_msg', '<div class="alert alert-success text-center"><h4 class="m-0">OTP is successfully sent to your email id.</h4></div>');  
+			redirect('user/forget_password_step2'); 
 			}   
 			else{
     					$this->session->set_flashdata('error_msg', '<div class="alert alert-danger text-center"><h4 class="m-0">Some problems occured, please try again.</h4></div>');
@@ -1215,14 +1228,21 @@ public function user_register(){
 						$data['captcha'] =  $this->captcha();  
     				}    
 
-				}
-				
-						
+				}elseif(empty($id)){
+					$this->session->set_flashdata('error_msg', '<div class="alert alert-danger text-center"><h4 class="m-0">Email id is not registered.</h4></div>');
+						redirect('user/forget_password/'); 
+						$data['captcha'] =  $this->captcha();
+				}else{
+					$this->session->set_flashdata('error_msg', '<div class="alert alert-danger text-center"><h4 class="m-0">Captcha is wrong! Please try again.</h4></div>');
+						redirect('user/forget_password/'); 
+						$data['captcha'] =  $this->captcha();
+
+				}						
 		} 
 
 		else{
 				//die('here2'); 
-						$this->session->set_flashdata('error_msg', '<div class="alert alert-danger text-center"><h4 class="m-0">Email or Password or Confirm password can not match.</h4></div>');						
+						$this->session->set_flashdata('error_msg', '<div class="alert alert-danger text-center"><h4 class="m-0">Email or capcha is invalid.</h4></div>');						
 							redirect('user/forget_password/'); 					
 					redirect('user/forget_password'); 
 						$data['captcha'] =  $this->captcha();  
@@ -1234,5 +1254,127 @@ public function user_register(){
 	} 
 }
 
+    public function forget_password_step2(){
+	$data['captcha'] =  $this->captcha();
+
+	if($this->session->userdata('success_msg')){ 
+			$data['success_msg'] = $this->session->userdata('success_msg'); 
+			$this->session->unset_userdata('success_msg'); 
+		} 
+		if($this->session->userdata('error_msg')){ 
+			$data['error_msg'] = $this->session->userdata('error_msg'); 
+			$this->session->unset_userdata('error_msg'); 
+		} 
+
+	$this->load->view('front/user/forget_password_step2.php',$data);
+}
+
+    public function forget_password_step2_action(){ 
+
+    	//echo "forget";die('forget_password_action');
+		//print_r($this->session->all_userdata('captchaCode'));
+    	$ts = date('Y-m-d H:i:s', time());
+    	//$query1 = $this->scrutiny_model->upd_scrutiny_data_as_undefective_his($id);	
+		if($this->session->userdata('success_msg')){ 
+			$data['success_msg'] = $this->session->userdata('success_msg'); 
+			$this->session->unset_userdata('success_msg'); 
+		} 
+		if($this->session->userdata('error_msg')){ 
+			$data['error_msg'] = $this->session->userdata('error_msg'); 
+			$this->session->unset_userdata('error_msg'); 
+		} 
+
+        // If login request submitted 
+		if($this->input->post('userloginSubmit')){ 
+
+			$this->form_validation->set_rules('password2', 'Confirm Password', 'required'); 
+				$this->form_validation->set_rules('password', 'password', 'trim|required');  
+			$this->form_validation->set_rules('captcha', 'captcha', 'required'); 
+			$this->form_validation->set_rules('otp', 'OTP', 'required'); 
+			if($this->input->post('password')){
+					$this->form_validation->set_rules('password2', 'confirm password', 'trim|matches[password]'); 			
+				}
+
+
+			if($this->form_validation->run() == true){
+			    $password_encrypted = $this->input->post('password');
+				$password_decrypted = decode($password_encrypted);
+			    $data['password'] = md5(strip_tags($password_decrypted));
+			    $password_md5=$data['password'];
+			    $data['captcha_input'] = trim($this->input->post('captcha'));
+			    $captcha_session = $this->session->all_userdata('captchaCode');
+			    $otp = trim($this->input->post('otp'));
+			   // print_r($data['captcha_input']);		  
+			    if($data['captcha_input'] == $captcha_session['captchaCode'])
+			    {
+			    	$checkcaptch='t';
+			    }
+			    else
+			    {
+				$checkcaptch='f';
+			    }	  
+				
+				if ($checkcaptch == 't')
+				{
+					$service_name = 'email';
+					$tag = 'FP';
+					$session_service_id = $_SESSION['session_service_id'];
+					$data = $this->login_model->varifyOtp_new($session_service_id, $otp, $service_name, $tag);
+					if($data == 1){
+        				$result = $this->login_model->update_otp_validator($session_service_id, $otp, $service_name, $tag);
+        				$this->session->unset_userdata('session_service_id');
+
+        				if($result){
+						$user_data = array( 									
+						'password'	=>$password_md5,														
+						'updated_at' => $ts,
+						'ip' => $ip,
+						);
+						$query1 = $this->login_model->forget_pass_his_ins($session_service_id);				
+						$update = $this->login_model->forget_pass_change($user_data,$session_service_id); 
+						if($update){
+							$this->session->set_flashdata('success_msg', '<div class="alert alert-success text-center"><h4 class="m-0">Password successfully updated.</h4></div>');  
+							redirect('user/login'); 
+						}   
+						else{
+    						$this->session->set_flashdata('error_msg', '<div class="alert alert-danger text-center"><h4 class="m-0">Some problems occured, please try again.</h4></div>');
+							redirect('user/forget_password_step2/'); 
+							$data['captcha'] =  $this->captcha();  
+    					}
+    				}else{
+    					$this->session->set_flashdata('error_msg', '<div class="alert alert-danger text-center"><h4 class="m-0">Some problems occured, please try again.</h4></div>');
+							redirect('user/forget_password_step2/'); 
+							$data['captcha'] =  $this->captcha();
+    				}    
+
+				}else{
+					$this->session->set_flashdata('error_msg', '<div class="alert alert-danger text-center"><h4 class="m-0">OTP does not match. Please try again.</h4></div>');
+							redirect('user/forget_password_step2/'); 
+							$data['captcha'] =  $this->captcha();
+				}
+				
+						
+		} 
+
+		else{
+				//die('here2'); 
+						$this->session->set_flashdata('error_msg', '<div class="alert alert-danger text-center"><h4 class="m-0">Captcha does not match.</h4></div>');						
+							redirect('user/forget_password_step2/'); 					
+					redirect('user/forget_password'); 
+						$data['captcha'] =  $this->captcha();  
+				} 
+		
+	}else{
+		$this->session->set_flashdata('error_msg', '<div class="alert alert-danger text-center"><h4 class="m-0">Password, Confirm, OTP or Captcha is invalid. Please try again.</h4></div>');						
+							redirect('user/forget_password_step2/'); 					
+					redirect('user/forget_password'); 
+						$data['captcha'] =  $this->captcha();  
+
+	}	 
+}
+		        // Load view 
+				$data['captcha'] =  $this->captcha();  
+		$this->load->view('front/user/forget_password_step2.php', $data); 
+}
 }
 
