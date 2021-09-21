@@ -294,17 +294,17 @@ class Admin extends CI_Controller {
 				$this->load->view('admin/templates/admin_header', $data);	
 				$this->load->view('admin/dashboard/dashboard');	
 			}elseif($data['user']['role'] == 18){
-				redirect('filing/filing');
+				redirect('e-filing/form');
 			}elseif($data['user']['role'] == 126){
-				redirect('scrutiny/dashboard_main');
+				redirect('scrutiny');
 			}elseif($data['user']['role'] == 161 || $data['user']['role'] == 162 || $data['user']['role'] == 163 || $data['user']['role'] == 164){
-				redirect('scrutiny/dashboard_main');
+				redirect('scrutiny');
 			}elseif($data['user']['role'] == 131){
-				redirect('counter/counterfiling');
+				redirect('c-filing');
 			}elseif($data['user']['role'] == 138){
 				redirect('bench/dashboard_main');
 			}elseif($data['user']['role'] == 143){
-				redirect('counter/dashboard_registry');
+				redirect('internal-filing/ack-rec-for-phisical-filing');
 			}elseif($data['user']['role'] == 147 || $data['user']['role'] == 170){
 				redirect('proceeding/dashboard_main');
 			}elseif($data['user']['role'] == 172){
