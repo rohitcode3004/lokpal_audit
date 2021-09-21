@@ -1068,22 +1068,22 @@ input[type="checkbox"]::before {
     padding: 18px 15px;
     margin-bottom: 12px;
     height: 61px;
-    color: #FFFFFF;
+    color: #666;
     border-radius: 0;
     width: 100%;
     text-align: right;
     font-size: 18px;
 }
 .medium-password {
-    background-color: #ffbc00;
+    background-color: rgb(255 188 0 / 25%);
 }
 
 .weak-password {
-    background-color: #fd4f46;
+    background-color: rgb(253 79 70 / 25%);
 }
 
 .strong-password {
-    background-color: #0abb12;
+    background-color: rgb(10 187 18 / 25%);
 }
 .password_form #pwd{
     top: 0;
@@ -1097,4 +1097,15 @@ input[type="checkbox"]::before {
 .password_form_upd #password-strength-status {
     height: 62px;
     margin-bottom: 15px;
+}
+
+.otp_box {
+    position: relative;
+    display: flex;
+}
+.submit_otp_btn {
+    width: 120px;
+    height: 62px;
+    font-size: 16px;
+    border: none;
 }

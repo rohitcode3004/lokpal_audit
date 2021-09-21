@@ -27,16 +27,32 @@
         ?>
       <form class="form-horizontal password_form" role="form" action="<?php echo base_url('user/forget_password_step2_action') ?>" method="post" autocomplete="off">
 
+        <!--<div class="box-group">
+          <div class="otp_box">
+            <input class="input-form" placeholder="Enter OTP Here" name="otp" type="text" value="" id="otp">
+            <div class="otp_group_btn">
+              <button class="submit_otp_btn btn-primary" id="submit-email-otp" type="button">Submit OTP</button>
+            </div>
+          </div>
+          <div id="count_timer" class="text-orange">Your OTP will expire in : <span id="timer"></span></div>
+          <div id="resend_otp" class="text-primary" style="display: none;">OTP expired. Please send new otp again.</div>
+        </div>
+
+        <div class="box-group" id="email-verified">
+          <div class="alert alert-success"><i class="fa fa-check-square-o" aria-hidden="true"></i> Your Email id is <strong>Verifyed Successfully!</strong></div>
+        </div>-->
+
+        <div class="box-group">
+          <input class="input-form" placeholder="Enter OTP Here" name="otp" type="text" value="" id="otp">
+          <div id="count_timer" class="text-orange">Your OTP will expire in : <span id="timer"></span></div>
+          <div id="resend_otp" class="text-primary" style="display: none;">OTP expired. Please send new otp again.</div>
+        </div>
         <div class="box-group">
           <input id="pwd" type="password" class="input-form password_Strength" placeholder="Enter New Password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&\*]).{6,}" onKeyUp="checkPasswordStrength();" data-toggle="tooltip" data-placement="bottom" title="Password must contain minimum of 6 characters, At least one capital letter, one small letter, one number, and one special character!">
           <div id="password-strength-status"></div>
         </div>
         <div class="box-group">
           <input class="input-form" placeholder="Confirm New Password" name="password2" type="password" value="" id="pwd2">
-        </div>
-
-        <div class="box-group">
-          <input class="input-form" placeholder="OTP" name="otp" type="text" value="" id="otp">
         </div>
 
         <div class="captcha-box">
@@ -62,5 +78,37 @@
   </div>
 </div>
 
+
+<script type="text/javascript">
+let timerOn = true;
+
+function timer(remaining) {
+  var m = Math.floor(remaining / 60);
+  var s = remaining % 60;
+  
+  m = m < 10 ? '0' + m : m;
+  s = s < 10 ? '0' + s : s;
+  document.getElementById('timer').innerHTML = m + ':' + s;
+  remaining -= 1;
+  
+  if(remaining >= 0 && timerOn) {
+    setTimeout(function() {
+        timer(remaining);
+    }, 1000);
+    return;
+  }
+
+  if(!timerOn) {
+    // Do validate stuff here
+    return;
+  }
+  
+  // Do timeout stuff here
+  alert('Timeout for otp');
+}
+
+timer(60);
+
+</script>
 <!-- End of Features Section-->
 <?php include(APPPATH.'views/templates/front/ffooter.php'); ?>

@@ -54,7 +54,7 @@
           <input type="text" class="input-form" name="captcha" value="" placeholder="Enter the captcha code "/>
         </div>
 
-        <input class="loginhny-btn btn" type="submit" name="userloginSubmit" value="submit" onclick="encode_dl_passport('pwd', 'pwd2',)" />
+        <input class="loginhny-btn btn" type="submit" name="userloginSubmit" value="Send OTP" onclick="encode_dl_passport('pwd', 'pwd2',)" />
 
         <div class="login-divider"><span><i class="fa fa-hand-o-down" aria-hidden="true"></i></span></div>
 
