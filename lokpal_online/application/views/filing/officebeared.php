@@ -407,7 +407,7 @@ $ref_no=$this->session->userdata('ref_no');
             <div class="row">
               <div class="col-md-12">  
 
-  <form id="officebeared" class="form-horizontal" role="form" method="post" action='<?= base_url();?>applet/officsave'  name="officebeared" enctype="multipart/form-data">
+  <form id="officebeared" class="form-horizontal" role="form" method="post" action='<?= base_url();?>company-save'  name="officebeared" enctype="multipart/form-data">
 
     <div class="form_error">
       <?php //echo validation_errors(); ?>

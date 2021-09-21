@@ -270,7 +270,7 @@ public function witnessave(){
               ); 
               $insert_log = $this->login_model->loginlog_ins($log_data); 
 
-         redirect('/respondent/witnessdetail',$data);
+         redirect('/public-servant-witness/add',$data);
       } 
       else
       {
@@ -413,7 +413,7 @@ $this->load->view('templates/front/CE_Footer.php',$data);
 
           $this->session->set_flashdata('success_msg', '<div class="alert alert-success"><h4 class="m-0">Witness detail data has been successfully added.</h4></div>'); 
           
-           redirect('/respondent/witnessdetail',$data); 
+           redirect('/public-servant-witness/add',$data); 
         }
         else
         {
@@ -744,7 +744,7 @@ if (empty($data['partc']))
               'status' => 'Form-C Part Submitted Successfully',
               ); 
               $insert_log = $this->login_model->loginlog_ins($log_data);
-                redirect('/document/testafidavit');
+                redirect('/affidavit-upload');
                  
               }
               else{
@@ -1051,7 +1051,7 @@ if (empty($data['partc']))
               'status' => 'Part C Form Modified Successfully',
               ); 
               $insert_log = $this->login_model->loginlog_ins($log_data); 
-    redirect('/document/testafidavit');
+    redirect('/affidavit-upload');
   }
   else
   {
@@ -1290,7 +1290,7 @@ else
               ); 
               $insert_log = $this->login_model->loginlog_ins($log_data); 
 
-       redirect('/respondent/ad_public_servant',$data);  
+       redirect('/additional-public-servant/add',$data);  
     }  
     else
     {
@@ -1439,7 +1439,7 @@ else
               $insert_log = $this->login_model->loginlog_ins($log_data); 
 
       $this->session->set_flashdata('success_msg', '<div class="alert alert-success"><h4 class="m-0">Public Servant detail data has been successfully added.</h4></div>');
-       redirect('/respondent/ad_public_servant',$data);  
+       redirect('/additional-public-servant/add',$data);  
     }
     else
     {

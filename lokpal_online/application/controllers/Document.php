@@ -179,7 +179,7 @@ $this->load->helper("common_helper");
             if ( ! $this->upload->do_upload('affidavit_upload'))
             {
               $error = array('error' => $this->upload->display_errors()); 
-              redirect('document/testafidavit'); 
+              redirect('affidavit-upload'); 
               
             }else
             { 
@@ -245,7 +245,7 @@ $this->load->helper("common_helper");
                   'status' => 'Affidavit Uploaded Successfully',
                   ); 
                   $insert_log = $this->login_model->loginlog_ins($log_data);
-                    redirect('/document/testafidavit',$data);
+                    redirect('/affidavit-upload',$data);
                     }
                     else
                     {

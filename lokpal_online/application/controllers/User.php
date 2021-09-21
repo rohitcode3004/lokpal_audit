@@ -113,14 +113,14 @@ class User extends CI_Controller {
 					//$parta_status = get_parts_status_onid($checkLogin['id'], 'A');
 					$parta_status = 1;
 					if($parta_status && $page == 'statuspage'){
-						redirect('/filing/dashboard_completed_complaint'); 
+						redirect('/e-filing/list-completed'); 
 					}elseif($parta_status){
-						redirect('/filing/dashboard');
+						redirect('/e-filing');
 					}
 					else{
 						$user_id=$this->session->userdata('user_id');
 						$ref_no = get_refno_latest($user_id);
-						redirect('/filing/filing/'.$ref_no); 
+						redirect('/e-filing/form/(:num)/'.$ref_no); 
 					}
 				}
 

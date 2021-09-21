@@ -69,8 +69,10 @@ $route['officebeared/filing'] = 'applet/officebeared';
 $route['compnay/additionalparty-add'] = 'applet/additionalparty';
 $route['additional-public-servant/add'] = 'respondent/ad_public_servant';
 $route['public-servant-additionalparty/add'] = 'applet/additionalparty';
-
 $route['public-servant-witness/add'] = 'respondent/witnessdetail';
+$route['(?i)([a-z0-9_-]+)/compnay/additionalparty-add'] = 'applet/additionalparty';
+
+$route['(?i)([a-z0-9_-]+)/officebeared/filing'] = 'applet/officebeared';
 
 
 
@@ -91,6 +93,12 @@ $route['affidavit-upload'] = 'document/testafidavit';
 $route['phisical-file-upload'] = 'document/phisical';
 $route['complaint/preview'] = 'affidavit/affidavit_detail';
 $route['company/filing'] = 'applet/appletfiling';
+$route['company-save'] = 'applet/officsave';
+$route['public/filing'] = 'respondent/respondentfiling';
+
+
+
+
 
 
 //scrutiny
