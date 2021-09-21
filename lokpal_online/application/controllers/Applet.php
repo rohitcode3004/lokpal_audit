@@ -283,7 +283,7 @@ public function addsave(){
               $insert_log = $this->login_model->loginlog_ins($log_data); 
 
         $this->session->set_flashdata('success_msg', '<div class="alert alert-success"><h4 class="m-0"> Third party detail has been successfully Modified.</h4></div>'); 
-        redirect('/applet/additionalparty',$data); 
+        redirect('/compnay/additionalparty-add',$data); 
       } 
       else
       {
@@ -407,7 +407,7 @@ public function addsave(){
               ); 
               $insert_log = $this->login_model->loginlog_ins($log_data); 
         $this->session->set_flashdata('success_msg', '<div class="alert alert-success"><h4 class="m-0">Third party detail has been successfully added.</h4></div>');
-        redirect('/applet/additionalparty',$data); 
+        redirect('/compnay/additionalparty-add',$data); 
       } 
       else
       {
@@ -577,7 +577,7 @@ if(!empty($_FILES['ob_idres_proof_upload']['name']))
   if ( ! $this->upload->do_upload('ob_idres_proof_upload'))
   {
     $error = array('error' => $this->upload->display_errors()); 
-    redirect('applet/officebeared');
+    redirect('officebeared/filing');
 
   }
   else
@@ -810,7 +810,7 @@ if($officesavedata){
               'status' => 'Office Bearer Form Modified Successfully',
               ); 
               $insert_log = $this->login_model->loginlog_ins($log_data); 
-    redirect('/applet/officebeared',$data); 
+    redirect('/officebeared/filing',$data); 
 }
 else
 {
@@ -943,7 +943,7 @@ if(!empty($_FILES['ob_idres_proof_upload']['name']))
   if ( ! $this->upload->do_upload('ob_idres_proof_upload'))
   {
     $error = array('error' => $this->upload->display_errors()); 
-    redirect('applet/officebeared');         
+    redirect('officebeared/filing');         
   }
   else
   { 
@@ -1198,7 +1198,7 @@ if($officesavedata){
               ); 
               $insert_log = $this->login_model->loginlog_ins($log_data);
   $this->session->set_flashdata('success_msg', '<div class="alert alert-success"><h4 class="m-0">Data successfully added.</h4></div>'); 
-  redirect('/applet/officebeared',$data); 
+  redirect('/officebeared/filing',$data); 
 
 } 
 else
@@ -1621,7 +1621,7 @@ else
               'status' => 'Form-B Part Submitted Successfully',
               ); 
               $insert_log = $this->login_model->loginlog_ins($log_data);
-       redirect('/respondent/respondentfiling');
+       redirect('/public/filing');
     }  
     else
     {
@@ -2037,7 +2037,7 @@ $employeeId = $this->filing_model->modifyFormbFiling($formbdata_modify);
               'status' => 'Part B Form Modified Successfully',
               ); 
               $insert_log = $this->login_model->loginlog_ins($log_data);   
-       redirect('/respondent/respondentfiling');
+       redirect('/public/filing');
     }  
     else
     {

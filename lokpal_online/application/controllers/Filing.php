@@ -669,12 +669,12 @@ class Filing extends CI_Controller {
 				
 							if($complaint_capacity_id =='1')
 							{
-								redirect('/respondent/respondentfiling',$data);
+								redirect('/respondent-filing',$data);
 
 							}
 							else
 							{
-								redirect('/applet/appletfiling',$data);
+								redirect('/company/filing',$data);
 							} 
 
 
@@ -1032,12 +1032,12 @@ class Filing extends CI_Controller {
 					     $this->load->view('filing/filing');
 					     if($complaint_capacity_id =='1')
 					     {
-					     	redirect('/respondent/respondentfiling',$data);
+					     	redirect('/respondent-filing',$data);
 
 					     }
 					     else
 					     {
-					     	redirect('/applet/appletfiling',$data);
+					     	redirect('/company/filing',$data);
 					     } 
 					 }
 					 else
