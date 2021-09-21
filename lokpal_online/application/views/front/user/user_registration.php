@@ -112,9 +112,8 @@
                     </div>
                     <div id="count_timer" class="text-orange">Your OTP will expire in : <span id="timer"></span></div>
                     <div id="resend_otp" class="text-primary" style="display: none;">OTP expired. Please send new otp again.</div>
-                  <!--<p id="otp-reminder_email" class="text-info" role="alert"></p>-->
-                  <div class="text-danger" id="email-otp-error"></div>
-                  <div class="text-danger" id="email-otp-time"></div>
+                    <div class="text-danger" id="email-otp-error"></div>
+                    <div class="text-danger" id="email-otp-time"></div>
                   </div>
                 </div>
                 <div class="col-md-6 mt-30" id="email-verified" style="display: none">
@@ -186,7 +185,18 @@
 <!-- End of Features Section-->
 
 <script type="text/javascript">
-  $("#send-email-otp").click(function(e) {
+
+
+  function ValidateAlpha(evt)
+                  {
+                    var keyCode = (evt.which) ? evt.which : evt.keyCode
+                    if ((keyCode < 65 || keyCode > 90) && (keyCode < 97 || keyCode > 123) && keyCode != 32)
+                     
+                      return false;
+                    return true;
+                  }
+
+  $("#send-email-otp").click(function(e) {   
     e.preventDefault();
     var emailid = jQuery('#emailid').val();
    $.ajax({
@@ -271,7 +281,6 @@
 // ================== OTP Timer ===============
 
 $('#send-email-otp').click(function(){
-
   let timerOn = true;
   $("#send-email-otp").prop('disabled', true);
   $("#resend_otp").hide();
@@ -321,15 +330,10 @@ $('#send-email-otp').click(function(){
    });
   }
 
-}
-
-
-  timer(60);
-
 });
 
 
-
+timer(60);
 
 </script>
 <?php include(APPPATH.'views/templates/front/ffooter.php'); ?>
