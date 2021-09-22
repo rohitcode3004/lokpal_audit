@@ -153,13 +153,13 @@ $ref_no=$this->session->userdata('counter_ref_no');
    ?>
 <div class="app-content">
   <div class="main-content-app">
-    <div class="page-header">
+    <!--<div class="page-header">
       <h4 class="page-title">Recording of the Complaint</h4>
       <ol class="breadcrumb"> 
         <li class="breadcrumb-item"><a href="<?php echo base_url('c-filing'); ?>">Dashboad</a></li> 
         <li class="breadcrumb-item active" aria-current="page">Recording of the Complaint</li> 
       </ol>
-    </div>
+    </div>-->
 
 <?php if ($role == 161 || $role == 162) { ?>
     <div class="row">

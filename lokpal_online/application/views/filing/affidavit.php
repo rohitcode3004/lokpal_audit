@@ -1557,14 +1557,14 @@ $this->load->helper("date_helper");
       <div class="row">
         <div class="col-md-6">
           <?php if($status == 'f') { ?>
-            <button type="button" class="btn btn-primary"  onclick="window.open('<?php echo site_url("e-filing/form");?>')">Edit application</button>     
+            <button type="button" class="btn btn-primary"  onclick="window.open('<?php echo site_url("e-filing/form");?>')"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit application</button>     
           <?php } ?>
         </div>
         <div class="col-md-6 text-right">
-          <button type="submit" class="btn btn-success" id="submitbtn">Generate Pdf</button>
+          <button type="submit" class="btn btn-success" id="submitbtn"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Generate Pdf</button>
 
           <?php if($status == 't') { ?>
-            <button type="button" class="btn btn-success final_submit" disabled> ✓ Application submitted </button>
+            <button type="button" class="btn btn-success final_submit" disabled> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Application submitted </button>
             <?php 
             } 
             else { ?>

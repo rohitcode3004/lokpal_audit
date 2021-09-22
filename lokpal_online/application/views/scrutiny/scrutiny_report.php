@@ -8,9 +8,9 @@
 <div class="app-content">
   <div class="main-content-app">
     <div class="page-header">
-      <h4 class="page-title">Scrutiny Report</h4>
+      <h4 class="page-title">Dashboard for Scrutiny</h4>
       <ol class="breadcrumb"> 
-        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="<?php echo base_url('scrutiny'); ?>">Dashboard</a></li>
         <li class="breadcrumb-item">Scrutiny Report</li>
       </ol>
     </div>

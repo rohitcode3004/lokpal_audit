@@ -228,7 +228,7 @@ function freshApp(){
                 			</li>-->
                             <li>
                                 <a href="<?php echo base_url('causelist/genratecauselist'); ?>">
-                                    <i class="fa fa-hourglass-end side-menu_icon" aria-hidden="true"></i>
+                                    <i class="fa fa-list side-menu_icon" aria-hidden="true"></i>
                                     <span>Generate Causelist</span> 
                                 </a>
                             </li>
@@ -249,7 +249,7 @@ function freshApp(){
 
                 			<li>
                 				<a href="<?php echo base_url('bench/search_case'); ?>">
-                                    <i class="fa fa-share side-menu_icon" aria-hidden="true"></i>
+                                    <i class="fa fa-search side-menu_icon" aria-hidden="true"></i>
                 					<span>Search Status of Complaints</span> 
                 				</a>
                 			</li>
