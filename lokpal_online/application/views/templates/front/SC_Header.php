@@ -215,34 +215,34 @@ function freshApp(){
                 			</li>
                             <li>
                                 <a href="<?php echo base_url('scrutiny/dash'); ?>">
-                                    <i class="fa fa-dashboard side-menu_icon"></i> 
+                                    <i class="fa fa-file-text-o side-menu_icon" aria-hidden="true"></i>
                                     <span>New Complaints for Scrutiny</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="<?php echo base_url('scrutiny/dash/def'); ?>">
-                                    <i class="fa fa-dashboard side-menu_icon"></i> 
+                                    <i class="fa fa-list side-menu_icon" aria-hidden="true"></i>
                                     <span>List of Defective Complaints</span>
                                 </a>
                             </li>
                             <?php if($user['role'] == 161 || $user['role'] == 162) { ?>
                 			<li>
                 				<a href="<?php echo base_url('c-filing'); ?>">
-                                    <i class="fa fa-address-card-o side-menu_icon" aria-hidden="true"></i>
-                				<span>Generate Acknowedgement for complaint received on Email</span> 
+                                    <i class="fa fa-envelope-o side-menu_icon" aria-hidden="true"></i>
+                				    <span>Generate Acknowedgement for complaint received on Email</span> 
                 				</a>
                 			</li>
                             <?php } ?>
                             <li>
                                 <a href="<?php echo base_url('scrutiny/list'); ?>">
-                                    <i class="fa fa-hourglass-end side-menu_icon" aria-hidden="true"></i>
+                                     <i class="fa fa-clipboard side-menu_icon" aria-hidden="true"></i>
                                     <span>Scrutiny Report of complaints</span> 
                                 </a>
                             </li>
                 			
                             <li>
                 				<a href="<?php echo base_url('case-search'); ?>">
-                                    <i class="fa fa-hourglass-end side-menu_icon" aria-hidden="true"></i>
+                                    <i class="fa fa-search side-menu_icon" aria-hidden="true"></i>
                 					<span>Search legacy/New complaint</span> 
                 				</a>
                 			</li>

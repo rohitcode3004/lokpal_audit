@@ -5,9 +5,6 @@
                 <div class="main-content-app">
                 	<div class="page-header">
                         <h4 class="page-title">Dashboard of Bench</h4>
-                        <ol class="breadcrumb"> 
-                            <li class="breadcrumb-item"><a href="#">Dashboard of Bench</a></li>
-                        </ol>
                     </div>
 
                     <div class="clearfix"></div>
