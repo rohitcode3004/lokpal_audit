@@ -329,11 +329,12 @@ $('#send-email-otp').click(function(){
      }
    });
   }
+  timer(60);
 
 });
 
 
-timer(60);
+
 
 </script>
 <?php include(APPPATH.'views/templates/front/ffooter.php'); ?>
