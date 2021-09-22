@@ -262,7 +262,7 @@ class Scrutiny extends CI_Controller {
 			}
 		}else
 		{
-			redirect('/scrutiny/dashboard');
+			redirect('/scrutiny/dash');
 		}
 	}
 	public function action()
@@ -487,7 +487,7 @@ class Scrutiny extends CI_Controller {
 
 
 						$this->session->set_flashdata('error_msg', 'Scrutiny processed for Diary no. '.$filing_no.' and forwarded to '.$torole_name);
-						redirect('scrutiny/dashboard');
+						redirect('scrutiny/dash');
 					}
 					}elseif($torole == 4){
 						if($comp_data['chk_cou'] && $comp_data['comp_no'] && $comp_data['year'])
@@ -542,7 +542,7 @@ class Scrutiny extends CI_Controller {
 
 
 							$this->session->set_flashdata('success_msg', 'Scrutiny successfully completed for Diary no. '.$filing_no.' without defects and forwarded to chairperson .');
-							redirect('scrutiny/dashboard');
+							redirect('scrutiny/dash');
 						}else{
 
 						$log_data = array( 
@@ -3634,7 +3634,7 @@ function updatecategory(){
 			}
 			else
 				{
-					redirect('/scrutiny/dashboard/'.$bench_no.'/'.$flag);
+					redirect('/scrutiny/dash/'.$bench_no.'/'.$flag);
 				}	
 		}
 
@@ -3758,7 +3758,7 @@ function updatecategory(){
 
 			else
 				{
-					redirect('/scrutiny/dashboard/'.$bench_no.'/'.$flag);
+					redirect('/scrutiny/dash/'.$bench_no.'/'.$flag);
 				}	
 		}
 
@@ -3884,7 +3884,7 @@ function updatecategory(){
 	            $error = array('error' => $this->upload->display_errors()); 
 	            //print_r($error['error']);die;
 	            $this->session->set_flashdata('upload_error', $error['error']);
-	            redirect('scrutiny/dashboard/'.$bench_no.'/'.$flag);
+	            redirect('scrutiny/dash/'.$bench_no.'/'.$flag);
 	            die; 
 	         }
 	   
@@ -3975,19 +3975,19 @@ function updatecategory(){
 						$insert_log = $this->login_model->loginlog_ins($log_data); 
 
 						$this->session->set_flashdata('error_msg', 'Some problem inserting in orders_agency_report model');
-						redirect('scrutiny/dashboard/'.$flag);
+						redirect('scrutiny/dash/'.$flag);
 					}
 					}else{
 						$this->session->set_flashdata('error_msg', 'Some problem updating in agency model');
-						redirect('scrutiny/dashboard/'.$bench_no.'/'.$flag);
+						redirect('scrutiny/dash/'.$bench_no.'/'.$flag);
 					}
 					}else{
 						$this->session->set_flashdata('error_msg', 'Some problem updating in case detail model');
-						redirect('scrutiny/dashboard/'.$bench_no.'/'.$flag);
+						redirect('scrutiny/dash/'.$bench_no.'/'.$flag);
 					}
 							}else{
 								$this->session->set_flashdata('error_msg', 'Some problem inserting in case detail history model');
-								redirect('scrutiny/dashboard/'.$bench_no.'/'.$flag);
+								redirect('scrutiny/dash/'.$bench_no.'/'.$flag);
 							}
 	         
 		}
@@ -4134,7 +4134,7 @@ function updatecategory(){
 
 			else
 				{
-					redirect('/scrutiny/dashboard/'.$bench_no.'/'.$flag);
+					redirect('/scrutiny/dash/'.$bench_no.'/'.$flag);
 				}	
 		}
 
@@ -4286,7 +4286,7 @@ function updatecategory(){
 	            $error = array('error' => $this->upload->display_errors()); 
 	            //print_r($error['error']);die;
 	            $this->session->set_flashdata('upload_error', $error['error']);
-	            redirect('scrutiny/dashboard/'.$bench_no.'/'.$flag);
+	            redirect('scrutiny/dash/'.$bench_no.'/'.$flag);
 	            die; 
 	         }
 	   
@@ -4379,19 +4379,19 @@ function updatecategory(){
 
 
 						$this->session->set_flashdata('error_msg', 'Some problem inserting in orders_agency_report model');
-						redirect('scrutiny/dashboard/'.$flag);
+						redirect('scrutiny/dash/'.$flag);
 					}
 					}else{
 						$this->session->set_flashdata('error_msg', 'Some problem updating in agency model');
-						redirect('scrutiny/dashboard/'.$bench_no.'/'.$flag);
+						redirect('scrutiny/dash/'.$bench_no.'/'.$flag);
 					}
 					}else{
 						$this->session->set_flashdata('error_msg', 'Some problem updating in case detail model');
-						redirect('scrutiny/dashboard/'.$bench_no.'/'.$flag);
+						redirect('scrutiny/dash/'.$bench_no.'/'.$flag);
 					}
 							}else{
 								$this->session->set_flashdata('error_msg', 'Some problem inserting in case detail history model');
-								redirect('scrutiny/dashboard/'.$bench_no.'/'.$flag);
+								redirect('scrutiny/dash/'.$bench_no.'/'.$flag);
 							}
 	         
 		}
@@ -4506,7 +4506,7 @@ function updatecategory(){
 	            $error = array('error' => $this->upload->display_errors()); 
 	            //print_r($error['error']);die;
 	            $this->session->set_flashdata('upload_error', $error['error']);
-	            redirect('scrutiny/dashboard/'.$bench_no.'/'.$flag);
+	            redirect('scrutiny/dash/'.$bench_no.'/'.$flag);
 	            die; 
 	         }
 	   
@@ -4558,7 +4558,7 @@ function updatecategory(){
 				              $insert_log = $this->login_model->loginlog_ins($log_data); 
 
 						$this->session->set_flashdata('success_msg', 'Complaint no '.get_complaintno($filing_no).' forwarded to HCP');
-						redirect('scrutiny/dashboard/'.$bench_no.'/'.$flag);
+						redirect('scrutiny/dash/'.$bench_no.'/'.$flag);
 					}else{
 						$log_data = array( 
 				              'user_id' => $user_id, 
@@ -4571,19 +4571,19 @@ function updatecategory(){
 				              ); 
 				              $insert_log = $this->login_model->loginlog_ins($log_data); 
 						$this->session->set_flashdata('error_msg', 'Some problem inserting in orders_agency_report model');
-						redirect('scrutiny/dashboard/'.$bench_no.'/'.$flag);
+						redirect('scrutiny/dash/'.$bench_no.'/'.$flag);
 					}
 					}else{
 						$this->session->set_flashdata('error_msg', 'Some problem updating in agency model');
-						redirect('scrutiny/dashboard/'.$bench_no.'/'.$flag);
+						redirect('scrutiny/dash/'.$bench_no.'/'.$flag);
 					}
 					}else{
 						$this->session->set_flashdata('error_msg', 'Some problem updating in case detail model');
-						redirect('scrutiny/dashboard/'.$bench_no.'/'.$flag);
+						redirect('scrutiny/dash/'.$bench_no.'/'.$flag);
 					}
 							}else{
 								$this->session->set_flashdata('error_msg', 'Some problem inserting in case detail history model');
-								redirect('scrutiny/dashboard/'.$bench_no.'/'.$flag);
+								redirect('scrutiny/dash/'.$bench_no.'/'.$flag);
 							}
 	         }else if($select_an_option == 2){
 	         		die('agn');
