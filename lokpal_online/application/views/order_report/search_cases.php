@@ -16,13 +16,13 @@
                           <div class="panel-heading">
                             Search Order/Report
                             <ul class="more-action">
-                                <li><a href="<?php echo base_url(); ?>bench/dashboard_main" class="previous">&laquo; Back</a></li>
+                                <li><a href="<?php echo base_url(); ?>complaints/allocation-to-bench" class="previous">&laquo; Back</a></li>
                             </ul>
                           </div>
                           <br>
                           <div class="panel-body">
 
-     <form id="search_cases" class="form-horizontal" role="form" method="post" action='<?= base_url();?>order_report/search_case_action'  name="search_case" enctype="multipart/form-data">   
+     <form id="search_cases" class="form-horizontal" role="form" method="post" action='<?= base_url();?>show-order-report'  name="search_case" enctype="multipart/form-data">   
       <?php  
        if(!empty($success_msg)){
          echo "hello";

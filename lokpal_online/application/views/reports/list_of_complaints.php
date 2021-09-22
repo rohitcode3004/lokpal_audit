@@ -6,7 +6,7 @@
     <div class="page-header">
       <h4 class="page-title">MIS Reports</h4>
         <ol class="breadcrumb"> 
-          <li class="breadcrumb-item"><a href="<?php echo base_url('bench/dashboard_main'); ?>">Dashboad</a></li> 
+          <li class="breadcrumb-item"><a href="<?php echo base_url('complaints/allocation-to-bench'); ?>">Dashboad</a></li> 
           <li class="breadcrumb-item active" aria-current="page">MIS Report</li> 
         </ol>
     </div>
@@ -28,7 +28,7 @@
             ?>
 
             <ul class="more-action">
-              <li><a href="<?php echo base_url(); ?>report/status_of_complaints" class="previous">&laquo; Back</a></li>
+              <li><a href="<?php echo base_url(); ?>complaints-status" class="previous">&laquo; Back</a></li>
             </ul>
           </div>
           <div class="panel-body">

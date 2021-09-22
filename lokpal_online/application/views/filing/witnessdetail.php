@@ -391,7 +391,7 @@ $ref_no=$this->session->userdata('ref_no');
 
           <div class="col-md-6">
             <?php if(!empty($addparty)){ ?>  
-            <button type="button" class="btn btn-primary" id="mySubmit" onclick="window.open('<?php echo site_url("respondent/witnessdetail");?>')">Do you want to add more click here</button>
+            <button type="button" class="btn btn-primary" id="mySubmit" onclick="window.open('<?php echo site_url("public-servant/add-witness-detail");?>')">Do you want to add more click here</button>
             <?php  }?>
           </div>
 

@@ -1608,7 +1608,7 @@ else
               ); 
               $insert_log = $this->login_model->loginlog_ins($log_data); 
 
-      redirect('/respondent/additionalparty',$data);
+      redirect('/public-servamt/add-more-party',$data);
     } 
     else
     {
@@ -1743,7 +1743,7 @@ else
               ); 
               $insert_log = $this->login_model->loginlog_ins($log_data); 
 
-      redirect('/respondent/additionalparty',$data);
+      redirect('/public-servamt/add-more-party',$data);
     } 
     else
     {

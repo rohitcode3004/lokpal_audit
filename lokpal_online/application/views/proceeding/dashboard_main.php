@@ -76,21 +76,21 @@
 							  <div class="panel-body">
 							  	<div class="row">
 							  		<div class="col-md-4">
-							  			<a href="<?php echo base_url('report/status_of_complaints'); ?>" class="widgets-card gd-blue">
+							  			<a href="<?php echo base_url('complaints-status'); ?>" class="widgets-card gd-blue">
 							  				<div class="widgets-icon"><span><i class="fa fa-file-text-o" aria-hidden="true"></i></span></div>
 							  				<div class="widgets-content">Status of Complaints</div>
 							  				<i class="fa fa-files-o transparent_icon" aria-hidden="true"></i>
 							  			</a>
 							  		</div>
 							  		<div class="col-md-4">
-							  			<a href="<?php echo base_url('report/status_of_complaints_under_loi'); ?>" class="widgets-card gd-fuchsia">
+							  			<a href="<?php echo base_url('complaints/list-of-complaints-considration-lokpal'); ?>" class="widgets-card gd-fuchsia">
 							  				<div class="widgets-icon"><span><i class="fa fa-file-text" aria-hidden="true"></i></span></div>
 							  				<div class="widgets-content">Status of Complaints under consideration with Lokpal of India</div>
 							  				<i class="fa fa-files-o transparent_icon" aria-hidden="true"></i>
 							  			</a>
 							  		</div>
 							  		<div class="col-md-4">
-							  			<a href="<?php echo base_url('report/category_of_complaints'); ?>" class="widgets-card gd-green">
+							  			<a href="<?php echo base_url('category/report'); ?>" class="widgets-card gd-green">
 							  				<div class="widgets-icon"><span><i class="fa fa-files-o" aria-hidden="true"></i></span></div>
 							  				<div class="widgets-content">Status of Complaints Category Wise</div>
 							  				<i class="fa fa-files-o transparent_icon" aria-hidden="true"></i>

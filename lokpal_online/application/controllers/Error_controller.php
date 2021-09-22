@@ -34,7 +34,7 @@ class Error_controller extends CI_Controller {
 			}elseif($data['user']['role'] == 131){
 				$data['url'] = 'counter/counterfiling';
 			}elseif($data['user']['role'] == 138){
-				$data['url'] = 'bench/dashboard_main';
+				$data['url'] = 'complaints/allocation-to-bench';
 			}elseif($data['user']['role'] == 143){
 				$data['url'] = 'counter/dashboard_registry';
 			}elseif($data['user']['role'] == 147 || $data['user']['role'] == 170){
@@ -88,7 +88,7 @@ class Error_controller extends CI_Controller {
 			}elseif($data['user']['role'] == 131){
 				$data['url'] = 'counter/counterfiling';
 			}elseif($data['user']['role'] == 138){
-				$data['url'] = 'bench/dashboard_main';
+				$data['url'] = 'complaints/allocation-to-bench';
 			}elseif($data['user']['role'] == 143){
 				$data['url'] = 'counter/dashboard_registry';
 			}elseif($data['user']['role'] == 147 || $data['user']['role'] == 170){

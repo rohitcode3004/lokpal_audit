@@ -65,7 +65,7 @@
                 	<div class="side-menu">
                 		<ul class="sidebar-menu">
                 			<li>
-                				<a href="<?php echo base_url('bench/dashboard_main'); ?>">
+                				<a href="<?php echo base_url('complaints/allocation-to-bench'); ?>">
                 					<i class="fa fa-dashboard side-menu_icon"></i> 
                 					<span>Dashboard</span>
                 				</a>
@@ -78,8 +78,8 @@
                 				
                 				</a>
                 				<ul class="sidebar-submenu">
-                					<li><a href="<?php echo base_url('bench/get_complaints/F'); ?>"><i class="fa fa-circle-o"></i> Fresh complaints</a></li>
-                					<li><a href="<?php echo base_url('bench/get_complaints/I'); ?>"><i class="fa fa-circle-o"></i> Complaints in which preliminary-inquiry  Report has been recieved</a></li>
+                					<li><a href="<?php echo base_url('bench/list-of-new-complaints'); ?>"><i class="fa fa-circle-o"></i> Fresh complaints</a></li>
+                					<li><a href="<?php echo base_url('bench/list-of-inquiry-report'); ?>"><i class="fa fa-circle-o"></i> Complaints in which preliminary-inquiry  Report has been recieved</a></li>
                 					<li><a href="<?php echo base_url('bench/get_complaints/V'); ?>"><i class="fa fa-circle-o"></i> Complaints in which investigation Report has been recieved</a></li>
                 				</ul>
                 			</li>

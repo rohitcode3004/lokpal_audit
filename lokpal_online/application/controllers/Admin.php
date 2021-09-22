@@ -302,7 +302,7 @@ class Admin extends CI_Controller {
 			}elseif($data['user']['role'] == 131){
 				redirect('c-filing');
 			}elseif($data['user']['role'] == 138){
-				redirect('bench/dashboard_main');
+				redirect('complaints/allocation-to-bench');
 			}elseif($data['user']['role'] == 143){
 				redirect('internal-filing/ack-rec-for-phisical-filing');
 			}elseif($data['user']['role'] == 147 || $data['user']['role'] == 170){

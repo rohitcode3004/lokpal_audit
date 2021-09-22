@@ -201,7 +201,7 @@ a:hover {
 
 <br>
 <br>
-        <form id="complaint_allotment" class="form-horizontal" role="form" method="post" action='<?= base_url();?>bench/benchcreation'  name="complaint_allotment" enctype="multipart/form-data">
+        <form id="complaint_allotment" class="form-horizontal" role="form" method="post" action='<?= base_url();?>bench/creation-of-bench'  name="complaint_allotment" enctype="multipart/form-data">
 
           <input type="hidden" name="modification" value="1">
           <input type="hidden" name="bench_id" value="" id="bench_id">

@@ -16,7 +16,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">Proceeding Order
                             <ul class="more-action">
-                                <li><a href="<?php echo base_url(); ?>order_report/list_of_case" class="previous">&laquo; Back</a></li>
+                                <li><a href="<?php echo base_url(); ?>order-report/list-of-order-report" class="previous">&laquo; Back</a></li>
                             </ul>
                         </div>
                         <div class="panel-body">

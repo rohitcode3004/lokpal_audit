@@ -77,7 +77,7 @@
                   <div class="page-header">
                         <h4 class="page-title">Search Complaints</h4>
                         <ol class="breadcrumb"> 
-                            <li class="breadcrumb-item"><a href="<?php echo base_url('bench/dashboard_main'); ?>">Dashboad</a></li> 
+                            <li class="breadcrumb-item"><a href="<?php echo base_url('complaints/allocation-to-bench'); ?>">Dashboad</a></li> 
                             <li class="breadcrumb-item active" aria-current="page">Search Complaints</li> 
                         </ol>
                     </div>
@@ -89,7 +89,7 @@
                         <div class="panel panel-default">
                           <div class="panel-heading">Select a search criteria
                             <ul class="more-action">
-                                <li><a href="<?php echo base_url(); ?>bench/dashboard_main" class="previous">&laquo; Back</a></li>
+                                <li><a href="<?php echo base_url(); ?>complaints/allocation-to-bench" class="previous">&laquo; Back</a></li>
                             </ul>
                           </div>
                           <div class="panel-body">

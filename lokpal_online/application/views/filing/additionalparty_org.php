@@ -351,7 +351,7 @@ $elements = $this->label->view(1);
                   <div class="row">
                     <div class="col-md-6 mb-15">
                       <?php if(!empty($addparty)){ ?>  
-                      <button type="button" class="btn btn-primary"  onclick="window.open('<?php echo site_url("applet/additionalparty");?>')">Do you want to add more click here</button>
+                      <button type="button" class="btn btn-primary"  onclick="window.open('<?php echo site_url("office-add-more-party");?>')">Do you want to add more click here</button>
                     <?php }?>
                     </div>
 

@@ -6,7 +6,7 @@ $elements = $this->label->view(1);
     <div class="page-header">
       <h4 class="page-title">Total Benches</h4>
         <ol class="breadcrumb"> 
-          <li class="breadcrumb-item"><a href="<?php echo base_url('bench/dashboard_main'); ?>">Dashboad</a></li> 
+          <li class="breadcrumb-item"><a href="<?php echo base_url('complaints/allocation-to-bench'); ?>">Dashboad</a></li> 
           <li class="breadcrumb-item active" aria-current="page">Total Benches</li> 
         </ol>
     </div>
@@ -19,7 +19,7 @@ $elements = $this->label->view(1);
           <div class="panel-heading">
             Total Benches
             <ul class="more-action">
-              <li><a href="<?php echo base_url(); ?>bench/dashboard_main" class="previous">&laquo; Back</a></li>
+              <li><a href="<?php echo base_url(); ?>complaints/allocation-to-bench" class="previous">&laquo; Back</a></li>
             </ul>
           </div>
           <div class="panel-body">

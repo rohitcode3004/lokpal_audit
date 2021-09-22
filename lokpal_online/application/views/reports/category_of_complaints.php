@@ -8,7 +8,7 @@
             <div class="page-header">
                 <h4 class="page-title">MIS Reports</h4>
                 <ol class="breadcrumb"> 
-                    <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>bench/dashboard_main">Dashboad</a></li> 
+                    <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>complaints/allocation-to-bench">Dashboad</a></li> 
                     <li class="breadcrumb-item active" aria-current="page">MIS Reports</li> 
                 </ol>
             </div>
@@ -20,7 +20,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">Status of Complaints against various Categories of Public Servants.
                             <ul class="more-action">
-                                <li><a href="<?php echo base_url(); if($user['role'] == 138){ ?>bench/dashboard_main<?php } elseif($user['role'] == 147 || $user['role'] == 170){ ?>proceeding/dashboard_main<?php } ?>" class="previous">&laquo; Back</a></li>
+                                <li><a href="<?php echo base_url(); if($user['role'] == 138){ ?>complaints/allocation-to-bench<?php } elseif($user['role'] == 147 || $user['role'] == 170){ ?>proceeding/dashboard_main<?php } ?>" class="previous">&laquo; Back</a></li>
                             </ul>
                         </div>
                         <div class="panel-body">
@@ -38,28 +38,28 @@
                                     <tbody>
                                         <tr>
                                             <td>1</td>
-                                            <td><a href="<?php echo base_url();?>report/list_of_categories/M">Member of Parliament</a></td>
-                                            <td><a href="<?php echo base_url();?>report/list_of_categories/M"><?php echo $member_of_parliyament ?></a></td>
+                                            <td><a href="<?php echo base_url();?>category/member-of-parliament">Member of Parliament</a></td>
+                                            <td><a href="<?php echo base_url();?>category/member-of-parliament"><?php echo $member_of_parliyament ?></a></td>
                                         </tr>
                                         <tr>
                                             <td>2</td>
-                                            <td><a href="<?php echo base_url();?>report/list_of_categories/A">Group A or Group B officials</a></td>
-                                            <td><a href="<?php echo base_url();?>report/list_of_categories/A"><?php echo $officials_groupa_groupb ?></a></td>
+                                            <td><a href="<?php echo base_url();?>category/group-a_and_b">Group A or Group B officials</a></td>
+                                            <td><a href="<?php echo base_url();?>report/category/group-a_and_b"><?php echo $officials_groupa_groupb ?></a></td>
                                         </tr>
                                         <tr>
                                             <td>3</td>
-                                            <td><a href="<?php echo base_url();?>report/list_of_categories/E">Group 'C' & Group 'D' </a></td>
-                                            <td><a href="<?php echo base_url();?>report/list_of_categories/E"><?php echo $ex_group; ?></a></td>
+                                            <td><a href="<?php echo base_url();?>category/group-c_and_d">Group 'C' & Group 'D' </a></td>
+                                            <td><a href="<?php echo base_url();?>category/group-c_and_d"><?php echo $ex_group; ?></a></td>
                                         </tr>
                                         <tr>
                                             <td>4</td>
-                                            <td><a href="<?php echo base_url();?>report/list_of_categories/C">Chairperson/Member/Officer/Employee in any body/<br>Board/Corporation/Authority/Company/Society/Trust/Autonomous Body <br> (established by an Act of Parliament or wholly or partially financed by the Central Government or controlled by it.</a></td>
-                                            <td><a href="<?php echo base_url();?>report/list_of_categories/C"><?php echo $cons_rest ?></a></td>
+                                            <td><a href="<?php echo base_url();?>category/list-of-other-cate">Chairperson/Member/Officer/Employee in any body/<br>Board/Corporation/Authority/Company/Society/Trust/Autonomous Body <br> (established by an Act of Parliament or wholly or partially financed by the Central Government or controlled by it.</a></td>
+                                            <td><a href="<?php echo base_url();?>category/list-of-other-cate"><?php echo $cons_rest ?></a></td>
                                         </tr>
                                         <tr>
                                             <td>5</td>
-                                            <td><a href="<?php echo base_url();?>report/list_of_categories/O">Others (Which are not specifically covered under categories specified in section 14).</a></td>
-                                            <td><a href="<?php echo base_url();?>report/list_of_categories/O"><?php echo $others; ?></a></td>
+                                            <td><a href="<?php echo base_url();?>category/others">Others (Which are not specifically covered under categories specified in section 14).</a></td>
+                                            <td><a href="<?php echo base_url();?>category/others"><?php echo $others; ?></a></td>
                                         </tr>    
                                         <tr>
                                             <td>Total</td>
