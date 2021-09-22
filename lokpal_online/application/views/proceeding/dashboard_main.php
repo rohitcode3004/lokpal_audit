@@ -106,7 +106,7 @@
 							  <div class="panel-body">
 							  	<div class="row">
 							  		<div class="col-md-12">
-							  			<a href="<?php echo base_url('bench/search_case'); ?>" class="widgets-card gd-lightred">
+							  			<a href="<?php echo base_url('search-case'); ?>" class="widgets-card gd-lightred">
 							  				<div class="widgets-icon"><span><i class="fa fa-search" aria-hidden="true"></i></span></div>
 							  				<div class="widgets-content">Search Status of Complaints</div>
 							  				<i class="fa fa-search transparent_icon" aria-hidden="true"></i>

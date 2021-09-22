@@ -248,7 +248,7 @@ function freshApp(){
 
 
                 			<li>
-                				<a href="<?php echo base_url('bench/search_case'); ?>">
+                				<a href="<?php echo base_url('search-case'); ?>">
                                     <i class="fa fa-search side-menu_icon" aria-hidden="true"></i>
                 					<span>Search Status of Complaints</span> 
                 				</a>
