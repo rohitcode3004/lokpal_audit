@@ -492,8 +492,8 @@ $ref_no=$this->session->userdata('ref_no');
         <div class="col-md-12 mb-15">                   
           <label class="text-orange" for="ad_ps_dsp_lp"><?php print_r($this->label->get_short_name($elements, 130)); ?><span class="text-danger">*</span></label>    
           <div class="radio">
-            <label><input type="radio" name="ad_ps_dsp_lp" id="Active" required="required" value="1" checked="checked"> Yes</label>
-            <label><input type="radio" name="ad_ps_dsp_lp" id="Inactive" required="required" value="2" > No</label>
+            <label><input type="radio" name="ad_ps_dsp_lp" id="Active" required="required" value="1"> Yes</label>
+            <label><input type="radio" name="ad_ps_dsp_lp" id="Inactive" required="required" value="2" checked="checked"> No</label>
           </div>
         </div>
       </div>
