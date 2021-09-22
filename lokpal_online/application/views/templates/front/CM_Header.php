@@ -240,9 +240,9 @@ function freshApp(){
                                     <i class="fa fa-angle-left icon-right"></i>
                                 </a>
                                 <ul class="sidebar-submenu">
-                                    <li><a href="<?php echo base_url('report/status_of_complaints'); ?>"><i class="fa fa-circle-o"></i> Status of all Complaints</a></li>
-                                    <li><a href="<?php echo base_url('report/status_of_complaints_under_loi'); ?>"><i class="fa fa-circle-o"></i> Status of Complaints under consideration with Lokpal of India</a></li>
-                                    <li><a href="<?php echo base_url('report/category_of_complaints'); ?>"><i class="fa fa-circle-o"></i> Status of Complaints Category Wise</a></li>
+                                    <li><a href="<?php echo base_url('complaints-status'); ?>"><i class="fa fa-circle-o"></i> Status of all Complaints</a></li>
+                                    <li><a href="<?php echo base_url('complaints/list-of-complaints-considration-lokpal'); ?>"><i class="fa fa-circle-o"></i> Status of Complaints under consideration with Lokpal of India</a></li>
+                                    <li><a href="<?php echo base_url('category/report'); ?>"><i class="fa fa-circle-o"></i> Status of Complaints Category Wise</a></li>
                                 </ul>
                             </li>
 

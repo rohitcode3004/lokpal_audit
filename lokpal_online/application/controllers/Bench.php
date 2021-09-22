@@ -356,7 +356,7 @@ class Bench extends CI_Controller {
 				              $insert_log = $this->login_model->loginlog_ins($log_data); 
 
 					$this->session->set_flashdata('success_msg', 'Bench composition successfully done for complaint no. '.get_complaintno($filing_no));
-					redirect('bench/dashboard_main');
+					redirect('complaints/allocation-to-bench');
 				}else{
 					$log_data = array( 
 						'user_id' => $this->con['id'], 
@@ -429,7 +429,7 @@ class Bench extends CI_Controller {
 	            		$error = array('error' => $this->upload->display_errors()); 
 	            		//print_r($error['error']);die;
 	            		$this->session->set_flashdata('upload_error', $error['error']);
-	            		redirect('bench/dashboard_main');
+	            		redirect('complaints/allocation-to-bench');
 	            		die; 
 	         		}
 				}
@@ -509,7 +509,7 @@ class Bench extends CI_Controller {
 				              $insert_log = $this->login_model->loginlog_ins($log_data); 
 
 					$this->session->set_flashdata('success_msg', 'Bench composition successfully done for complaint no. '.get_complaintno($filing_no));
-					redirect('bench/dashboard_main');
+					redirect('complaints/allocation-to-bench');
 				}else{
 					$log_data = array( 
 						'user_id' => $this->con['id'], 
@@ -558,7 +558,7 @@ class Bench extends CI_Controller {
 	            		$error = array('error' => $this->upload->display_errors()); 
 	            		//print_r($error['error']);die;
 	            		$this->session->set_flashdata('upload_error', $error['error']);
-	            		redirect('bench/benchcomposition_separate');
+	            		redirect('bench/bench-composition-seprate');
 	            		die; 
 	         		}
 				}
@@ -634,7 +634,7 @@ class Bench extends CI_Controller {
 				              $insert_log = $this->login_model->loginlog_ins($log_data); 
 
 					$this->session->set_flashdata('success_msg', 'Bench constitution successfully done');
-					redirect('bench/benchcomposition_separate');
+					redirect('bench/bench-composition-seprate');
 				}else{
 
 					$log_data = array( 
@@ -748,7 +748,7 @@ class Bench extends CI_Controller {
 				}
 				if ($count  && $count2) {
 					$this->session->set_flashdata('success_msg', 'Bench modification successfully done');
-					redirect('bench/benchcomposition_separate');
+					redirect('bench/bench-composition-seprate');
 				}else{
 					die('model error');
 				}

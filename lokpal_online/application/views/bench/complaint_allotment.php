@@ -93,7 +93,7 @@ $public_servant_name=$ps_first_name.' '.$ps_mid_name.' '.$ps_sur_name;
                     <div class="page-header">
                         <h4 class="page-title">Complaints Allotment</h4>
                         <ol class="breadcrumb"> 
-                            <li class="breadcrumb-item"><a href="<?php echo base_url('bench/dashboard_main'); ?>">Dashboad</a></li> 
+                            <li class="breadcrumb-item"><a href="<?php echo base_url('complaints/allocation-to-bench'); ?>">Dashboad</a></li> 
                             <li class="breadcrumb-item active" aria-current="page">Complaints Allotment</li> 
                         </ol>
                     </div>
@@ -109,13 +109,13 @@ $public_servant_name=$ps_first_name.' '.$ps_mid_name.' '.$ps_sur_name;
                               <strong>Diary no.</strong> <?php echo $filing_no; ?>
                             </span>
                             <ul class="more-action">
-                              <li><a href="<?php echo base_url(); ?>bench/dashboard_main" class="previous">&laquo; Back</a></li>
+                              <li><a href="<?php echo base_url(); ?>complaints/allocation-to-bench" class="previous">&laquo; Back</a></li>
                             </ul>
                           </div>
                           <div class="panel-body">
                             <div class="row">
                               <div class="col-md-12">
-                                <form id="complaint_allotment" class="form-horizontal" role="form" method="post" action='<?= base_url();?>bench/benchcreation'  name="complaint_allotment" enctype="multipart/form-data">
+                                <form id="complaint_allotment" class="form-horizontal" role="form" method="post" action='<?= base_url();?>bench/creation-of-bench'  name="complaint_allotment" enctype="multipart/form-data">
 
                                   <input type="hidden" name="filing_no" value="<?php echo $filing_no; ?>">
  

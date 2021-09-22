@@ -190,7 +190,7 @@ if(isset($addparty))
           <div class="panel-body">
             <div class="row">
               <div class="col-md-12">   
-    <form id="additionalparty" class="form-horizontal" role="form" method="post" action='<?= base_url();?>respondent/addsave'  name="additionalparty" enctype="multipart/form-data">
+    <form id="additionalparty" class="form-horizontal" role="form" method="post" action='<?= base_url();?>public-servant/add-additonal-party'  name="additionalparty" enctype="multipart/form-data">
       <div class="form_error">
             <?php //echo validation_errors(); ?>
       </div>
@@ -334,7 +334,7 @@ if(isset($addparty))
       <div class="row"> 
         <div class="col-md-6">
           <?php if(!empty($addparty)){ ?>  
-          <button type="button" class="btn btn-primary"  onclick="window.open('<?php echo site_url("respondent/additionalparty");?>')">Do you want to add more click here</button>  
+          <button type="button" class="btn btn-primary"  onclick="window.open('<?php echo site_url("public-servant/add-more-party");?>')">Do you want to add more click here</button>  
           <?php } ?> 
             
         </div>

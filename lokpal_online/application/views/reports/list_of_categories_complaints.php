@@ -20,7 +20,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">List of Categories Complaints
                             <ul class="more-action">
-                                <li><a href="<?php echo base_url(); ?>report/category_of_complaints" class="previous">&laquo; Back</a></li>
+                                <li><a href="<?php echo base_url(); ?>category/report" class="previous">&laquo; Back</a></li>
                             </ul>
                         </div>
                         <div class="panel-body">

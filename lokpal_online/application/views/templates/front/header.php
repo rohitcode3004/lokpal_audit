@@ -453,7 +453,7 @@ Complaint Management System Lokpal of India <span></a>	</h1>
                     </li>
                     <?php } elseif($user['role'] == 138){ ?>
             <li class="menu__item is-leaf first leaf menu-mlid-4455">
-                        <a href="<?php echo base_url('bench/dashboard_main'); ?>" class="menu__link">Your dashboard</a>
+                        <a href="<?php echo base_url('complaints/allocation-to-bench'); ?>" class="menu__link">Your dashboard</a>
                     </li>
                   <?php } elseif($user['role'] == 147){ ?>
             <li class="menu__item is-leaf first leaf menu-mlid-4455">

@@ -160,7 +160,7 @@
                 	<div class="side-menu">
                 		<ul class="sidebar-menu">
                 			<li>
-                				<a href="<?php echo base_url('bench/dashboard_main'); ?>">
+                				<a href="<?php echo base_url('complaints/allocation-to-bench'); ?>">
                 					<i class="fa fa-dashboard side-menu_icon"></i> 
                 					<span>Dashboard</span>
                 				</a>
@@ -173,19 +173,19 @@
                 				
                 				</a>
                 				<ul class="sidebar-submenu">
-                					<li><a href="<?php echo base_url('bench/get_complaints/F'); ?>"><i class="fa fa-circle-o"></i> New complaints</a></li>
-                					<li><a href="<?php echo base_url('bench/get_complaints/I'); ?>"><i class="fa fa-circle-o"></i> Complaints for which Preliminary-Inquiry  Report has been Accepted</a></li>
-                					<li><a href="<?php echo base_url('bench/get_complaints/V'); ?>"><i class="fa fa-circle-o"></i> Complaints for which investigation Report has been Accepted</a></li>
+                					<li><a href="<?php echo base_url('bench/list-of-new-complaints'); ?>"><i class="fa fa-circle-o"></i> New complaints</a></li>
+                					<li><a href="<?php echo base_url('bench/list-of-inquiry-report'); ?>"><i class="fa fa-circle-o"></i> Complaints for which Preliminary-Inquiry  Report has been Accepted</a></li>
+                					<li><a href="<?php echo base_url('bench/list-of-investigaion-report'); ?>"><i class="fa fa-circle-o"></i> Complaints for which investigation Report has been Accepted</a></li>
                 				</ul>
                 			</li>
                 			<li>
-                				<a href="<?php echo base_url('bench/benchcomposition_separate'); ?>">
+                				<a href="<?php echo base_url('bench/bench-composition-seprate'); ?>">
                 					<i class="fa fa-pencil-square-o side-menu_icon" aria-hidden="true"></i> 
                 					<span>Creation of new Bench</span> 
                 				</a>
                 			</li>
                 			<li>
-                				<a href="<?php echo base_url('bench/benches_all'); ?>">
+                				<a href="<?php echo base_url('list-of-bench'); ?>">
                 					<i class="fa fa-cubes side-menu_icon" aria-hidden="true"></i> 
                 					<span>List of Existing Benches</span> 
                 				</a>
@@ -197,9 +197,9 @@
                 					<i class="fa fa-angle-left icon-right"></i>
                 				</a>
                 				<ul class="sidebar-submenu">
-                					<li><a href="<?php echo base_url('report/status_of_complaints'); ?>"><i class="fa fa-circle-o"></i> Status of all Complaints</a></li>
-                					<li><a href="<?php echo base_url('report/status_of_complaints_under_loi'); ?>"><i class="fa fa-circle-o"></i> Status of Complaints under consideration with Lokpal of India</a></li>
-                					<li><a href="<?php echo base_url('report/category_of_complaints'); ?>"><i class="fa fa-circle-o"></i> Status of Complaints Category Wise</a></li>
+                					<li><a href="<?php echo base_url('complaints-status'); ?>"><i class="fa fa-circle-o"></i> Status of all Complaints</a></li>
+                					<li><a href="<?php echo base_url('complaints/list-of-complaints-considration-lokpal'); ?>"><i class="fa fa-circle-o"></i> Status of Complaints under consideration with Lokpal of India</a></li>
+                					<li><a href="<?php echo base_url('category/report'); ?>"><i class="fa fa-circle-o"></i> Status of Complaints Category Wise</a></li>
                 				</ul>
                 			</li>
                 			<li>
@@ -210,7 +210,7 @@
                 			</li>
 
                             <li>
-                                <a href="<?php echo base_url('order_report/list_of_case'); ?>">
+                                <a href="<?php echo base_url('order-report/list-of-order-report'); ?>">
                                     <i class="fa fa-search side-menu_icon" aria-hidden="true"></i>
                                     <span>View Order/Report</span> 
                                 </a>

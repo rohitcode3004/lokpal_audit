@@ -8,7 +8,7 @@
                     <div class="page-header">
                         <h4 class="page-title">MIS Reports</h4>
                         <ol class="breadcrumb"> 
-                            <li class="breadcrumb-item"><a href="<?php echo base_url('bench/dashboard_main'); ?>">Dashboad</a></li> 
+                            <li class="breadcrumb-item"><a href="<?php echo base_url('complaints/allocation-to-bench'); ?>">Dashboad</a></li> 
                             <li class="breadcrumb-item active" aria-current="page">Status of Complaints</li> 
                         </ol>
                     </div>
@@ -20,7 +20,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">Status of all Complaints Receive by Lokpal.
                                     <ul class="more-action">
-                                        <li><a href="<?php echo base_url(); if($user['role'] == 138){ ?>bench/dashboard_main<?php } elseif($user['role'] == 147 || $user['role'] == 170){ ?>proceeding/dashboard_main<?php } ?>" class="previous">&laquo; Back</a></li>
+                                        <li><a href="<?php echo base_url(); if($user['role'] == 138){ ?>complaints/allocation-to-bench<?php } elseif($user['role'] == 147 || $user['role'] == 170){ ?>proceeding/dashboard_main<?php } ?>" class="previous">&laquo; Back</a></li>
                                     </ul>
                                 </div>
                                 <div class="panel-body">
@@ -38,13 +38,13 @@
                                                     <tbody>
                                                         <tr>
                                                             <td>1</td>
-                                                            <td><a href="<?php echo base_url();?>report/list_of_complaints/I">Under Preliminary Inquiry</a></td>
-                                                            <td><a href="<?php echo base_url();?>report/list_of_complaints/I"><?php echo $under_prem_inq ?></a></td>
+                                                            <td><a href="<?php echo base_url();?>complaints/under-pre-inquiry">Under Preliminary Inquiry</a></td>
+                                                            <td><a href="<?php echo base_url();?>complaints/under-pre-inquiry"><?php echo $under_prem_inq ?></a></td>
                                                         </tr>
                                                         <tr>
                                                             <td>2</td>
-                                                            <td><a href="<?php echo base_url();?>report/list_of_complaints/V">Under Investigation</a></td>
-                                                            <td><a href="<?php echo base_url();?>report/list_of_complaints/V"><?php echo $under_inves ?></a></td>
+                                                            <td><a href="<?php echo base_url();?>complaints/under-investigation">Under Investigation</a></td>
+                                                            <td><a href="<?php echo base_url();?>complaints/under-investigation"><?php echo $under_inves ?></a></td>
                                                         </tr>
                                                         <tr>
                                                             <td>3</td>
@@ -53,8 +53,8 @@
                                                         </tr>
                                                         <tr>
                                                             <td>4</td>
-                                                            <td><a href="<?php echo base_url();?>report/list_of_complaints/U">Under Consideration of Lokpal</a></td>
-                                                            <td><a href="<?php echo base_url();?>report/list_of_complaints/U"><?php echo $cons_lokpal ?></a></td>
+                                                            <td><a href="<?php echo base_url();?>complaints/under-considration-lokpal">Under Consideration of Lokpal</a></td>
+                                                            <td><a href="<?php echo base_url();?>complaints/under-considration-lokpal"><?php echo $cons_lokpal ?></a></td>
                                                         </tr>
                                                         <tr>
                                                             <td>5</td>
@@ -63,8 +63,8 @@
                                                         </tr>
                                                         <tr>
                                                             <td>6</td>
-                                                            <td><a href="<?php echo base_url();?>report/list_of_complaints/D">Closed</a></td>
-                                                            <td><a href="<?php echo base_url();?>report/list_of_complaints/D"><?php echo $closed ?></a></td>
+                                                            <td><a href="<?php echo base_url();?>complaints/closed">Closed</a></td>
+                                                            <td><a href="<?php echo base_url();?>complaints/closed"><?php echo $closed ?></a></td>
                                                         </tr>
                                                         <tr>
                                             <td hidden="true">6</td>

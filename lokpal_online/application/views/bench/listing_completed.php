@@ -107,7 +107,7 @@ a:hover {
               $c = $c+1;
                 $agency_count = getAgencyCount($row->filing_no);
               ?>
-              <form action="<?php echo base_url();?>bench/benchcomposition" method="post" id="">
+              <form action="<?php echo base_url();?>bench/composition" method="post" id="">
                 <tr <?php if($agency_count == 1) { ?> class="onece" <?php } elseif($agency_count == 2) { ?> class="secylce" <?php } ?> data-toggle="collapse" data-target="#demo<?php echo $c ?>, #demo1<?php echo $c ?>, #demo2<?php echo $c ?>, #demo3<?php echo $c ?>, #demo4<?php echo $c ?>" data-parent="#myTable">
                   <td><?php echo $c.'.'; ?></td>
                   <td><b><?php echo get_complaintno($row->filing_no); ?></b></td>

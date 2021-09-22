@@ -25,7 +25,7 @@
                   <div class="page-header">
                         <h4 class="page-title">Complaints for Allocation to benches</h4>
                         <ol class="breadcrumb"> 
-                            <li class="breadcrumb-item"><a href="<?php echo base_url('bench/dashboard_main'); ?>">Dashboad</a></li> 
+                            <li class="breadcrumb-item"><a href="<?php echo base_url('complaints/allocation-to-bench'); ?>">Dashboad</a></li> 
                             <li class="breadcrumb-item active" aria-current="page">Complaints for Allocation to benches</li> 
                         </ol>
                     </div>
@@ -69,12 +69,12 @@
 
                             <ul class="more-action">
                             
-                                <li><a href="<?php echo base_url(); ?>bench/dashboard_main" class="previous">&laquo; Back</a></li>
+                                <li><a href="<?php echo base_url(); ?>complaints/allocation-to-bench" class="previous">&laquo; Back</a></li>
                             </ul>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
-                              <form action="<?php echo base_url();?>bench/benchcomposition" method="post" id="myForm">  </form>
+                              <form action="<?php echo base_url();?>bench/composition" method="post" id="myForm">  </form>
                                 <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                                   <thead>
                                     <tr>

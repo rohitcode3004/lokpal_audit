@@ -35,42 +35,42 @@
 							  <div class="panel-body">
 							  	<div class="row">
 							  		<div class="col-md-4 mb-15">
-							  			<a href="<?php echo base_url('bench/get_complaints/F'); ?>" class="widgets-card gd-blueviolet">
+							  			<a href="<?php echo base_url('bench/list-of-new-complaints'); ?>" class="widgets-card gd-blueviolet">
 							  				<div class="widgets-icon"><span><?php echo $fresh_comps;  ?></span></div>
 							  				<div class="widgets-content">New Complaints</div>
 							  				<i class="fa fa-file-text-o transparent_icon" aria-hidden="true"></i>
 							  			</a>
 							  		</div>
 							  		<div class="col-md-4 mb-15">
-							  			<a href="<?php echo base_url('bench/get_complaints/I'); ?>" class="widgets-card gd-hotpink">
+							  			<a href="<?php echo base_url('bench/list-of-inquiry-report'); ?>" class="widgets-card gd-hotpink">
 							  				<div class="widgets-icon"><span><?php echo $pre_inq_comps; ?></span></div>
 							  				<div class="widgets-content">Complaints for which Preliminary-Inquiry Report has been <strong>Accepted</strong></div>
 							  				<i class="fa fa-file-text-o transparent_icon" aria-hidden="true"></i>
 							  			</a>
 							  		</div>
 							  		<div class="col-md-4 mb-15">
-							  			<a href="<?php echo base_url('bench/get_complaints/V'); ?>" class="widgets-card gd-goldyellow">
+							  			<a href="<?php echo base_url('bench/list-of-investigaion-report'); ?>" class="widgets-card gd-goldyellow">
 							  				<div class="widgets-icon"><span><?php echo $inv_comps;  ?></span></div>
 							  				<div class="widgets-content">Complaints for which Investigation Report has been <strong>Accepted</strong></div>
 							  				<i class="fa fa-file-text-o transparent_icon" aria-hidden="true"></i>
 							  			</a>
 							  		</div>
 							  		<div class="col-md-4 mb-15">
-							  			<a href="<?php echo base_url('bench/get_complaints_ops/PIR'); ?>" class="widgets-card gd-purple">
+							  			<a href="<?php echo base_url('bench/ops-report-after-pi'); ?>" class="widgets-card gd-purple">
 							  				<div class="widgets-icon"><span><?php echo $opportunity_ps_after_pi_receive; ?></span></div>
 							  				<div class="widgets-content">Complaints for which Public Servant's Report after Preliminary Inquiry has been <strong>Accepted</strong></div>
 							  				<i class="fa fa-file-text-o transparent_icon" aria-hidden="true"></i>
 							  			</a>
 							  		</div>
 							  		<div class="col-md-4 mb-15">
-							  			<a href="<?php echo base_url('bench/get_complaints_ops/IR'); ?>" class="widgets-card gd-olive">
+							  			<a href="<?php echo base_url('bench/ops-report-after-in'); ?>" class="widgets-card gd-olive">
 							  				<div class="widgets-icon"><span><?php echo $opportunity_ps_after_inq_receive;  ?></span></div>
 							  				<div class="widgets-content">Complaints for which Public Servant's Report after Investigation has been <strong>Accepted</strong> </div>
 							  				<i class="fa fa-file-text-o transparent_icon" aria-hidden="true"></i>
 							  			</a>
 							  		</div>
 							  		<div class="col-md-4 mb-15">
-							  			<a href="<?php echo base_url('bench/get_complaints_ops/AOA'); ?>" class="widgets-card gd-navy">
+							  			<a href="<?php echo base_url('bench/list-of-aoa-report'); ?>" class="widgets-card gd-navy">
 							  				<div class="widgets-icon"><span><?php echo $any_other_action_count; ?></span></div>
 							  				<div class="widgets-content">Complaints for which Status/Additional Documents/Other Report has been <strong>Accepted</strong> </div>
 							  				<i class="fa fa-file-text-o transparent_icon" aria-hidden="true"></i>
@@ -96,7 +96,7 @@
 							  <div class="panel-body">
 							  	<div class="row">
 							  		<div class="col-md-12">
-							  			<a href="<?php echo base_url('bench/search_case'); ?>" class="widgets-card gd-lightred" data-toggle="tooltip" data-placement="bottom" title="search complaint by complainant name, public servant name , complaint number">
+							  			<a href="<?php echo base_url('search-case'); ?>" class="widgets-card gd-lightred" data-toggle="tooltip" data-placement="bottom" title="search complaint by complainant name, public servant name , complaint number">
 							  				<div class="widgets-icon"><span><i class="fa fa-search" aria-hidden="true"></i></span></div>
 							  				<div class="widgets-content">Search Status of Complaints</div>
 							  				<i class="fa fa-search transparent_icon" aria-hidden="true"></i>
@@ -112,14 +112,14 @@
 							  <div class="panel-body">
 							  	<div class="row">
 							  		<div class="col-md-6">
-							  			<a href="<?php echo base_url('bench/benchcomposition_separate'); ?>" class="widgets-card gd-cyanblue">
+							  			<a href="<?php echo base_url('bench/bench-composition-seprate'); ?>" class="widgets-card gd-cyanblue">
 							  				<div class="widgets-icon"><span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span></div>
 							  				<div class="widgets-content">Creation of a new Bench</div>
 							  				<i class="fa fa-pencil-square-o transparent_icon" aria-hidden="true"></i>
 							  			</a>
 							  		</div>
 							  		<div class="col-md-6">
-							  			<a href="<?php echo base_url('bench/benches_all'); ?>" class="widgets-card gd-green">
+							  			<a href="<?php echo base_url('list-of-bench'); ?>" class="widgets-card gd-green">
 							  				<div class="widgets-icon"><span><i class="fa fa-cubes" aria-hidden="true"></i></span></div>
 							  				<div class="widgets-content">List of Existing Benches</div>
 							  				<i class="fa fa-cubes transparent_icon" aria-hidden="true"></i>
@@ -138,21 +138,21 @@
 							  <div class="panel-body">
 							  	<div class="row">
 							  		<div class="col-md-4">
-							  			<a href="<?php echo base_url('report/status_of_complaints'); ?>" class="widgets-card gd-blue">
+							  			<a href="<?php echo base_url('complaints-status'); ?>" class="widgets-card gd-blue">
 							  				<div class="widgets-icon"><span><i class="fa fa-file-text-o" aria-hidden="true"></i></span></div>
 							  				<div class="widgets-content">Status of All Complaints</div>
 							  				<i class="fa fa-files-o transparent_icon" aria-hidden="true"></i>
 							  			</a>
 							  		</div>
 							  		<div class="col-md-4">
-							  			<a href="<?php echo base_url('report/status_of_complaints_under_loi'); ?>" class="widgets-card gd-fuchsia">
+							  			<a href="<?php echo base_url('complaints/list-of-complaints-considration-lokpal'); ?>" class="widgets-card gd-fuchsia">
 							  				<div class="widgets-icon"><span><i class="fa fa-file-text" aria-hidden="true"></i></span></div>
 							  				<div class="widgets-content">Status of Complaints under consideration with Lokpal of India</div>
 							  				<i class="fa fa-files-o transparent_icon" aria-hidden="true"></i>
 							  			</a>
 							  		</div>
 							  		<div class="col-md-4">
-							  			<a href="<?php echo base_url('report/category_of_complaints'); ?>" class="widgets-card gd-peru">
+							  			<a href="<?php echo base_url('category/report'); ?>" class="widgets-card gd-peru">
 							  				<div class="widgets-icon"><span><i class="fa fa-files-o" aria-hidden="true"></i></span></div>
 							  				<div class="widgets-content">Status of Complaints Category Wise</div>
 							  				<i class="fa fa-files-o transparent_icon" aria-hidden="true"></i>

@@ -9,7 +9,7 @@ $elements = $this->label->view(1);
                     <div class="page-header">
                         <h4 class="page-title">Dashboard of Hon’ble Chairperson</h4>
                         <ol class="breadcrumb"> 
-                            <li class="breadcrumb-item"><a href="<?php echo base_url('bench/dashboard_main'); ?>">Dashboad</a></li> 
+                            <li class="breadcrumb-item"><a href="<?php echo base_url('complaints/allocation-to-bench'); ?>">Dashboad</a></li> 
                             <li class="breadcrumb-item active" aria-current="page">Create a New Bench</li> 
                         </ol>
                     </div>
@@ -22,7 +22,7 @@ $elements = $this->label->view(1);
                           <div class="panel-heading">
                             Creation of a new Bench
                             <ul class="more-action">
-                              <li><a href="<?php echo base_url(); ?>bench/dashboard_main" class="previous">&laquo; Back</a></li>
+                              <li><a href="<?php echo base_url(); ?>complaints/allocation-to-bench" class="previous">&laquo; Back</a></li>
                             </ul>
                           </div>
                           <div class="panel-body">
@@ -43,7 +43,7 @@ $elements = $this->label->view(1);
                              }
                             ?>
 
-                            <form id="complaint_allotment" class="form-horizontal" role="form" method="post" action='<?= base_url();?>bench/benchcreation'  name="complaint_allotment" enctype="multipart/form-data">
+                            <form id="complaint_allotment" class="form-horizontal" role="form" method="post" action='<?= base_url();?>bench/creation-of-bench'  name="complaint_allotment" enctype="multipart/form-data">
 
                               <input type="hidden" name="new_saparate" value="1">
 
