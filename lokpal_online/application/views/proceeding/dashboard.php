@@ -62,7 +62,7 @@
                 ?>
 
                 <ul class="more-action">
-                  <li><a href="<?php echo base_url(); ?>proceeding/dashboard_main_level2/0" class="previous">&laquo; Back</a></li>
+                  <li><a href="<?php echo base_url(); ?>proceeding/complaint-bench-wise/0" class="previous">&laquo; Back</a></li>
                 </ul>
                 
               </div>
@@ -86,7 +86,7 @@
     ?>
 
 
-      <form action="<?php echo base_url();?>proceeding/proceeding_form" method="post" id="myForm">  </form>
+      <form action="<?php echo base_url();?>recording_of_proceedings/bench-wise" method="post" id="myForm">  </form>
       <div class="table-responsive">
         <table class="table table-bordered table-striped table-hover dataTable js-exportable">
           <thead>

@@ -152,7 +152,7 @@ $listingjudeg=(array)$listingjudeg;
         <div class="panel panel-default">
           <div class="panel-heading">Generate Cause List 
             <ul class="more-action">
-              <li><a href="<?php echo base_url(); ?>proceeding/dashboard_main" class="previous">&laquo; Back</a></li>
+              <li><a href="<?php echo base_url(); ?>proceeding/complaint-bench-wise" class="previous">&laquo; Back</a></li>
             </ul>
           </div>
           <div class="panel-body">
