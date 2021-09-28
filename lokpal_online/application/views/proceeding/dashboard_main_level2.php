@@ -10,7 +10,7 @@ if (0 == $bench_no) {
                 	<div class="page-header">
                         <h4 class="page-title">Dashboard of <?php echo $bench_no_display; ?></h4>
                         <ol class="breadcrumb"> 
-                            <li class="breadcrumb-item"><a href="<?php echo base_url("proceeding/dashboard_main"); ?>">Dashboad of Bench</a></li> 
+                            <li class="breadcrumb-item"><a href="<?php echo base_url("proceeding/complaint-bench-wise"); ?>">Dashboad of Bench</a></li> 
 							<li class="breadcrumb-item active" aria-current="page">Complaints for Hearing</li> 
                         </ol>
                     </div>
@@ -38,48 +38,48 @@ if (0 == $bench_no) {
 							  <div class="panel-heading">Complaints for the Consideration of Bench
 
 							  <ul class="more-action">
-                              <li><a href="<?php echo base_url(); ?>proceeding/dashboard_main" class="previous">&laquo; Back</a></li>
+                              <li><a href="<?php echo base_url(); ?>proceeding/complaint-bench-wise" class="previous">&laquo; Back</a></li>
                             </ul>
 							  </div>
 							  <div class="panel-body">
 							  	<div class="row">
 							  		<div class="col-md-4 mb-15">
-							  			<a href="<?php echo base_url("proceeding/dashboard/$bench_no/F"); ?>" class="widgets-card gd-blueviolet">
+							  			<a href="<?php echo base_url("list-of-complaint-for-hearing/$bench_no"); ?>" class="widgets-card gd-blueviolet">
 							  				<div class="widgets-icon"><span><?php echo $allocated_data_count;  ?></span></div>
 							  				<div class="widgets-content">New complaints</div>
 							  				<i class="fa fa-file-text-o transparent_icon" aria-hidden="true"></i>
 							  			</a>
 							  		</div>
 							  		<div class="col-md-4 mb-15">
-							  			<a href="<?php echo base_url("proceeding/dashboard/$bench_no/I"); ?>" class="widgets-card gd-hotpink" data-toggle="tooltip" data-placement="bottom">
+							  			<a href="<?php echo base_url("list-of-complaint-preliminary-inquiry-hearing/$bench_no"); ?>" class="widgets-card gd-hotpink" data-toggle="tooltip" data-placement="bottom">
 							  				<div class="widgets-icon"><span><?php echo $inq_data_count; ?></span></div>
 							  				<div class="widgets-content">Complaints for which Preliminary-Inquiry  Report has been received</div>
 							  				<i class="fa fa-file-text-o transparent_icon" aria-hidden="true"></i>
 							  			</a>
 							  		</div>
 							  		<div class="col-md-4 mb-15">
-							  			<a href="<?php echo base_url("proceeding/dashboard/$bench_no/V"); ?>" class="widgets-card gd-goldyellow" data-toggle="tooltip" data-placement="bottom">
+							  			<a href="<?php echo base_url("list-of-complaint-investigation-hearing/$bench_no"); ?>" class="widgets-card gd-goldyellow" data-toggle="tooltip" data-placement="bottom">
 							  				<div class="widgets-icon"><span><?php echo $inv_data_count;  ?></span></div>
 							  				<div class="widgets-content">Complaints for which Investigation Report has been received</div>
 							  				<i class="fa fa-file-text-o transparent_icon" aria-hidden="true"></i>
 							  			</a>
 							  		</div>
 							  		<div class="col-md-4 mb-15">
-							  			<a href="<?php echo base_url("proceeding/dashboard/$bench_no/OPI"); ?>" class="widgets-card gd-purple" data-toggle="tooltip" data-placement="bottom">
+							  			<a href="<?php echo base_url("oppertunity-to-ps-after-pi-receive/$bench_no"); ?>" class="widgets-card gd-purple" data-toggle="tooltip" data-placement="bottom">
 							  				<div class="widgets-icon"><span><?php echo $ops_inq_report_count;  ?></span></div>
 							  				<div class="widgets-content">Complaints for which Public Servant's Report after Preliminary Inquiry has been received</div>
 							  				<i class="fa fa-file-text-o transparent_icon" aria-hidden="true"></i>
 							  			</a>
 							  		</div>
 							  		<div class="col-md-4 mb-15">
-							  			<a href="<?php echo base_url("proceeding/dashboard/$bench_no/OPV"); ?>" class="widgets-card gd-olive" data-toggle="tooltip" data-placement="bottom">
+							  			<a href="<?php echo base_url("oppertunity-to-ps-after-inq-receive/$bench_no"); ?>" class="widgets-card gd-olive" data-toggle="tooltip" data-placement="bottom">
 							  				<div class="widgets-icon"><span><?php echo $ops_inv_report_count; ?></span></div>
 							  				<div class="widgets-content">Complaints for which Public Servant's Report after Investigation has been received</div>
 							  				<i class="fa fa-file-text-o transparent_icon" aria-hidden="true"></i>
 							  			</a>
 							  		</div>	
 							  		<div class="col-md-4 mb-15">
-							  			<a href="<?php echo base_url("proceeding/dashboard/$bench_no/AOA"); ?>" class="widgets-card gd-navy" data-toggle="tooltip" data-placement="bottom">
+							  			<a href="<?php echo base_url("any-other-action-receive/$bench_no"); ?>" class="widgets-card gd-navy" data-toggle="tooltip" data-placement="bottom">
 							  				<div class="widgets-icon"><span><?php echo $aoa_report_count;  ?></span></div>
 							  				<div class="widgets-content">Complaints for which Status/Additional Documents/Other Report has been received</div>
 							  				<i class="fa fa-file-text-o transparent_icon" aria-hidden="true"></i>

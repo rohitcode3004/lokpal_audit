@@ -1132,7 +1132,7 @@ $year=$var['1'];
 if ($case_no =='' or $year =='')
 {  
 $this->session->set_flashdata('success_msg', '<div class="alert alert-danger text-center"><h4 class="m-0">Please Enter Complaint Number / Year</h2></div>');
-redirect('bench/search_case');
+redirect('search-case');
 
 
 }

@@ -20,7 +20,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">Status of all Complaints Receive by Lokpal.
                                     <ul class="more-action">
-                                        <li><a href="<?php echo base_url(); if($user['role'] == 138){ ?>complaints/allocation-to-bench<?php } elseif($user['role'] == 147 || $user['role'] == 170){ ?>proceeding/dashboard_main<?php } ?>" class="previous">&laquo; Back</a></li>
+                                        <li><a href="<?php echo base_url(); if($user['role'] == 138){ ?>complaints/allocation-to-bench<?php } elseif($user['role'] == 147 || $user['role'] == 170){ ?>proceeding/complaint-bench-wise<?php } ?>" class="previous">&laquo; Back</a></li>
                                     </ul>
                                 </div>
                                 <div class="panel-body">

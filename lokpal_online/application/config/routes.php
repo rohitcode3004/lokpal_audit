@@ -75,14 +75,6 @@ $route['(?i)([a-z0-9_-]+)/compnay/additionalparty-add'] = 'applet/additionalpart
 $route['(?i)([a-z0-9_-]+)/officebeared/filing'] = 'applet/officebeared';
 
 
-
-
-
-
-
-
-
-
 //$route['e-filing/list-of-reopen-complaints/(:num)'] = 'filing/dashboard_re_entry_complaint/$1';
 
 //Complaint Entry
@@ -98,24 +90,11 @@ $route['public/filing'] = 'respondent/respondentfiling';
 $route['public-servant/add-additonal-party'] = 'respondent/addsave';
 $route['public-servant/add-witness-detail'] = 'respondent/witnessdetail';
 
-
-
-
 $route['office-add-more'] = 'applet/officebeared';
 $route['office-add-more-party'] = 'applet/additionalparty';
 
 $route['additional-public-servant/add-more-party'] = 'respondent/ad_public_servant';
 $route['public-servant/add-more-party'] = 'respondent/additionalparty';
-
-
-
-
-
-
-
-
-
-
 
 
 //scrutiny
@@ -187,6 +166,39 @@ $route['category/others'] = 'report/list_of_categories/O';
 $route['order-report/list-of-order-report'] = 'order_report/list_of_case';
 
 $route['show-order-report'] = 'order_report/search_case_action';
+
+
+//courtmaster
+$route['proceeding/complaint-bench-wise'] = 'proceeding/dashboard_main';
+$route['proceeding/complaint-bench-wise/(:any)'] = 'proceeding/dashboard_main/$1';
+$route['causelist-generation'] = 'causelist/genratecauselist';
+
+//$route['e-filing/form/(:num)'] = 'filing/filing/$1';
+
+$route['consideration_of_bench/list_of_complaint/(:any)'] = 'proceeding/dashboard_main_level2/$1';
+
+$route['list-of-complaint-for-hearing/(:any)'] = 'proceeding/dashboard/$1/F';
+
+$route['list-of-complaint-preliminary-inquiry-hearing/(:any)'] = 'proceeding/dashboard/$1/I';
+
+$route['list-of-complaint-investigation-hearing/(:any)'] = 'proceeding/dashboard/$1/V';
+$route['oppertunity-to-ps-after-pi-receive/(:any)'] = 'proceeding/dashboard/$1/OPI';
+
+$route['oppertunity-to-ps-after-inq-receive/(:any)'] = 'proceeding/dashboard/$1/OPV';
+
+$route['any-other-action-receive/(:any)'] = 'proceeding/dashboard/$1/AOA';
+
+$route['recording_of_proceedings/bench-wise'] = 'proceeding/proceeding_form';
+
+
+
+
+
+
+//$route['product/(:num)'] = 'catalog/product_lookup_by_id/$1';
+
+
+
 
 
 
