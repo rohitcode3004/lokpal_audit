@@ -20,7 +20,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">Status of Complaints Under Consideration of Lokpal of India
                             <ul class="more-action">
-                            <li><a href="<?php echo base_url(); if($user['role'] == 138){ ?>complaints/allocation-to-bench<?php } elseif($user['role'] == 147 || $user['role'] == 170){ ?>proceeding/dashboard_main<?php } ?>" class="previous">&laquo; Back</a></li>
+                            <li><a href="<?php echo base_url(); if($user['role'] == 138){ ?>complaints/allocation-to-bench<?php } elseif($user['role'] == 147 || $user['role'] == 170){ ?>proceeding/complaint-bench-wise<?php } ?>" class="previous">&laquo; Back</a></li>
                         </ul>
                     </div>
                     <div class="panel-body">
@@ -51,9 +51,9 @@
                                                 $bid_array = get_bench_ids_bybno($row->bench_no);
                         //$bid_array = array(112,115,116,117);
                                                 ?>
-                                                <td><a href="<?php echo base_url();?>complaints/fresh-complaint-considration'/<?php echo $row->bench_no; ?>"><?php echo $f = get_f_cases_u_loi_count($bid_array); ?></a></td>
+                                                <td><a href="<?php echo base_url();?>report/list_of_complaints_2/F/<?php echo $row->bench_no; ?>"><?php echo $f = get_f_cases_u_loi_count($bid_array); ?></a></td>
 
-                                                <td><a href="<?php echo base_url();?>complaints/complaint-preliminay-inq/<?php echo $row->bench_no; ?>"><?php echo $u = get_i_cases_u_loi_count($bid_array); ?></a></td>
+                                                <td><a href="<?php echo base_url();?>report/list_of_complaints_2/I/<?php echo $row->bench_no; ?>"><?php echo $u = get_i_cases_u_loi_count($bid_array); ?></a></td>
 
                                                 <td><a href="<?php echo base_url();?>report/list_of_complaints_2/V/<?php echo $row->bench_no; ?>"><?php echo $v = get_v_cases_u_loi_count($bid_array); ?></a></td>
 

@@ -38,7 +38,7 @@ class Error_controller extends CI_Controller {
 			}elseif($data['user']['role'] == 143){
 				$data['url'] = 'counter/dashboard_registry';
 			}elseif($data['user']['role'] == 147 || $data['user']['role'] == 170){
-				$data['url'] = 'proceeding/dashboard_main';
+				$data['url'] = 'proceeding/complaint-bench-wise';
 			}elseif($data['user']['role'] == 172){
 				$data['url'] = 'backlog';
 			}elseif($data['user']['role'] == 173){

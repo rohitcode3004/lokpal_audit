@@ -86,7 +86,7 @@ td,th {
         <div class="panel panel-default">
           <div class="panel-heading">Cause List 
             <ul class="more-action">
-              <li><a href="<?php echo base_url(); ?>causelist/genratecauselist" class="previous">&laquo; Back</a></li>
+              <li><a href="<?php echo base_url(); ?>causelist-generation" class="previous">&laquo; Back</a></li>
               <li><a href="#" onclick="window.print()">Print</a></li>
             </ul>
           </div>

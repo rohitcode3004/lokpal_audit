@@ -50,7 +50,7 @@
                                             $bench_no_display = $row->bench_no;
                                         } ?>
 							  		<div class="col-md-4 mb-15">
-							  			<a href="<?php echo base_url("proceeding/dashboard_main_level2/{$row->bench_no}"); ?>" class="widgets-card gd-blueviolet">
+							  			<a href="<?php echo base_url("consideration_of_bench/list_of_complaint/{$row->bench_no}"); ?>" class="widgets-card gd-blueviolet">
 							  				<div class="widgets-icon"><span><i class="fa fa-sitemap" aria-hidden="true"></i></span></div>
 							  				<div class="widgets-content"><?php echo 'Bench - '.$bench_no_display; ?></div>
 							  				<i class="fa fa-sitemap transparent_icon" aria-hidden="true"></i>
@@ -106,7 +106,7 @@
 							  <div class="panel-body">
 							  	<div class="row">
 							  		<div class="col-md-12">
-							  			<a href="<?php echo base_url('bench/search_case'); ?>" class="widgets-card gd-lightred">
+							  			<a href="<?php echo base_url('search-case'); ?>" class="widgets-card gd-lightred">
 							  				<div class="widgets-icon"><span><i class="fa fa-search" aria-hidden="true"></i></span></div>
 							  				<div class="widgets-content">Search Status of Complaints</div>
 							  				<i class="fa fa-search transparent_icon" aria-hidden="true"></i>

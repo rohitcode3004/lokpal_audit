@@ -11,7 +11,7 @@
               <div class="panel-heading">
                 Status Update
                 <ul class="more-action">
-                  <li><a href="<?php echo base_url(); ?>proceeding/dashboard_main_level2/0" class="previous">&laquo; Back</a></li>
+                  <li><a href="<?php echo base_url(); ?>consideration_of_bench/list_of_complaint/0" class="previous">&laquo; Back</a></li>
                 </ul>
                 
               </div>
