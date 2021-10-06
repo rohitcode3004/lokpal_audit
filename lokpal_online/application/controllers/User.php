@@ -35,6 +35,9 @@ class User extends CI_Controller {
 		$data = $this->login_model->fetch_all();
 		echo json_encode($data->result_array());
 	}
+
+			
+
 	
 	public function login(){ 
 		//print_r($this->session->all_userdata('captchaCode'));
@@ -65,8 +68,8 @@ class User extends CI_Controller {
 				$current_lock = $this->login_model->current_lock(strip_tags($this->input->post('username')), date('Y-m-d'));
 
 			    $password_encrypted = $this->input->post('password');
-				$password_decrypted = decode($password_encrypted);
-				$data['password'] = md5(strip_tags($password_decrypted));
+				 $password_decrypted = decode($password_encrypted);
+				 $data['password'] = md5(strip_tags($password_decrypted));
 
 				$page = trim($this->input->post('page'));
 			    $data['captcha_input'] = trim($this->input->post('captcha'));
@@ -546,6 +549,8 @@ class User extends CI_Controller {
 	private function send_otp_new($service_name, $service_id)
 	{
 		//echo $service_name." service is called for".$service_id;die(' here');
+
+
 		$data = $this->login_model->checkUserExist_new($service_name, $service_id);
 
 		if ($data == 0) {
@@ -569,7 +574,6 @@ class User extends CI_Controller {
 			}
 			if((int)$result == 201){
 				$return_arr[] = array("val" => 'false', "service_name" => $service_name, "error" => 'OTP request is blocked!Please try after 24 hrs.');
-
 					echo json_encode($return_arr);
 			}
 			elseif($result == 1){
@@ -747,9 +751,9 @@ class User extends CI_Controller {
     		$data['user'] = $this->login_model->getRows($con);
     		
         // If registration request is submitted 
-    		if($this->input->post('upd-pass-form')){ 
+    		if($this->input->post('submitform')){ 
 				//die('k');
-    			$this->form_validation->set_rules('username', 'Username', 'required');
+    			//$this->form_validation->set_rules('username', 'Username', 'required');
     			$this->form_validation->set_rules('password_old', 'old password', 'required'); 
     			$this->form_validation->set_rules('password', 'password', 'required'); 
     			$this->form_validation->set_rules('password2', 'confirm password', 'required|matches[password]');
@@ -760,7 +764,7 @@ class User extends CI_Controller {
     			$password_encrypted = $this->input->post('password');
 				$password_decrypted = decode($password_encrypted);
     			$userData = array( 
-    				'username' => strip_tags($this->input->post('username')),
+    				//'username' => strip_tags($this->input->post('username')),
     				'password' => md5($password_decrypted),
     				'updated_at' => $ts,
     				'last_login_remark' => 'User Updated Password',
@@ -817,6 +821,15 @@ class User extends CI_Controller {
 				$service_id= strip_tags($this->input->post('username'));
 				
 				$sended = sendMail($service_id, $subject, $html);
+
+				if($sended == 1){
+					$return_arr[] = array("val" => 'true', "service_name" => $service_name);
+
+					echo json_encode($return_arr);
+				}else{
+					echo show_error($this->email->print_debugger());
+				}
+
 
 
 
@@ -997,6 +1010,13 @@ public function user_register(){
 
 				$captcha_session = $this->session->all_userdata('captchaCode');
 
+			 $password_encrypted = $this->input->post('password'); 
+			  	$password_decrypted = decode($password_encrypted);
+
+			   $data['password'] = md5(strip_tags($password_decrypted));
+			   $password_md5=$data['password']; 
+
+
 				//print_r($captcha_session['captchaCode']);die;
 				//echo $data['captcha']['word'];
 				
@@ -1005,7 +1025,7 @@ public function user_register(){
 				$userData = array( 
 					'username' => strip_tags($this->input->post('service_id')), 
 					'email' => strip_tags($this->input->post('service_id')), 
-					'password' => md5($this->input->post('password')),  
+					'password' =>  $password_md5,  
 					'mobile' => strip_tags($this->input->post('mobile')), 
 					'role'=>18,					
 					'is_staff' => FALSE,
@@ -1402,5 +1422,7 @@ public function user_register(){
 				$data['captcha'] =  $this->captcha();  
 		$this->load->view('front/user/forget_password_step2.php', $data); 
 }
+
+
 }
 

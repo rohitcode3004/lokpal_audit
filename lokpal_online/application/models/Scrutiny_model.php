@@ -850,5 +850,21 @@ function get_previous_complaint_remarks($fn)
 		        return 0;
 		    }
 		}
+
+		function getEmailIdFromparta($filing_no)
+		{
+			$this->db->select('email_id');
+			//$this->db->from('scrutiny');
+			$this->db->where('filing_no', $filing_no);
+			$query = $this->db->get('complainant_details_parta');
+			if ($query->num_rows() > 0){
+		        return $query->result();;
+		    }
+		    else{
+		        return false;
+		    }
+		}
+
+
 }
 ?>

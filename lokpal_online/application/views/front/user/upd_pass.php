@@ -1,3 +1,4 @@
+
 <?php
 //$r = $this->session->userdata('ref_no');
 //$u = $user['id'];
@@ -9,11 +10,35 @@
 //print_r($this->label->view(1));
 ?>
 
+  <script type="text/javascript">
+    var baseURL= "<?php echo base_url();?>";
+  </script>
+ 
+ <script type="text/javascript">
+function CheckPassword(inputtxt) 
+{ 
+ 
+  var decimal=  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{6,15}$/;
+  if(inputtxt.value.match(decimal)) 
+  { 
+    $("#show_msg").hide();
+    return true;
+  }
+  else
+  { 
+    $("#show_msg").show();
+    $("#pwd").val(""); 
+    event.preventDefault();
+    return false;
+  }
+} 
+</script>
+
 <script src="<?php echo base_url();?>assets/customjs/password_encryption.js"></script>
 <div class="login-box">
   <div class="login-form">
     <div class="login-main">
-      <h6 class="sec-one">Update Your Password! <i class="fa fa-hand-o-down" aria-hidden="true"></i></h6>
+      <h6 class="sec-one">Update Your password_old! <i class="fa fa-hand-o-down" aria-hidden="true"></i></h6>
       <div class="speci-login first-look">
         <img src="<?php echo base_url(); ?>assets/my_assets/images/user.png" alt="">
       </div>
@@ -33,12 +58,12 @@
           ?>
         </div>
       </div>
-      <form id="upd-pass-form" class="form-horizontal password_form_upd" role="form" method="post" action='<?= base_url();?>user/submit_user_pass'  name="upd-pass-form" enctype="multipart/form-data">
+      <form class="form-horizontal password_form_upd" method="post" action='<?= base_url();?>user/submit_user_pass'  name="submitform"  enctype="multipart/form-data">
           <?php echo validation_errors(); ?>
-        <div class="box-group">
+      <!--  <div class="box-group">
           <label for="exampleInputEmail1">Email Id</label>
-          <input type="text" name="username" class="input-form" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email Id" value="<?php echo $user['username']; ?>" readonly>
-        </div>
+          <input  type="hidden" name="username" class="input-form" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email Id" value="<?php echo $user['username']; ?>" readonly>
+        </div>-->
 
         <div class="box-group">
           <label for="exampleInputPassword1">Old Password <span class="text-danger">*</span></label>
@@ -47,9 +72,13 @@
 
         <div class="box-group">
           <label for="exampleInputPassword1">New Password <span class="text-danger">*</span></label>
-          <!--<input type="password" name="password" class="input-form password_Strength" id="pwd" placeholder="New Password" onKeyUp="checkPasswordStrength();" data-toggle="popover" title="Password Must include" data-content="Minimum 6 characters, At least one capital letter, At least one number" data-placement="bottom">-->
-          <input id="pwd" type="password" class="input-form password_Strength" placeholder="Enter Password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&\*]).{6,}" onKeyUp="checkPasswordStrength();" data-toggle="tooltip" data-placement="bottom" title="Password must contain minimum of 6 characters, At least one capital letter, one small letter, one number, and one special character!">
+                 
+
+          <input id="pwd" type="password" class="input-form password_Strength" placeholder="Enter Password" name="password" onKeyUp="checkPasswordStrength();" data-toggle="tooltip"  data-placement="bottom" title="Password must contain minimum of 6 characters, At least one capital letter, one small letter, one number, and one special character!" onblur="CheckPassword(document.submitform.password)" >
+
           <div id="password-strength-status"></div>
+
+          <div id="show_msg" class="text-danger" style="display: none;">Password must use a combination of these! Minimum 6 characters, At least one capital letter, one small letter, one number and one spcial character.</div>
         </div>
 
         <div class="box-group">
@@ -73,7 +102,7 @@
 
 
               
-        <button type="submit" class="loginhny-btn btn" name="upd-pass-form" value="upd" onclick="encode_upd_pass('pwd_old', 'pwd', 'pwd2')">Submit</button>
+        <button type="submit" class="loginhny-btn btn" name="submitform" value="upd" onclick="encode_upd_pass('pwd_old', 'pwd', 'pwd2')">Submit</button>
         
         <div class="login-divider"><span><i class="fa fa-hand-o-down" aria-hidden="true"></i></span></div>
         
@@ -85,3 +114,4 @@
 
 
 
+ 
