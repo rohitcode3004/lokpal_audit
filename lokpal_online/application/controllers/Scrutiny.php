@@ -31,6 +31,7 @@ class Scrutiny extends CI_Controller {
 			$this->load->helper(array('form', 'url'));
 			$this->load->library('form_validation');
 			$this->load->library('session');
+			$this->load->helper('email_helper');
 			$this->isUserLoggedIn = $this->session->userdata('isUserLoggedIn');
 		if($this->isUserLoggedIn) 
 		{
@@ -283,6 +284,7 @@ class Scrutiny extends CI_Controller {
 			$torole = trim($this->security->xss_clean($this->input->post('torole')));
 			$ts = date('Y-m-d H:i:s', time());
 			if($torole == 4){
+
 				$chk_exist_case_det = $this->scrutiny_model->chk_exist_case_det($filing_no);
 
 				if(!$chk_exist_case_det){
@@ -299,6 +301,37 @@ class Scrutiny extends CI_Controller {
 					$comp_data['comp_no'] = $chk_exist_case_det['0']->complaint_no;
 					$comp_data['year'] = $chk_exist_case_det['0']->complaint_year;
 				}
+
+				$checkEmailId = $this->scrutiny_model->getEmailIdFromparta($filing_no);				
+				$service_id=$checkEmailId['0']->email_id;
+
+				$comp_no=get_complaintno($filing_no);
+				$subject = "Complaint Number related to your Application with Diary number ".$filing_no." ";
+				$html = "
+			Dear Sir/Madam,
+				<p>The Complaint Number to your Application is ".$comp_no." with the diary Number ".$filing_no." . Please quote this
+				Complaint Number in your future communication(s) with the Lokpal of India.
+				</p>
+				<p style='margin-bottom:20px;'>You can check the status of your complaint on the Lokpal of India website as well as on the Lokpal-Online Portal.</p>
+
+				<p style='margin-bottom:20px;'>Regards,</p>
+				<p  style='margin-bottom:30px;'>Lokpal of India <br> New Delhi</p>
+
+				<p><strong>Note:- </strong>THIS IS AN AUTOMATED MESSAGE-PLEASE DO NOT REPLY DIRECTLY TO THIS EMAIL.</p>
+				";
+				$sended = sendMail($service_id, $subject, $html);
+				//common code for email end
+
+
+				if($sended == 1){
+					$return_arr[] = array("val" => 'true', "service_name" => $service_name);
+
+					echo json_encode($return_arr);
+				}else{
+					echo show_error($this->email->print_debugger());
+				}
+
+
 			}elseif(trim($this->security->xss_clean($this->input->post('par1'))) == 1){
 				$comp_no_pre_gen = $this->pre_gen_comp_no($this->input->post('filing_no'));
 				//$comp_no_gen = $comp_no_pre_gen['comp_no'];
@@ -539,6 +572,35 @@ class Scrutiny extends CI_Controller {
 				              'status' => 'Scrutiny of Complaint Successfully Completed',
 				              ); 
 				              $insert_log = $this->login_model->loginlog_ins($log_data); 
+/*
+				$checkEmailId = $this->scrutiny_model->getEmailIdFromparta($filing_no);				
+				$service_id=$checkEmailId['0']->email_id;
+
+				$comp_no=get_complaintno($filing_no);
+				$subject = "Complaint Number related to your Application with Diary number ".$filing_no." ";
+				$html = "
+			Dear Sir/Madam,
+				<p>The Complaint Number to your Application is ".$comp_no." with the diary Number ".$filing_no." . Please quote this this
+				Complaint Number in your future communication(s) with the Lokpal of India.
+				</p>
+				<p style='margin-bottom:20px;'>You can check the status of your complaint on the Lokpal of India website as well as on the Lokpal-Online Portal.</p>
+
+				<p style='margin-bottom:20px;'>Regards,</p>
+				<p  style='margin-bottom:30px;'>Lokpal of India <br> New Delhi</p>
+
+				<p><strong>Note:- </strong>THIS IS AN AUTOMATED MESSAGE-PLEASE DO NOT REPLY DIRECTLY TO THIS EMAIL.</p>
+				";
+				$sended = sendMail($service_id, $subject, $html);
+				//common code for email end
+
+
+				if($sended == 1){
+					$return_arr[] = array("val" => 'true', "service_name" => $service_name);
+
+					echo json_encode($return_arr);
+				}else{
+					echo show_error($this->email->print_debugger());
+				}*/
 
 
 							$this->session->set_flashdata('success_msg', 'Scrutiny successfully completed for Diary no. '.$filing_no.' without defects and forwarded to chairperson .');
@@ -4806,6 +4868,8 @@ public function status_open_for_edit_complaint(){
 	{	
 		if($this->input->post('filing_no'))
 		{
+			$filing_no=$this->input->post('filing_no');		
+			
 			//print_r($_FILES['doc_upload']);die;
 			if(isset($_FILES['doc_upload'])){
 			//print_r($_FILES);die;
@@ -4870,8 +4934,33 @@ public function status_open_for_edit_complaint(){
 			$modifycounter3 = $this->scrutiny_model->status_edit_open_complaint($id, '3', $db_path);
 
 
-	if($query1 && $modifycounter1 && $query2 && $modifycounter2 && $query3 && $modifycounter3){
-			$this->session->set_flashdata('success_msg', 'Successfully Forwarded the Complaint to Complainant for Resubmission');
+	if($query1 && $modifycounter1 && $query2 && $modifycounter2 && $query3 && $modifycounter3){			
+
+				$checkEmailId = $this->scrutiny_model->getEmailIdFromparta($filing_no);				
+				$service_id=$checkEmailId['0']->email_id;
+
+				$subject = "Defect(s) in your Application with Diary number ".$filing_no." ";
+				$html = "
+			Dear Sir/Madam,
+				<p>This Office has scrutinized your complaint with the diary Number ".$filing_no." .Please re-submit the application after removing the defect(s) as pointed out by this office on the lokpal-online Portal using the same credentials.
+				</p>
+				<p style='margin-bottom:20px;'>Regards,</p>
+				<p  style='margin-bottom:30px;'>Lokpal of India <br> New Delhi</p>
+
+				<p><strong>Note:- </strong>THIS IS AN AUTOMATED MESSAGE-PLEASE DO NOT REPLY DIRECTLY TO THIS EMAIL.</p>
+				";
+				$sended = sendMail($service_id, $subject, $html);
+				//common code for email end
+
+
+				if($sended == 1){
+					$return_arr[] = array("val" => 'true', "service_name" => $service_name);
+
+					echo json_encode($return_arr);
+				}else{
+					echo show_error($this->email->print_debugger());
+				}
+				$this->session->set_flashdata('success_msg', 'Successfully Forwarded the Complaint to Complainant for Resubmission');
 			redirect('scrutiny/dashboard_def');
 
 	}else{

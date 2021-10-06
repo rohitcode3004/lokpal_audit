@@ -5,11 +5,7 @@
     </div>
     <!-- Image loader -->
 
-    <script src="<?php echo base_url(); ?>assets/my_assets/js/jquery.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/my_assets/js/bootstrap.min.js"></script>
 
-    <script src="<?php echo base_url(); ?>assets/my_assets/js/jquery.waypoints.js"></script>
-    <script src="<?php echo base_url(); ?>assets/my_assets/js/jquery.rcounterup.js"></script>
 
     <script type="text/javascript">
     // preloader
@@ -75,14 +71,15 @@
 
         function checkPasswordStrength() {
             var number = /([0-9])/;
-            var alphabets = /([a-zA-Z])/;
+            var loweralphabets = /([a-z])/;
+            var upperalphabets = /([A-Z])/;
             var special_characters = /([~,!,@,#,$,%,^,&,*,-,_,+,=,?,>,<])/;
             if ($('#pwd').val().length < 6) {
                 $('#password-strength-status').removeClass();
                 $('#password-strength-status').addClass('weak-password');
                 $('#password-strength-status').html("Weak Password");
             } else {
-                if ($('#pwd').val().match(number) && $('#pwd').val().match(alphabets) && $('#pwd').val().match(special_characters)) {
+                if ($('#pwd').val().match(number) && $('#pwd').val().match(loweralphabets) && $('#pwd').val().match(upperalphabets) && $('#pwd').val().match(special_characters)) {
                     $('#password-strength-status').removeClass();
                     $('#password-strength-status').addClass('strong-password');
                     $('#password-strength-status').html("Strong Password");
@@ -113,6 +110,7 @@ $(document).ready(function(){
 });
 </script>
    
+
 
 </body>
 </html>
