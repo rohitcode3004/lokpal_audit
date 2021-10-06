@@ -25,7 +25,7 @@
                 $uri_parts = explode('?', $_SERVER['REQUEST_URI'], 2);
                 $uri_parts2 = explode('/', $uri_parts[0]);
         ?>
-      <form class="form-horizontal password_form" role="form" action="<?php echo base_url('user/forget_password_step2_action') ?>" method="post" autocomplete="off">
+      <form class="form-horizontal password_form" action="<?php echo base_url('user/forget_password_step2_action') ?>" method="post" autocomplete="off" name="userloginSubmit">
 
         <!--<div class="box-group">
           <div class="otp_box">
@@ -48,8 +48,11 @@
           <div id="resend_otp" class="text-primary" style="display: none;">OTP expired. Please send new otp again.</div>
         </div>
         <div class="box-group">
-          <input id="pwd" type="password" class="input-form password_Strength" placeholder="Enter New Password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&\*]).{6,}" onKeyUp="checkPasswordStrength();" data-toggle="tooltip" data-placement="bottom" title="Password must contain minimum of 6 characters, At least one capital letter, one small letter, one number, and one special character!">
+          <input id="pwd" type="password" class="input-form password_Strength" placeholder="Enter New Password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&\*]).{6,}" onKeyUp="checkPasswordStrength();" data-toggle="tooltip" data-placement="bottom" title="Password must contain minimum of 6 characters, At least one capital letter, one small letter, one number, and one special character!" onblur="CheckPassword(document.userloginSubmit.password)">
           <div id="password-strength-status"></div>
+
+           <div id="show_msg" class="text-danger" style="display: none;">Password must use a combination of these! Minimum 6 characters, At least one capital letter, one small letter, one number and one spcial character.</div>
+
         </div>
         <div class="box-group">
           <input class="input-form" placeholder="Confirm New Password" name="password2" type="password" value="" id="pwd2">
@@ -77,6 +80,26 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+function CheckPassword(inputtxt) 
+{ 
+ 
+  var decimal=  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{6,15}$/;
+  if(inputtxt.value.match(decimal)) 
+  { 
+    $("#show_msg").hide();
+    return true;
+  }
+  else
+  { 
+    $("#show_msg").show();
+    $("#pwd").val(""); 
+    event.preventDefault();
+    return false;
+  }
+} 
+</script>
 
 
 <script type="text/javascript">
@@ -110,5 +133,28 @@ function timer(remaining) {
 timer(60);
 
 </script>
+
+
+ <script type="text/javascript">
+function CheckPassword(inputtxt) 
+{ 
+ 
+  var decimal=  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{6,15}$/;
+  if(inputtxt.value.match(decimal)) 
+  { 
+    $("#show_msg").hide();
+    return true;
+  }
+  else
+  { 
+    $("#show_msg").show();
+    $("#pwd").val(""); 
+    event.preventDefault();
+    return false;
+  }
+} 
+</script>
+
+
 <!-- End of Features Section-->
 <?php include(APPPATH.'views/templates/front/ffooter.php'); ?>

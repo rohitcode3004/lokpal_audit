@@ -36,6 +36,11 @@
 
         <input class="loginhny-btn btn" type="submit" name="loginSubmit" value="login" onclick="encode(this)"/>
 
+         <div class="login-divider"><span>OR</span></div>
+
+        <p class="text-orange">Forgot password <br> 
+          <a href="<?php echo base_url(); ?>user/forget_password"><strong>Please Click Here</strong></a>  </p>
+
         <p class="text-orange">If you want to go Home page <br><a href="<?php echo base_url(); ?>home/index"><strong>Please click here!</strong></a></a></p>
       </form>
     </div>

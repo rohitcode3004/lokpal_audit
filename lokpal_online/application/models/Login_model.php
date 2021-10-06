@@ -389,7 +389,7 @@ class Login_model extends CI_Model {
 
 	function checkUserName($username_exist){
 		$this->db->where('username', $username_exist);
-		$this->db->where('is_staff ', 'f');
+		//$this->db->where('is_staff ', 'f');
 		$query = $this->db->get('users');
 		//echo $this->db->last_query();die;
 		return $query->result();
@@ -413,4 +413,9 @@ function forget_pass_his_ins($id){
 			$this->db->last_query();			//die;
       		return ($this->db->affected_rows() != 1) ? false : true;   
 		}
+
+
+	
+			
+
 }

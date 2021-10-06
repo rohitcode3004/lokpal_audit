@@ -1,6 +1,5 @@
+<script src="<?php echo base_url();?>assets/customjs/password_encryption.js"></script>
 <?php include(APPPATH.'views/templates/front/fheader.php'); ?>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
 <style type="text/css">
     .second-box{
@@ -36,7 +35,7 @@
             ?>
             <!-- Image loader -->
 
-            <form method="POST" action="<?php echo base_url(); ?>user/new_user_save" autocomplete="off">
+            <form method="POST" action="<?php echo base_url(); ?>user/new_user_save" autocomplete="off" name="submitform">
               <div class="row">
                 <div class="col-md-3">
                   <div class="form-group">
@@ -119,9 +118,7 @@
                 <div class="col-md-6 mt-30" id="email-verified" style="display: none">
                   <div class="alert alert-success"><i class="fa fa-check-square-o" aria-hidden="true"></i> Your Email id is <strong>Verifyed Successfully!</strong></div>
                 </div>
-              </div>
-
-              
+              </div>          
                 
         
 
@@ -129,18 +126,18 @@
                 <div class="col-md-6">                  
                   <div class="form-group">
                     <label>Password<span class="text-danger">*</span></label>
-                    <!--<input type="password" name="password" class="form-control" id="pwd" placeholder="New Password" onKeyUp="checkPasswordStrength();" data-toggle="popover" title="Password Must include" data-content="Minimum 6 characters, At least one capital letter, At least one number" data-placement="bottom">-->
-                    <input id="pwd" type="password" class="form-control" placeholder="Enter Password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&\*]).{6,}" onKeyUp="checkPasswordStrength();" data-toggle="popover" title="Password must use a combination of these" data-content="Minimum 6 characters, At least one capital letter, one small letter, one number and one spcial character" data-placement="bottom">
+                    <input id="pwd" type="password" class="form-control" placeholder="Enter Password" name="password" onKeyUp="checkPasswordStrength();" data-toggle="tooltip" data-placement="bottom" title="Password must use a combination of these! Minimum 6 characters, At least one capital letter, one small letter, one number and one spcial character"
+                     onblur="CheckPassword(document.submitform.password)">
                     <div id="password-strength-status"></div>
                     <?php echo form_error('password','<div class="text-danger">','</div>'); ?>
+                    <div id="show_msg" class="text-danger" style="display: none;">Password must use a combination of these! Minimum 6 characters, At least one capital letter, one small letter, one number and one spcial character.</div>
                   </div>
-                  <!--<span class="text-danger"><strong>Notes:</strong> Password must use a combination of these: Minimum 6 characters, At least one capital letter, one number and one spcial character</span>-->
                 </div>
 
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Confirm Password<span class="text-danger">*</span></label>
-                    <input type="password" class="form-control" placeholder="Enter Confirm Password" name="password2">
+                    <input type="password" class="form-control" placeholder="Enter Confirm Password" name="password2" id="password2">
                     <?php echo form_error('password2','<div class="text-danger">','</div>'); ?>
                   </div>
                 </div>
@@ -163,10 +160,10 @@
                   </div>
                 </div>                
               </div>
-              
+            
               <div class="row">                   
                 <div class="col-md-4 col-md-offset-4">
-                  <button type="submit" class="loginhny-btn btn" name="submitform" value="subacc" align="center">Submit</button>
+                  <button type="submit" class="loginhny-btn btn" name="submitform" value="subacc" align="center" onclick="encode_dl_passport('pwd', 'password2')">Submit</button>
                 </div>
               </div>
               <?php
@@ -185,16 +182,36 @@
 <!-- End of Features Section-->
 
 <script type="text/javascript">
+function CheckPassword(inputtxt) 
+{ 
+  
+  var decimal=  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{6,15}$/;
+  if(inputtxt.value.match(decimal)) 
+  { 
+    $("#show_msg").hide();
+    return true;
+  }
+  else
+  { 
+    $("#show_msg").show();
+    $("#pwd").val(""); 
+    event.preventDefault();
+    return false;
 
+  }
+} 
 
+</script>
+
+<script type="text/javascript">
   function ValidateAlpha(evt)
-                  {
+    {
                     var keyCode = (evt.which) ? evt.which : evt.keyCode
                     if ((keyCode < 65 || keyCode > 90) && (keyCode < 97 || keyCode > 123) && keyCode != 32)
                      
                       return false;
                     return true;
-                  }
+    }
 
   $("#send-email-otp").click(function(e) {   
     e.preventDefault();

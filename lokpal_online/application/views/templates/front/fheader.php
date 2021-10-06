@@ -9,6 +9,12 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/my_assets/css/font-awesome.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/my_assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/my_assets/css/mystyle.css">
+
+    <script src="<?php echo base_url(); ?>assets/my_assets/js/jquery.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/my_assets/js/bootstrap.min.js"></script>
+
+    <script src="<?php echo base_url(); ?>assets/my_assets/js/jquery.waypoints.js"></script>
+    <script src="<?php echo base_url(); ?>assets/my_assets/js/jquery.rcounterup.js"></script>
   
 <!-- Avoid Clickjacking Code --> 
   <?php 
