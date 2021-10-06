@@ -193,18 +193,94 @@ class Login_model extends CI_Model {
 		else
 			die('invalid service');
 		$data = array('service_name' => $s_n, 'service_id' => $service_id, 'otp_attempts' => 1,
-			'otp_generated' => $otp, 'tag' => $tag, 'ip' => get_ip(), 'create_date' => date('Y-m-d H:i:s', time()));
+			'otp_generated' => $otp, 'tag' => $tag, 'ip' => get_ip(), 'create_date' => date('Y-m-d H:i:s', time()), 'attempts_per_day' => 1);
 		return $this->db->insert('otp_validator', $data);
 	}
 
-	function update_otp_new($service_name, $service_id, $tag, $otp){
+	function get_old_update_date($service_name, $service_id, $tag)
+	{
 		if($service_name == 'email')
 			$s_n = 'E';
 		elseif($service_name == 'mobile')
 			$s_n = 'M';
 		else
 			die('invalid service');
-		$data = array('otp_generated' => $otp, 'ip' => get_ip(), 'update_date' => date('Y-m-d H:i:s', time()));
+		$this->db->select('update_date');
+		$this->db->from('otp_validator');
+		$this->db->where('service_id', $service_id);
+		$this->db->where('service_name', $s_n);
+		$this->db->where('tag', $tag);
+		$query = $this->db->get();
+		return $query->result();
+	}
+	
+	function get_attempts($service_name, $service_id, $tag)
+	{
+		if($service_name == 'email')
+			$s_n = 'E';
+		elseif($service_name == 'mobile')
+			$s_n = 'M';
+		else
+			die('invalid service');
+		$this->db->select('attempts_per_day');
+		$this->db->from('otp_validator');
+		$this->db->where('service_id', $service_id);
+		$this->db->where('service_name', $s_n);
+		$this->db->where('tag', $tag);
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	function attempts($service_name, $service_id, $tag, $otp)
+	{
+		if($service_name == 'email')
+			$s_n = 'E';
+		elseif($service_name == 'mobile')
+			$s_n = 'M';
+		else
+			die('invalid service');
+		$this->db->select('attempts');
+		$this->db->from('otp_validator');
+		$this->db->where('service_id', $service_id);
+		$this->db->where('service_name', $s_n);
+		$this->db->where('tag', $tag);
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	function update_otp_new($service_name, $service_id, $tag, $otp, $old_update_date, $current_date, $attempts){
+		if($service_name == 'email')
+			$s_n = 'E';
+		elseif($service_name == 'mobile')
+			$s_n = 'M';
+		else
+			die('invalid service');
+
+		$current_date = new DateTime($current_date);//start time
+		$old_update_date = new DateTime($old_update_date);//end time
+		//print_r($old_update_date);die;
+		$interval = $current_date->diff($old_update_date);
+		//echo $interval->format('%Y years %m months %d days %H hours %i minutes %s seconds');//00 years 0 months 0 days 08 hours 0 minutes 0 seconds
+		$years =  $interval->format('%Y');
+		$months =  $interval->format('%m');
+		$days =  $interval->format('%d');
+		//die(gettype($days));
+		$days = (int)$days;
+		$months = (int)$months;
+		$years = (int)$years;
+		//die($attempts);
+		if ($days > 0 || ($days == 0 && ($months > 0 || $years > 0))) {
+  			$attempts_per_day = 1;
+  			//$d = 'g';
+		}elseif($attempts >= 5){
+				return '201';
+				exit;
+			}else{
+				$attempts_per_day = $attempts + 1;
+				//$d = 'f';
+			}
+		//die($d);
+		$data = array('otp_generated' => $otp, 'ip' => get_ip(), 'update_date' => date('Y-m-d H:i:s', time()), 'attempts_per_day' => $attempts_per_day);
 		$this->db->where('service_id', $service_id);
 		$this->db->where('service_name', $s_n);
 		$this->db->where('tag', $tag);

@@ -562,11 +562,21 @@ class User extends CI_Controller {
 			$data_exists = $this->login_model->check_otp_requests($service_name, $service_id, $tag);
 			if($data_exists == 0)
 				$result = $this->login_model->insert_otp_new($service_name, $service_id, $tag, $otp);
-			elseif($data_exists == 1)
-				$result = $this->login_model->update_otp_new($service_name, $service_id, $tag, $otp);
-			if($result){
-
-			
+			elseif($data_exists == 1){
+				$old_update_date = $this->login_model->get_old_update_date($service_name, $service_id, $tag);
+				$old_update_date = $old_update_date[0]->update_date;
+				//print_r($old_update_date);die('h');
+				$current_date = date('Y-m-d H:i:s', time());
+				$attempts = $this->login_model->get_attempts($service_name, $service_id, $tag);
+				$attempts = $attempts[0]->attempts_per_day;
+				$result = $this->login_model->update_otp_new($service_name, $service_id, $tag, $otp, $old_update_date, $current_date, $attempts);
+				//print_r($result);die;
+			}
+			if((int)$result == 201){
+				$return_arr[] = array("val" => 'false', "service_name" => $service_name, "error" => 'OTP request is blocked!Please try after 24 hrs.');
+					echo json_encode($return_arr);
+			}
+			elseif($result == 1){
 				//common code for email start
 				$subject = "OTP for login";
 				$html = "
@@ -1221,10 +1231,24 @@ public function user_register(){
   				$otp = rand(11111,99999);
   				$data_exists = $this->login_model->check_otp_requests($service_name, $service_id, $tag);
 					if($data_exists == 0)
-				$result = $this->login_model->insert_otp_new($service_name, $service_id, $tag, $otp);
-					elseif($data_exists == 1)
-				$result = $this->login_model->update_otp_new($service_name, $service_id, $tag, $otp);
-				if (!empty($id) && $checkcaptch == 't')
+						$result = $this->login_model->insert_otp_new($service_name, $service_id, $tag, $otp);
+					elseif($data_exists == 1){
+						$old_update_date = $this->login_model->get_old_update_date($service_name, $service_id, $tag);
+						$old_update_date = $old_update_date[0]->update_date;
+						//print_r($old_update_date);die('h');
+						$current_date = date('Y-m-d H:i:s', time());
+						$attempts = $this->login_model->get_attempts($service_name, $service_id, $tag);
+						$attempts = $attempts[0]->attempts_per_day;
+
+						$result = $this->login_model->update_otp_new($service_name, $service_id, $tag, $otp, $old_update_date, $current_date, $attempts);
+					}
+				if ((int)$result == 201)
+				{
+					$this->session->set_flashdata('error_msg', '<div class="alert alert-danger text-center"><h4 class="m-0">OTP request is bloked! Please try again after 24 hrs.</h4></div>');
+						redirect('user/forget_password/'); 
+						$data['captcha'] =  $this->captcha();
+				}
+				elseif (!empty($id) && $checkcaptch == 't' && $result == 1)
 				{
 					//email code
 					//common code for email start
