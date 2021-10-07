@@ -521,12 +521,34 @@ class Filing extends CI_Controller {
 			else
 			{
 				
-				 $identity_proof_no_encrypted=trim($this->input->post('identity_proof_no'));
-				 $identity_proof_no_decrypted = decode($identity_proof_no_encrypted);
+			 $identity_proof_no_encrypted=trim($this->input->post('identity_proof_no'));
+			 $identity_proof_no_decrypted = decode($identity_proof_no_encrypted);				
+				
+				$idno=explode("-",$identity_proof_no_decrypted);
+				if($idno[0]=='XXXX')
+				{
+					 $identity_proof_no=$myArray[0]->identity_proof_no ?? '';
+
+				}
+				else
+				{
+					$identity_proof_no=base64_encode($identity_proof_no_decrypted);
+				}
+
+			
 				 $idres_proof_no_encrypted=trim($this->input->post('idres_proof_no')); 
 				 $idres_proof_no_decrypted = decode($idres_proof_no_encrypted);
 
+				$idress_no=explode("-",$identity_proof_no_decrypted);
+				if($idress_no[0]=='XXXX')
+				{
+					 $idres_proof_no=$myArray[0]->idres_proof_no ?? '';
 
+				}
+				else
+				{
+					$idres_proof_no=base64_encode($idres_proof_no_decrypted);
+				}
 
 					     	
 				$curYear = date('Y');
@@ -547,13 +569,13 @@ class Filing extends CI_Controller {
 				$age_years= trim($this->input->post('age_years'));
 				$identity_proof_id= ($this->input->post('identity_proof_id'));
 				//$identity_proof_no= trim($this->input->post('identity_proof_no'));
-				$identity_proof_no=base64_encode($identity_proof_no_decrypted);
+				//$identity_proof_no=base64_encode($identity_proof_no_decrypted);
 				$identity_proof_doi=$identity_proof_doi;
 				$identity_proof_vupto= trim($this->input->post('identity_proof_vupto'));	
 				$identity_proof_iauth= trim($this->input->post('identity_proof_iauth'));
 				$idres_proof_id= ($this->input->post('idres_proof_id'));
 				//$idres_proof_no= trim($this->input->post('idres_proof_no'));
-				 $idres_proof_no=base64_encode($idres_proof_no_decrypted);
+				// $idres_proof_no=base64_encode($idres_proof_no_decrypted);
 				$idres_proof_doi=$idres_proof_doi;
 				$idres_proof_vupto= trim($this->input->post('idres_proof_vupto'));
 				$idres_proof_iauth= trim($this->input->post('idres_proof_iauth'));

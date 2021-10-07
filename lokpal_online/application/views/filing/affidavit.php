@@ -179,7 +179,10 @@ $this->load->helper("date_helper");
             
             <td><?php echo  $identitydesc; ?></td>
             <td><?php  $idno=base64_decode($farma[0]->identity_proof_no ?? '');
+            if($idno !='')
+            {
             echo 'XXXX-XXXX-XXXX-'.substr($idno,-4);
+          }
              ?></td>
             <td><?php 
               $farma[0]->identity_proof_doi=get_displaydate($farma[0]->identity_proof_doi);
@@ -224,9 +227,10 @@ $this->load->helper("date_helper");
             ?>     
             <td><?php echo  $identitydesc; ?></td>
             <td><?php  $idres_no= base64_decode($farma[0]->idres_proof_no ?? '');
-
+            if($idres_no !='')
+            {
              echo 'XXXX-XXXX-XXXX-'.substr($idres_no,-4);
-
+           }
 
              ?></td>
             <td><?php echo  get_displaydate($farma[0]->idres_proof_doi ?? ''); ?></td>
@@ -688,7 +692,14 @@ $this->load->helper("date_helper");
             <tr>  
               <td><?php echo  $wcountryname; ?></td>
               <td><?php echo $identitydesc; ?></td>
-              <td><?php echo  base64_decode($farmb[0]->aidentity_proof_no); ?></td>
+
+              <td><?php  $idno=base64_decode($farmb[0]->aidentity_proof_no ?? '');
+            if($idno !='')
+            {
+            echo 'XXXX-XXXX-XXXX-'.substr($idno,-4);
+          }
+             ?></td>       
+
               <td><?php
               $farmb[0]->aidentity_proof_doi=get_displaydate($farmb[0]->aidentity_proof_doi);
                  echo $farmb[0]->aidentity_proof_doi ?? ''; ?></td>
@@ -732,7 +743,14 @@ $this->load->helper("date_helper");
           <tbody>
             <tr>  
                <td><?php echo  $wcountryname; ?></td>
-                  <td><?php echo  base64_decode($farmb[0]->aidres_proof_no); ?></td>
+
+               <td><?php  $idress_no=base64_decode($farmb[0]->aidres_proof_no ?? '');
+            if($idress_no !='')
+            {
+            echo 'XXXX-XXXX-XXXX-'.substr($idress_no,-4);
+          }
+             ?></td> 
+                
                 <td><?php
                 $farmb[0]->aidres_proof_doi=get_displaydate($farmb[0]->aidres_proof_doi); 
 
