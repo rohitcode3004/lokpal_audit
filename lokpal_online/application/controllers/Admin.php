@@ -172,7 +172,7 @@ class Admin extends CI_Controller {
 		}
 
         // Load view 
-		$this->load->view('admin/user/login', $data); 			
+		$this->load->view('admin/admin/login', $data); 			
 	}
 
 	public function captcha(){

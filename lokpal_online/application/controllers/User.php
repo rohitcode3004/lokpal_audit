@@ -718,7 +718,13 @@ class User extends CI_Controller {
     }
 
     public function update_user_pass()
-    {	
+    {
+
+    	if(isset($_GET['page']))
+			 $data['page'] = $_GET['page'];
+		else
+			$data['page'] = 'na';
+
     $data['captcha'] =  $this->captcha();
 
     	if($this->isUserLoggedIn){ 
@@ -1306,6 +1312,10 @@ public function user_register(){
 }
 
     public function forget_password_step2(){
+
+    	
+			$data['page'] = 'a';
+
 	$data['captcha'] =  $this->captcha();
 
 	if($this->session->userdata('success_msg')){ 
