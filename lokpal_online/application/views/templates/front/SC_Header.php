@@ -254,7 +254,7 @@ function freshApp(){
                 				</a>
                 				<ul class="sidebar-submenu">
                 					<li><a href="#"><i class="fa fa-circle-o"></i> Edit Profile</a></li>
-                					<li><a href="<?php echo base_url('user/update_user_pass'); ?>"><i class="fa fa-circle-o"></i> Update Password</a></li>                                    
+                					<li><a href="<?php echo base_url('user/update_user_pass?page=a'); ?>"><i class="fa fa-circle-o"></i> Update Password</a></li>                                    
                 				</ul>
                 			</li>
                 		</ul>

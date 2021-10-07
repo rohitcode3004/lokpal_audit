@@ -105,8 +105,12 @@ function CheckPassword(inputtxt)
         <button type="submit" class="loginhny-btn btn" name="submitform" value="upd" onclick="encode_upd_pass('pwd_old', 'pwd', 'pwd2')">Submit</button>
         
         <div class="login-divider"><span><i class="fa fa-hand-o-down" aria-hidden="true"></i></span></div>
-        
+        <?php if($page=='a'){ ?>
+
+           <p class="text-orange">If you want to go back? <a href="<?php echo base_url(); ?>scrutiny">Please click here!</a></a></p>
+         <?php } else {?>
         <p class="text-orange">If you want to go back? <a href="<?php echo base_url(); ?>e-filing">Please click here!</a></a></p>
+      <?php } ?>
       </form>
     </div>
   </div>

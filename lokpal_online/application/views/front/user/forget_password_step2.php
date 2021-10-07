@@ -71,10 +71,14 @@
         <input class="loginhny-btn btn" type="submit" name="userloginSubmit" value="submit" onclick="encode_dl_passport('pwd', 'pwd2',)" />
 
         <div class="login-divider"><span><i class="fa fa-hand-o-down" aria-hidden="true"></i></span></div>
-
-       <!-- <p class="text-orange mt-50">If you want to go back? <br><a href="<?php echo "http://" . $_SERVER['SERVER_NAME']."/". $uri_parts2[1]; ?>/lokpal?menu_bar?Lodge_Your_Complaints?0304"><strong>Please click here!</strong></a></p>-->
-        <p class="text-orange">If you want to go back <br> 
-          <a href="<?php echo base_url(); ?>user/login"><strong>Please Click Here</strong></a>  </p>
+             <!-- <p class="text-orange mt-50">If you want to go back? <br><a href="<?php echo "http://" . $_SERVER['SERVER_NAME']."/". $uri_parts2[1]; ?>/lokpal?menu_bar?Lodge_Your_Complaints?0304"><strong>Please click here!</strong></a></p>-->
+ <p class="text-orange">If you want to go back <br> 
+       <?php if($page =='a'){?>
+       
+          <a href="<?php echo base_url(); ?>admin/login"><strong>Please Click Here</strong></a>  </p>
+        <?php } else {?>
+            <a href="<?php echo base_url(); ?>user/login"><strong>Please Click Here</strong></a>  </p>
+          <?php }?>
 
       </form>
     </div>
