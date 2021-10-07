@@ -1016,9 +1016,10 @@ public function user_register(){
 
 				$captcha_session = $this->session->all_userdata('captchaCode');
 
-			 $password_encrypted = $this->input->post('password'); 
-			  	$password_decrypted = decode($password_encrypted);
+					
 
+			 $password_encrypted = trim($this->input->post('password')); 
+			   $password_decrypted = decode($password_encrypted);
 			   $data['password'] = md5(strip_tags($password_decrypted));
 			   $password_md5=$data['password']; 
 
