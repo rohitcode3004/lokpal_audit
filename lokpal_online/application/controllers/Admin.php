@@ -19,7 +19,11 @@ class Admin extends CI_Controller {
 		$this->isUserLoggedIn = $this->session->userdata('isUserLoggedIn'); 
 	}
 	
-	public function login(){	
+	public function login(){
+
+
+
+
 		if($this->isUserLoggedIn){ 
 			redirect('admin/dashboard'); 
 		}else{ 

@@ -1163,6 +1163,11 @@ public function user_register(){
     }
 
     public function forget_password(){
+    	if(isset($_GET['page']))
+			echo $data['page'] = $_GET['page'];
+		else
+			$data['page'] = 'na';
+
 	$data['captcha'] =  $this->captcha();
 
 	if($this->session->userdata('success_msg')){ 
