@@ -233,10 +233,26 @@ if(isset($farma))
                 </select>  
                 <div class="error"><?php echo form_error('identity_proof_id'); ?></div>
               </div>
-              <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
+
+              <?php        
+         $idno=base64_decode(@$myArray[0]->identity_proof_no ?? '');
+           if($idno !='')
+           {
+           $idno='XXXX-XXXX-XXXX-'.substr($idno,-4); 
+           }
+              ?>
+
+                <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
+                <label for="identity_proof_no"><?php print_r($this->label->get_short_name($elements, 19)); ?></label>
+                <input type="text" class="form-control" name="identity_proof_no" value="<?php echo set_value('identity_proof_no', @$idno ); ?>" id="identity_proof_no" maxlength="500" placeholder="" hidden="true">
+              </div>
+
+
+
+             <!-- <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
                 <label for="identity_proof_no"><?php print_r($this->label->get_short_name($elements, 19)); ?></label>
                 <input type="text" class="form-control" name="identity_proof_no" value="<?php echo set_value('identity_proof_no', base64_decode(@$myArray[0]->identity_proof_no)); ?>" id="identity_proof_no" maxlength="500" placeholder="" hidden="true">
-              </div>
+              </div>-->
               <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
                 <label for="identity_proof_doi"><?php print_r($this->label->get_short_name($elements, 20)); ?></label>
                 <input type="text" class="form-control" name="identity_proof_doi" id="identity_proof_doi" value="<?php echo set_value('identity_proof_doi', @$myArray[0]->identity_proof_doi); ?>"placeholder=""> 
@@ -289,10 +305,16 @@ if(isset($farma))
                 </select> 
                 <div class="error"><?php echo form_error('idres_proof_id'); ?></div>
               </div>
+              <?php        
+         $idress_no=base64_decode($myArray[0]->idres_proof_no ?? '');
+           if($idress_no !='')
+           {
+           $idress_no='XXXX-XXXX-XXXX-'.substr($idress_no,-4); 
+           }?>
               <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
                 <label for="idres_proof_no"><?php print_r($this->label->get_short_name($elements, 25)); ?></label>
                 <input type="text" class="form-control" name="idres_proof_no" id="idres_proof_no" value="<?php echo set_value('idres_proof_no',
-                base64_decode(@$myArray[0]->idres_proof_no)); ?>" maxlength="500" placeholder="">
+                @$idress_no); ?>" maxlength="500" placeholder="">
               </div>
               <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
                 <label for="idres_proof_doi"><?php print_r($this->label->get_short_name($elements, 26)); ?></label> 

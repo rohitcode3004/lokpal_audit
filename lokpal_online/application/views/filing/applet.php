@@ -350,10 +350,17 @@ $elements = $this->label->view(1);
                       </select>    
                       <div class="error"><?php echo form_error('aidentity_proof_id'); ?></div>       
                     </div>
+                    <?php        
+           $id_no=base64_decode($partb['aidentity_proof_no'] ?? '');
+           if($id_no !='')
+           {
+           $id_no='XXXX-XXXX-XXXX-'.substr($id_no,-4); 
+           }?>
 
                     <div class="col-md-4 mb-15">
                       <label for="aidentity_proof_no"><?php print_r($this->label->get_short_name($elements, 84)); ?></label>
-                      <input type="text" class="form-control" name="aidentity_proof_no" id="aidentity_proof_no" value="<?php if(isset($partb)) echo base64_decode($partb['aidentity_proof_no']); else echo set_value('aidentity_proof_no');?>" placeholder="" maxlength="500">
+                      <input type="text" class="form-control" name="aidentity_proof_no" id="aidentity_proof_no" 
+                      value="<?php if(isset($partb)) echo $id_no; else echo set_value('aidentity_proof_no');?>" placeholder="" maxlength="500">
                     </div>
 
                     <div class="col-md-4 mb-15">
@@ -413,10 +420,17 @@ $elements = $this->label->view(1);
                       <div class="error"><?php echo form_error('aidres_proof_id'); ?></div>    
                     </div>
 
+                            <?php        
+           $idres_no=base64_decode($partb['aidres_proof_no'] ?? '');
+           if($idres_no !='')
+           {
+           $idres_no='XXXX-XXXX-XXXX-'.substr($idres_no,-4); 
+           }?>
+
                     <div class="col-md-4 mb-15">
                       <label for="aidres_proof_no"><?php print_r($this->label->get_short_name($elements, 114)); ?></label>
                       <input type="text" class="form-control" name="aidres_proof_no" id="aidres_proof_no" value="<?php   if(isset($partb)) 
-                      echo base64_decode($partb['aidres_proof_no']); else echo set_value('aidres_proof_no');?>" placeholder="" maxlength="500">
+                      echo $idres_no; else echo set_value('aidres_proof_no');?>" placeholder="" maxlength="500">
                     </div>
 
                     <div class="col-md-4 mb-15">
