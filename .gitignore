@@ -1,5 +1,10 @@
 .DS_Store
 
+/lokpal_online/application/config/config.php
+/lokpal_online/application/config/database.php
+/lokpal_online/cdn/*
+/lokpal_online/captcha_images/*
+
 /lokpal_online/application/cache/*
 !/lokpal_online/application/cache/index.html
 
