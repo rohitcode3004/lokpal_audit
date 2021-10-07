@@ -38,7 +38,7 @@ function CheckPassword(inputtxt)
 <div class="login-box">
   <div class="login-form">
     <div class="login-main">
-      <h6 class="sec-one">Update Your password_old! <i class="fa fa-hand-o-down" aria-hidden="true"></i></h6>
+      <h6 class="sec-one">Update Your password! <i class="fa fa-hand-o-down" aria-hidden="true"></i></h6>
       <div class="speci-login first-look">
         <img src="<?php echo base_url(); ?>assets/my_assets/images/user.png" alt="">
       </div>

@@ -539,7 +539,7 @@ class Filing extends CI_Controller {
 				 $idres_proof_no_encrypted=trim($this->input->post('idres_proof_no')); 
 				 $idres_proof_no_decrypted = decode($idres_proof_no_encrypted);
 
-				$idress_no=explode("-",$identity_proof_no_decrypted);
+				$idress_no=explode("-",$idres_proof_no_decrypted);
 				if($idress_no[0]=='XXXX')
 				{
 					 $idres_proof_no=$myArray[0]->idres_proof_no ?? '';
