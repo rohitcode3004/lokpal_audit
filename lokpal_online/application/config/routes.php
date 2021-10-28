@@ -104,6 +104,7 @@ $route['scrutiny/dash'] = 'scrutiny/dashboard';
 $route['scrutiny/dash/def'] = 'scrutiny/dashboard_def';
 $route['scrutiny/list'] = 'scrutiny/scrutiny_report';
 $route['case-search'] = 'search/search_case';
+$route['judiciary-case-search'] = 'scrutiny/judiciary_search';
 $route['checklist'] = 'scrutiny/checklist';
 $route['re-entry'] = 'scrutiny/openedit';
 $route['report/external-agency-inquiry'] = 'scrutiny/agency_report_chk/RI';
@@ -114,6 +115,7 @@ $route['opportunity/list-of-public-servant-investigation'] = 'scrutiny/ps_report
 $route['any-other-action/list-of-report'] = 'scrutiny/ps_report_chk/AOA';
 $route['report/submission-any-other-action'] = 'scrutiny/aoa_proceeding_form';
 $route['report/opportunity-after-inquiry-investigation'] = 'scrutiny/ops_proceeding_form';
+$route['scrutiny/upload_doc_submit'] = 'scrutiny/upload_doc_submit';
 
 
 //chairperson
