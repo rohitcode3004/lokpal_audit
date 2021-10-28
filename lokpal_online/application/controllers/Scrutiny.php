@@ -4996,6 +4996,148 @@ public function status_open_for_edit_complaint(){
 	}
 
 
+		public function judiciary_search(){
+
+		$data['user'] = $this->login_model->getRows($this->con);
+
+		$this->load->helper("date_helper");
+		$this->load->helper("compno_helper");
+		$userid=$data['user']['id'];
+		$data['menus'] = $this->menus_lib->get_menus($data['user']['role']);
+
+		$this->load->view('templates/front/SC_Header.php',$data);
+		$this->load->view('scrutiny/search_case_judiciary.php',$data);
+		$this->load->view('templates/front/CE_Footer.php',$data);
+	}
+
+
+	public function upload_extra_doc()
+	{
+	//print_r($_FILES);die;	
+		if($this->input->post('filing_no'))
+		{
+			$filing_no=$this->input->post('filing_no');	
+
+			$order_date=$this->input->post('order_date');	
+
+			
+			
+			//print_r($_FILES['doc_upload']);die;
+			if(isset($_FILES['doc_upload'])){
+			//print_r($_FILES);die;
+			$extra_doc_count = $this->scrutiny_model->get_extra_doc_count($filing_no);
+
+				//echo "<pre>";
+			//print_r($extra_doc_count);die();
+
+
+			// $extra_doc_count = $extra_doc_count[0]->extra_doc_count;
+			//echo "<pre>";
+			//print_r($extra_doc_count);die();
+			if($extra_doc_count == 0)
+			{
+				$extra_doc_count = 1;
+			}
+			else
+			{
+					$extra_doc_count = $extra_doc_count+1;
+			}
+				
+		
+			$filing_no = $this->input->post('filing_no');
+			$config['upload_path']   = './cdn/extra_doc/'; 
+	        $config['allowed_types'] = 'pdf'; 
+	        //$config['max_size']      = 2000; 
+	       	$config['file_name'] = 'extra_doc_'.$filing_no.'_'.$extra_doc_count.'.pdf';
+
+	        $this->upload->initialize($config);
+	        $this->load->library('upload', $config);
+
+	        if ( ! $this->upload->do_upload('doc_upload')) {
+
+	        
+	            $error = array('error' => $this->upload->display_errors()); 
+	            //print_r($error['error']);die;
+	            $this->session->set_flashdata('upload_error', $error['error']);
+	        
+
+	           // print_r($data['user']['id']);die;
+
+				$data['menus'] = $this->menus_lib->get_menus($data['user']['role']);
+				$filing_no = $this->input->post('filing_no');
+				$data['filing_no'] = $filing_no;
+
+
+		//$data['last_timestamp'] = $last_remarks[0]->updated_date;
+	      	//$this->load->view('templates/front/header2.php',$data);
+
+				$this->load->view('templates/front/SC_Header.php',$data);
+
+				$this->load->view('scrutiny/search_case_judiciary.php',$data);
+
+				$this->load->view('templates/front/CE_Footer.php',$data);
+
+	         }else{	         
+				
+				$ts = date('Y-m-d H:i:s', time());
+				$created_at = $ts;
+
+				    $data['user'] = $this->login_model->getRows($this->con);
+	               $user_id=$data['user']['id'];
+				//$updated_at = ;
+				$ip = get_ip();
+
+
+
+					$insert_data = array(
+								'filing_no' => $filing_no,										
+								'order_date' => $order_date,										
+								'doc_upload_url' => $config['file_name'],
+								'doc_type'	=> 'E',
+								'extra_doc_count' => $extra_doc_count,									
+								'ip' => $ip,									
+								'created_at' => $ts,
+								'user_id' => $user_id,		
+									);
+					$query1 = $this->scrutiny_model->insert_extra_doc($insert_data);
+					if($query1){
+
+						 
+
+						$this->session->set_flashdata('success_msg', '<div class="alert alert-success"><h4 class="m-0">Successfully uploaded documents with filing no. '.$filing_no.'.</h4></div>');
+							redirect('scrutiny/judiciary_search');
+					}else{
+						die('Some problem occured during insertion');
+					}	
+	         }
+
+	     }else{
+
+			$data['user'] = $this->login_model->getRows($this->con);
+
+	           // print_r($data['user']['id']);die;
+
+			$data['menus'] = $this->menus_lib->get_menus($data['user']['role']);
+			$filing_no = $this->input->post('filing_no');
+			$data['filing_no'] = $filing_no;
+
+
+		//$data['last_timestamp'] = $last_remarks[0]->updated_date;
+	      	//$this->load->view('templates/front/header2.php',$data);
+
+				$this->load->view('templates/front/SC_Header.php',$data);
+
+				$this->load->view('scrutiny/search_case_judiciary.php',$data);
+
+				$this->load->view('templates/front/CE_Footer.php',$data);
+		}
+		}else
+		{
+			redirect('/scrutiny/dashboard');
+		}
+	}
+
+
 }
 
 

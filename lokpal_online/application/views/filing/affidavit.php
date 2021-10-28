@@ -1306,9 +1306,13 @@ $this->load->helper("date_helper");
                   {
                     $public_servantc['pss_sbbca']='Yes';
                   }
-                  else
+                   elseif($public_servantc['pss_sbbca']=='2')
                   {
                     $public_servantc['pss_sbbca']='No';
+                  }
+                  else
+                  {
+                    $public_servantc['pss_sbbca']='N/A';
                   }
                   echo $public_servantc['pss_sbbca'] ?? ''; 
                 ?>
@@ -1607,8 +1611,8 @@ $this->load->helper("date_helper");
       ?> 
       <?php if($status == 't') { ?>
       <div class="alert alert-success msg-box">
-        <h3 class="text-center"  id="success_msg">Complaint submitted successfully</h3>
-        <h4 class="text-center" id="filing_no">Please note the 
+        <h3 class="text-center"  id="success_msg">Your application/complaint form has been diarised vide</h3>
+        <h4 class="text-center" id="filing_no"> 
                 <span><b>Dairy no. </b><?php echo $filing_no; ?></span>
              </h4> 
         <h4 class="text-center" id="quote_msg">Please quote the above diary no in all future communications.</h4>

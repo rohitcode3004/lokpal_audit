@@ -865,6 +865,44 @@ function get_previous_complaint_remarks($fn)
 		    }
 		}
 
+/*
+		function get_extra_doc_count($filing_no)
+		{
+			//$this->db->select('proceeding_count');
+			//$this->db->from('case_proceeding');
+			//$this->db->where('filing_no', $filing_no);
+			//return $this->db->get()->row();
+
+			$this->db->where('filing_no',$filing_no);
+		    $query = $this->db->get('extra_doc_uploaded');
+
+			//echo $this->db->last_query();die('ooo');
+		    if ($query->num_rows() > 0){
+		        return $query->result();
+		    }
+		    else{
+		        return 0;
+		    }
+		}*/
+
+			function get_extra_doc_count($filing_no)
+		{
+			$this->db->select('filing_no');
+			$this->db->where('filing_no', $filing_no);
+			$query = $this->db->get('extra_doc_uploaded');
+			return $query->num_rows();
+		}
+
+
+
+
+	function insert_extra_doc($insert_data)
+		{
+			$this->db->insert('extra_doc_uploaded',$insert_data);
+    		return ($this->db->affected_rows() != 1) ? false : true;
+		}
+
+
 
 }
 ?>

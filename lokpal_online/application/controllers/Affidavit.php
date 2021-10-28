@@ -463,9 +463,13 @@ if($ps_psssbbca ='1')
   $ps_psssbbca="Yes";
 
 }
+elseif($ps_psssbbca =='2')
+{
+  $ps_psssbbca='No';
+}
 else
 {
-  $ps_psssbbca="No";
+  $ps_psssbbca="N/A";
 
 }
 
@@ -1119,9 +1123,13 @@ if($public_servant_detail){
       {
         $value->ad_pss_sbbca='Yes';
       }
+      elseif($value->ad_pss_sbbca=='2')
+      {
+         $value->ad_pss_sbbca='No';
+      }
       else
       {
-        $value->ad_pss_sbbca='No';
+        $value->ad_pss_sbbca='N/A';
       }
 
        $value->ad_ps_pl_stateid;
