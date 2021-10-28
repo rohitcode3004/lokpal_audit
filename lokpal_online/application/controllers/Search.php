@@ -262,6 +262,8 @@ class Search extends CI_Controller {
 
 
 	public function search_case_detail_leg(){
+
+
 		$data['user'] = $this->login_model->getRows($this->con);
 		$this->load->helper("date_helper");
 		$this->load->helper("compno_helper");
@@ -272,9 +274,14 @@ class Search extends CI_Controller {
 		$this->load->view('templates/front/SC_Header.php',$data);
 
 		$search_case= ($this->input->post('search_case'));
+
+		$from_type = $this->input->post('from_type');
+	//if($from_type == 'judi'){
+
+
 //echo "here";
 //$complaint_number= ($this->input->post('complaint_number'));
-		if($search_case=='3')
+		if($search_case=='3' || $from_type=='judi')
 		{
 
 
@@ -337,7 +344,7 @@ class Search extends CI_Controller {
 			$data_view['case_detail']= $this->search_model->case_search_by_date_leg($dt_of_filing_from,$dt_of_filing_to);
  
 		}
-		if($search_case=='3')
+		if($search_case=='3' || $from_type=='judi')
 		{
 			$complaint_number= ($this->input->post('complaint_number'));
 			$var = preg_split("#/#", $complaint_number);
@@ -360,8 +367,20 @@ if(isset($data_view['case_detail']))
 	$data_view['error']= "";
 }
 
+if($this->input->post('from_type') != null)
+{
+	$from_type = $this->input->post('from_type');
+	if($from_type == 'judi'){
+		//print_r($data_view);
+		$this->load->view('scrutiny/search_case_judiciary.php',$data_view);
+		$this->load->view('templates/front/CE_Footer.php',$data);
+		//die;
+	}
+}else{
+
 $this->load->view('search/search_case_action.php',$data_view);
 $this->load->view('templates/front/CE_Footer.php',$data);
+}
 }
 
 

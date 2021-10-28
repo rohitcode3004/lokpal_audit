@@ -21,13 +21,13 @@
 	
 
 							  	<div class="col-lg-4 col-sm-4 mb-15">
-							  		<a href="#" class="widgets-card gd-cyanblue widgets-contentt">
+							  		<a href="<?php echo base_url('e-filing/form'); ?>" class="widgets-card gd-cyanblue widgets-contentt">
 							  			<div class="widgets-icon">
 							  				<span>
 							  					<i class="fa fa-file-text-o" aria-hidden="true"></i>
 							  				</span>
 							  			</div>
-							  			<div class="widgets-content" id="xyz">Lodge a new Complaint</div>
+							  			<div class="widgets-content" id="" >Lodge a new Complaint</div>
 							  			<i class="fa fa-sitemap transparent_icon" aria-hidden="true"></i>
 							  		</a>
 							  	</div>

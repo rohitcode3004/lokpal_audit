@@ -110,7 +110,7 @@
 			//$data['procetot_comps'] = $this->proceeding_model->get_proce_tot_count();
 			//$data['procepen_comps'] = $this->proceeding_model->get_proce_pen_count();
 			//$data['procedon_comps'] = $this->proceeding_model->get_proce_don_count();
-			if($data['user']['id'] != 1308 && $data['user']['role'] == 147) { //means its not a courtmaster but benchuser
+			if(($data['user']['id'] != 1308 && $data['user']['role'] == 147) && ($data['user']['id'] != 1375 && $data['user']['role'] == 147)) { //means its not a courtmaster but benchuser
 
 				$data['logged_judge_code'] = get_logged_judge_code($data['user']['id']);
 			//echo $logged_judge_code;die;

@@ -19,6 +19,10 @@
                                 echo 'n/a';
                               }?></div>
 						<div class="panel-body">
+							<?php 
+							if($user['id']!='1342')
+							{
+							?>
 							<div class="row">
 								<div class="col-lg-6 col-sm-6 mb-15" id="divFY">
 							  		<a href="<?php echo base_url('scrutiny/dash'); ?>" class="widgets-card gd-blueviolet">
@@ -42,7 +46,7 @@
 							</div>
  <?php   //print_r($data['user']['id']);
 //echo $user['id'];
-
+}
  //die;
  if($user['id']=='1317')
 {
@@ -151,11 +155,35 @@
                     	</div>
                     </div>
 
-                <?php } ?>
+                <?php }
+ 				if($user['id']=='1342')
+					{
+ 				?>
+ 					<div class="row">
+                    	<div class="col-md-12">
+                    		<div class="panel panel-default">
+                    			<!--<div class="panel-heading">Any Other Report Received</div>-->
+							  <div class="panel-body">
+							  	<div class="row">
+							  		<div class="col-md-6 mb-15">
+							  			<a href="<?php //echo base_url("proceeding/dashboard/$bench_no/RI");
+							  				echo base_url("judiciary-case-search");
 
+							  			 ?>" class="widgets-card gd-cyanblue" data-toggle="tooltip" data-placement="bottom">
+							  				
+							  				<div class="widgets-content">Search for complaint</div>
+							  				<i class="fa fa-file-text-o transparent_icon" aria-hidden="true"></i>
+							  			</a>
+							  		</div>
+							  	</div>
+							  </div>
+							</div>
+                    	</div>
+                    </div>
 
-
-
+ 				<?php 
+ 				}
+ 				?>
 						</div>
 				</div>
 			</div>
