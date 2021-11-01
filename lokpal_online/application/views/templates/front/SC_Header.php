@@ -246,6 +246,14 @@ function freshApp(){
                 					<span>Search legacy/New complaint</span> 
                 				</a>
                 			</li>
+
+                            <li>
+                                <a href="<?php echo base_url('order-report/list-of-order-report'); ?>">
+                                    <i class="fa fa-search side-menu_icon" aria-hidden="true"></i>
+                                    <span>View Order/Report</span> 
+                                </a>
+                            </li>
+
                 			<li>
                 				<a href="#">
                 					<i class="fa fa-user-o side-menu_icon" aria-hidden="true"></i> 
