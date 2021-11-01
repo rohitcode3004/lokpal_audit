@@ -1,12 +1,9 @@
       <!-- JQuery DataTable Css -->
       <link href="<?php echo base_url();?>assets/admin_material/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
-
-
-
     <div class="app-content">
         <div class="main-content-app">
             <div class="page-header">
-                <h4 class="page-title">MIS Reports</h4>
+                <h4 class="page-title"></h4>
                 <ol class="breadcrumb"> 
                     <li class="breadcrumb-item"><a href="#">Dashboad</a></li> 
                     <li class="breadcrumb-item active" aria-current="page">MIS Reports</li> 
@@ -17,7 +14,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-default">
-                        <div class="panel-heading">List of Cases
+                        <div class="panel-heading">External Uploaded Report
                             <ul class="more-action">
                                 <li><a href="<?php echo base_url(); ?>order-report/list-of-order-report" class="previous">&laquo; Back</a></li>
                             </ul>
@@ -29,63 +26,40 @@
                                 <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                                     <thead>
                                         <tr>
-                                           <th>S.No.</th>
-                                                <th>Complaint No</th>
-                                                 <th>Listing Date</th>
-                                                <th>Name of the complainant</th>
-                                                <th>Name of public servant</th>
-                                                <th>Date of filing</th>
-                                                 <th>Order</th>
-                                                <th>Agency Report</th>
-                                                 <th>External Report</th>
+                                           <!--<th>S.No.</th>-->
+                                              <th>Diary No</th>
+                                                <th> Date of Submission</th>                            
+                                                <th>Show External Report</th>
+                                                                                       
                                             
                                         </tr>
                                     </thead>
         <tbody>
 
                         <?php
-                        //echo "<pre>";
-                       //print_r($case_list);
+                       //echo "<pre>";
+                      // print_r($external_report_data);
             $c = 1;
-            foreach($case_list as $row):
+            foreach($external_report_data as $row):
               ?>
-            <tr>
-                <td><?php echo $c++.'.'; ?></td>
-                <td><b><?php echo get_complaintno($row->filing_no); ?></b></td>
-                 <td><b><?php echo get_displaydate($row->listing_date); ?></b></td>
-                 <td>
-                <?php
-                    echo $row->first_name.' '.$row->mid_name.' '.$row->sur_name; ?></td>
-               
-                <td><?php                    
-                      echo $row->ps_first_name.' '.$row->ps_mid_name.' '.$row->ps_sur_name; ?>
-                 </td>
-            <td><?php
-                 echo get_displaydate($row->dt_of_filing); ?>
-
-                </td>
-                 
-               <td><a href="<?php echo base_url();?>order_report/display_order_proc/<?php echo $row->filing_no ?>">Show order</a></td>
-                 <td><a href="<?php echo base_url();?>order_report/display_report_agency/<?php echo $row->filing_no ?>">Show report</a></td>
-                   <td><a href="<?php echo base_url();?>order_report/display_external_report/<?php echo $row->filing_no ?>">Show report</a></td>
-            </tr>
+           <tr>
+                                         <!-- <td><?php echo $sno++.'.'; ?></td>-->
+                                          <td><?php echo $row->filing_no; ?></td>
+                                          <td><?php echo get_displaydate($row->order_date); ?></td>                          
+                                          <td><a href="<?php echo base_url().$row->doc_upload_url; ?>" target="_blank" alt=""><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Preview report uploaded</a></td>
+                                        </tr>
              <?php endforeach;
-            if(count($case_list) == 0){ ?>
-              <tr><td colspan="8"> <h3>No data found. </h3></td></tr>
+            if(count($external_report_data) == 0){ ?>
+              <tr></tr>
            <?php }
            ?>
         </tbody>
                                     <tfoot>
                                         <tr>
-                                           <th>S.No.</th>
-                                                <th>Complaint No</th>
-                                                 <th>Listing Date</th>
-                                                <th>Name of the complainant</th>
-                                                <th>Name of public servant</th>
-                                                <th>Date of filing</th>
-                                                <th>Order</th>
-                                                <th>Agency Report</th>
-                                                <th>External Report</th>
+                                          <!-- <th>S.No.</th>-->
+                                               <th>Diary No</th>
+                                                <th> Date of Submission</th>                            
+                                                <th>Show External Report</th>
                                             
                                         </tr>
                                     </tfoot>

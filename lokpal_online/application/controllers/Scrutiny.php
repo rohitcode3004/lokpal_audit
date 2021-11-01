@@ -5045,6 +5045,8 @@ public function status_open_for_edit_complaint(){
 				
 		
 			$filing_no = $this->input->post('filing_no');
+
+
 			$config['upload_path']   = './cdn/extra_doc/'; 
 	        $config['allowed_types'] = 'pdf'; 
 	        //$config['max_size']      = 2000; 
@@ -5087,12 +5089,12 @@ public function status_open_for_edit_complaint(){
 				//$updated_at = ;
 				$ip = get_ip();
 
-
+   				 $doc_upload_url='cdn/extra_doc/extra_doc_'.$filing_no.'_'.$extra_doc_count.'.pdf';
 
 					$insert_data = array(
 								'filing_no' => $filing_no,										
 								'order_date' => $order_date,										
-								'doc_upload_url' => $config['file_name'],
+								'doc_upload_url' => $doc_upload_url,
 								'doc_type'	=> 'E',
 								'extra_doc_count' => $extra_doc_count,									
 								'ip' => $ip,									

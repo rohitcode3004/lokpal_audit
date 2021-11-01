@@ -608,6 +608,58 @@ $elements = $this->label->view(1);
         </div>
         <?php } ?>
 
+
+         <?php
+
+         $external_report_data= $this->agency_model->getExternal_report_data($filing_no);         
+          $ct=count($external_report_data);
+          if($ct > 0)
+          {
+                $external_report_data=(array)$external_report_data;
+
+                /*echo "<pre>";
+                print_r($external_report_data);die;
+               $filing_no=$ageData[0]->filing_no ?? '';
+               $bench_name=$ageData[0]->bench_name ?? '';
+               $dt_submission=$ageData[0]->dt_submission ?? '';
+               $team_lead_nm=$ageData[0]->team_lead_nm ?? '';
+               $contact_no=$ageData[0]->contact_no ?? '';
+               $email_id=$ageData[0]->email_id ?? '';
+               $bench_no=$ageData[0]->bench_no ?? '';
+               $listing_date=$ageData[0]->listing_date ?? '';
+               $report_upload=$ageData[0]->report_upload ?? '';*/
+                
+        ?>
+
+        <div class="panel panel-primary">
+          <div class="panel-heading">External Uploaded Report</div>
+          <div class="panel-body">
+            <table class="table">
+              <tbody id="proceeding-info">
+                <tr class='error'>
+                  <th style="width:10px;">S no.</th>
+                  <th style="width:100px;">Date of Submission</th>
+                  <th> Show uploaded report</th>
+                </tr>
+                <?php
+                $sno = 1;
+                foreach($external_report_data as $row):
+                  ?>
+                <tr>
+                <td style="width:10px;"><?php echo $sno++.'.'; ?></td>
+                <td style="width:100px;"><?php echo get_displaydate($row->order_date); ?></td>
+                <td><a href="<?php echo base_url().$row->doc_upload_url; ?>" target="_blank" alt="">Preview uploaded report</a></td>
+              </tr>
+              <?php endforeach;                
+              ?>
+                
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <?php } ?>
+
+
         <div class="panel panel-primary">
           <div class="panel-heading">Fill Proceeding Details -</div>
           <div class="panel-body">
