@@ -277,6 +277,18 @@ class Agency_model extends CI_Model
 			else
 				return $query->result();	
 	}
+
+
+
+		public function getExternal_report_data($filing_no)
+	{	 
+		$sql = "select * from extra_doc_uploaded where filing_no='".$filing_no."'";
+		$query 	= $this->db->query($sql)->result();
+		return $query;			
+	}
+
+
+
 }
 
 
