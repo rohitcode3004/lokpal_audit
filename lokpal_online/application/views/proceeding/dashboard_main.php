@@ -32,7 +32,7 @@
 
                                 	//if($user['id'] != '1308' || $user['id'] != '1345')
                                 	//{
-                                    if (1308 != $user['id'] && 1375 != $user['id']) {      //not courtmaster
+                                    if (1308 != $user['id'] && 1356 != $user['id']) {      //not courtmaster
                                         $bench_id = $row->id;
                                         //echo $row->bench_id;die();
                                         $judge_code_array = get_judge_code($bench_id);

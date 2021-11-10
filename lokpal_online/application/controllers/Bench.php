@@ -161,6 +161,8 @@ class Bench extends CI_Controller {
 
 		$data['purpose_type'] = $this->bench_model->fetch_purpose_type();
 
+		$data['all_courtmasters'] = $this->bench_model->fetch_all_courtmaster();
+
 		
 		$this->load->view('templates/front/dheader.php',$data);
 
@@ -373,6 +375,7 @@ class Bench extends CI_Controller {
 				}
 			}elseif($radio == 'old'){
 				//die('exis');
+				$courtmaster_id = $this->input->post('courtmaster');
 				$bench_id = explode('/', $this->input->post('newbench'));
 				$bench_id = $bench_id[1];
 				//print_r($bench_id);die('k');
@@ -479,6 +482,7 @@ class Bench extends CI_Controller {
 					'bench_no'=>$new_bno,				
 					'bench_id'=>$count,				
 					'remarks'=>$remarks,				
+					'courtmaster_id'=>$courtmaster_id,				
 					//'court_no'=>$court_no,	
 					//'bench_nature' => $bench_nature,			
 				);

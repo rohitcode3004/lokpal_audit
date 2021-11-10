@@ -554,6 +554,21 @@ $public_servant_name=$ps_first_name.' '.$ps_mid_name.' '.$ps_sur_name;
                                         <h4 class="panel-title">Bench Allocation -</h4>
                                       </div>
                                       <div class="panel-body">
+
+                                      <div class="row">
+                                          <div class="col-md-4">
+                                            <label for="courtmaster"><span style="color: red;">*</span>Courtmaster</label>
+                                            <select type="text" class="form-control chosen-single chosen-default" name="courtmaster" id="courtmaster">
+                                          <option value="">-- Select Courtmaster --</option>
+                                        <?php foreach($all_courtmasters as $row):?>              
+                                          <option value="<?php echo $row->id;?>"> <?php echo $row->username; ?> </option>
+                                        <?php endforeach;?>
+                                        </select> 
+                                      <div class="error"><?php echo form_error('courtmaster'); ?></div>
+                                          </div>
+                                        </div>
+                                        <br>
+
                                         <?php if($user['id'] != 1303) { ?>
                                         <div class="row">
                                           <div class="col-md-4">

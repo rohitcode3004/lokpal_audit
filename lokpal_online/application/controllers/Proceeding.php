@@ -70,7 +70,7 @@
 
 			$data['menus'] = $this->menus_lib->get_menus($data['user']['role']);
 
-			if($data['user']['id'] != 1308 && $data['user']['role'] == 147) { //means its not a courtmaster but benchuser
+			if($data['user']['id'] != 1308 && $data['user']['role'] == 147 && ($data['user']['id'] != 1356 && $data['user']['role'] == 147)) { //means its not a courtmaster but benchuser
 
 				$data['logged_judge_code'] = get_logged_judge_code($data['user']['id']);
 			//echo $logged_judge_code;die;
@@ -80,7 +80,7 @@
 			}
 			
 			$bid_array = get_bench_ids_bybno($bench_no);
-			$data['allocated_data'] = $this->proceeding_model->get_allocated_data($bid_array, $flag);
+			$data['allocated_data'] = $this->proceeding_model->get_allocated_data($bid_array, $flag, $data['user']['id']);
 			$data['scrpen_comps'] = $this->scrutiny_model->get_scrutiny_pen_complaints_bench($data['user']['role'], $data['user']['id']);
 
 			$data['purpose_type'] = $this->bench_model->fetch_purpose_type();
@@ -110,7 +110,7 @@
 			//$data['procetot_comps'] = $this->proceeding_model->get_proce_tot_count();
 			//$data['procepen_comps'] = $this->proceeding_model->get_proce_pen_count();
 			//$data['procedon_comps'] = $this->proceeding_model->get_proce_don_count();
-			if(($data['user']['id'] != 1308 && $data['user']['role'] == 147) && ($data['user']['id'] != 1375 && $data['user']['role'] == 147)) { //means its not a courtmaster but benchuser
+			if(($data['user']['id'] != 1308 && $data['user']['role'] == 147) && ($data['user']['id'] != 1356 && $data['user']['role'] == 147)) { //means its not a courtmaster but benchuser
 
 				$data['logged_judge_code'] = get_logged_judge_code($data['user']['id']);
 			//echo $logged_judge_code;die;
@@ -148,9 +148,9 @@
 			$data['menus'] = $this->menus_lib->get_menus($data['user']['role']);
 
 			$bid_array = get_bench_ids_bybno($bench_no);
-			$data['allocated_data_count'] = $this->proceeding_model->get_allocated_data_count($bid_array);
-			$data['inq_data_count'] = $this->proceeding_model->get_inq_data_count($bid_array);
-			$data['inv_data_count'] = $this->proceeding_model->get_inv_data_count($bid_array);
+			$data['allocated_data_count'] = $this->proceeding_model->get_allocated_data_count($bid_array, $data['user']['id']);
+			$data['inq_data_count'] = $this->proceeding_model->get_inq_data_count($bid_array, $data['user']['id']);
+			$data['inv_data_count'] = $this->proceeding_model->get_inv_data_count($bid_array, $data['user']['id']);
 
 			//$data['scrpen_comps_count'] = $this->scrutiny_model->get_scrutiny_pen_complaints_bench_count($data['user']['role'], $data['user']['id']);
 			$data['agency_data_count'] = $this->agency_model->get_agency_data_bench_count();
@@ -160,9 +160,9 @@
 
 			/*ysc code start 8july */
 
-			$data['ops_inq_report_count'] = $this->proceeding_model->get_ops_inq_report_count($bid_array);
-			$data['ops_inv_report_count'] = $this->proceeding_model->get_ops_inv_report_count($bid_array);
-			$data['aoa_report_count'] = $this->proceeding_model->get_aoa_report_count($bid_array);
+			$data['ops_inq_report_count'] = $this->proceeding_model->get_ops_inq_report_count($bid_array, $data['user']['id']);
+			$data['ops_inv_report_count'] = $this->proceeding_model->get_ops_inv_report_count($bid_array, $data['user']['id']);
+			$data['aoa_report_count'] = $this->proceeding_model->get_aoa_report_count($bid_array, $data['user']['id']);
 
 			/*ysc code end 8jul */
 

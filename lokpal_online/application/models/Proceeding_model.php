@@ -7,25 +7,25 @@ class Proceeding_model extends CI_Model
 		parent::__construct();
 	}
 
-    public function get_allocated_data($bench_ids, $flag)
+    public function get_allocated_data($bench_ids, $flag, $user_id)
     {
         if($flag == 'F'){
-            $sql1 = 'select a.bench_id, a.filing_no, a.id, a.listing_date, a.purpose, a.venue, a.created_at, c.first_name, c.mid_name, c.sur_name, a.bench_no, c.ref_no, p.ps_desig, p.ps_orgn from case_allocation a inner join complainant_details_parta c on a.filing_no=c.filing_no inner join public_servant_partc p on a.filing_no=p.filing_no inner join case_detail d on a.filing_no=d.filing_no where a.proceeded=FALSE and d.listed=TRUE and a.bench_id in ('.implode(',', $bench_ids).') and a.filing_no not in(select a.filing_no from case_allocation a inner join case_detail d on a.filing_no=d.filing_no inner join case_proceeding cp on a.filing_no=cp.filing_no where a.proceeded=FALSE and d.listed=TRUE and cp.ordertype_code!=4 and a.bench_id in ('.implode(',', $bench_ids).')) order by d.complaint_year, d.complaint_no';
+            $sql1 = 'select a.bench_id, a.filing_no, a.id, a.listing_date, a.purpose, a.venue, a.created_at, c.first_name, c.mid_name, c.sur_name, a.bench_no, c.ref_no, p.ps_desig, p.ps_orgn from case_allocation a inner join complainant_details_parta c on a.filing_no=c.filing_no inner join public_servant_partc p on a.filing_no=p.filing_no inner join case_detail d on a.filing_no=d.filing_no where a.proceeded=FALSE and (a.courtmaster_id='.$user_id.' or a.courtmaster_id is NULL) and d.listed=TRUE and a.bench_id in ('.implode(',', $bench_ids).') and a.filing_no not in(select a.filing_no from case_allocation a inner join case_detail d on a.filing_no=d.filing_no inner join case_proceeding cp on a.filing_no=cp.filing_no where a.proceeded=FALSE and (a.courtmaster_id='.$user_id.' or a.courtmaster_id is NULL) and d.listed=TRUE and cp.ordertype_code!=4 and a.bench_id in ('.implode(',', $bench_ids).')) order by d.complaint_year, d.complaint_no';
         }
         elseif($flag == 'I'){
-            $sql1 = 'select a.bench_id, a.filing_no, a.id, a.listing_date, a.purpose, a.venue, a.created_at, c.first_name, c.mid_name, c.sur_name, a.bench_no, c.ref_no, p.ps_desig, p.ps_orgn from case_allocation a inner join complainant_details_parta c on a.filing_no=c.filing_no inner join public_servant_partc p on a.filing_no=p.filing_no inner join case_detail d on a.filing_no=d.filing_no inner join case_proceeding cp on a.filing_no=cp.filing_no where cp.ordertype_code=1 and a.proceeded=FALSE and d.listed=TRUE and a.bench_id in ('.implode(',', $bench_ids).') order by d.complaint_year, d.complaint_no';
+            $sql1 = 'select a.bench_id, a.filing_no, a.id, a.listing_date, a.purpose, a.venue, a.created_at, c.first_name, c.mid_name, c.sur_name, a.bench_no, c.ref_no, p.ps_desig, p.ps_orgn from case_allocation a inner join complainant_details_parta c on a.filing_no=c.filing_no inner join public_servant_partc p on a.filing_no=p.filing_no inner join case_detail d on a.filing_no=d.filing_no inner join case_proceeding cp on a.filing_no=cp.filing_no where cp.ordertype_code=1 and a.proceeded=FALSE and (a.courtmaster_id='.$user_id.' or a.courtmaster_id is NULL) and d.listed=TRUE and a.bench_id in ('.implode(',', $bench_ids).') order by d.complaint_year, d.complaint_no';
         }
         elseif($flag == 'V'){
-            $sql1 = 'select a.bench_id, a.filing_no, a.id, a.listing_date, a.purpose, a.venue, a.created_at, c.first_name, c.mid_name, c.sur_name, a.bench_no, c.ref_no, p.ps_desig, p.ps_orgn from case_allocation a inner join complainant_details_parta c on a.filing_no=c.filing_no inner join public_servant_partc p on a.filing_no=p.filing_no inner join case_detail d on a.filing_no=d.filing_no inner join case_proceeding cp on a.filing_no=cp.filing_no where cp.ordertype_code=2 and a.proceeded=FALSE and d.listed=TRUE and a.bench_id in ('.implode(',', $bench_ids).') order by d.complaint_year, d.complaint_no';
+            $sql1 = 'select a.bench_id, a.filing_no, a.id, a.listing_date, a.purpose, a.venue, a.created_at, c.first_name, c.mid_name, c.sur_name, a.bench_no, c.ref_no, p.ps_desig, p.ps_orgn from case_allocation a inner join complainant_details_parta c on a.filing_no=c.filing_no inner join public_servant_partc p on a.filing_no=p.filing_no inner join case_detail d on a.filing_no=d.filing_no inner join case_proceeding cp on a.filing_no=cp.filing_no where cp.ordertype_code=2 and a.proceeded=FALSE and (a.courtmaster_id='.$user_id.' or a.courtmaster_id is NULL) and d.listed=TRUE and a.bench_id in ('.implode(',', $bench_ids).') order by d.complaint_year, d.complaint_no';
         }
         elseif($flag == 'OPI'){
-            $sql1 = 'select a.bench_id, a.filing_no, a.id, a.listing_date, a.purpose, a.venue, a.created_at, c.first_name, c.mid_name, c.sur_name, a.bench_no, c.ref_no, p.ps_desig, p.ps_orgn from case_allocation a inner join complainant_details_parta c on a.filing_no=c.filing_no inner join public_servant_partc p on a.filing_no=p.filing_no inner join case_detail d on a.filing_no=d.filing_no inner join case_proceeding cp on a.filing_no=cp.filing_no where cp.ordertype_code=3 and a.proceeded=FALSE and d.listed=TRUE and a.bench_id in ('.implode(',', $bench_ids).') order by d.complaint_year, d.complaint_no';
+            $sql1 = 'select a.bench_id, a.filing_no, a.id, a.listing_date, a.purpose, a.venue, a.created_at, c.first_name, c.mid_name, c.sur_name, a.bench_no, c.ref_no, p.ps_desig, p.ps_orgn from case_allocation a inner join complainant_details_parta c on a.filing_no=c.filing_no inner join public_servant_partc p on a.filing_no=p.filing_no inner join case_detail d on a.filing_no=d.filing_no inner join case_proceeding cp on a.filing_no=cp.filing_no where cp.ordertype_code=3 and a.proceeded=FALSE and (a.courtmaster_id='.$user_id.' or a.courtmaster_id is NULL) and d.listed=TRUE and a.bench_id in ('.implode(',', $bench_ids).') order by d.complaint_year, d.complaint_no';
         }
         elseif($flag == 'OPV'){
-            $sql1 = 'select a.bench_id, a.filing_no, a.id, a.listing_date, a.purpose, a.venue, a.created_at, c.first_name, c.mid_name, c.sur_name, a.bench_no, c.ref_no, p.ps_desig, p.ps_orgn from case_allocation a inner join complainant_details_parta c on a.filing_no=c.filing_no inner join public_servant_partc p on a.filing_no=p.filing_no inner join case_detail d on a.filing_no=d.filing_no inner join case_proceeding cp on a.filing_no=cp.filing_no where cp.ordertype_code=7 and a.proceeded=FALSE and d.listed=TRUE and a.bench_id in ('.implode(',', $bench_ids).') order by d.complaint_year, d.complaint_no';
+            $sql1 = 'select a.bench_id, a.filing_no, a.id, a.listing_date, a.purpose, a.venue, a.created_at, c.first_name, c.mid_name, c.sur_name, a.bench_no, c.ref_no, p.ps_desig, p.ps_orgn from case_allocation a inner join complainant_details_parta c on a.filing_no=c.filing_no inner join public_servant_partc p on a.filing_no=p.filing_no inner join case_detail d on a.filing_no=d.filing_no inner join case_proceeding cp on a.filing_no=cp.filing_no where cp.ordertype_code=7 and a.proceeded=FALSE and (a.courtmaster_id='.$user_id.' or a.courtmaster_id is NULL) and d.listed=TRUE and a.bench_id in ('.implode(',', $bench_ids).') order by d.complaint_year, d.complaint_no';
         }
         elseif($flag == 'AOA'){
-            $sql1 = 'select a.bench_id, a.filing_no, a.id, a.listing_date, a.purpose, a.venue, a.created_at, c.first_name, c.mid_name, c.sur_name, a.bench_no, c.ref_no, p.ps_desig, p.ps_orgn from case_allocation a inner join complainant_details_parta c on a.filing_no=c.filing_no inner join public_servant_partc p on a.filing_no=p.filing_no inner join case_detail d on a.filing_no=d.filing_no inner join case_proceeding cp on a.filing_no=cp.filing_no where cp.ordertype_code=14 and a.proceeded=FALSE and d.listed=TRUE and a.bench_id in ('.implode(',', $bench_ids).') order by d.complaint_year, d.complaint_no';
+            $sql1 = 'select a.bench_id, a.filing_no, a.id, a.listing_date, a.purpose, a.venue, a.created_at, c.first_name, c.mid_name, c.sur_name, a.bench_no, c.ref_no, p.ps_desig, p.ps_orgn from case_allocation a inner join complainant_details_parta c on a.filing_no=c.filing_no inner join public_servant_partc p on a.filing_no=p.filing_no inner join case_detail d on a.filing_no=d.filing_no inner join case_proceeding cp on a.filing_no=cp.filing_no where cp.ordertype_code=14 and a.proceeded=FALSE and (a.courtmaster_id='.$user_id.' or a.courtmaster_id is NULL) and d.listed=TRUE and a.bench_id in ('.implode(',', $bench_ids).') order by d.complaint_year, d.complaint_no';
         }
 
         return $this->db->query($sql1)->result();
@@ -329,14 +329,14 @@ LIMIT 1";
 			return $this->db->query($sql1)->result();
 		}
 
-		public function get_allocated_data_count($bench_ids)
+		public function get_allocated_data_count($bench_ids, $user_id)
 		{
-			$sql1 = 'select count(*) from case_allocation a inner join case_detail d on a.filing_no=d.filing_no where a.proceeded=FALSE and d.listed=TRUE and a.bench_id in ('.implode(',', $bench_ids).')';
+			$sql1 = 'select count(*) from case_allocation a inner join case_detail d on a.filing_no=d.filing_no where a.proceeded=FALSE and (a.courtmaster_id='.$user_id.' or a.courtmaster_id is NULL) and d.listed=TRUE and a.bench_id in ('.implode(',', $bench_ids).')';
 				$query1 = $this->db->query($sql1);
 				$query1 = $query1->row_array();
 				$query1 = $query1['count'];
 				//print_r($query1);die;
-				$sql2 = 'select count(*) from case_allocation a inner join case_detail d on a.filing_no=d.filing_no inner join case_proceeding cp on a.filing_no=cp.filing_no where a.proceeded=FALSE and d.listed=TRUE and a.bench_id in ('.implode(',', $bench_ids).')';
+				$sql2 = 'select count(*) from case_allocation a inner join case_detail d on a.filing_no=d.filing_no inner join case_proceeding cp on a.filing_no=cp.filing_no where a.proceeded=FALSE and (a.courtmaster_id='.$user_id.' or a.courtmaster_id is NULL) and d.listed=TRUE and a.bench_id in ('.implode(',', $bench_ids).')';
 				$query2 = $this->db->query($sql2);
 				$query2 = $query2->row_array();
 				$query2 = $query2['count'];
@@ -344,18 +344,18 @@ LIMIT 1";
 				return $query1 - $query2;
 		}
 
-		public function get_inq_data_count($bench_ids)
+		public function get_inq_data_count($bench_ids, $user_id)
 		{
-			$sql1 = 'select count(*) from case_allocation a inner join complainant_details_parta c on a.filing_no=c.filing_no inner join public_servant_partc p on a.filing_no=p.filing_no inner join case_detail d on a.filing_no=d.filing_no inner join case_proceeding cp on a.filing_no=cp.filing_no where cp.ordertype_code=1 and a.proceeded=FALSE and d.listed=TRUE and a.bench_id in ('.implode(',', $bench_ids).')';
+			$sql1 = 'select count(*) from case_allocation a inner join complainant_details_parta c on a.filing_no=c.filing_no inner join public_servant_partc p on a.filing_no=p.filing_no inner join case_detail d on a.filing_no=d.filing_no inner join case_proceeding cp on a.filing_no=cp.filing_no where cp.ordertype_code=1 and a.proceeded=FALSE and a.courtmaster_id='.$user_id.' and d.listed=TRUE and a.bench_id in ('.implode(',', $bench_ids).')';
 			$query = $this->db->query($sql1);
 			$query = $query->row_array();
 	
 			return $query = $query['count'];
 		}
 
-		public function get_inv_data_count($bench_ids)
+		public function get_inv_data_count($bench_ids, $user_id)
 		{
-			$sql1 = 'select count(*) from case_allocation a inner join complainant_details_parta c on a.filing_no=c.filing_no inner join public_servant_partc p on a.filing_no=p.filing_no inner join case_detail d on a.filing_no=d.filing_no inner join case_proceeding cp on a.filing_no=cp.filing_no where cp.ordertype_code=2 and a.proceeded=FALSE and d.listed=TRUE and a.bench_id in ('.implode(',', $bench_ids).')';
+			$sql1 = 'select count(*) from case_allocation a inner join complainant_details_parta c on a.filing_no=c.filing_no inner join public_servant_partc p on a.filing_no=p.filing_no inner join case_detail d on a.filing_no=d.filing_no inner join case_proceeding cp on a.filing_no=cp.filing_no where cp.ordertype_code=2 and a.proceeded=FALSE and a.courtmaster_id='.$user_id.' and d.listed=TRUE and a.bench_id in ('.implode(',', $bench_ids).')';
 			$query = $this->db->query($sql1);
 			$query = $query->row_array();
 	
@@ -396,9 +396,9 @@ LIMIT 1";
 
 		/* ysc code start here 8july */
 
-		public function get_ops_inq_report_count($bench_ids)
+		public function get_ops_inq_report_count($bench_ids, $user_id)
 		{
-			$sql1 = 'select count(*) from case_allocation a inner join complainant_details_parta c on a.filing_no=c.filing_no inner join public_servant_partc p on a.filing_no=p.filing_no inner join case_detail d on a.filing_no=d.filing_no inner join case_proceeding cp on a.filing_no=cp.filing_no where cp.ordertype_code=3 and a.proceeded=FALSE and d.listed=TRUE and a.bench_id in ('.implode(',', $bench_ids).')';
+			$sql1 = 'select count(*) from case_allocation a inner join complainant_details_parta c on a.filing_no=c.filing_no inner join public_servant_partc p on a.filing_no=p.filing_no inner join case_detail d on a.filing_no=d.filing_no inner join case_proceeding cp on a.filing_no=cp.filing_no where cp.ordertype_code=3 and a.proceeded=FALSE and a.courtmaster_id='.$user_id.' and d.listed=TRUE and a.bench_id in ('.implode(',', $bench_ids).')';
 			$query = $this->db->query($sql1);
 			$query = $query->row_array();
 	
@@ -406,9 +406,9 @@ LIMIT 1";
 		}
 			
 
-		public function get_ops_inv_report_count($bench_ids)
+		public function get_ops_inv_report_count($bench_ids, $user_id)
 		{
-			$sql1 = 'select count(*) from case_allocation a inner join complainant_details_parta c on a.filing_no=c.filing_no inner join public_servant_partc p on a.filing_no=p.filing_no inner join case_detail d on a.filing_no=d.filing_no inner join case_proceeding cp on a.filing_no=cp.filing_no where cp.ordertype_code=7 and a.proceeded=FALSE and d.listed=TRUE and a.bench_id in ('.implode(',', $bench_ids).')';
+			$sql1 = 'select count(*) from case_allocation a inner join complainant_details_parta c on a.filing_no=c.filing_no inner join public_servant_partc p on a.filing_no=p.filing_no inner join case_detail d on a.filing_no=d.filing_no inner join case_proceeding cp on a.filing_no=cp.filing_no where cp.ordertype_code=7 and a.proceeded=FALSE and a.courtmaster_id='.$user_id.' and d.listed=TRUE and a.bench_id in ('.implode(',', $bench_ids).')';
 			$query = $this->db->query($sql1);
 			$query = $query->row_array();
 	
@@ -416,9 +416,9 @@ LIMIT 1";
 		}
 
 
-		public function get_aoa_report_count($bench_ids)
+		public function get_aoa_report_count($bench_ids, $user_id)
 		{
-			$sql1 = 'select count(*) from case_allocation a inner join complainant_details_parta c on a.filing_no=c.filing_no inner join public_servant_partc p on a.filing_no=p.filing_no inner join case_detail d on a.filing_no=d.filing_no inner join case_proceeding cp on a.filing_no=cp.filing_no where cp.ordertype_code=14 and a.proceeded=FALSE and d.listed=TRUE and a.bench_id in ('.implode(',', $bench_ids).')';
+			$sql1 = 'select count(*) from case_allocation a inner join complainant_details_parta c on a.filing_no=c.filing_no inner join public_servant_partc p on a.filing_no=p.filing_no inner join case_detail d on a.filing_no=d.filing_no inner join case_proceeding cp on a.filing_no=cp.filing_no where cp.ordertype_code=14 and a.proceeded=FALSE and a.courtmaster_id='.$user_id.' and d.listed=TRUE and a.bench_id in ('.implode(',', $bench_ids).')';
 			$query = $this->db->query($sql1);
 			$query = $query->row_array();
 	

@@ -1058,6 +1058,19 @@ return $query;
 			return 0;
 		else
 			return $query->result();
-	} 
+	}
+
+	 
+		function fetch_all_courtmaster()
+		{
+			$this->db->select('id, username');
+			$this->db->from('users');
+			$this->db->where('role', 147);
+			$ids = [1319,1320,1331,1332,1337];
+			$this->db->where_not_in('id', $ids);
+			$this->db->order_by('create_date');
+			$query = $this->db->get();
+			return $query->result();
+		}
 
 }
