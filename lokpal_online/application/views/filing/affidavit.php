@@ -1613,7 +1613,7 @@ $this->load->helper("date_helper");
       <div class="alert alert-success msg-box">
         <h3 class="text-center"  id="success_msg">Your application/complaint form has been diarised vide</h3>
         <h4 class="text-center" id="filing_no"> 
-                <span><b>Dairy no. </b><?php echo $filing_no; ?></span>
+                <span><b>Diary no. </b><?php echo $filing_no; ?></span>
              </h4> 
         <h4 class="text-center" id="quote_msg">Please quote the above diary no in all future communications.</h4>
       </div>

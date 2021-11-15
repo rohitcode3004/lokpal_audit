@@ -103,49 +103,7 @@
 }
 </script>
 
-		<!-- Model popup -->
-		<?php if(get_complaintno($filing_no) == 'n/a' ) { ?>
-		<!-- Modal -->
-		<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLongTitle">Submit Scrutiny Report</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<input type="hidden" id="fn" name="fn" value="<?php echo $filing_no ?>">
-					<div class="modal-footer" style="text-align: center;">
-						<button type="button" class="btn btn-danger submit-scrutiny">Submit scrutiny report<br> without complaint no.</button>
-						<button type="button" class="btn btn-success submit-scrutiny-compno">Submit scrutiny report<br> and generate complaint no.</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<?php } else { ?>
-				<!-- Modal -->
-		<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						Please click appropriate button to tell how you want to do scrutiny?
-					</div>
-					<input type="hidden" id="fn" name="fn" value="<?php echo $filing_no ?>">
-					<div class="modal-footer" style="text-align: left;">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary submit-scrutiny">Submit scrutiny</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<?php } ?>
+		
 
 <div class="app-content">
 	<div class="main-content-app">
@@ -611,9 +569,14 @@
 					</select> 
 					<label class="error"></label>
 				</div>
+
+				<div class="form-group" id="" style="">  
+				<input type="checkbox" id="par1" name="par1" value="1">
+				<label for="torole" class="control-label" title="select if you want to generate complaint no.">Check if you want to submit scrutiny report and generate complaint no. </label>
+				</div>
 				<div class="form-group" id="" style="">  
 					<div class="col-sm-12 text-right">  
-						<button class="btn btn-danger" type="button" value="Submit" data-toggle="modal" data-target="#exampleModalCenter">Submit</button>
+						<button class="btn btn-danger" type="button" value="Submit">Submit</button>
 					</div>
 				</div>
 			</form>
@@ -904,7 +867,7 @@
 fetch_data();
 });
 
-
+/*
 	$(document).on('click', '.submit-scrutiny-compno', function(event){
 	        	//alert('here');
 
@@ -929,6 +892,7 @@ fetch_data();
 	        	$("#myForm").submit();
 
 	        });
+	        */
 	    </script>
 
 

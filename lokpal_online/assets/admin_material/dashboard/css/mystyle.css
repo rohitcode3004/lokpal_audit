@@ -1338,3 +1338,20 @@ ul.more-action > li > a {
   font-weight: 600;
   color: #04a718;
 }
+
+.file-viwer{
+    position: relative;
+}
+.close-iframe {
+    position: absolute;
+    right: 2px;
+    top: 14px;
+    font-size: 20px;
+    color: #fff;
+}
+#preview-file{
+    display: none;
+}
+.file-viwer{
+    display: none;
+}
