@@ -268,6 +268,7 @@ class Scrutiny extends CI_Controller {
 	}
 	public function action()
 	{
+		//echo "here";die;
 		//echo "<pre>";
 		//print_r($_POST);die;
 
@@ -511,7 +512,7 @@ class Scrutiny extends CI_Controller {
           			'success1' => true,
        						 );
 						echo  json_encode($array);
-
+								redirect('scrutiny/dash');
 						}else{
 
 							 $userid=$this->con['id'];
