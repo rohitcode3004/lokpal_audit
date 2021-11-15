@@ -79,6 +79,7 @@
 	    		court_no:"required",   
 	    		bench_nature: "required",
 	    		newbench:"required",
+	    	},
 
 	    		username: {
 	    			required: true,
@@ -98,12 +99,10 @@
 		        }
 	    	}
 		});
-	    
-	});
-}
-</script>
+	    });
+	
 
-		
+</script>
 
 <div class="app-content">
 	<div class="main-content-app">
@@ -136,7 +135,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<ul class="form_list">
-									<li><a target="_blank" href="<?php echo base_url().get_gadjet_report($filing_no);?>">C-<?php echo $filing_no; ?></a></li>
+									<li><a target="_blank" href="<?php echo base_url().get_gadjet_report($filing_no);?>"><?php echo $filing_no; ?></a></li>
 									<?php
 										$previous_gazzatte_reports = get_previous_gadjet_report(get_refno($filing_no));
 									 if(!empty($previous_gazzatte_reports)) { 
@@ -481,7 +480,7 @@
                         	</div>
                         </div>
 
-                        <div class="row" style="display: none;" id="cat_tr">
+                       <div class="row" style="display: none;" id="cat_tr">
                         	<div class="col-md-12 form-horizontal"> 
                         	<div class="form-group">
                         		<label class="control-label col-sm-2" for="complaint_capacity_id">Category</label>
@@ -502,7 +501,6 @@
                         		
                         	</div>
                         </div>
-
 					</div>
 				</div>
 				<hr>
@@ -533,7 +531,7 @@
 				<div class="form-group">
 					<label class="control-label text-danger">Last send by : <?php echo (isset($last_remarkedby)) ? $last_remarkedby : ''; ?> on <?php echo (isset($last_date)) ? $last_date : ''; ?> at <?php echo (isset($last_time)) ? $last_time : ''; ?></label>
 						
-					<textarea class="ckeditor" name="remarks_latest" placeholder="No remarks given">							
+					<textarea class="ckeditor" name="remarks_latest" placeholder="No remarks given" readonly>							
 					<?php echo (isset($last_remarks)) ?  $last_remarks : '';  ?>
 					</textarea>
 
@@ -574,9 +572,10 @@
 				<input type="checkbox" id="par1" name="par1" value="1">
 				<label for="torole" class="control-label" title="select if you want to generate complaint no.">Check if you want to submit scrutiny report and generate complaint no. </label>
 				</div>
+
 				<div class="form-group" id="" style="">  
 					<div class="col-sm-12 text-right">  
-						<button class="btn btn-danger" type="button" value="Submit">Submit</button>
+						<button class="btn btn-danger" type="submit" value="Submit">Submit</button>
 					</div>
 				</div>
 			</form>
@@ -867,21 +866,26 @@
 fetch_data();
 });
 
-/*
-	$(document).on('click', '.submit-scrutiny-compno', function(event){
+
+	/*$(document).on('click', '.submit-scrutiny-compno', function(event){
 	        	//alert('here');
 
 	        	var filing_no = document.getElementById("fn").value;
-	        	//alert('y');
+
 	        	$.ajax({
 	        		url: '<?php echo site_url('scrutiny/action'); ?>',
 	        		type: 'POST',
 	        		data:$("#myForm").serialize()+"&par1=1",
 	        		dataType: 'json',
 	        		//async: false,
+	        		       error: function(xhr, status, error) {
+
+           				console.debug(error);
+       					},
 	        		success: function(data) {
-	        			console.log(data);
-	        			window.location.href= "<?php echo site_url('scrutiny/dash'); ?>";
+	        			console.log('data');
+	        			window.location.href= "<?php echo site_url('scrutiny/dashboard'); ?>";
+	        			return false;
 	        			
 	      }
 	  });
@@ -891,8 +895,7 @@ fetch_data();
 	        	//alert('here');
 	        	$("#myForm").submit();
 
-	        });
-	        */
+	        });*/
 	    </script>
 
 
