@@ -9,6 +9,15 @@ $elements = $this->label->view(1);
 
   <script src="<?php echo base_url();?>assets/customjs/bench_comp.js"></script>
 
+
+ <script type="text/javascript">
+            function PreviewImage() {
+                pdffile=document.getElementById("order_upload").files[0];
+                pdffile_url=URL.createObjectURL(pdffile);
+                $('#viewer').attr('src',pdffile_url);
+            }
+        </script>
+
   <script language="javascript"> 
     $().ready(function() {
     $('.datepicker').datepicker({
@@ -661,8 +670,20 @@ $elements = $this->label->view(1);
 
 
         <div class="panel panel-primary">
-          <div class="panel-heading">Fill Proceeding Details -</div>
+          <div class="panel-heading">Fill Proceeding Details - <div class="pull-right"><input id="preview-file" class="btn btn-primary" type="button" value="Preview" onclick="PreviewImage();" /></div></div>
           <div class="panel-body">
+
+
+            <div class="row">
+              <div div class="col-md-12">
+                <div class="file-viwer">
+                  <span class="close-iframe"><i class="fa fa-window-close-o" aria-hidden="true"></i></span>
+                  <iframe id="viewer" frameborder="0" scrolling="no" width="100%" height="600"></iframe>
+                </div>
+              </div>
+            </div>
+
+
             <div class="row">
               <div class="error"><?php echo form_error('order_upload'); ?></div>
               <?php
@@ -997,4 +1018,19 @@ $elements = $this->label->view(1);
           incomplete_div.style.display="";
         }
       }
+</script>
+
+<script>
+$(document).ready(function(){
+  $("#order_upload").change(function(){
+    $("#preview-file").show();
+  });
+  $("#preview-file").click(function(){
+    $(".file-viwer").show();
+  });
+  $(".close-iframe").click(function(){
+    $(".file-viwer").hide();
+  });
+  close-iframe
+});
 </script>

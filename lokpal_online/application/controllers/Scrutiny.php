@@ -270,12 +270,18 @@ class Scrutiny extends CI_Controller {
 	{
 		//echo "<pre>";
 		//print_r($_POST);die;
+
+		 $this->input->post('summary');
+
+		 $this->input->post('remarks');
+
+		//die('@@');
 		if($this->input->post('filing_no') && $this->input->post('torole'))
 		{
 			//print_r($this->input->post());die();
 			$data['user'] = $this->login_model->getRows($this->con);
 
-	           // print_r($data['user']['id']);die;
+	            //print_r($data['user']['id']);die;
 			$remarks_by = $this->scrutiny_model->get_remarksby($data['user']['role']);
 			$remarks_by = $remarks_by[0]->id;
 
@@ -284,7 +290,6 @@ class Scrutiny extends CI_Controller {
 			$torole = trim($this->security->xss_clean($this->input->post('torole')));
 			$ts = date('Y-m-d H:i:s', time());
 			if($torole == 4){
-
 				$chk_exist_case_det = $this->scrutiny_model->chk_exist_case_det($filing_no);
 
 				if(!$chk_exist_case_det){
@@ -301,6 +306,7 @@ class Scrutiny extends CI_Controller {
 					$comp_data['comp_no'] = $chk_exist_case_det['0']->complaint_no;
 					$comp_data['year'] = $chk_exist_case_det['0']->complaint_year;
 				}
+
 
 				$checkEmailId = $this->scrutiny_model->getEmailIdFromparta($filing_no);				
 				$service_id=$checkEmailId['0']->email_id;
@@ -440,7 +446,9 @@ class Scrutiny extends CI_Controller {
 				else
 					$scr_stat = 'f';
 
-				if($remarks_by == 2 || $remarks_by == 3 || $remarks_by == 6 || $remarks_by == 7){            
+				if($remarks_by == 2 || $remarks_by == 3 || $remarks_by == 6 || $remarks_by == 7){   
+
+				 // die("in first") ;        
 					$scrutiny_upddata = array(
 						'scrutiny_date' => date('Y-m-d'),
 						'updated_date' => $ts,
@@ -455,6 +463,8 @@ class Scrutiny extends CI_Controller {
 					);
 					$query = $this->scrutiny_model->scrutiny_update($scrutiny_upddata, $filing_no);
 				}elseif($remarks_by == 4 || $remarks_by == 5){
+
+					  //die("in second") ; 
 					$scrutiny_upddata = array(
 						'scrutiny_date' => date('Y-m-d'),
 						'updated_date' => $ts,
@@ -493,19 +503,18 @@ class Scrutiny extends CI_Controller {
 			    }
 
 					//echo "yogendra";die;
-
-
 				if($res){
 					if($torole == 1 || $torole == 2 || $torole == 3 || $torole == 5 || $torole == 6){
 						if(trim($this->security->xss_clean($this->input->post('par1'))) == 1){
 							$this->session->set_flashdata('error_msg', 'Scrutiny processed for Diary no. '.$filing_no.' and forwarded to '.$torole_name);
 							$array = array(
-          			'success' => true,
+          			'success1' => true,
        						 );
 						echo  json_encode($array);
 
 						}else{
-						 $userid=$this->con['id'];
+
+							 $userid=$this->con['id'];
 							
 							$log_data = array( 
 				              'user_id' => $userid, 
@@ -518,17 +527,13 @@ class Scrutiny extends CI_Controller {
 				              ); 
 				              $insert_log = $this->login_model->loginlog_ins($log_data); 
 
-
 						$this->session->set_flashdata('error_msg', 'Scrutiny processed for Diary no. '.$filing_no.' and forwarded to '.$torole_name);
-						redirect('scrutiny/dash');
+					redirect('scrutiny/dash');
+						
 					}
 					}elseif($torole == 4){
 						if($comp_data['chk_cou'] && $comp_data['comp_no'] && $comp_data['year'])
 						{
-
-							//echo  " in here";die('@@@'); 
-
-
 							if(!$chk_exist_case_det){
 							$case_det_insdata = array(
 								'filing_no' => $filing_no,
@@ -544,79 +549,22 @@ class Scrutiny extends CI_Controller {
 								'complaint_counter' => $comp_data['counter']
 							);
 							$this->scrutiny_model->update_year_initialisation($comp_data['year'], $upd_data);
-							 $userid=$this->con['id'];
+
 							$ts = date('Y-m-d H:i:s', time());
 							$insert_data = array(
 								'ref_no' => get_refno($filing_no),
-								'user_id' => $userid,
+								'user_id' => $this->con['id'],
 								'filing_no' => $filing_no,
 								'complaint_no' => $comp_data['comp_no'],
 								'created_at' => $ts,
 								'ip' => get_ip(),
 							);
 							$this->scrutiny_model->update_comp_his($insert_data);
-
-
-							
 						}
-							//echo "in hireeeee";die('@@@@');
-						 $userid=$this->con['id'];
-							
-							$log_data = array( 
-				              'user_id' => $userid, 
-				              'username' => $data['user']['username'],
-				              'form_type' => 'Scrutiny of Complaint Form',  
-				              'ip' => get_ip(),
-				              'datetime' => date('Y-m-d H:i:s', time()),
-				              'action_performed' => 'Scrutiny of Complaint ',
-				              'status' => 'Scrutiny of Complaint Successfully Completed',
-				              ); 
-				              $insert_log = $this->login_model->loginlog_ins($log_data); 
-/*
-				$checkEmailId = $this->scrutiny_model->getEmailIdFromparta($filing_no);				
-				$service_id=$checkEmailId['0']->email_id;
-
-				$comp_no=get_complaintno($filing_no);
-				$subject = "Complaint Number related to your Application with Diary number ".$filing_no." ";
-				$html = "
-			Dear Sir/Madam,
-				<p>The Complaint Number to your Application is ".$comp_no." with the diary Number ".$filing_no." . Please quote this this
-				Complaint Number in your future communication(s) with the Lokpal of India.
-				</p>
-				<p style='margin-bottom:20px;'>You can check the status of your complaint on the Lokpal of India website as well as on the Lokpal-Online Portal.</p>
-
-				<p style='margin-bottom:20px;'>Regards,</p>
-				<p  style='margin-bottom:30px;'>Lokpal of India <br> New Delhi</p>
-
-				<p><strong>Note:- </strong>THIS IS AN AUTOMATED MESSAGE-PLEASE DO NOT REPLY DIRECTLY TO THIS EMAIL.</p>
-				";
-				$sended = sendMail($service_id, $subject, $html);
-				//common code for email end
-
-
-				if($sended == 1){
-					$return_arr[] = array("val" => 'true', "service_name" => $service_name);
-
-					echo json_encode($return_arr);
-				}else{
-					echo show_error($this->email->print_debugger());
-				}*/
-
 
 							$this->session->set_flashdata('success_msg', 'Scrutiny successfully completed for Diary no. '.$filing_no.' without defects and forwarded to chairperson .');
 							redirect('scrutiny/dash');
 						}else{
-
-						$log_data = array( 
-						'user_id' => $this->con['id'], 
-						'username' => $data['user']['username'],
-						'form_type' => 'Scrutiny of Complaint',  
-						'ip' => get_ip(),
-						'datetime' => date('Y-m-d H:i:s', time()),
-						'action_performed' => 'Scrutiny of Complaint Form',
-						'status' => 'Scrutiny of Complaint Failed',
-						); 
-						$insert_log = $this->login_model->loginlog_ins($log_data); 
 							die('Unable to generate complaint no. Contact Admin');
 						}
 
@@ -672,6 +620,7 @@ class Scrutiny extends CI_Controller {
 		die('parameters missing');
 	}
 }
+
 
 public function partbpdf($filing_no)
 	{
@@ -3244,7 +3193,9 @@ function api_action()
 
 		if($data_action == 'fetch_single')
 		{
-			$api_url = base_url()."api_lokpal/fetch_single";
+			 $api_url = base_url()."api_lokpal/fetch_single";
+
+			
 
 			$form_data = array(
 				'id' => $this->input->post('filing_no')
@@ -3283,6 +3234,8 @@ function pre_gen_comp_no($filing_no){
 			$query2 = $this->scrutiny_model->case_det_ins($case_det_insdata);
 
 			//set case_initialisation
+			if($query2)
+			{
 			$upd_data = array(
 				'complaint_counter' => $comp_data['counter']
 							);
@@ -3303,7 +3256,7 @@ function pre_gen_comp_no($filing_no){
           			//'comp_no' => '"Lok/".$comp_data['comp_no']."/".$comp_data['year']',
        			 );
 				return $array;
-
+			}
 				//$this->session->set_flashdata('success_msg', 'Complaint no. successfully generated for Diary no. '.$filing_no.'.');
 				//redirect('scrutiny/dashboard');
 				}else{
