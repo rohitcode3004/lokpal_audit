@@ -19,6 +19,17 @@
                                 echo 'n/a';
                               }?></div>
 						<div class="panel-body">
+							<?php
+              if($this->session->flashdata('success_msg'))
+              {
+               echo '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">×</button><h4 class="m-0">'.$this->session->flashdata('success_msg').'</h4></div>';
+              }
+              if($this->session->flashdata('error_msg'))
+              {
+               echo '<div class="alert alert-info"><button type="button" class="close" data-dismiss="alert">×</button>
+               <h4 class="m-0">'.$this->session->flashdata('error_msg').'</h4></div>';
+              }
+            ?>
 							<?php 
 							if($user['id']!='1342')
 							{

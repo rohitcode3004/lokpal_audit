@@ -4574,7 +4574,7 @@ function updatecategory(){
 				              $insert_log = $this->login_model->loginlog_ins($log_data); 
 
 						$this->session->set_flashdata('success_msg', 'Complaint no '.get_complaintno($filing_no).' forwarded to HCP');
-						redirect('scrutiny/dash/'.$bench_no.'/'.$flag);
+						redirect('scrutiny/');
 					}else{
 						$log_data = array( 
 				              'user_id' => $user_id, 
@@ -4587,19 +4587,19 @@ function updatecategory(){
 				              ); 
 				              $insert_log = $this->login_model->loginlog_ins($log_data); 
 						$this->session->set_flashdata('error_msg', 'Some problem inserting in orders_agency_report model');
-						redirect('scrutiny/dash/'.$bench_no.'/'.$flag);
+						redirect('scrutiny/');
 					}
 					}else{
 						$this->session->set_flashdata('error_msg', 'Some problem updating in agency model');
-						redirect('scrutiny/dash/'.$bench_no.'/'.$flag);
+						redirect('scrutiny/');
 					}
 					}else{
 						$this->session->set_flashdata('error_msg', 'Some problem updating in case detail model');
-						redirect('scrutiny/dash/'.$bench_no.'/'.$flag);
+						redirect('scrutiny/');
 					}
 							}else{
 								$this->session->set_flashdata('error_msg', 'Some problem inserting in case detail history model');
-								redirect('scrutiny/dash/'.$bench_no.'/'.$flag);
+								redirect('scrutiny/');
 							}
 	         }else if($select_an_option == 2){
 	         		die('agn');
