@@ -255,7 +255,7 @@ if(isset($farma))
               </div>-->
               <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
                 <label for="identity_proof_doi"><?php print_r($this->label->get_short_name($elements, 20)); ?></label>
-                <input type="text" class="form-control" name="identity_proof_doi" id="identity_proof_doi" value="<?php echo set_value('identity_proof_doi', @$myArray[0]->identity_proof_doi); ?>"placeholder=""> 
+                <input type="text" class="form-control" name="identity_proof_doi" id="identity_proof_doi" value="<?php echo set_value('identity_proof_doi', get_displaydate(@$myArray[0]->identity_proof_doi)); ?>"placeholder=""> 
               </div>
             </div>
             <div class="row">
@@ -318,7 +318,7 @@ if(isset($farma))
               </div>
               <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
                 <label for="idres_proof_doi"><?php print_r($this->label->get_short_name($elements, 26)); ?></label> 
-                <input type="text" class="form-control" name="idres_proof_doi" id="idres_proof_doi" value="<?php echo set_value('idres_proof_doi', @$myArray[0]->idres_proof_doi); ?>" placeholder="">
+                <input type="text" class="form-control" name="idres_proof_doi" id="idres_proof_doi" value="<?php echo set_value('idres_proof_doi', get_displaydate(@$myArray[0]->idres_proof_doi)); ?>" placeholder="">
               </div>
             </div>
             <div class="row">
