@@ -522,6 +522,14 @@ class Filing extends CI_Controller {
 			{
 				
 			 $identity_proof_no_encrypted=trim($this->input->post('identity_proof_no'));
+
+			 //$identity_proof_no_encrypted = trim($this->security->xss_clean($this->input->post('identity_proof_no')));
+			if($identity_proof_no_encrypted=='1$aA')
+			{
+				$identity_proof_no_encrypted='';
+			}
+			else
+			{	
 			 $identity_proof_no_decrypted = decode($identity_proof_no_encrypted);				
 				
 				$idno=explode("-",$identity_proof_no_decrypted);
@@ -535,8 +543,16 @@ class Filing extends CI_Controller {
 					$identity_proof_no=base64_encode($identity_proof_no_decrypted);
 				}
 
+			}
+
 			
 				 $idres_proof_no_encrypted=trim($this->input->post('idres_proof_no')); 
+
+				 if($idres_proof_no_encrypted=='1$aA')
+			{
+				$idres_proof_no_encrypted='';
+			}
+			else{
 				 $idres_proof_no_decrypted = decode($idres_proof_no_encrypted);
 
 				$idress_no=explode("-",$idres_proof_no_decrypted);
@@ -549,7 +565,7 @@ class Filing extends CI_Controller {
 				{
 					$idres_proof_no=base64_encode($idres_proof_no_decrypted);
 				}
-
+}
 					     	
 				$curYear = date('Y');
 				$cur_year=$curYear;			
@@ -910,7 +926,7 @@ class Filing extends CI_Controller {
 
 						//echo $nationality_id=($this->input->post('nationality_id'));die;
 
-					     $identity_proof_no_encrypted=trim($this->input->post('identity_proof_no'));
+					      $identity_proof_no_encrypted=trim($this->input->post('identity_proof_no'));
 						 $identity_proof_no_decrypted = decode($identity_proof_no_encrypted);
 
 						 $idres_proof_no_encrypted=trim($this->input->post('idres_proof_no'));
