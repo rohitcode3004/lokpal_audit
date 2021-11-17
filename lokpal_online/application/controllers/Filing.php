@@ -204,9 +204,11 @@ class Filing extends CI_Controller {
 			// $data['identity_document_type'] = $this->common_model->getDocument_type();
 			// echo "check the session value";
 			// echo $this->session->userdata('ref_no');die('here');
-			if($dash_ref_no == NULL ){
+			if($dash_ref_no == NULL && !isset($_GET['type'])){
 				$ref_no=$this->session->userdata('ref_no');
 				//print_r($ref_no);die;
+			}elseif($dash_ref_no == NULL && isset($_GET['type'])){
+				$ref_no=$this->session->unset_userdata('ref_no');
 			}else{
 		    	//$ref_no=$this->session->userdata('ref_no');
 		    	//ref no coming from link url 

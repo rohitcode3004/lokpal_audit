@@ -21,7 +21,7 @@
 	
 
 							  	<div class="col-lg-4 col-sm-4 mb-15">
-							  		<a href="<?php echo base_url('e-filing/form'); ?>" class="widgets-card gd-cyanblue widgets-contentt">
+							  		<a href="<?php echo base_url('e-filing/form?type=new'); ?>" class="widgets-card gd-cyanblue widgets-contentt">
 							  			<div class="widgets-icon">
 							  				<span>
 							  					<i class="fa fa-file-text-o" aria-hidden="true"></i>
