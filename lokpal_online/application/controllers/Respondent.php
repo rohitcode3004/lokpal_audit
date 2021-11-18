@@ -1596,7 +1596,7 @@ else
     $additionalinfo = $this->filing_model->additionalpartyModify($formmodify,$modify_party,$party_cate);
 
     if($additionalinfo){ 
-      $this->session->set_flashdata('success_msg', '<div class="alert alert-success"><h4 class="m-0">Third party detail has been successfully Modified.</h4></div>'); 
+     
       $log_data = array( 
               'user_id' => $userid, 
               'username' => $data['user']['username'],
@@ -1607,8 +1607,8 @@ else
               'status' => 'Third Party Form-C Modified Successfully',
               ); 
               $insert_log = $this->login_model->loginlog_ins($log_data); 
-
-      redirect('/public-servamt/add-more-party',$data);
+ $this->session->set_flashdata('success_msg', '<div class="alert alert-success"><h4 class="m-0">Third party detail has been successfully Modified.</h4></div>'); 
+      redirect('/public-servant/add-more-party',$data);
     } 
     else
     {
@@ -1731,7 +1731,7 @@ else
     );
     $additionalinfo = $this->filing_model->additionalparty($formbdata); 
     if($additionalinfo){ 
-      $this->session->set_flashdata('success_msg', '<div class="alert alert-success"><h4 class="m-0">Third party detail has been successfully added.</h4></div>'); 
+     
        $log_data = array( 
               'user_id' => $userid, 
               'username' => $data['user']['username'],
@@ -1742,8 +1742,8 @@ else
               'status' => 'Third Party Form-C Submitted Successfully',
               ); 
               $insert_log = $this->login_model->loginlog_ins($log_data); 
-
-      redirect('/public-servamt/add-more-party',$data);
+ $this->session->set_flashdata('success_msg', '<div class="alert alert-success"><h4 class="m-0">Third party detail has been successfully added.</h4></div>'); 
+      redirect('/public-servant/add-more-party',$data);
     } 
     else
     {
