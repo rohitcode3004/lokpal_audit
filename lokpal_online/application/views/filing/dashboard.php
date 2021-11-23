@@ -23,6 +23,17 @@
           </div>
           <div class="panel-body">
 
+            <?php
+              if($this->session->flashdata('success_msg'))
+              {
+               echo '<div>'.$this->session->flashdata('success_msg').'</div>';
+              }
+              if($this->session->flashdata('error_msg'))
+              {
+               echo '<div>'.$this->session->flashdata('error_msg').'</div>';
+              }
+            ?>
+
             <div class="table-responsive">
               <span id="success_message"></span>
               <table id="mytable" class="table table-bordred table-striped">                               
@@ -30,7 +41,8 @@
                   <th>S.No.</th>             
                     <th>Date of Last Entry</th>                     
                     <th>Public Servant Name</th>
-                     <th>Action</th>                
+                     <th>Action</th> 
+                     <th>Delete</th>                
                 </thead>
                 <tbody>
                     <?php    
@@ -84,6 +96,9 @@
                       <a href="<?php echo base_url().'e-filing/form/'.$r ?>">Go to application</a>
                       <?php } ?>
                     </td>
+                     <td><a style="font-size: 18px"><i class="fa fa-trash-o" aria-hidden="true" onclick="checkconfirm(this.form,<?php echo $r ?>)"></i></a></td>
+
+
                        <?php endforeach;?>
                   </tr>
                   
@@ -98,5 +113,17 @@
   </div>
 </div>
 
+<script type="text/javascript">
 
+function checkconfirm(r)
+{ 
 
+var r = "<?php echo $r;?>";
+
+if (confirm('Are you sure you want to delete this draft complaint?')) {
+ location.href="<?php echo base_url().'filing/deleteby_ref/'.$r ?>";
+} else {
+  console.log('Thing was not saved to the database.');
+}
+}
+</script>

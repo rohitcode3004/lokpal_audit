@@ -246,6 +246,7 @@ class Filing_model extends CI_Model
 			$this->db->where('ref_no is NOT NULL', NULL, FALSE);
 			$this->db->where('age_years is NOT NULL', NULL, FALSE);
 			$this->db->where('filing_status',false);
+			$this->db->where('is_deleted',false);
 			$this->db->order_by('ref_no');
 
 			$query = $this->db->get('complainant_details_parta');
@@ -567,6 +568,7 @@ function get_pub_pen_count($user_id)
 			$this->db->where('ref_no is NOT NULL', NULL, FALSE);
 			$this->db->where('age_years is NOT NULL', NULL, FALSE);
 			$this->db->where('filing_status',false);
+			$this->db->where('is_deleted',false);
 
 			$query = $this->db->get('complainant_details_parta');
 
@@ -661,6 +663,28 @@ function get_pub_completed_count($user_id)
 			return $query->result();
 
 		} 
+
+
+function delete_user_draft_complaints($user_id,$ref_no){ 
+
+
+			
+			$this->db->where('user_id', $user_id);
+			$this->db->where('ref_no', $ref_no);//we never ever update scrutiny when its true
+
+			$upd_data = array(
+									'is_deleted' => 'true',																						
+								);
+				$this->db->update('complainant_details_parta', $upd_data);
+
+			
+			//print_r($r);die;
+		//	echo $str = $this->db->last_query();
+
+		
+			return ($this->db->affected_rows() != 1) ? false : true;   
+		}
+
 
 
 

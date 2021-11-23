@@ -235,24 +235,23 @@ if(isset($farma))
               </div>
 
               <?php        
-         $idno=base64_decode(@$myArray[0]->identity_proof_no ?? '');
+       echo  $idno=base64_decode(@$myArray[0]->identity_proof_no ?? '');
            if($idno !='')
            {
-           $idno='XXXX-XXXX-XXXX-'.substr($idno,-4); 
+        echo   $idno='XXXX-XXXX-XXXX-'.substr($idno,-4); 
            }
+
+        
               ?>
 
                 <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
                 <label for="identity_proof_no"><?php print_r($this->label->get_short_name($elements, 19)); ?></label>
-                <input type="text" class="form-control" name="identity_proof_no" value="<?php echo set_value('identity_proof_no', @$idno ); ?>" id="identity_proof_no" maxlength="500" placeholder="" hidden="true">
+                <input type="text" class="form-control" name="identity_proof_no" value="<?php echo set_value('identity_proof_no', @$idno ); ?>" id="identity_proof_no1" maxlength="500" placeholder="">
               </div>
 
 
 
-             <!-- <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
-                <label for="identity_proof_no"><?php print_r($this->label->get_short_name($elements, 19)); ?></label>
-                <input type="text" class="form-control" name="identity_proof_no" value="<?php echo set_value('identity_proof_no', base64_decode(@$myArray[0]->identity_proof_no)); ?>" id="identity_proof_no" maxlength="500" placeholder="" hidden="true">
-              </div>-->
+        
               <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
                 <label for="identity_proof_doi"><?php print_r($this->label->get_short_name($elements, 20)); ?></label>
                 <input type="text" class="form-control" name="identity_proof_doi" id="identity_proof_doi" value="<?php echo set_value('identity_proof_doi', get_displaydate(@$myArray[0]->identity_proof_doi)); ?>"placeholder=""> 
@@ -313,7 +312,7 @@ if(isset($farma))
            }?>
               <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
                 <label for="idres_proof_no"><?php print_r($this->label->get_short_name($elements, 25)); ?></label>
-                <input type="text" class="form-control" name="idres_proof_no" id="idres_proof_no" value="<?php echo set_value('idres_proof_no',
+                <input type="text" class="form-control" name="idres_proof_no" id="idres_proof_no1" value="<?php echo set_value('idres_proof_no',
                 @$idress_no); ?>" maxlength="500" placeholder="">
               </div>
               <div class="col-lg-4 col-md-6 col-sm-6 mb-15">
@@ -661,8 +660,8 @@ if(isset($farma))
 
         <div class="row">
           <div class="col-md-12 text-right">
-            <button type="submit" class="btn btn-success" id="submitbtn" onclick="encode_dl_passport('identity_proof_no', 'idres_proof_no')" >Save as Draft</button> 
-            <button type="submit" class="btn btn-success" id="submitbtn" onclick="encode_dl_passport('identity_proof_no', 'idres_proof_no')">Save & Next</button>    
+            <button type="submit" class="btn btn-success" id="submitbtn" onclick="encode_dl_passport('identity_proof_no1', 'identity_proof_no1')" >Save as Draft</button> 
+            <button type="submit" class="btn btn-success" id="submitbtn" onclick="encode_dl_passport('identity_proof_no1', 'idres_proof_no1')">Save & Next</button>    
           </div>
         </div>
                     </form>
