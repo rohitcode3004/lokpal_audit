@@ -66,10 +66,16 @@ class Order_report extends CI_Controller {
 		$data['menus'] = $this->menus_lib->get_menus($data['user']['role']);
 		$this->load->helper("date_helper");	
 		$this->load->helper("compno_helper");
-		$userid=$data['user']['id'];		
-		$this->load->view('templates/front/dheader.php',$data);
-		$this->load->view('order_report/search_cases.php',$data);
-		$this->load->view('templates/front/dfooter.php',$data);
+		$userid=$data['user']['id'];
+		if($data['user']['role'] == 162 || $data['user']['role'] == 161 || $data['user']['role'] == 163 || $data['user']['role'] == 164){		
+			$this->load->view('templates/front/SC_Header.php',$data);
+			$this->load->view('order_report/search_cases.php',$data);
+			$this->load->view('templates/front/dfooter.php',$data);
+		}else{
+			$this->load->view('templates/front/dheader.php',$data);
+			$this->load->view('order_report/search_cases.php',$data);
+			$this->load->view('templates/front/dfooter.php',$data);
+		}
 	}
 
 	public function search_case_action(){
@@ -117,10 +123,17 @@ class Order_report extends CI_Controller {
 
 			}
 	
+	if($data['user']['role'] == 162 || $data['user']['role'] == 161 || $data['user']['role'] == 163 || $data['user']['role'] == 164){
+		$this->load->view('templates/front/SC_Header.php',$data);
+		//$data['case_list'] = $this->order_report_model->get_all_case($dt_of_order_from,$dt_of_order_to);
+		$this->load->view('order_report/list_of_cases.php',$data);
+		$this->load->view('templates/front/dfooter.php',$data);
+	}else{
 		$this->load->view('templates/front/dheader.php',$data);
 		//$data['case_list'] = $this->order_report_model->get_all_case($dt_of_order_from,$dt_of_order_to);
 		$this->load->view('order_report/list_of_cases.php',$data);
 		$this->load->view('templates/front/dfooter.php',$data);
+	}
 		
 	}
 
@@ -131,11 +144,19 @@ class Order_report extends CI_Controller {
 	$this->load->helper("compno_helper");
 	$userid=$data['user']['id'];
 	$filing_no = $this->uri->segment(3);
-	$this->load->view('templates/front/dheader.php',$data);
+	
 	$data['last_proceeding'] = $this->proceeding_model->get_last_proceeding($filing_no);
 	$data['proceeding_his'] = $this->proceeding_model->get_proceeding_his($filing_no);
+
+	if($data['user']['role'] == 162 || $data['user']['role'] == 161 || $data['user']['role'] == 163 || $data['user']['role'] == 164){
+	$this->load->view('templates/front/SC_Header.php',$data);
 	$this->load->view('templates/front/dfooter.php',$data);
 	$this->load->view('order_report/proceeding_order.php',$data);
+}else{
+	$this->load->view('templates/front/dheader.php',$data);
+	$this->load->view('templates/front/dfooter.php',$data);
+	$this->load->view('order_report/proceeding_order.php',$data);
+	}
 }
 
 
@@ -146,7 +167,6 @@ $this->load->helper("date_helper");
 $this->load->helper("compno_helper");
 $userid=$data['user']['id'];
 $filing_no = $this->uri->segment(3);
-$this->load->view('templates/front/dheader.php',$data);
 
 $data['agencydata']= $this->agency_model->getAgencydata($filing_no);
 $data['agencydatahis']= $this->agency_model->getAgencydata_his($filing_no);
@@ -156,8 +176,15 @@ $data['anyotheractiondata_report']= $this->agency_model->getAnyOtherData_report(
 
 		 //$data['last_proceeding'] = $this->proceeding_model->get_last_proceeding($filing_no);
 		//$data['proceeding_his'] = $this->proceeding_model->get_proceeding_his($filing_no);
+if($data['user']['role'] == 162 || $data['user']['role'] == 161 || $data['user']['role'] == 163 || $data['user']['role'] == 164){
+$this->load->view('templates/front/SC_Header.php',$data);
 $this->load->view('templates/front/dfooter.php',$data);
 $this->load->view('order_report/agency_report.php',$data);
+}else{
+	$this->load->view('templates/front/dheader.php',$data);
+$this->load->view('templates/front/dfooter.php',$data);
+$this->load->view('order_report/agency_report.php',$data);
+}
 }
 
 
@@ -169,7 +196,6 @@ $this->load->helper("date_helper");
 $this->load->helper("compno_helper");
 $userid=$data['user']['id'];
 $filing_no = $this->uri->segment(3);
-$this->load->view('templates/front/dheader.php',$data);
 
 $data['external_report_data']= $this->agency_model->getExternal_report_data($filing_no);
 
@@ -183,8 +209,15 @@ $data['anyotheractiondata_report']= $this->agency_model->getAnyOtherData_report(
 */
 		 //$data['last_proceeding'] = $this->proceeding_model->get_last_proceeding($filing_no);
 		//$data['proceeding_his'] = $this->proceeding_model->get_proceeding_his($filing_no);
+if($data['user']['role'] == 162 || $data['user']['role'] == 161 || $data['user']['role'] == 163 || $data['user']['role'] == 164){
+$this->load->view('templates/front/SC_Header.php',$data);
 $this->load->view('templates/front/dfooter.php',$data);
 $this->load->view('order_report/external_uploaded_data_report.php',$data);
+}else{
+	$this->load->view('templates/front/dheader.php',$data);
+$this->load->view('templates/front/dfooter.php',$data);
+$this->load->view('order_report/external_uploaded_data_report.php',$data);
+}
 }
 
 
