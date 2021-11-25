@@ -16,6 +16,7 @@
 			//$this->load->model('report_model');
 			//$this->load->model('filing_model');
 			//$this->load->helper("parts_status_helper");
+			$this->load->helper("status_helper");
 			$this->load->helper("compno_helper");
 			$this->load->helper("bench_helper");
 			$this->load->helper("common_helper");
@@ -70,7 +71,7 @@
 
 			$data['menus'] = $this->menus_lib->get_menus($data['user']['role']);
 
-			if($data['user']['id'] != 1308 && $data['user']['role'] == 147 && ($data['user']['id'] != 1356 && $data['user']['role'] == 147)) { //means its not a courtmaster but benchuser
+			if($data['user']['id'] != 1308 && $data['user']['role'] == 147 && ($data['user']['id'] != 1380 && $data['user']['role'] == 147)) { //means its not a courtmaster but benchuser
 
 				$data['logged_judge_code'] = get_logged_judge_code($data['user']['id']);
 			//echo $logged_judge_code;die;
@@ -110,7 +111,7 @@
 			//$data['procetot_comps'] = $this->proceeding_model->get_proce_tot_count();
 			//$data['procepen_comps'] = $this->proceeding_model->get_proce_pen_count();
 			//$data['procedon_comps'] = $this->proceeding_model->get_proce_don_count();
-			if(($data['user']['id'] != 1308 && $data['user']['role'] == 147) && ($data['user']['id'] != 1356 && $data['user']['role'] == 147)) { //means its not a courtmaster but benchuser
+			if(($data['user']['id'] != 1308 && $data['user']['role'] == 147) && ($data['user']['id'] != 1380 && $data['user']['role'] == 147)) { //means its not a courtmaster but benchuser
 
 				$data['logged_judge_code'] = get_logged_judge_code($data['user']['id']);
 			//echo $logged_judge_code;die;
@@ -281,8 +282,15 @@
 				if(in_array(2, $ot_array) && (!in_array(1, $ot_array)))
 					array_push($ot_array, 1);
 
-				$data['order_type'] = $this->proceeding_model->fetch_order_type($ot_array);
-				$data['other_action'] = $this->proceeding_model->fetch_other_action($ot_array);
+				//$data['order_type'] = $this->proceeding_model->fetch_order_type($ot_array);
+
+				$data['order_type'] = $this->proceeding_model->fetch_order_type();
+
+				//$data['other_action'] = $this->proceeding_model->fetch_other_action($ot_array);
+
+				$data['other_action'] = $this->proceeding_model->fetch_other_action();
+
+
 				$this->load->view('templates/front/CM_Header.php',$data);
 				$this->load->view('proceeding/proceeding.php',$data);
 				$this->load->view('templates/front/CE_Footer.php',$data);
@@ -592,6 +600,22 @@
 							'updated_date' => $ts,
 						);
 						$cdetail = $this->agency_model->upd_casedet($filing_no, $upd_data2);	
+																					if($order_type ==5)
+			{	
+			//	echo 'Closed After Preliminary Examination';
+			$comp_data =log_status_update($filing_no,$user_id,'Closed After Preliminary Examination', 'Closed After Preliminary Examination');
+			}
+						if($order_type ==8)
+			{	
+			//	echo 'Closed After Consideration of Preliminary Inquiry';
+		$comp_data =log_status_update($filing_no,$user_id,'Closed After Consideration of Preliminary Inquiry', 'Closed After Consideration of Preliminary Inquiry');die();
+			}
+						if($order_type ==9)
+			{	
+				//echo 'Closed After Consideration of Investigation Report';die();
+
+			$comp_data =log_status_update($filing_no,$user_id,'Closed After Consideration of Investigation Report', 'Closed After Consideration of Investigation Report');
+			}
 						if(!($cdetailhis || $cdetail)){
 							$this->session->set_flashdata('error_msg', 'Unable to Dispose case!');
 							redirect('proceeding/dashboard/'.$bench_no.'/'.$flag);
@@ -662,9 +686,26 @@
 												); 
 												$insert_log = $this->login_model->loginlog_ins($log_data); 
 
-												$this->session->set_flashdata('success_msg', 'Successfully disposed complaint no. '.$complaint_no.'.');
+															if($order_type ==5)
+			{	
+			//	echo 'Closed After Preliminary Examination';die();
+	$comp_data =log_status_update($filing_no, $user_id,'Closed After Preliminary Examination','Closed After Preliminary Examination');
+			}
+						if($order_type ==8)
+			{	
+				//echo 'Closed After Consideration of Preliminary Inquiry';
+			$comp_data =log_status_update($filing_no, $user_id,'Closed After Consideration of Preliminary Inquiry','Closed After Consideration of Preliminary Inquiry');
+			}
+						if($order_type ==9)
+			{	
+				//echo 'Closed After Consideration of Investigation Report';die();
+
+			$comp_data =log_status_update($filing_no, $user_id,'Closed After Consideration of Investigation Report','Closed After Consideration of Investigation Report');
+			}
+
+												$this->session->set_flashdata('success_msg','Successfully disposed complaint no. '.$complaint_no.'.');
 												redirect('proceeding/dashboard/'.$bench_no.'/'.$flag);
-											}else{
+											}else{                          //chauhanji ki galti
 												$log_data = array( 
 													'user_id' => $user_id, 
 													'username' => $data['user']['username'],
@@ -792,6 +833,22 @@
 											'status' => 'Complaint Recording Successfully Done',
 										); 
 										$insert_log = $this->login_model->loginlog_ins($log_data); 
+																									if($order_type ==5)
+			{	
+			//	echo 'Closed After Preliminary Examination';die();
+$comp_data =log_status_update($filing_no,$user_id ,'Closed After Preliminary Examination','Closed After Preliminary Examination');
+			}
+						if($order_type ==8)
+			{	
+			//	echo 'Closed After Consideration of Preliminary Inquiry';
+			$comp_data =log_status_update($filing_no,$user_id,'Closed After Consideration of Preliminary Inquiry','Closed After Consideration of Preliminary Inquiry');
+			}
+						if($order_type ==9)
+			{	
+			//	echo 'Closed After Consideration of Investigation Report';die();
+
+			$comp_data =log_status_update($filing_no, $user_id,'Closed After Consideration of Investigation Report','Closed After Consideration of Investigation Report');
+			}
 
 										$this->session->set_flashdata('success_msg', 'Successfully disposed complaint no. '.$complaint_no.'.');
 										redirect('proceeding/dashboard/'.$bench_no.'/'.$flag);
@@ -839,7 +896,52 @@
 										}
 
 										 }
-										$this->session->set_flashdata('success_msg', 'Successfully proceeded complaint no. '.$complaint_no.' and forwarded.');
+										 if($order_type ==1)
+			{	
+			//	echo 'Preliminary inquiry Ordered';die;
+
+
+			 $comp_data =log_status_update($filing_no,$user_id,'Preliminary inquiry Ordered','Preliminary inquiry Ordered');
+			}
+			if($order_type ==3)
+			{	
+			//	echo 'Opportunity to Public Servant after Preliminary Inquiry';
+			//	echo 'Opportunity to Public Servant';die();
+			$comp_data =log_status_update($filing_no,$user_id,'Opportunity to Public Servant after Preliminary Inquiry','Opportunity to Public Servant');
+			}
+ 
+			if($order_type ==2)
+			{	
+			//	echo 'Investigation Ordered';die();
+			 $comp_data =log_status_update($filing_no, $user_id,'Investigation Ordered','Investigation Ordered');
+			}
+
+			if($order_type ==7)
+			{	
+				//echo 'Opportunity to Public Servant after Investigation';
+				//echo 'Opportunity to Public Servant';die();
+			$comp_data =log_status_update($filing_no, $user_id,'Opportunity to Public Servant after Investigation','Opportunity to Public Servant');
+			}
+			
+			if($order_type ==10)
+			{	
+		//		echo 'Ordered Prosecution';die();
+			 $comp_data =log_status_update($filing_no,$user_id,'Ordered Prosecution','Ordered Prosecution');
+			}
+			
+			if($order_type ==11)
+			{	
+			//	echo 'Ordered Departmental Proceedings';die();
+			 $comp_data =log_status_update($filing_no,$user_id, 'Ordered Departmental Proceedings','Ordered Departmental Proceedings');
+			}
+
+			if($order_type ==14)
+			{	
+			//	echo 'Any Other Action';
+			//	echo 'Under Consideration of Lokpal of India';die();
+			 $comp_data =log_status_update($filing_no, $user_id,'Any Other Action','Under Consideration of Lokpal of India');
+			}
+										$this->session->set_flashdata('success_msg','Successfully proceeded complaint no. '.$complaint_no.' and forwarded.');
 										redirect('proceeding/dashboard/'.$bench_no.'/'.$flag);
 									}
 								}

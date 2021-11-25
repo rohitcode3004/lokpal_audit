@@ -12,6 +12,7 @@ class Scrutiny extends CI_Controller {
 		$this->load->helper("date_helper");
 		$this->load->helper("common_helper");
 		$this->load->helper("scrutiny_helper");
+		$this->load->helper("status_helper");
 		$this->load->library('html2pdf');
 		$this->load->model('common_model');
 		$this->load->model('causelist_model');
@@ -3135,6 +3136,8 @@ private function generate_complaintno($filing_no)
 	$cur_year = date("Y");
 	$counter = $this->scrutiny_model->get_complaint_counter($cur_year);
 	$counter = $counter->complaint_counter;
+	$data['user'] = $this->login_model->getRows($this->con);
+   $user_id=$data['user']['id'];
 
 	if($counter == 0)
 	{
@@ -3148,15 +3151,24 @@ private function generate_complaintno($filing_no)
 		$complaint_no = $counter+1;
 	      //die($counter);
 		$chk_cou = $this->varify_counter($counter, $cur_year);
+
+
 	}else{
 		die('Counter not set contact admin');
 	}
 
 	$array = array('comp_no' => $complaint_no, 'counter' => $complaint_no,'year' => $cur_year, 'chk_cou' => $chk_cou);
 	    //print_r($array);die();
+
+		$comp_data =log_status_update($filing_no,$user_id,'Complaint Under Consideration', 'Under Consideration of Lokpal');
+
 	return $array;
 
 }
+
+
+
+
 
 private function varify_counter($counter, $cur_year)
 {
