@@ -43,6 +43,7 @@ class Proceeding_model extends CI_Model
         return $query->result();*/
     }
 
+/*
 	function fetch_order_type($codes)
 		{
 			$this->db->select('ordertype_code, ordertype_name');
@@ -54,8 +55,21 @@ class Proceeding_model extends CI_Model
 			$this->db->order_by('priority');
 			$query = $this->db->get();
 			return $query->result();
+		}*/
+
+		function fetch_order_type()
+		{
+			$this->db->select('ordertype_code, ordertype_name');
+			$this->db->from('ordertype_master');
+			$this->db->where('display', 't');
+			$this->db->where('parent_id', null);		
+
+			$this->db->order_by('priority');
+			$query = $this->db->get();
+			return $query->result();
 		}
 
+/*
 	function fetch_other_action($codes)
 		{
 			$this->db->select('ordertype_code, ordertype_name');
@@ -64,6 +78,17 @@ class Proceeding_model extends CI_Model
 			$this->db->where('parent_id !=', null);
 			if(!empty($codes))
 				$this->db->where_not_in('ordertype_code', $codes);
+			$this->db->order_by('priority');
+			$query = $this->db->get();
+			return $query->result();
+		}*/
+
+		function fetch_other_action()
+		{
+			$this->db->select('ordertype_code, ordertype_name');
+			$this->db->from('ordertype_master');
+			$this->db->where('display', 't');
+			$this->db->where('parent_id !=', null);			
 			$this->db->order_by('priority');
 			$query = $this->db->get();
 			return $query->result();

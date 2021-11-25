@@ -828,6 +828,9 @@ function get_previous_complaint_remarks($fn)
 			//$this->db->from('scrutiny');
 			$this->db->where('filing_no', $filing_no);
 			$query = $this->db->get('scrutiny');
+
+
+			//echo $this->db->last_query();die('ooo');
 			if ($query->num_rows() > 0){
 		        return $query->result();;
 		    }
@@ -903,6 +906,55 @@ function get_previous_complaint_remarks($fn)
 			$this->db->insert('extra_doc_uploaded',$insert_data);
     		return ($this->db->affected_rows() != 1) ? false : true;
 		}
+
+
+
+
+	function log_status_exists($filing_no)
+		{
+
+		    $this->db->where('filing_no',$filing_no);
+		    $query = $this->db->get('status_log');
+		   // echo $this->db->last_query();die('ooo');
+		    if ($query->num_rows() > 0){
+		    	
+		        return true;
+		    }
+		    else{
+		        return false;
+		    }
+		}
+
+
+	function log_status_history_insert($filing_no){
+
+    	$this->db->where('filing_no', $filing_no);
+    	$query = $this->db->get('status_log');
+    	foreach ($query->result() as $row) {
+          $this->db->insert('status_log_his',$row);
+          // echo $this->db->last_query();die('ooo');
+    	}
+    	  //echo $this->db->last_query();die('ooo');
+    	return ($this->db->affected_rows() != 1) ? false : true;
+    }
+
+      public function log_status_delete($filing_no){
+	    $this->db->where('filing_no', $filing_no);
+	    $this->db->delete('status_log');
+	    //echo $this->db->last_query();die('ooo');die;
+	    return ($this->db->affected_rows() != 1) ? false : true;
+	}
+
+
+	function log_status_insert($log_status_data)
+		{
+			$this->db->insert('status_log',$log_status_data);
+
+			  //echo $this->db->last_query();die('ooo');die;
+    		return ($this->db->affected_rows() != 1) ? false : true;
+		}
+
+
 
 
 
