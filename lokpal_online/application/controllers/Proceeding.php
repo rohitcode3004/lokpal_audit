@@ -563,6 +563,7 @@
 					die();
 				}
 
+
 				$proceeding_count = $this->proceeding_model->get_proc_count($filing_no);
 				//print_r($proceeding_count);die;
 				$proceeding_count = $proceeding_count[0]->proceeding_count;
@@ -608,7 +609,7 @@
 						if($order_type ==8)
 			{	
 			//	echo 'Closed After Consideration of Preliminary Inquiry';
-		$comp_data =log_status_update($filing_no,$user_id,'Closed After Consideration of Preliminary Inquiry', 'Closed After Consideration of Preliminary Inquiry');die();
+		$comp_data =log_status_update($filing_no,$user_id,'Closed After Consideration of Preliminary Inquiry', 'Closed After Consideration of Preliminary Inquiry');
 			}
 						if($order_type ==9)
 			{	
@@ -625,12 +626,17 @@
 					}
 
 
-					$proc_exist = $this->proceeding_model->proceeding_exists($filing_no);
+					 $proc_exist= $this->proceeding_model->proceeding_exists($filing_no);
+
+
+					
 					if($proc_exist){
 	   
 
 						$query4 = $this->proceeding_model->proceeding_history_insert($filing_no);
-						if($query4){  			
+						if($query4){ 
+
+
 							$query5 = $this->proceeding_model->delete_proceeding($filing_no);
 							if($query5){
 								
@@ -660,10 +666,14 @@
 									'additional_documents' => $additional_documents,
 									'status_report_department' => $status_rep_dept,
 								);
-							//print_r($insert_data);die;
+								//echo "<pre>";
+							//print_r($insert_data);die('@@@');
 								$query = $this->proceeding_model->proceeding_insert($insert_data);
 
+
 								if($query){
+
+									//echo "qqqq";die(); 
 									$query3 = $this->proceeding_model->updhis_insert($filing_no, $listing_date, $bench_no);
 									if($query3){
 										$upd_data = array(
@@ -673,18 +683,7 @@
 										$query2 = $this->proceeding_model->upd_alloc($filing_no, $listing_date, $bench_no, $upd_data);
 
 										if($query2){
-											if($order_type == 5 || $order_type == 8 || $order_type == 9){
-
-												$log_data = array( 
-													'user_id' => $user_id, 
-													'username' => $data['user']['username'],
-													'form_type' => 'Complaint Recording Form',  
-													'ip' => get_ip(),
-													'datetime' => date('Y-m-d H:i:s', time()),
-													'action_performed' => 'Complaint Recording',
-													'status' => 'Complaint Recording Successfully Done',
-												); 
-												$insert_log = $this->login_model->loginlog_ins($log_data); 
+											if($order_type == 5 || $order_type == 8 || $order_type == 9){										
 
 															if($order_type ==5)
 			{	
@@ -705,33 +704,61 @@
 
 												$this->session->set_flashdata('success_msg','Successfully disposed complaint no. '.$complaint_no.'.');
 												redirect('proceeding/dashboard/'.$bench_no.'/'.$flag);
-											}else{                          //chauhanji ki galti
-												$log_data = array( 
-													'user_id' => $user_id, 
-													'username' => $data['user']['username'],
-													'form_type' => 'Complaint Recording Form',  
-													'ip' => get_ip(),
-													'datetime' => date('Y-m-d H:i:s', time()),
-													'action_performed' => 'Complaint Recording',
-													'status' => 'Complaint Recording Successfully Done',
-												); 
-												$insert_log = $this->login_model->loginlog_ins($log_data); 
+											}else{                        //chauhanji ki galti
+												
+													 if($order_type ==1)
+			{	
+			//	echo 'Preliminary inquiry Ordered';die;
+
+
+			 $comp_data =log_status_update($filing_no,$user_id,'Preliminary inquiry Ordered','Preliminary inquiry Ordered');
+			}
+			if($order_type ==3)
+			{	
+			//	echo 'Opportunity to Public Servant after Preliminary Inquiry';
+			//	echo 'Opportunity to Public Servant';die();
+			$comp_data =log_status_update($filing_no,$user_id,'Opportunity to Public Servant after Preliminary Inquiry','Opportunity to Public Servant');
+			}
+ 
+			if($order_type ==2)
+			{	
+			//	echo 'Investigation Ordered';die();
+			 $comp_data =log_status_update($filing_no, $user_id,'Investigation Ordered','Investigation Ordered');
+			}
+
+			if($order_type ==7)
+			{	
+				//echo 'Opportunity to Public Servant after Investigation';
+				//echo 'Opportunity to Public Servant';die();
+			$comp_data =log_status_update($filing_no, $user_id,'Opportunity to Public Servant after Investigation','Opportunity to Public Servant');
+			}
+			
+			if($order_type ==10)
+			{	
+		//		echo 'Ordered Prosecution';die();
+			 $comp_data =log_status_update($filing_no,$user_id,'Ordered Prosecution','Ordered Prosecution');
+			}
+			
+			if($order_type ==11)
+			{	
+			//	echo 'Ordered Departmental Proceedings';die();
+			 $comp_data =log_status_update($filing_no,$user_id, 'Ordered Departmental Proceedings','Ordered Departmental Proceedings');
+			}
+
+			if($order_type ==14)
+			{	
+			//	echo 'Any Other Action';
+			//	echo 'Under Consideration of Lokpal of India';die();
+			 $comp_data =log_status_update($filing_no, $user_id,'Any Other Action','Under Consideration of Lokpal of India');
+			}
+
+
 
 												$this->session->set_flashdata('success_msg', 'Successfully proceeded complaint no. '.$complaint_no.' and forwarded.');
 												redirect('proceeding/dashboard/'.$bench_no.'/'.$flag);
 											}
 										}else{
-											$log_data = array( 
-												'user_id' => $this->con['id'], 
-												'username' => $data['user']['username'],
-												'form_type' => 'Complaint Recording Form',  
-												'ip' => get_ip(),
-												'datetime' => date('Y-m-d H:i:s', time()),
-												'action_performed' => 'Complaint Recording',
-												'status' => 'Complaint Recording Failed',
-											); 
-											$insert_log = $this->login_model->loginlog_ins($log_data); 
-
+											
 											$this->session->set_flashdata('error_msg', 'Some problem updating in allocation model complaint no. '.$complaint_no.'.');
 											redirect('proceeding/dashboard/'.$bench_no.'/'.$flag);
 										}
@@ -741,33 +768,13 @@
 									}
 								}else{
 									//die('problem inserting in proceeding model');
-									$log_data = array( 
-										'user_id' => $this->con['id'], 
-										'username' => $data['user']['username'],
-										'form_type' => 'Complaint Recording Form',  
-										'ip' => get_ip(),
-										'datetime' => date('Y-m-d H:i:s', time()),
-										'action_performed' => 'Complaint Recording',
-										'status' => 'Complaint Recording Failed',
-									); 
-									$insert_log = $this->login_model->loginlog_ins($log_data); 
-
+									
 									$this->session->set_flashdata('error_msg', 'Some problem inserting in proceeding model complaint no. '.$complaint_no.'.');
 									redirect('proceeding/dashboard/'.$bench_no.'/'.$flag);
 								}
 
 							}else{
-								$log_data = array( 
-									'user_id' => $this->con['id'], 
-									'username' => $data['user']['username'],
-									'form_type' => 'Complaint Recording Form',  
-									'ip' => get_ip(),
-									'datetime' => date('Y-m-d H:i:s', time()),
-									'action_performed' => 'Complaint Recording',
-									'status' => 'Complaint Recording Failed',
-								); 
-								$insert_log = $this->login_model->loginlog_ins($log_data); 
-
+								
 								$this->session->set_flashdata('error_msg', 'Some problem deleting in proceeding model complaint no. '.$complaint_no.'.');
 								redirect('proceeding/dashboard/'.$bench_no.'/'.$flag);
 							}
@@ -823,16 +830,7 @@
 								if($query2){
 									if($order_type == 5 || $order_type == 8 || $order_type == 9)
 									{
-										$log_data = array( 
-											'user_id' => $user_id, 
-											'username' => $data['user']['username'],
-											'form_type' => 'Complaint Recording Form',  
-											'ip' => get_ip(),
-											'datetime' => date('Y-m-d H:i:s', time()),
-											'action_performed' => 'Complaint Recording',
-											'status' => 'Complaint Recording Successfully Done',
-										); 
-										$insert_log = $this->login_model->loginlog_ins($log_data); 
+										
 																									if($order_type ==5)
 			{	
 			//	echo 'Closed After Preliminary Examination';die();
@@ -854,20 +852,9 @@ $comp_data =log_status_update($filing_no,$user_id ,'Closed After Preliminary Exa
 										redirect('proceeding/dashboard/'.$bench_no.'/'.$flag);
 									}
 									else{
-										$log_data = array( 
-											'user_id' => $user_id, 
-											'username' => $data['user']['username'],
-											'form_type' => 'Complaint Recording Form',  
-											'ip' => get_ip(),
-											'datetime' => date('Y-m-d H:i:s', time()),
-											'action_performed' => 'Complaint Recording',
-											'status' => 'Complaint Recording Successfully Done',
-										); 
-										$insert_log = $this->login_model->loginlog_ins($log_data); 
+										
 
-
-
-										 if($order_type==1)
+										/* if($order_type==1)
 										 {
 										 $checkEmailId = $this->scrutiny_model->getEmailIdFromparta($filing_no);				
 										  $service_id=$checkEmailId['0']->email_id;
@@ -895,7 +882,7 @@ $comp_data =log_status_update($filing_no,$user_id ,'Closed After Preliminary Exa
 											echo show_error($this->email->print_debugger());
 										}
 
-										 }
+										 }*/
 										 if($order_type ==1)
 			{	
 			//	echo 'Preliminary inquiry Ordered';die;
@@ -946,18 +933,7 @@ $comp_data =log_status_update($filing_no,$user_id ,'Closed After Preliminary Exa
 									}
 								}
 								else{
-
-									$log_data = array( 
-										'user_id' => $this->con['id'], 
-										'username' => $data['user']['username'],
-										'form_type' => 'Complaint Recording Form',  
-										'ip' => get_ip(),
-										'datetime' => date('Y-m-d H:i:s', time()),
-										'action_performed' => 'Complaint Recording',
-										'status' => 'Complaint Recording Failed',
-									); 
-									$insert_log = $this->login_model->loginlog_ins($log_data); 
-
+								
 									$this->session->set_flashdata('error_msg', 'Some problem updating in allocation model complaint no. '.$complaint_no.'.');
 									redirect('proceeding/dashboard/'.$bench_no.'/'.$flag);
 								}
@@ -967,19 +943,8 @@ $comp_data =log_status_update($filing_no,$user_id ,'Closed After Preliminary Exa
 								redirect('proceeding/dashboard/'.$bench_no.'/'.$flag);
 							}
 						}
-						else{
-					
-							$log_data = array( 
-								'user_id' => $this->con['id'], 
-								'username' => $data['user']['username'],
-								'form_type' => 'Complaint Recording Form',  
-								'ip' => get_ip(),
-								'datetime' => date('Y-m-d H:i:s', time()),
-								'action_performed' => 'Complaint Recording',
-								'status' => 'Complaint Recording Failed',
-							); 
-							$insert_log = $this->login_model->loginlog_ins($log_data); 
-
+						else{					
+							
 							$this->session->set_flashdata('error_msg', 'Some problem inserting in proceeding model complaint no. '.$complaint_no.'.');
 							redirect('proceeding/dashboard/'.$bench_no.'/'.$flag);
 						}
